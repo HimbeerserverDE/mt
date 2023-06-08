@@ -29842,6 +29842,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Type).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -29883,6 +29886,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).Name))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -29921,6 +29927,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Name))))
 			write16(w, uint16(x))
 		}
@@ -29959,6 +29968,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Name))[:])
 			chk(err)
 		}
@@ -29996,6 +30008,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).Desc))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -30034,6 +30049,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Desc))))
 			write16(w, uint16(x))
 		}
@@ -30072,6 +30090,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Desc))[:])
 			chk(err)
 		}
@@ -30110,6 +30131,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).InvImg).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30152,6 +30176,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).WieldImg).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30193,6 +30220,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).WieldScale {
 			{
 				x := ((*(*(struct {
@@ -30229,6 +30259,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 					ShortDesc string
 
 					PlaceParam2 uint8
+
+					SoundUse    SoundDef
+					SoundUseAir SoundDef
 				}))(obj)).WieldScale)[local308]
 				write32(w, math.Float32bits(x))
 			}
@@ -30268,6 +30301,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).StackMax
 			write16(w, uint16(x))
 		}
@@ -30306,6 +30342,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Usable
 			if x {
 				write8(w, 1)
@@ -30348,6 +30387,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).CanPointLiquids
 			if x {
 				write8(w, 1)
@@ -30390,6 +30432,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).ToolCaps).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30431,6 +30476,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).Groups)) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -30469,6 +30517,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Groups)))
 			write16(w, uint16(x))
 		}
@@ -30506,6 +30557,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).Groups {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -30542,6 +30596,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 					ShortDesc string
 
 					PlaceParam2 uint8
+
+					SoundUse    SoundDef
+					SoundUseAir SoundDef
 				}))(obj)).Groups)[local309]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
@@ -30584,6 +30641,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).PlacePredict))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -30622,6 +30682,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).PlacePredict))))
 			write16(w, uint16(x))
 		}
@@ -30660,6 +30723,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).PlacePredict))[:])
 			chk(err)
 		}
@@ -30698,6 +30764,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).PlaceSnd).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30740,6 +30809,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).PlaceFailSnd).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30782,6 +30854,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).PointRange
 			write32(w, math.Float32bits(x))
 		}
@@ -30820,6 +30895,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Palette).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30862,6 +30940,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Color
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -30900,6 +30981,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).InvOverlay).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30942,6 +31026,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).WieldOverlay).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30983,6 +31070,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).ShortDesc))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -31021,6 +31111,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).ShortDesc))))
 			write16(w, uint16(x))
 		}
@@ -31059,6 +31152,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).ShortDesc))[:])
 			chk(err)
 		}
@@ -31097,8 +31193,101 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).PlaceParam2
 			write8(w, uint8(x))
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+			}))(obj)).SoundUse).serialize(w)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+			}))(obj)).SoundUseAir).serialize(w)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		{
 			buf := w
@@ -31172,6 +31361,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Type).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -31224,6 +31416,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).Name) = string(local312)
 		var local314 []uint8
 		var local315 uint16
@@ -31270,6 +31465,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).Desc) = string(local314)
 		if err := pcall(func() {
 			((*(*(struct {
@@ -31306,6 +31504,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).InvImg).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -31348,6 +31549,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).WieldImg).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -31389,6 +31593,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).WieldScale {
 			{
 				p := &((*(*(struct {
@@ -31425,6 +31632,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 					ShortDesc string
 
 					PlaceParam2 uint8
+
+					SoundUse    SoundDef
+					SoundUseAir SoundDef
 				}))(obj)).WieldScale)[local316]
 				*p = math.Float32frombits(read32(r))
 			}
@@ -31464,6 +31674,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).StackMax
 			*p = read16(r)
 		}
@@ -31502,6 +31715,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Usable
 			switch n := read8(r); n {
 			case 0:
@@ -31547,6 +31763,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).CanPointLiquids
 			switch n := read8(r); n {
 			case 0:
@@ -31592,6 +31811,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).ToolCaps).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -31638,6 +31860,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).Groups) = make([]Group, local317)
 		for local318 := range (*(*(struct {
 			Type ItemType
@@ -31673,6 +31898,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).Groups {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -31709,6 +31937,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 					ShortDesc string
 
 					PlaceParam2 uint8
+
+					SoundUse    SoundDef
+					SoundUseAir SoundDef
 				}))(obj)).Groups)[local318]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
@@ -31762,6 +31993,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).PlacePredict) = string(local319)
 		if err := pcall(func() {
 			((*(*(struct {
@@ -31798,6 +32032,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).PlaceSnd).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -31840,6 +32077,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).PlaceFailSnd).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -31882,6 +32122,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).PointRange
 			*p = math.Float32frombits(read32(r))
 		}
@@ -31920,6 +32163,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Palette).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -31962,6 +32208,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).Color
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -32000,6 +32249,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).InvOverlay).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32042,6 +32294,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).WieldOverlay).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32094,6 +32349,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
 		}))(obj)).ShortDesc) = string(local321)
 		{
 			p := &(*(*(struct {
@@ -32130,8 +32388,101 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				ShortDesc string
 
 				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
 			}))(obj)).PlaceParam2
 			*p = read8(r)
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+			}))(obj)).SoundUse).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				PlaceParam2 uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+			}))(obj)).SoundUseAir).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		if r.N > 0 {
 			chk(fmt.Errorf("%d bytes of trailing data", r.N))

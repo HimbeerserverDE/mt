@@ -54,5 +54,8 @@ type ItemDef struct {
 
 	PlaceParam2 uint8
 
+	SoundUse    SoundDef
+	SoundUseAir SoundDef
+
 	//mt:end
 }
