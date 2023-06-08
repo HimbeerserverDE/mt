@@ -22712,7 +22712,7 @@ func (obj *MapBlk) serialize(w io.Writer) {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zlib
+			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22730,7 +22730,7 @@ func (obj *MapBlk) serialize(w io.Writer) {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zlib
+			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22758,12 +22758,12 @@ func (obj *MapBlk) serialize(w io.Writer) {
 		}
 	}
 	{
-		w := zlib.NewWriter(w)
+		w := zstd.NewWriter(w)
 		for local285 := range (*(*(struct {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zlib
+			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22775,7 +22775,7 @@ func (obj *MapBlk) serialize(w io.Writer) {
 					Flags   MapBlkFlags
 					LitFrom LitFromBlks
 
-					//mt:zlib
+					//mt:zstd
 					Param0 [4096]Content
 					Param1 [4096]uint8
 					Param2 [4096]uint8
@@ -22794,7 +22794,7 @@ func (obj *MapBlk) serialize(w io.Writer) {
 				Flags   MapBlkFlags
 				LitFrom LitFromBlks
 
-				//mt:zlib
+				//mt:zstd
 				Param0 [4096]Content
 				Param1 [4096]uint8
 				Param2 [4096]uint8
@@ -22808,7 +22808,7 @@ func (obj *MapBlk) serialize(w io.Writer) {
 				Flags   MapBlkFlags
 				LitFrom LitFromBlks
 
-				//mt:zlib
+				//mt:zstd
 				Param0 [4096]Content
 				Param1 [4096]uint8
 				Param2 [4096]uint8
@@ -22824,7 +22824,7 @@ func (obj *MapBlk) serialize(w io.Writer) {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zlib
+			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22881,7 +22881,7 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zlib
+			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22899,7 +22899,7 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zlib
+			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22935,13 +22935,13 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 		}
 	}
 	{
-		r, err := zlib.NewReader(byteReader{r})
+		r, err := zstd.NewReader(byteReader{r})
 		chk(err)
 		for local291 := range (*(*(struct {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zlib
+			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22953,7 +22953,7 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 					Flags   MapBlkFlags
 					LitFrom LitFromBlks
 
-					//mt:zlib
+					//mt:zstd
 					Param0 [4096]Content
 					Param1 [4096]uint8
 					Param2 [4096]uint8
@@ -22972,7 +22972,7 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 				Flags   MapBlkFlags
 				LitFrom LitFromBlks
 
-				//mt:zlib
+				//mt:zstd
 				Param0 [4096]Content
 				Param1 [4096]uint8
 				Param2 [4096]uint8
@@ -22986,7 +22986,7 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 				Flags   MapBlkFlags
 				LitFrom LitFromBlks
 
-				//mt:zlib
+				//mt:zstd
 				Param0 [4096]Content
 				Param1 [4096]uint8
 				Param2 [4096]uint8
@@ -23002,7 +23002,7 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zlib
+			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
