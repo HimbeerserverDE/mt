@@ -506,6 +506,7 @@ var typeNames = []string{
 	"ToSrvNodeMetaFields",
 	"ToSrvInvFields",
 	"ToSrvReqMedia",
+	"ToSrvHaveMedia",
 	"ToSrvCltReady",
 	"ToSrvFirstSRP",
 	"ToSrvSRPBytesA",
