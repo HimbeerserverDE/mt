@@ -23940,13 +23940,6 @@ func (obj *MapBlk) serialize(w io.Writer) {
 			}
 		}
 	}
-	{
-		local288 := uint8(2) // version
-		{
-			x := local288
-			write8(w, uint8(x))
-		}
-	}
 }
 
 func (obj *MapBlk) deserialize(r io.Reader) {
@@ -23985,28 +23978,28 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LitFromBlks", err))
 	}
 	{
-		var local289 uint8
-		local290 := uint8(2) // Size of param0 in bytes.
+		var local288 uint8
+		local289 := uint8(2) // Size of param0 in bytes.
 		{
-			p := &local289
+			p := &local288
 			*p = read8(r)
 		}
-		if local289 != local290 {
-			chk(fmt.Errorf("const %v: %v", "uint8(2)     // Size of param0 in bytes.", local289))
+		if local288 != local289 {
+			chk(fmt.Errorf("const %v: %v", "uint8(2)     // Size of param0 in bytes.", local288))
 		}
 	}
 	{
-		var local291 uint8
-		local292 := uint8(1 + 1) // Size of param1 and param2 combined, in bytes.
+		var local290 uint8
+		local291 := uint8(1 + 1) // Size of param1 and param2 combined, in bytes.
 		{
-			p := &local291
+			p := &local290
 			*p = read8(r)
 		}
-		if local291 != local292 {
-			chk(fmt.Errorf("const %v: %v", "uint8(1 + 1) // Size of param1 and param2 combined, in bytes.", local291))
+		if local290 != local291 {
+			chk(fmt.Errorf("const %v: %v", "uint8(1 + 1) // Size of param1 and param2 combined, in bytes.", local290))
 		}
 	}
-	for local293 := range (*(*(struct {
+	for local292 := range (*(*(struct {
 		Flags   MapBlkFlags
 		LitFrom LitFromBlks
 
@@ -24026,7 +24019,7 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 				Param2 [4096]uint8
 
 				NodeMetas map[uint16]*NodeMeta
-			}))(obj)).Param0)[local293]).deserialize(r)
+			}))(obj)).Param0)[local292]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -24087,17 +24080,6 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 			default:
 				chk(fmt.Errorf("unsupported nodemetas version: %d", ver))
 			}
-		}
-	}
-	{
-		var local294 uint8
-		local295 := uint8(2) // version
-		{
-			p := &local294
-			*p = read8(r)
-		}
-		if local294 != local295 {
-			chk(fmt.Errorf("const %v: %v", "uint8(2) // version", local294))
 		}
 	}
 }
@@ -24173,18 +24155,18 @@ func (obj *CSMRestrictionFlags) deserialize(r io.Reader) {
 }
 
 func (obj *Vec) serialize(w io.Writer) {
-	for local296 := range *(*([3]float32))(obj) {
+	for local293 := range *(*([3]float32))(obj) {
 		{
-			x := (*(*([3]float32))(obj))[local296]
+			x := (*(*([3]float32))(obj))[local293]
 			write32(w, math.Float32bits(x))
 		}
 	}
 }
 
 func (obj *Vec) deserialize(r io.Reader) {
-	for local297 := range *(*([3]float32))(obj) {
+	for local294 := range *(*([3]float32))(obj) {
 		{
-			p := &(*(*([3]float32))(obj))[local297]
+			p := &(*(*([3]float32))(obj))[local294]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -24233,9 +24215,9 @@ func (obj *AOAdd) serialize(w io.Writer) {
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
-		local298 := genericCAO
+		local295 := genericCAO
 		if err := pcall(func() {
-			(local298).serialize(w)
+			(local295).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -24292,18 +24274,18 @@ func (obj *AOAdd) deserialize(r io.Reader) {
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
-		var local299 aoType
-		local300 := genericCAO
+		var local296 aoType
+		local297 := genericCAO
 		if err := pcall(func() {
-			(local299).deserialize(r)
+			(local296).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.aoType", err))
 		}
-		if local299 != local300 {
-			chk(fmt.Errorf("const %v: %v", "genericCAO", local299))
+		if local296 != local297 {
+			chk(fmt.Errorf("const %v: %v", "genericCAO", local296))
 		}
 	}
 	{
@@ -24417,9 +24399,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 		ow := w
 		w := new(bytes.Buffer)
 		{
-			local301 := uint8(6)
+			local298 := uint8(6)
 			{
-				x := local301
+				x := local298
 				write8(w, uint8(x))
 			}
 		}
@@ -24775,7 +24757,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
-		for local302 := range (*(*(struct {
+		for local299 := range (*(*(struct {
 			Type ItemType
 
 			Name, Desc string
@@ -24845,7 +24827,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 					ShortDesc string
 
 					PlaceParam2 uint8
-				}))(obj)).WieldScale)[local302]
+				}))(obj)).WieldScale)[local299]
 				write32(w, math.Float32bits(x))
 			}
 		}
@@ -25088,7 +25070,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			}))(obj)).Groups)))
 			write16(w, uint16(x))
 		}
-		for local303 := range (*(*(struct {
+		for local300 := range (*(*(struct {
 			Type ItemType
 
 			Name, Desc string
@@ -25158,7 +25140,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 					ShortDesc string
 
 					PlaceParam2 uint8
-				}))(obj)).Groups)[local303]).serialize(w)
+				}))(obj)).Groups)[local300]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -25743,14 +25725,14 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 		}
 		r := &io.LimitedReader{R: r, N: int64(n)}
 		{
-			var local304 uint8
-			local305 := uint8(6)
+			var local301 uint8
+			local302 := uint8(6)
 			{
-				p := &local304
+				p := &local301
 				*p = read8(r)
 			}
-			if local304 != local305 {
-				chk(fmt.Errorf("const %v: %v", "uint8(6)", local304))
+			if local301 != local302 {
+				chk(fmt.Errorf("const %v: %v", "uint8(6)", local301))
 			}
 		}
 		if err := pcall(func() {
@@ -25795,15 +25777,15 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ItemType", err))
 		}
-		var local306 []uint8
-		var local307 uint16
+		var local303 []uint8
+		var local304 uint16
 		{
-			p := &local307
+			p := &local304
 			*p = read16(r)
 		}
-		(local306) = make([]uint8, local307)
+		(local303) = make([]uint8, local304)
 		{
-			_, err := io.ReadFull(r, (local306)[:])
+			_, err := io.ReadFull(r, (local303)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -25840,16 +25822,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
-		}))(obj)).Name) = string(local306)
-		var local308 []uint8
-		var local309 uint16
+		}))(obj)).Name) = string(local303)
+		var local305 []uint8
+		var local306 uint16
 		{
-			p := &local309
+			p := &local306
 			*p = read16(r)
 		}
-		(local308) = make([]uint8, local309)
+		(local305) = make([]uint8, local306)
 		{
-			_, err := io.ReadFull(r, (local308)[:])
+			_, err := io.ReadFull(r, (local305)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -25886,7 +25868,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
-		}))(obj)).Desc) = string(local308)
+		}))(obj)).Desc) = string(local305)
 		if err := pcall(func() {
 			((*(*(struct {
 				Type ItemType
@@ -25971,7 +25953,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
-		for local310 := range (*(*(struct {
+		for local307 := range (*(*(struct {
 			Type ItemType
 
 			Name, Desc string
@@ -26041,7 +26023,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 					ShortDesc string
 
 					PlaceParam2 uint8
-				}))(obj)).WieldScale)[local310]
+				}))(obj)).WieldScale)[local307]
 				*p = math.Float32frombits(read32(r))
 			}
 		}
@@ -26215,9 +26197,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolCaps", err))
 		}
-		var local311 uint16
+		var local308 uint16
 		{
-			p := &local311
+			p := &local308
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -26254,8 +26236,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
-		}))(obj)).Groups) = make([]Group, local311)
-		for local312 := range (*(*(struct {
+		}))(obj)).Groups) = make([]Group, local308)
+		for local309 := range (*(*(struct {
 			Type ItemType
 
 			Name, Desc string
@@ -26325,7 +26307,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 					ShortDesc string
 
 					PlaceParam2 uint8
-				}))(obj)).Groups)[local312]).deserialize(r)
+				}))(obj)).Groups)[local309]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -26333,15 +26315,15 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 			}
 		}
-		var local313 []uint8
-		var local314 uint16
+		var local310 []uint8
+		var local311 uint16
 		{
-			p := &local314
+			p := &local311
 			*p = read16(r)
 		}
-		(local313) = make([]uint8, local314)
+		(local310) = make([]uint8, local311)
 		{
-			_, err := io.ReadFull(r, (local313)[:])
+			_, err := io.ReadFull(r, (local310)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -26378,7 +26360,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
-		}))(obj)).PlacePredict) = string(local313)
+		}))(obj)).PlacePredict) = string(local310)
 		if err := pcall(func() {
 			((*(*(struct {
 				Type ItemType
@@ -26665,15 +26647,15 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
-		var local315 []uint8
-		var local316 uint16
+		var local312 []uint8
+		var local313 uint16
 		{
-			p := &local316
+			p := &local313
 			*p = read16(r)
 		}
-		(local315) = make([]uint8, local316)
+		(local312) = make([]uint8, local313)
 		{
-			_, err := io.ReadFull(r, (local315)[:])
+			_, err := io.ReadFull(r, (local312)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -26710,7 +26692,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			ShortDesc string
 
 			PlaceParam2 uint8
-		}))(obj)).ShortDesc) = string(local315)
+		}))(obj)).ShortDesc) = string(local312)
 		{
 			p := &(*(*(struct {
 				Type ItemType
@@ -26848,7 +26830,7 @@ func (obj *TileAnim) serialize(w io.Writer) {
 		Duration float32 // in seconds
 
 	}))(obj)).Type == VerticalFrameAnim {
-		for local317 := range (*(*(struct {
+		for local314 := range (*(*(struct {
 			Type AnimType
 
 			//mt:if %s.Type == SpriteSheetAnim
@@ -26874,7 +26856,7 @@ func (obj *TileAnim) serialize(w io.Writer) {
 					//mt:if %s.Type != NoAnim
 					Duration float32 // in seconds
 
-				}))(obj)).NFrames)[local317]
+				}))(obj)).NFrames)[local314]
 				write16(w, uint16(x))
 			}
 		}
@@ -26990,7 +26972,7 @@ func (obj *TileAnim) deserialize(r io.Reader) {
 		Duration float32 // in seconds
 
 	}))(obj)).Type == VerticalFrameAnim {
-		for local318 := range (*(*(struct {
+		for local315 := range (*(*(struct {
 			Type AnimType
 
 			//mt:if %s.Type == SpriteSheetAnim
@@ -27016,7 +26998,7 @@ func (obj *TileAnim) deserialize(r io.Reader) {
 					//mt:if %s.Type != NoAnim
 					Duration float32 // in seconds
 
-				}))(obj)).NFrames)[local318]
+				}))(obj)).NFrames)[local315]
 				*p = read16(r)
 			}
 		}
@@ -27121,7 +27103,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDType", err))
 	}
-	for local319 := range (*(*(struct {
+	for local316 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -27157,7 +27139,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Pos)[local319]
+			}))(obj)).Pos)[local316]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -27223,7 +27205,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		}))(obj)).Name))[:])
 		chk(err)
 	}
-	for local320 := range (*(*(struct {
+	for local317 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -27259,7 +27241,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Scale)[local320]
+			}))(obj)).Scale)[local317]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -27388,7 +27370,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		}))(obj)).Dir
 		write32(w, uint32(x))
 	}
-	for local321 := range (*(*(struct {
+	for local318 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -27424,11 +27406,11 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Align)[local321]
+			}))(obj)).Align)[local318]
 			write32(w, math.Float32bits(x))
 		}
 	}
-	for local322 := range (*(*(struct {
+	for local319 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -27464,7 +27446,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Offset)[local322]
+			}))(obj)).Offset)[local319]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -27493,7 +27475,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
-	for local323 := range (*(*(struct {
+	for local320 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -27529,7 +27511,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Size)[local323]
+			}))(obj)).Size)[local320]
 			write32(w, uint32(x))
 		}
 	}
@@ -27669,7 +27651,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDType", err))
 	}
-	for local324 := range (*(*(struct {
+	for local321 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -27705,19 +27687,19 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Pos)[local324]
+			}))(obj)).Pos)[local321]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	var local325 []uint8
-	var local326 uint16
+	var local322 []uint8
+	var local323 uint16
 	{
-		p := &local326
+		p := &local323
 		*p = read16(r)
 	}
-	(local325) = make([]uint8, local326)
+	(local322) = make([]uint8, local323)
 	{
-		_, err := io.ReadFull(r, (local325)[:])
+		_, err := io.ReadFull(r, (local322)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -27737,8 +27719,8 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
-	}))(obj)).Name) = string(local325)
-	for local327 := range (*(*(struct {
+	}))(obj)).Name) = string(local322)
+	for local324 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -27774,19 +27756,19 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Scale)[local327]
+			}))(obj)).Scale)[local324]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	var local328 []uint8
-	var local329 uint16
+	var local325 []uint8
+	var local326 uint16
 	{
-		p := &local329
+		p := &local326
 		*p = read16(r)
 	}
-	(local328) = make([]uint8, local329)
+	(local325) = make([]uint8, local326)
 	{
-		_, err := io.ReadFull(r, (local328)[:])
+		_, err := io.ReadFull(r, (local325)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -27806,7 +27788,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
-	}))(obj)).Text) = string(local328)
+	}))(obj)).Text) = string(local325)
 	{
 		p := &(*(*(struct {
 			Type HUDType
@@ -27870,7 +27852,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		}))(obj)).Dir
 		*p = read32(r)
 	}
-	for local330 := range (*(*(struct {
+	for local327 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -27906,11 +27888,11 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Align)[local330]
+			}))(obj)).Align)[local327]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	for local331 := range (*(*(struct {
+	for local328 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -27946,7 +27928,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Offset)[local331]
+			}))(obj)).Offset)[local328]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -27975,7 +27957,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
-	for local332 := range (*(*(struct {
+	for local329 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -28011,7 +27993,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Size)[local332]
+			}))(obj)).Size)[local329]
 			*p = int32(read32(r))
 		}
 	}
@@ -28036,15 +28018,15 @@ func (obj *HUD) deserialize(r io.Reader) {
 		}))(obj)).ZIndex
 		*p = int16(read16(r))
 	}
-	var local333 []uint8
-	var local334 uint16
+	var local330 []uint8
+	var local331 uint16
 	{
-		p := &local334
+		p := &local331
 		*p = read16(r)
 	}
-	(local333) = make([]uint8, local334)
+	(local330) = make([]uint8, local331)
 	{
-		_, err := io.ReadFull(r, (local333)[:])
+		_, err := io.ReadFull(r, (local330)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -28064,7 +28046,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
-	}))(obj)).Text2) = string(local333)
+	}))(obj)).Text2) = string(local330)
 	if err := pcall(func() {
 		((*(*(struct {
 			Type HUDType
@@ -28163,18 +28145,18 @@ func (obj *Texture) serialize(w io.Writer) {
 }
 
 func (obj *Texture) deserialize(r io.Reader) {
-	var local335 []uint8
-	var local336 uint16
+	var local332 []uint8
+	var local333 uint16
 	{
-		p := &local336
+		p := &local333
 		*p = read16(r)
 	}
-	(local335) = make([]uint8, local336)
+	(local332) = make([]uint8, local333)
 	{
-		_, err := io.ReadFull(r, (local335)[:])
+		_, err := io.ReadFull(r, (local332)[:])
 		chk(err)
 	}
-	(*(*(string))(obj)) = string(local335)
+	(*(*(string))(obj)) = string(local332)
 }
 
 func (obj *PlayerListUpdateType) serialize(w io.Writer) {
@@ -28207,9 +28189,9 @@ func (obj *ModChanSig) deserialize(r io.Reader) {
 
 func (obj *AOProps) serialize(w io.Writer) {
 	{
-		local337 := uint8(4)
+		local334 := uint8(4)
 		{
-			x := local337
+			x := local334
 			write8(w, uint8(x))
 		}
 	}
@@ -28579,7 +28561,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		}))(obj)).Visual))[:])
 		chk(err)
 	}
-	for local338 := range (*(*(struct {
+	for local335 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
@@ -28651,7 +28633,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
-			}))(obj)).VisualSize)[local338]
+			}))(obj)).VisualSize)[local335]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -28732,7 +28714,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		}))(obj)).Textures)))
 		write16(w, uint16(x))
 	}
-	for local339 := range (*(*(struct {
+	for local336 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
@@ -28804,7 +28786,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
-			}))(obj)).Textures)[local339]).serialize(w)
+			}))(obj)).Textures)[local336]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -28812,7 +28794,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 	}
-	for local340 := range (*(*(struct {
+	for local337 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
@@ -28884,11 +28866,11 @@ func (obj *AOProps) serialize(w io.Writer) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
-			}))(obj)).SpriteSheetSize)[local340]
+			}))(obj)).SpriteSheetSize)[local337]
 			write16(w, uint16(x))
 		}
 	}
-	for local341 := range (*(*(struct {
+	for local338 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
@@ -28960,7 +28942,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
-			}))(obj)).SpritePos)[local341]
+			}))(obj)).SpritePos)[local338]
 			write16(w, uint16(x))
 		}
 	}
@@ -29282,7 +29264,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		}))(obj)).Colors)))
 		write16(w, uint16(x))
 	}
-	for local342 := range (*(*(struct {
+	for local339 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
@@ -29354,7 +29336,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
-			}))(obj)).Colors)[local342]
+			}))(obj)).Colors)[local339]
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
 	}
@@ -30362,14 +30344,14 @@ func (obj *AOProps) serialize(w io.Writer) {
 
 func (obj *AOProps) deserialize(r io.Reader) {
 	{
-		var local343 uint8
-		local344 := uint8(4)
+		var local340 uint8
+		local341 := uint8(4)
 		{
-			p := &local343
+			p := &local340
 			*p = read8(r)
 		}
-		if local343 != local344 {
-			chk(fmt.Errorf("const %v: %v", "uint8(4)", local343))
+		if local340 != local341 {
+			chk(fmt.Errorf("const %v: %v", "uint8(4)", local340))
 		}
 	}
 	{
@@ -30628,15 +30610,15 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			chk(fmt.Errorf("invalid bool: %d", n))
 		}
 	}
-	var local345 []uint8
-	var local346 uint16
+	var local342 []uint8
+	var local343 uint16
 	{
-		p := &local346
+		p := &local343
 		*p = read16(r)
 	}
-	(local345) = make([]uint8, local346)
+	(local342) = make([]uint8, local343)
 	{
-		_, err := io.ReadFull(r, (local345)[:])
+		_, err := io.ReadFull(r, (local342)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -30674,8 +30656,8 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
-	}))(obj)).Visual) = string(local345)
-	for local347 := range (*(*(struct {
+	}))(obj)).Visual) = string(local342)
+	for local344 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
@@ -30747,13 +30729,13 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
-			}))(obj)).VisualSize)[local347]
+			}))(obj)).VisualSize)[local344]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	var local348 uint16
+	var local345 uint16
 	{
-		p := &local348
+		p := &local345
 		*p = read16(r)
 	}
 	((*(*(struct {
@@ -30791,8 +30773,8 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
-	}))(obj)).Textures) = make([]Texture, local348)
-	for local349 := range (*(*(struct {
+	}))(obj)).Textures) = make([]Texture, local345)
+	for local346 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
@@ -30864,7 +30846,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
-			}))(obj)).Textures)[local349]).deserialize(r)
+			}))(obj)).Textures)[local346]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -30872,7 +30854,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 	}
-	for local350 := range (*(*(struct {
+	for local347 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
@@ -30944,11 +30926,11 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
-			}))(obj)).SpriteSheetSize)[local350]
+			}))(obj)).SpriteSheetSize)[local347]
 			*p = int16(read16(r))
 		}
 	}
-	for local351 := range (*(*(struct {
+	for local348 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
@@ -31020,7 +31002,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
-			}))(obj)).SpritePos)[local351]
+			}))(obj)).SpritePos)[local348]
 			*p = int16(read16(r))
 		}
 	}
@@ -31155,15 +31137,15 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		}))(obj)).RotateSpeed
 		*p = math.Float32frombits(read32(r))
 	}
-	var local352 []uint8
-	var local353 uint16
+	var local349 []uint8
+	var local350 uint16
 	{
-		p := &local353
+		p := &local350
 		*p = read16(r)
 	}
-	(local352) = make([]uint8, local353)
+	(local349) = make([]uint8, local350)
 	{
-		_, err := io.ReadFull(r, (local352)[:])
+		_, err := io.ReadFull(r, (local349)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -31201,10 +31183,10 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
-	}))(obj)).Mesh) = string(local352)
-	var local354 uint16
+	}))(obj)).Mesh) = string(local349)
+	var local351 uint16
 	{
-		p := &local354
+		p := &local351
 		*p = read16(r)
 	}
 	((*(*(struct {
@@ -31242,8 +31224,8 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
-	}))(obj)).Colors) = make([]color.NRGBA, local354)
-	for local355 := range (*(*(struct {
+	}))(obj)).Colors) = make([]color.NRGBA, local351)
+	for local352 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
@@ -31315,7 +31297,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
-			}))(obj)).Colors)[local355]
+			}))(obj)).Colors)[local352]
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
 	}
@@ -31535,15 +31517,15 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			chk(fmt.Errorf("invalid bool: %d", n))
 		}
 	}
-	var local356 []uint8
-	var local357 uint16
+	var local353 []uint8
+	var local354 uint16
 	{
-		p := &local357
+		p := &local354
 		*p = read16(r)
 	}
-	(local356) = make([]uint8, local357)
+	(local353) = make([]uint8, local354)
 	{
-		_, err := io.ReadFull(r, (local356)[:])
+		_, err := io.ReadFull(r, (local353)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -31581,7 +31563,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
-	}))(obj)).Nametag) = string(local356)
+	}))(obj)).Nametag) = string(local353)
 	{
 		p := &(*(*(struct {
 			MaxHP            uint16 // Player only.
@@ -31660,15 +31642,15 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		}))(obj)).FaceRotateSpeed
 		*p = math.Float32frombits(read32(r))
 	}
-	var local358 []uint8
-	var local359 uint16
+	var local355 []uint8
+	var local356 uint16
 	{
-		p := &local359
+		p := &local356
 		*p = read16(r)
 	}
-	(local358) = make([]uint8, local359)
+	(local355) = make([]uint8, local356)
 	{
-		_, err := io.ReadFull(r, (local358)[:])
+		_, err := io.ReadFull(r, (local355)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -31706,16 +31688,16 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
-	}))(obj)).Infotext) = string(local358)
-	var local360 []uint8
-	var local361 uint16
+	}))(obj)).Infotext) = string(local355)
+	var local357 []uint8
+	var local358 uint16
 	{
-		p := &local361
+		p := &local358
 		*p = read16(r)
 	}
-	(local360) = make([]uint8, local361)
+	(local357) = make([]uint8, local358)
 	{
-		_, err := io.ReadFull(r, (local360)[:])
+		_, err := io.ReadFull(r, (local357)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -31753,7 +31735,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
-	}))(obj)).Itemstring) = string(local360)
+	}))(obj)).Itemstring) = string(local357)
 	{
 		p := &(*(*(struct {
 			MaxHP            uint16 // Player only.
@@ -32181,7 +32163,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local362 := range (*(*(struct {
+	for local359 := range (*(*(struct {
 		Pos
 		Vel, Acc Vec
 		Rot      [3]float32
@@ -32199,7 +32181,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 				Interpolate    bool
 				End            bool
 				UpdateInterval float32
-			}))(obj)).Rot)[local362]
+			}))(obj)).Rot)[local359]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -32298,7 +32280,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local363 := range (*(*(struct {
+	for local360 := range (*(*(struct {
 		Pos
 		Vel, Acc Vec
 		Rot      [3]float32
@@ -32316,7 +32298,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 				Interpolate    bool
 				End            bool
 				UpdateInterval float32
-			}))(obj)).Rot)[local363]
+			}))(obj)).Rot)[local360]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -32373,7 +32355,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 }
 
 func (obj *AOSprite) serialize(w io.Writer) {
-	for local364 := range (*(*(struct {
+	for local361 := range (*(*(struct {
 		Frame0          [2]int16
 		Frames          uint16
 		FrameDuration   float32
@@ -32385,7 +32367,7 @@ func (obj *AOSprite) serialize(w io.Writer) {
 				Frames          uint16
 				FrameDuration   float32
 				ViewAngleFrames bool
-			}))(obj)).Frame0)[local364]
+			}))(obj)).Frame0)[local361]
 			write16(w, uint16(x))
 		}
 	}
@@ -32423,7 +32405,7 @@ func (obj *AOSprite) serialize(w io.Writer) {
 }
 
 func (obj *AOSprite) deserialize(r io.Reader) {
-	for local365 := range (*(*(struct {
+	for local362 := range (*(*(struct {
 		Frame0          [2]int16
 		Frames          uint16
 		FrameDuration   float32
@@ -32435,7 +32417,7 @@ func (obj *AOSprite) deserialize(r io.Reader) {
 				Frames          uint16
 				FrameDuration   float32
 				ViewAngleFrames bool
-			}))(obj)).Frame0)[local365]
+			}))(obj)).Frame0)[local362]
 			*p = int16(read16(r))
 		}
 	}
@@ -32506,21 +32488,21 @@ func (obj *Group) serialize(w io.Writer) {
 }
 
 func (obj *Group) deserialize(r io.Reader) {
-	var local366 []uint8
-	var local367 uint16
+	var local363 []uint8
+	var local364 uint16
 	{
-		p := &local367
+		p := &local364
 		*p = read16(r)
 	}
-	(local366) = make([]uint8, local367)
+	(local363) = make([]uint8, local364)
 	{
-		_, err := io.ReadFull(r, (local366)[:])
+		_, err := io.ReadFull(r, (local363)[:])
 		chk(err)
 	}
 	((*(*(struct {
 		Name   string
 		Rating int16
-	}))(obj)).Name) = string(local366)
+	}))(obj)).Name) = string(local363)
 	{
 		p := &(*(*(struct {
 			Name   string
@@ -32531,7 +32513,7 @@ func (obj *Group) deserialize(r io.Reader) {
 }
 
 func (obj *AOAnim) serialize(w io.Writer) {
-	for local368 := range (*(*(struct {
+	for local365 := range (*(*(struct {
 		Frames [2]int32
 		Speed  float32
 		Blend  float32
@@ -32543,7 +32525,7 @@ func (obj *AOAnim) serialize(w io.Writer) {
 				Speed  float32
 				Blend  float32
 				NoLoop bool
-			}))(obj)).Frames)[local368]
+			}))(obj)).Frames)[local365]
 			write32(w, uint32(x))
 		}
 	}
@@ -32581,7 +32563,7 @@ func (obj *AOAnim) serialize(w io.Writer) {
 }
 
 func (obj *AOAnim) deserialize(r io.Reader) {
-	for local369 := range (*(*(struct {
+	for local366 := range (*(*(struct {
 		Frames [2]int32
 		Speed  float32
 		Blend  float32
@@ -32593,7 +32575,7 @@ func (obj *AOAnim) deserialize(r io.Reader) {
 				Speed  float32
 				Blend  float32
 				NoLoop bool
-			}))(obj)).Frames)[local369]
+			}))(obj)).Frames)[local366]
 			*p = int32(read32(r))
 		}
 	}
@@ -32645,7 +32627,7 @@ func (obj *AOBonePos) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local370 := range (*(*(struct {
+	for local367 := range (*(*(struct {
 		Pos Vec
 		Rot [3]float32
 	}))(obj)).Rot {
@@ -32653,7 +32635,7 @@ func (obj *AOBonePos) serialize(w io.Writer) {
 			x := ((*(*(struct {
 				Pos Vec
 				Rot [3]float32
-			}))(obj)).Rot)[local370]
+			}))(obj)).Rot)[local367]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -32671,7 +32653,7 @@ func (obj *AOBonePos) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local371 := range (*(*(struct {
+	for local368 := range (*(*(struct {
 		Pos Vec
 		Rot [3]float32
 	}))(obj)).Rot {
@@ -32679,7 +32661,7 @@ func (obj *AOBonePos) deserialize(r io.Reader) {
 			p := &((*(*(struct {
 				Pos Vec
 				Rot [3]float32
-			}))(obj)).Rot)[local371]
+			}))(obj)).Rot)[local368]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -32743,7 +32725,7 @@ func (obj *AOAttach) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local372 := range (*(*(struct {
+	for local369 := range (*(*(struct {
 		ParentID     AOID
 		Bone         string
 		Pos          Vec
@@ -32757,7 +32739,7 @@ func (obj *AOAttach) serialize(w io.Writer) {
 				Pos          Vec
 				Rot          [3]float32
 				ForceVisible bool
-			}))(obj)).Rot)[local372]
+			}))(obj)).Rot)[local369]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -32792,15 +32774,15 @@ func (obj *AOAttach) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
-	var local373 []uint8
-	var local374 uint16
+	var local370 []uint8
+	var local371 uint16
 	{
-		p := &local374
+		p := &local371
 		*p = read16(r)
 	}
-	(local373) = make([]uint8, local374)
+	(local370) = make([]uint8, local371)
 	{
-		_, err := io.ReadFull(r, (local373)[:])
+		_, err := io.ReadFull(r, (local370)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -32809,7 +32791,7 @@ func (obj *AOAttach) deserialize(r io.Reader) {
 		Pos          Vec
 		Rot          [3]float32
 		ForceVisible bool
-	}))(obj)).Bone) = string(local373)
+	}))(obj)).Bone) = string(local370)
 	if err := pcall(func() {
 		((*(*(struct {
 			ParentID     AOID
@@ -32824,7 +32806,7 @@ func (obj *AOAttach) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local375 := range (*(*(struct {
+	for local372 := range (*(*(struct {
 		ParentID     AOID
 		Bone         string
 		Pos          Vec
@@ -32838,7 +32820,7 @@ func (obj *AOAttach) deserialize(r io.Reader) {
 				Pos          Vec
 				Rot          [3]float32
 				ForceVisible bool
-			}))(obj)).Rot)[local375]
+			}))(obj)).Rot)[local372]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -33133,9 +33115,9 @@ func (obj *DrawType) deserialize(r io.Reader) {
 
 func (obj *TileDef) serialize(w io.Writer) {
 	{
-		local376 := uint8(6)
+		local373 := uint8(6)
 		{
-			x := local376
+			x := local373
 			write8(w, uint8(x))
 		}
 	}
@@ -33340,14 +33322,14 @@ func (obj *TileDef) serialize(w io.Writer) {
 
 func (obj *TileDef) deserialize(r io.Reader) {
 	{
-		var local377 uint8
-		local378 := uint8(6)
+		var local374 uint8
+		local375 := uint8(6)
 		{
-			p := &local377
+			p := &local374
 			*p = read8(r)
 		}
-		if local377 != local378 {
-			chk(fmt.Errorf("const %v: %v", "uint8(6)", local377))
+		if local374 != local375 {
+			chk(fmt.Errorf("const %v: %v", "uint8(6)", local374))
 		}
 	}
 	if err := pcall(func() {
@@ -33579,9 +33561,9 @@ func (obj *LiquidType) deserialize(r io.Reader) {
 
 func (obj *NodeBox) serialize(w io.Writer) {
 	{
-		local379 := uint8(6)
+		local376 := uint8(6)
 		{
-			x := local379
+			x := local376
 			write8(w, uint8(x))
 		}
 	}
@@ -33738,7 +33720,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			}))(obj)).Fixed)))
 			write16(w, uint16(x))
 		}
-		for local380 := range (*(*(struct {
+		for local377 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -33764,7 +33746,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).Fixed)[local380]).serialize(w)
+				}))(obj)).Fixed)[local377]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -33857,7 +33839,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			}))(obj)).DiscoAll)))
 			write16(w, uint16(x))
 		}
-		for local381 := range (*(*(struct {
+		for local378 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -33883,7 +33865,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoAll)[local381]).serialize(w)
+				}))(obj)).DiscoAll)[local378]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -33922,7 +33904,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			}))(obj)).DiscoSides)))
 			write16(w, uint16(x))
 		}
-		for local382 := range (*(*(struct {
+		for local379 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -33948,7 +33930,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoSides)[local382]).serialize(w)
+				}))(obj)).DiscoSides)[local379]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -33961,14 +33943,14 @@ func (obj *NodeBox) serialize(w io.Writer) {
 
 func (obj *NodeBox) deserialize(r io.Reader) {
 	{
-		var local383 uint8
-		local384 := uint8(6)
+		var local380 uint8
+		local381 := uint8(6)
 		{
-			p := &local383
+			p := &local380
 			*p = read8(r)
 		}
-		if local383 != local384 {
-			chk(fmt.Errorf("const %v: %v", "uint8(6)", local383))
+		if local380 != local381 {
+			chk(fmt.Errorf("const %v: %v", "uint8(6)", local380))
 		}
 	}
 	if err := pcall(func() {
@@ -34093,9 +34075,9 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 		ConnDirs, DiscoDirs  DirBoxes
 		DiscoAll, DiscoSides []Box
 	}))(obj)).Type; t == FixedBox || t == LeveledBox || t == ConnectedBox {
-		var local385 uint16
+		var local382 uint16
 		{
-			p := &local385
+			p := &local382
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -34110,8 +34092,8 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			//mt:if %s.Type == ConnectedBox
 			ConnDirs, DiscoDirs  DirBoxes
 			DiscoAll, DiscoSides []Box
-		}))(obj)).Fixed) = make([]Box, local385)
-		for local386 := range (*(*(struct {
+		}))(obj)).Fixed) = make([]Box, local382)
+		for local383 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -34137,7 +34119,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).Fixed)[local386]).deserialize(r)
+				}))(obj)).Fixed)[local383]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -34199,9 +34181,9 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DirBoxes", err))
 		}
-		var local387 uint16
+		var local384 uint16
 		{
-			p := &local387
+			p := &local384
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -34216,8 +34198,8 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			//mt:if %s.Type == ConnectedBox
 			ConnDirs, DiscoDirs  DirBoxes
 			DiscoAll, DiscoSides []Box
-		}))(obj)).DiscoAll) = make([]Box, local387)
-		for local388 := range (*(*(struct {
+		}))(obj)).DiscoAll) = make([]Box, local384)
+		for local385 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -34243,7 +34225,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoAll)[local388]).deserialize(r)
+				}))(obj)).DiscoAll)[local385]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -34251,9 +34233,9 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 			}
 		}
-		var local389 uint16
+		var local386 uint16
 		{
-			p := &local389
+			p := &local386
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -34268,8 +34250,8 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			//mt:if %s.Type == ConnectedBox
 			ConnDirs, DiscoDirs  DirBoxes
 			DiscoAll, DiscoSides []Box
-		}))(obj)).DiscoSides) = make([]Box, local389)
-		for local390 := range (*(*(struct {
+		}))(obj)).DiscoSides) = make([]Box, local386)
+		for local387 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -34295,7 +34277,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoSides)[local390]).deserialize(r)
+				}))(obj)).DiscoSides)[local387]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -34351,21 +34333,21 @@ func (obj *SoundDef) serialize(w io.Writer) {
 }
 
 func (obj *SoundDef) deserialize(r io.Reader) {
-	var local391 []uint8
-	var local392 uint16
+	var local388 []uint8
+	var local389 uint16
 	{
-		p := &local392
+		p := &local389
 		*p = read16(r)
 	}
-	(local391) = make([]uint8, local392)
+	(local388) = make([]uint8, local389)
 	{
-		_, err := io.ReadFull(r, (local391)[:])
+		_, err := io.ReadFull(r, (local388)[:])
 		chk(err)
 	}
 	((*(*(struct {
 		Name              string
 		Gain, Pitch, Fade float32
-	}))(obj)).Name) = string(local391)
+	}))(obj)).Name) = string(local388)
 	{
 		p := &(*(*(struct {
 			Name              string
@@ -34447,9 +34429,9 @@ func (obj *LitFromBlks) deserialize(r io.Reader) {
 
 func (obj *AOInitData) serialize(w io.Writer) {
 	{
-		local393 := uint8(1)
+		local390 := uint8(1)
 		{
-			x := local393
+			x := local390
 			write8(w, uint8(x))
 		}
 	}
@@ -34578,7 +34560,7 @@ func (obj *AOInitData) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
-	for local394 := range (*(*(struct {
+	for local391 := range (*(*(struct {
 
 		// For players.
 		Name     string
@@ -34610,7 +34592,7 @@ func (obj *AOInitData) serialize(w io.Writer) {
 
 				// See (de)serialize.fmt.
 				Msgs []AOMsg
-			}))(obj)).Rot)[local394]
+			}))(obj)).Rot)[local391]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -34671,25 +34653,25 @@ func (obj *AOInitData) serialize(w io.Writer) {
 
 func (obj *AOInitData) deserialize(r io.Reader) {
 	{
-		var local395 uint8
-		local396 := uint8(1)
+		var local392 uint8
+		local393 := uint8(1)
 		{
-			p := &local395
+			p := &local392
 			*p = read8(r)
 		}
-		if local395 != local396 {
-			chk(fmt.Errorf("const %v: %v", "uint8(1)", local395))
+		if local392 != local393 {
+			chk(fmt.Errorf("const %v: %v", "uint8(1)", local392))
 		}
 	}
-	var local397 []uint8
-	var local398 uint16
+	var local394 []uint8
+	var local395 uint16
 	{
-		p := &local398
+		p := &local395
 		*p = read16(r)
 	}
-	(local397) = make([]uint8, local398)
+	(local394) = make([]uint8, local395)
 	{
-		_, err := io.ReadFull(r, (local397)[:])
+		_, err := io.ReadFull(r, (local394)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -34707,7 +34689,7 @@ func (obj *AOInitData) deserialize(r io.Reader) {
 
 		// See (de)serialize.fmt.
 		Msgs []AOMsg
-	}))(obj)).Name) = string(local397)
+	}))(obj)).Name) = string(local394)
 	{
 		p := &(*(*(struct {
 
@@ -34780,7 +34762,7 @@ func (obj *AOInitData) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
-	for local399 := range (*(*(struct {
+	for local396 := range (*(*(struct {
 
 		// For players.
 		Name     string
@@ -34812,7 +34794,7 @@ func (obj *AOInitData) deserialize(r io.Reader) {
 
 				// See (de)serialize.fmt.
 				Msgs []AOMsg
-			}))(obj)).Rot)[local399]
+			}))(obj)).Rot)[local396]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -34960,9 +34942,9 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 				PunchUses int32
 			}))(obj)).NonNil {
 				{
-					local400 := uint8(5)
+					local397 := uint8(5)
 					{
-						x := local400
+						x := local397
 						write8(w, uint8(x))
 					}
 				}
@@ -35041,7 +35023,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 					}))(obj)).GroupCaps)))
 					write32(w, uint32(x))
 				}
-				for local401 := range (*(*(struct {
+				for local398 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -35073,7 +35055,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).GroupCaps)[local401]).serialize(w)
+						}))(obj)).GroupCaps)[local398]).serialize(w)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -35118,7 +35100,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 					}))(obj)).DmgGroups)))
 					write32(w, uint32(x))
 				}
-				for local402 := range (*(*(struct {
+				for local399 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -35150,7 +35132,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).DmgGroups)[local402]).serialize(w)
+						}))(obj)).DmgGroups)[local399]).serialize(w)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -35284,14 +35266,14 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 				PunchUses int32
 			}))(obj)).NonNil {
 				{
-					var local403 uint8
-					local404 := uint8(5)
+					var local400 uint8
+					local401 := uint8(5)
 					{
-						p := &local403
+						p := &local400
 						*p = read8(r)
 					}
-					if local403 != local404 {
-						chk(fmt.Errorf("const %v: %v", "uint8(5)", local403))
+					if local400 != local401 {
+						chk(fmt.Errorf("const %v: %v", "uint8(5)", local400))
 					}
 				}
 				{
@@ -35332,9 +35314,9 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 					}))(obj)).MaxDropLvl
 					*p = int16(read16(r))
 				}
-				var local405 uint32
+				var local402 uint32
 				{
-					p := &local405
+					p := &local402
 					*p = read32(r)
 				}
 				((*(*(struct {
@@ -35352,8 +35334,8 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 					//mt:32tou16
 					PunchUses int32
-				}))(obj)).GroupCaps) = make([]ToolGroupCap, local405)
-				for local406 := range (*(*(struct {
+				}))(obj)).GroupCaps) = make([]ToolGroupCap, local402)
+				for local403 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -35385,7 +35367,7 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).GroupCaps)[local406]).deserialize(r)
+						}))(obj)).GroupCaps)[local403]).deserialize(r)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -35393,9 +35375,9 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolGroupCap", err))
 					}
 				}
-				var local407 uint32
+				var local404 uint32
 				{
-					p := &local407
+					p := &local404
 					*p = read32(r)
 				}
 				((*(*(struct {
@@ -35413,8 +35395,8 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 					//mt:32tou16
 					PunchUses int32
-				}))(obj)).DmgGroups) = make([]Group, local407)
-				for local408 := range (*(*(struct {
+				}))(obj)).DmgGroups) = make([]Group, local404)
+				for local405 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -35446,7 +35428,7 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).DmgGroups)[local408]).deserialize(r)
+						}))(obj)).DmgGroups)[local405]).deserialize(r)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -35454,9 +35436,9 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 					}
 				}
-				var local409 uint16
+				var local406 uint16
 				{
-					p := &local409
+					p := &local406
 					*p = read16(r)
 				}
 				(*(*(struct {
@@ -35474,7 +35456,7 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 					//mt:32tou16
 					PunchUses int32
-				}))(obj)).PunchUses = int32(local409)
+				}))(obj)).PunchUses = int32(local406)
 			}
 		}
 		if r.N > 0 {
@@ -35512,9 +35494,9 @@ func (obj *HUDType) deserialize(r io.Reader) {
 }
 
 func (obj *Box) serialize(w io.Writer) {
-	for local410 := range *(*([2]Vec))(obj) {
+	for local407 := range *(*([2]Vec))(obj) {
 		if err := pcall(func() {
-			((*(*([2]Vec))(obj))[local410]).serialize(w)
+			((*(*([2]Vec))(obj))[local407]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35525,9 +35507,9 @@ func (obj *Box) serialize(w io.Writer) {
 }
 
 func (obj *Box) deserialize(r io.Reader) {
-	for local411 := range *(*([2]Vec))(obj) {
+	for local408 := range *(*([2]Vec))(obj) {
 		if err := pcall(func() {
-			((*(*([2]Vec))(obj))[local411]).deserialize(r)
+			((*(*([2]Vec))(obj))[local408]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35593,7 +35575,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Top)))
 		write16(w, uint16(x))
 	}
-	for local412 := range (*(*(struct {
+	for local409 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Top {
@@ -35601,7 +35583,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Top)[local412]).serialize(w)
+			}))(obj)).Top)[local409]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35622,7 +35604,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Bot)))
 		write16(w, uint16(x))
 	}
-	for local413 := range (*(*(struct {
+	for local410 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Bot {
@@ -35630,7 +35612,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Bot)[local413]).serialize(w)
+			}))(obj)).Bot)[local410]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35651,7 +35633,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Front)))
 		write16(w, uint16(x))
 	}
-	for local414 := range (*(*(struct {
+	for local411 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Front {
@@ -35659,7 +35641,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Front)[local414]).serialize(w)
+			}))(obj)).Front)[local411]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35680,7 +35662,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Left)))
 		write16(w, uint16(x))
 	}
-	for local415 := range (*(*(struct {
+	for local412 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Left {
@@ -35688,7 +35670,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Left)[local415]).serialize(w)
+			}))(obj)).Left)[local412]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35709,7 +35691,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Back)))
 		write16(w, uint16(x))
 	}
-	for local416 := range (*(*(struct {
+	for local413 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Back {
@@ -35717,7 +35699,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Back)[local416]).serialize(w)
+			}))(obj)).Back)[local413]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35738,7 +35720,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Right)))
 		write16(w, uint16(x))
 	}
-	for local417 := range (*(*(struct {
+	for local414 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Right {
@@ -35746,7 +35728,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Right)[local417]).serialize(w)
+			}))(obj)).Right)[local414]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35757,16 +35739,16 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 }
 
 func (obj *DirBoxes) deserialize(r io.Reader) {
-	var local418 uint16
+	var local415 uint16
 	{
-		p := &local418
+		p := &local415
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Top) = make([]Box, local418)
-	for local419 := range (*(*(struct {
+	}))(obj)).Top) = make([]Box, local415)
+	for local416 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Top {
@@ -35774,7 +35756,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Top)[local419]).deserialize(r)
+			}))(obj)).Top)[local416]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35782,16 +35764,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
-	var local420 uint16
+	var local417 uint16
 	{
-		p := &local420
+		p := &local417
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Bot) = make([]Box, local420)
-	for local421 := range (*(*(struct {
+	}))(obj)).Bot) = make([]Box, local417)
+	for local418 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Bot {
@@ -35799,7 +35781,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Bot)[local421]).deserialize(r)
+			}))(obj)).Bot)[local418]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35807,16 +35789,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
-	var local422 uint16
+	var local419 uint16
 	{
-		p := &local422
+		p := &local419
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Front) = make([]Box, local422)
-	for local423 := range (*(*(struct {
+	}))(obj)).Front) = make([]Box, local419)
+	for local420 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Front {
@@ -35824,7 +35806,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Front)[local423]).deserialize(r)
+			}))(obj)).Front)[local420]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35832,16 +35814,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
-	var local424 uint16
+	var local421 uint16
 	{
-		p := &local424
+		p := &local421
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Left) = make([]Box, local424)
-	for local425 := range (*(*(struct {
+	}))(obj)).Left) = make([]Box, local421)
+	for local422 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Left {
@@ -35849,7 +35831,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Left)[local425]).deserialize(r)
+			}))(obj)).Left)[local422]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35857,16 +35839,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
-	var local426 uint16
+	var local423 uint16
 	{
-		p := &local426
+		p := &local423
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Back) = make([]Box, local426)
-	for local427 := range (*(*(struct {
+	}))(obj)).Back) = make([]Box, local423)
+	for local424 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Back {
@@ -35874,7 +35856,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Back)[local427]).deserialize(r)
+			}))(obj)).Back)[local424]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -35882,16 +35864,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
-	var local428 uint16
+	var local425 uint16
 	{
-		p := &local428
+		p := &local425
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Right) = make([]Box, local428)
-	for local429 := range (*(*(struct {
+	}))(obj)).Right) = make([]Box, local425)
+	for local426 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Right {
@@ -35899,7 +35881,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Right)[local429]).deserialize(r)
+			}))(obj)).Right)[local426]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -36006,7 +35988,7 @@ func (obj *ToolGroupCap) serialize(w io.Writer) {
 		}))(obj)).Times)))
 		write32(w, uint32(x))
 	}
-	for local430 := range (*(*(struct {
+	for local427 := range (*(*(struct {
 		Name string
 
 		//mt:32to16
@@ -36028,7 +36010,7 @@ func (obj *ToolGroupCap) serialize(w io.Writer) {
 
 				//mt:len32
 				Times []DigTime
-			}))(obj)).Times)[local430]).serialize(w)
+			}))(obj)).Times)[local427]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -36039,15 +36021,15 @@ func (obj *ToolGroupCap) serialize(w io.Writer) {
 }
 
 func (obj *ToolGroupCap) deserialize(r io.Reader) {
-	var local431 []uint8
-	var local432 uint16
+	var local428 []uint8
+	var local429 uint16
 	{
-		p := &local432
+		p := &local429
 		*p = read16(r)
 	}
-	(local431) = make([]uint8, local432)
+	(local428) = make([]uint8, local429)
 	{
-		_, err := io.ReadFull(r, (local431)[:])
+		_, err := io.ReadFull(r, (local428)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -36060,10 +36042,10 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 		//mt:len32
 		Times []DigTime
-	}))(obj)).Name) = string(local431)
-	var local433 int16
+	}))(obj)).Name) = string(local428)
+	var local430 int16
 	{
-		p := &local433
+		p := &local430
 		*p = int16(read16(r))
 	}
 	(*(*(struct {
@@ -36076,7 +36058,7 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 		//mt:len32
 		Times []DigTime
-	}))(obj)).Uses = int32(local433)
+	}))(obj)).Uses = int32(local430)
 	{
 		p := &(*(*(struct {
 			Name string
@@ -36091,9 +36073,9 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 		}))(obj)).MaxLvl
 		*p = int16(read16(r))
 	}
-	var local434 uint32
+	var local431 uint32
 	{
-		p := &local434
+		p := &local431
 		*p = read32(r)
 	}
 	((*(*(struct {
@@ -36106,8 +36088,8 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 		//mt:len32
 		Times []DigTime
-	}))(obj)).Times) = make([]DigTime, local434)
-	for local435 := range (*(*(struct {
+	}))(obj)).Times) = make([]DigTime, local431)
+	for local432 := range (*(*(struct {
 		Name string
 
 		//mt:32to16
@@ -36129,7 +36111,7 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 				//mt:len32
 				Times []DigTime
-			}))(obj)).Times)[local435]).deserialize(r)
+			}))(obj)).Times)[local432]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)

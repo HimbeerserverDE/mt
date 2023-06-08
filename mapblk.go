@@ -29,9 +29,6 @@ type MapBlk struct {
 	Param2 [4096]uint8
 
 	NodeMetas map[uint16]*NodeMeta
-
-	// net info
-	//mt:const uint8(2) // version
 }
 
 // Pos2BlkPos converts a node position to a MapBlk position and index.
