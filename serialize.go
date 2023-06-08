@@ -18582,16 +18582,106 @@ func (obj *ToCltFormspecPrepend) deserialize(r io.Reader) {
 func (obj *ToCltLighting) serialize(w io.Writer) {
 	{
 		x := (*(*(struct {
-			ShadowIntensity float32
-			Saturation      float32
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
 		}))(obj)).ShadowIntensity
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			ShadowIntensity float32
-			Saturation      float32
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
 		}))(obj)).Saturation
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).LuminanceMin
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).LuminanceMax
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).ExposureCorrection
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).SpeedDarkBright
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).SpeedBrightDark
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).CenterWeightPower
 		write32(w, math.Float32bits(x))
 	}
 }
@@ -18599,16 +18689,106 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 func (obj *ToCltLighting) deserialize(r io.Reader) {
 	{
 		p := &(*(*(struct {
-			ShadowIntensity float32
-			Saturation      float32
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
 		}))(obj)).ShadowIntensity
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			ShadowIntensity float32
-			Saturation      float32
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
 		}))(obj)).Saturation
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).LuminanceMin
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).LuminanceMax
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).ExposureCorrection
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).SpeedDarkBright
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).SpeedBrightDark
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+		}))(obj)).CenterWeightPower
 		*p = math.Float32frombits(read32(r))
 	}
 }

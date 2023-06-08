@@ -827,8 +827,14 @@ func (cmd *ToCltMinimapModes) deserialize(r io.Reader) {
 
 // ToCltLighting tells the client the shadow intensity of the local player.
 type ToCltLighting struct {
-	ShadowIntensity float32
-	Saturation      float32
+	ShadowIntensity    float32
+	Saturation         float32
+	LuminanceMin       float32
+	LuminanceMax       float32
+	ExposureCorrection float32
+	SpeedDarkBright    float32
+	SpeedBrightDark    float32
+	CenterWeightPower  float32
 }
 
 type ToCltDisco struct{}
