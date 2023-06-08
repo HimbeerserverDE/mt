@@ -3,7 +3,9 @@ Proxy is a Minetest proxy server
 supporting multiple concurrent connections.
 
 Usage:
+
 	proxy dial:port listen:port
+
 where dial:port is the server address
 and listen:port is the address to listen on.
 */
