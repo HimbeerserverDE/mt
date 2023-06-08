@@ -13049,6 +13049,8 @@ func (obj *ToCltNodeMetasChanged) serialize(w io.Writer) {
 				Changed map[[3]int16]*NodeMeta
 			}))(obj)).Changed
 			{
+				r, err := zlib.NewReader(byteReader{r})
+				chk(err)
 				if x == nil {
 					write8(w, 0)
 				} else {
@@ -13080,6 +13082,7 @@ func (obj *ToCltNodeMetasChanged) serialize(w io.Writer) {
 						chk(serialize(w, x[key]))
 					}
 				}
+				chk(r.Close())
 			}
 		}
 		{
@@ -13114,6 +13117,8 @@ func (obj *ToCltNodeMetasChanged) deserialize(r io.Reader) {
 				Changed map[[3]int16]*NodeMeta
 			}))(obj)).Changed
 			{
+				r, err := zlib.NewReader(byteReader{r})
+				chk(err)
 				switch ver := read8(r); ver {
 				case 0:
 					*p = nil
@@ -13132,6 +13137,7 @@ func (obj *ToCltNodeMetasChanged) deserialize(r io.Reader) {
 				default:
 					chk(fmt.Errorf("unsupported nodemetas version: %d", ver))
 				}
+				chk(r.Close())
 			}
 		}
 		if r.N > 0 {

@@ -60,6 +60,9 @@ map[uint16]*NodeMeta	{
 	}
 
 map[[3]int16]*NodeMeta	{
+		r, err := zlib.NewReader(byteReader{r})
+		chk(err)
+
 		switch ver := read8(r); ver {
 		case 0:
 			*p = nil
@@ -78,6 +81,8 @@ map[[3]int16]*NodeMeta	{
 		default:
 			chk(fmt.Errorf("unsupported nodemetas version: %d", ver))
 		}
+
+		chk(r.Close())
 	}
 
 PointedThing	{
