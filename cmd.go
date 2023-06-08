@@ -85,3 +85,4 @@ func (*ToSrvCltReady) cmd()       {}
 func (*ToSrvFirstSRP) cmd()       {}
 func (*ToSrvSRPBytesA) cmd()      {}
 func (*ToSrvSRPBytesM) cmd()      {}
+func (*ToSrvCltInfo) cmd()        {}

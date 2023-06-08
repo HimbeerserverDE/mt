@@ -165,6 +165,14 @@ type ToSrvSRPBytesM struct {
 	M []byte
 }
 
+// ToSrvCltInfo tells the server some information about the game window.
+type ToSrvCltInfo struct {
+	RenderTargetSize [2]int16
+	GUIScaling       float32
+	HUDScaling       float32
+	MaxFormspecInfo  [2]float32
+}
+
 type ToSrvDisco struct{}
 
 func (*ToSrvDisco) cmd()                         {}

@@ -511,6 +511,7 @@ var typeNames = []string{
 	"ToSrvFirstSRP",
 	"ToSrvSRPBytesA",
 	"ToSrvSRPBytesM",
+	"ToSrvCltInfo",
 
 	"ToCltHello",
 	"ToCltAcceptAuth",

@@ -26,6 +26,7 @@ func (*ToSrvCltReady) toSrvCmdNo() uint16       { return 67 }
 func (*ToSrvFirstSRP) toSrvCmdNo() uint16       { return 80 }
 func (*ToSrvSRPBytesA) toSrvCmdNo() uint16      { return 81 }
 func (*ToSrvSRPBytesM) toSrvCmdNo() uint16      { return 82 }
+func (*ToSrvCltInfo) toSrvCmdNo() uint16        { return 83 }
 
 var newToSrvCmd = map[uint16]func() Cmd{
 	0:  func() Cmd { return new(ToSrvNil) },
@@ -52,4 +53,5 @@ var newToSrvCmd = map[uint16]func() Cmd{
 	80: func() Cmd { return new(ToSrvFirstSRP) },
 	81: func() Cmd { return new(ToSrvSRPBytesA) },
 	82: func() Cmd { return new(ToSrvSRPBytesM) },
+	83: func() Cmd { return new(ToSrvCltInfo) },
 }

@@ -80,3 +80,4 @@ ToSrvCltReady	1	rel
 ToSrvFirstSRP	1	rel
 ToSrvSRPBytesA	1	rel
 ToSrvSRPBytesM	1	rel
+ToSrvCltInfo	1	rel

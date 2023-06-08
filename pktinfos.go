@@ -86,3 +86,4 @@ func (*ToSrvCltReady) DefaultPktInfo() rudp.PktInfo              { return rudp.P
 func (*ToSrvFirstSRP) DefaultPktInfo() rudp.PktInfo              { return rudp.PktInfo{1, false} }
 func (*ToSrvSRPBytesA) DefaultPktInfo() rudp.PktInfo             { return rudp.PktInfo{1, false} }
 func (*ToSrvSRPBytesM) DefaultPktInfo() rudp.PktInfo             { return rudp.PktInfo{1, false} }
+func (*ToSrvCltInfo) DefaultPktInfo() rudp.PktInfo               { return rudp.PktInfo{1, false} }
