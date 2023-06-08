@@ -135,6 +135,13 @@ type ToSrvReqMedia struct {
 	Filenames []string
 }
 
+// ToSrvHaveMedia informs the server about the dynamic media
+// the client has received.
+type ToSrvHaveMedia struct {
+	//mt:len8
+	Tokens []uint32
+}
+
 type ToSrvCltReady struct {
 	// Version information.
 	Major, Minor, Patch uint8

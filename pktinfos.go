@@ -80,6 +80,7 @@ func (*ToSrvRemovedSounds) DefaultPktInfo() rudp.PktInfo         { return rudp.P
 func (*ToSrvNodeMetaFields) DefaultPktInfo() rudp.PktInfo        { return rudp.PktInfo{0, false} }
 func (*ToSrvInvFields) DefaultPktInfo() rudp.PktInfo             { return rudp.PktInfo{0, false} }
 func (*ToSrvReqMedia) DefaultPktInfo() rudp.PktInfo              { return rudp.PktInfo{1, false} }
+func (*ToSrvHaveMedia) DefaultPktInfo() rudp.PktInfo             { return rudp.PktInfo{2, false} }
 func (*ToSrvCltReady) DefaultPktInfo() rudp.PktInfo              { return rudp.PktInfo{1, false} }
 func (*ToSrvFirstSRP) DefaultPktInfo() rudp.PktInfo              { return rudp.PktInfo{1, false} }
 func (*ToSrvSRPBytesA) DefaultPktInfo() rudp.PktInfo             { return rudp.PktInfo{1, false} }

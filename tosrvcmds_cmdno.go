@@ -21,6 +21,7 @@ func (*ToSrvRemovedSounds) toSrvCmdNo() uint16  { return 58 }
 func (*ToSrvNodeMetaFields) toSrvCmdNo() uint16 { return 59 }
 func (*ToSrvInvFields) toSrvCmdNo() uint16      { return 60 }
 func (*ToSrvReqMedia) toSrvCmdNo() uint16       { return 64 }
+func (*ToSrvHaveMedia) toSrvCmdNo() uint16      { return 65 }
 func (*ToSrvCltReady) toSrvCmdNo() uint16       { return 67 }
 func (*ToSrvFirstSRP) toSrvCmdNo() uint16       { return 80 }
 func (*ToSrvSRPBytesA) toSrvCmdNo() uint16      { return 81 }
@@ -46,6 +47,7 @@ var newToSrvCmd = map[uint16]func() Cmd{
 	59: func() Cmd { return new(ToSrvNodeMetaFields) },
 	60: func() Cmd { return new(ToSrvInvFields) },
 	64: func() Cmd { return new(ToSrvReqMedia) },
+	65: func() Cmd { return new(ToSrvHaveMedia) },
 	67: func() Cmd { return new(ToSrvCltReady) },
 	80: func() Cmd { return new(ToSrvFirstSRP) },
 	81: func() Cmd { return new(ToSrvSRPBytesA) },

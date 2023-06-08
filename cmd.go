@@ -79,6 +79,7 @@ func (*ToSrvRemovedSounds) cmd()  {}
 func (*ToSrvNodeMetaFields) cmd() {}
 func (*ToSrvInvFields) cmd()      {}
 func (*ToSrvReqMedia) cmd()       {}
+func (*ToSrvHaveMedia) cmd()      {}
 func (*ToSrvCltReady) cmd()       {}
 func (*ToSrvFirstSRP) cmd()       {}
 func (*ToSrvSRPBytesA) cmd()      {}

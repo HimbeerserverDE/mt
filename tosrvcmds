@@ -17,6 +17,7 @@
 59	NodeMetaFields
 60	InvFields
 64	ReqMedia
+65	HaveMedia
 67	CltReady
 80	FirstSRP
 81	SRPBytesA

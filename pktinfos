@@ -74,6 +74,7 @@ ToSrvRemovedSounds	2	rel
 ToSrvNodeMetaFields	0	rel
 ToSrvInvFields	0	rel
 ToSrvReqMedia	1	rel
+ToSrvHaveMedia	2	rel
 ToSrvCltReady	1	rel
 ToSrvFirstSRP	1	rel
 ToSrvSRPBytesA	1	rel
