@@ -55,6 +55,7 @@ ToCltStarParams	0	rel
 ToCltSRPBytesSaltB	0	rel
 ToCltFormspecPrepend	0	rel
 ToCltMinimapModes	0	rel
+ToCltLighting	0	rel
 ToSrvNil	0	rel
 ToSrvInit	1	unrel
 ToSrvInit2	1	rel

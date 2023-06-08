@@ -59,6 +59,7 @@ func (*ToCltStarParams) toCltCmdNo() uint16            { return 92 }
 func (*ToCltSRPBytesSaltB) toCltCmdNo() uint16         { return 96 }
 func (*ToCltFormspecPrepend) toCltCmdNo() uint16       { return 97 }
 func (*ToCltMinimapModes) toCltCmdNo() uint16          { return 98 }
+func (*ToCltLighting) toCltCmdNo() uint16              { return 99 }
 
 var newToCltCmd = map[uint16]func() Cmd{
 	2:  func() Cmd { return new(ToCltHello) },
@@ -118,4 +119,5 @@ var newToCltCmd = map[uint16]func() Cmd{
 	96: func() Cmd { return new(ToCltSRPBytesSaltB) },
 	97: func() Cmd { return new(ToCltFormspecPrepend) },
 	98: func() Cmd { return new(ToCltMinimapModes) },
+	99: func() Cmd { return new(ToCltLighting) },
 }

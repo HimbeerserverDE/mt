@@ -59,6 +59,7 @@ func (*ToCltStarParams) cmd()            {}
 func (*ToCltSRPBytesSaltB) cmd()         {}
 func (*ToCltFormspecPrepend) cmd()       {}
 func (*ToCltMinimapModes) cmd()          {}
+func (*ToCltLighting) cmd()              {}
 
 func (*ToSrvNil) cmd()            {}
 func (*ToSrvInit) cmd()           {}
