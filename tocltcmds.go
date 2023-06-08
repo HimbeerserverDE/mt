@@ -663,6 +663,8 @@ type ToCltSkyParams struct {
 	NightSky, NightHorizon,
 	Indoor color.NRGBA
 	//mt:end
+
+	BodyOrbitTilt float32
 }
 
 // ToCltOverrideDayNightRatio overrides the client's day-night ratio

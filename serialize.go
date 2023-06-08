@@ -16400,6 +16400,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).BgColor
 		w.Write([]byte{x.A, x.R, x.G, x.B})
 	}
@@ -16419,6 +16421,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 		DawnSky, DawnHorizon,
 		NightSky, NightHorizon,
 		Indoor color.NRGBA
+
+		BodyOrbitTilt float32
 	}))(obj)).Type))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -16439,6 +16443,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).Type))))
 		write16(w, uint16(x))
 	}
@@ -16459,6 +16465,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).Type))[:])
 		chk(err)
 	}
@@ -16479,6 +16487,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).Clouds
 		if x {
 			write8(w, 1)
@@ -16503,6 +16513,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).SunFogTint
 		w.Write([]byte{x.A, x.R, x.G, x.B})
 	}
@@ -16523,6 +16535,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).MoonFogTint
 		w.Write([]byte{x.A, x.R, x.G, x.B})
 	}
@@ -16542,6 +16556,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 		DawnSky, DawnHorizon,
 		NightSky, NightHorizon,
 		Indoor color.NRGBA
+
+		BodyOrbitTilt float32
 	}))(obj)).FogTintType))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -16562,6 +16578,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).FogTintType))))
 		write16(w, uint16(x))
 	}
@@ -16582,6 +16600,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).FogTintType))[:])
 		chk(err)
 	}
@@ -16601,6 +16621,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 		DawnSky, DawnHorizon,
 		NightSky, NightHorizon,
 		Indoor color.NRGBA
+
+		BodyOrbitTilt float32
 	}))(obj)).Type == "skybox" {
 		if len(((*(*(struct {
 			BgColor     color.NRGBA
@@ -16618,6 +16640,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).Textures)) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -16638,6 +16662,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).Textures)))
 			write16(w, uint16(x))
 		}
@@ -16657,6 +16683,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).Textures {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -16675,6 +16703,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 					DawnSky, DawnHorizon,
 					NightSky, NightHorizon,
 					Indoor color.NRGBA
+
+					BodyOrbitTilt float32
 				}))(obj)).Textures)[local200]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
@@ -16700,6 +16730,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 		DawnSky, DawnHorizon,
 		NightSky, NightHorizon,
 		Indoor color.NRGBA
+
+		BodyOrbitTilt float32
 	}))(obj)).Type == "regular" {
 		{
 			x := (*(*(struct {
@@ -16718,6 +16750,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).DaySky
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -16738,6 +16772,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).DayHorizon
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -16758,6 +16794,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).DawnSky
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -16778,6 +16816,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).DawnHorizon
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -16798,6 +16838,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).NightSky
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -16818,6 +16860,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).NightHorizon
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -16838,9 +16882,33 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).Indoor
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
+	}
+	{
+		x := (*(*(struct {
+			BgColor     color.NRGBA
+			Type        string
+			Clouds      bool
+			SunFogTint  color.NRGBA
+			MoonFogTint color.NRGBA
+			FogTintType string
+
+			//mt:if %s.Type == "skybox"
+			Textures []Texture
+
+			//mt:if %s.Type == "regular"
+			DaySky, DayHorizon,
+			DawnSky, DawnHorizon,
+			NightSky, NightHorizon,
+			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
+		}))(obj)).BodyOrbitTilt
+		write32(w, math.Float32bits(x))
 	}
 }
 
@@ -16862,6 +16930,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).BgColor
 		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 	}
@@ -16892,6 +16962,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 		DawnSky, DawnHorizon,
 		NightSky, NightHorizon,
 		Indoor color.NRGBA
+
+		BodyOrbitTilt float32
 	}))(obj)).Type) = string(local201)
 	{
 		p := &(*(*(struct {
@@ -16910,6 +16982,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).Clouds
 		switch n := read8(r); n {
 		case 0:
@@ -16937,6 +17011,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).SunFogTint
 		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 	}
@@ -16957,6 +17033,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).MoonFogTint
 		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 	}
@@ -16987,6 +17065,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 		DawnSky, DawnHorizon,
 		NightSky, NightHorizon,
 		Indoor color.NRGBA
+
+		BodyOrbitTilt float32
 	}))(obj)).FogTintType) = string(local203)
 	if (*(*(struct {
 		BgColor     color.NRGBA
@@ -17004,6 +17084,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 		DawnSky, DawnHorizon,
 		NightSky, NightHorizon,
 		Indoor color.NRGBA
+
+		BodyOrbitTilt float32
 	}))(obj)).Type == "skybox" {
 		var local205 uint16
 		{
@@ -17026,6 +17108,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).Textures) = make([]Texture, local205)
 		for local206 := range (*(*(struct {
 			BgColor     color.NRGBA
@@ -17043,6 +17127,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 			DawnSky, DawnHorizon,
 			NightSky, NightHorizon,
 			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
 		}))(obj)).Textures {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -17061,6 +17147,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 					DawnSky, DawnHorizon,
 					NightSky, NightHorizon,
 					Indoor color.NRGBA
+
+					BodyOrbitTilt float32
 				}))(obj)).Textures)[local206]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
@@ -17086,6 +17174,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 		DawnSky, DawnHorizon,
 		NightSky, NightHorizon,
 		Indoor color.NRGBA
+
+		BodyOrbitTilt float32
 	}))(obj)).Type == "regular" {
 		{
 			p := &(*(*(struct {
@@ -17104,6 +17194,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).DaySky
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17124,6 +17216,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).DayHorizon
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17144,6 +17238,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).DawnSky
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17164,6 +17260,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).DawnHorizon
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17184,6 +17282,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).NightSky
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17204,6 +17304,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).NightHorizon
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17224,9 +17326,33 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 				DawnSky, DawnHorizon,
 				NightSky, NightHorizon,
 				Indoor color.NRGBA
+
+				BodyOrbitTilt float32
 			}))(obj)).Indoor
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
+	}
+	{
+		p := &(*(*(struct {
+			BgColor     color.NRGBA
+			Type        string
+			Clouds      bool
+			SunFogTint  color.NRGBA
+			MoonFogTint color.NRGBA
+			FogTintType string
+
+			//mt:if %s.Type == "skybox"
+			Textures []Texture
+
+			//mt:if %s.Type == "regular"
+			DaySky, DayHorizon,
+			DawnSky, DawnHorizon,
+			NightSky, NightHorizon,
+			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
+		}))(obj)).BodyOrbitTilt
+		*p = math.Float32frombits(read32(r))
 	}
 }
 
