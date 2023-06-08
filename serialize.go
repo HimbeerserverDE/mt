@@ -13437,10 +13437,11 @@ func (obj *ToCltMoonParams) deserialize(r io.Reader) {
 func (obj *ToCltStarParams) serialize(w io.Writer) {
 	{
 		x := (*(*(struct {
-			Visible bool
-			Count   uint32
-			Color   color.NRGBA
-			Size    float32
+			Visible    bool
+			Count      uint32
+			Color      color.NRGBA
+			Size       float32
+			DayOpacity float32
 		}))(obj)).Visible
 		if x {
 			write8(w, 1)
@@ -13450,29 +13451,42 @@ func (obj *ToCltStarParams) serialize(w io.Writer) {
 	}
 	{
 		x := (*(*(struct {
-			Visible bool
-			Count   uint32
-			Color   color.NRGBA
-			Size    float32
+			Visible    bool
+			Count      uint32
+			Color      color.NRGBA
+			Size       float32
+			DayOpacity float32
 		}))(obj)).Count
 		write32(w, uint32(x))
 	}
 	{
 		x := (*(*(struct {
-			Visible bool
-			Count   uint32
-			Color   color.NRGBA
-			Size    float32
+			Visible    bool
+			Count      uint32
+			Color      color.NRGBA
+			Size       float32
+			DayOpacity float32
 		}))(obj)).Color
 		w.Write([]byte{x.A, x.R, x.G, x.B})
 	}
 	{
 		x := (*(*(struct {
-			Visible bool
-			Count   uint32
-			Color   color.NRGBA
-			Size    float32
+			Visible    bool
+			Count      uint32
+			Color      color.NRGBA
+			Size       float32
+			DayOpacity float32
 		}))(obj)).Size
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Visible    bool
+			Count      uint32
+			Color      color.NRGBA
+			Size       float32
+			DayOpacity float32
+		}))(obj)).DayOpacity
 		write32(w, math.Float32bits(x))
 	}
 }
@@ -13480,10 +13494,11 @@ func (obj *ToCltStarParams) serialize(w io.Writer) {
 func (obj *ToCltStarParams) deserialize(r io.Reader) {
 	{
 		p := &(*(*(struct {
-			Visible bool
-			Count   uint32
-			Color   color.NRGBA
-			Size    float32
+			Visible    bool
+			Count      uint32
+			Color      color.NRGBA
+			Size       float32
+			DayOpacity float32
 		}))(obj)).Visible
 		switch n := read8(r); n {
 		case 0:
@@ -13496,29 +13511,42 @@ func (obj *ToCltStarParams) deserialize(r io.Reader) {
 	}
 	{
 		p := &(*(*(struct {
-			Visible bool
-			Count   uint32
-			Color   color.NRGBA
-			Size    float32
+			Visible    bool
+			Count      uint32
+			Color      color.NRGBA
+			Size       float32
+			DayOpacity float32
 		}))(obj)).Count
 		*p = read32(r)
 	}
 	{
 		p := &(*(*(struct {
-			Visible bool
-			Count   uint32
-			Color   color.NRGBA
-			Size    float32
+			Visible    bool
+			Count      uint32
+			Color      color.NRGBA
+			Size       float32
+			DayOpacity float32
 		}))(obj)).Color
 		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 	}
 	{
 		p := &(*(*(struct {
-			Visible bool
-			Count   uint32
-			Color   color.NRGBA
-			Size    float32
+			Visible    bool
+			Count      uint32
+			Color      color.NRGBA
+			Size       float32
+			DayOpacity float32
 		}))(obj)).Size
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Visible    bool
+			Count      uint32
+			Color      color.NRGBA
+			Size       float32
+			DayOpacity float32
+		}))(obj)).DayOpacity
 		*p = math.Float32frombits(read32(r))
 	}
 }

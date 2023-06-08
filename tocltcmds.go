@@ -737,10 +737,11 @@ type ToCltMoonParams struct {
 
 // ToCltStarParams tells the client how to render the stars.
 type ToCltStarParams struct {
-	Visible bool
-	Count   uint32
-	Color   color.NRGBA
-	Size    float32
+	Visible    bool
+	Count      uint32
+	Color      color.NRGBA
+	Size       float32
+	DayOpacity float32
 }
 
 type ToCltSRPBytesSaltB struct {
