@@ -18552,6 +18552,24 @@ func (obj *ToCltFormspecPrepend) deserialize(r io.Reader) {
 	}))(obj)).Prepend) = string(local232)
 }
 
+func (obj *ToCltLighting) serialize(w io.Writer) {
+	{
+		x := (*(*(struct {
+			ShadowIntensity float32
+		}))(obj)).ShadowIntensity
+		write32(w, math.Float32bits(x))
+	}
+}
+
+func (obj *ToCltLighting) deserialize(r io.Reader) {
+	{
+		p := &(*(*(struct {
+			ShadowIntensity float32
+		}))(obj)).ShadowIntensity
+		*p = math.Float32frombits(read32(r))
+	}
+}
+
 func (obj *AOCmdProps) serialize(w io.Writer) {
 	if err := pcall(func() {
 		((*(*(struct {

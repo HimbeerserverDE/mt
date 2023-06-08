@@ -568,6 +568,7 @@ var typeNames = []string{
 	"ToCltStarParams",
 	"ToCltSRPBytesSaltB",
 	"ToCltFormspecPrepend",
+	"ToCltLighting",
 
 	"AOCmdProps",
 	"AOCmdPos",
