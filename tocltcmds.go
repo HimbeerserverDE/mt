@@ -386,6 +386,8 @@ type ToCltSpawnParticle struct {
 	AnimParams  TileAnim
 	Glow        uint8
 	AOCollision bool
+	Drag        [3]float32
+	Bounce      RangeV3F32
 	NodeParam0  Content
 	NodeParam2  uint8
 	NodeTile    uint8
