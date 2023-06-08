@@ -13049,8 +13049,7 @@ func (obj *ToCltNodeMetasChanged) serialize(w io.Writer) {
 				Changed map[[3]int16]*NodeMeta
 			}))(obj)).Changed
 			{
-				r, err := zlib.NewReader(byteReader{r})
-				chk(err)
+				w := zlib.NewWriter(w)
 				if x == nil {
 					write8(w, 0)
 				} else {
@@ -13082,7 +13081,7 @@ func (obj *ToCltNodeMetasChanged) serialize(w io.Writer) {
 						chk(serialize(w, x[key]))
 					}
 				}
-				chk(r.Close())
+				chk(w.Close())
 			}
 		}
 		{

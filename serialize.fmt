@@ -81,8 +81,7 @@ map[uint16]*NodeMeta	{
 	}
 
 map[[3]int16]*NodeMeta	{
-		r, err := zlib.NewReader(byteReader{r})
-		chk(err)
+		w := zlib.NewWriter(w)
 
 		if x == nil {
 			write8(w, 0)
@@ -118,7 +117,7 @@ map[[3]int16]*NodeMeta	{
 			}
 		}
 
-		chk(r.Close())
+		chk(w.Close())
 	}
 
 PointedThing	chk(writePointedThing(w, x))
