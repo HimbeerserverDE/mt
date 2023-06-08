@@ -23387,6 +23387,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Type).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -23426,6 +23428,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).Name))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -23462,6 +23466,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Name))))
 			write16(w, uint16(x))
 		}
@@ -23498,6 +23504,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Name))[:])
 			chk(err)
 		}
@@ -23533,6 +23541,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).Desc))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -23569,6 +23579,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Desc))))
 			write16(w, uint16(x))
 		}
@@ -23605,6 +23617,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Desc))[:])
 			chk(err)
 		}
@@ -23641,6 +23655,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).InvImg).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -23681,6 +23697,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).WieldImg).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -23720,6 +23738,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).WieldScale {
 			{
 				x := ((*(*(struct {
@@ -23754,6 +23774,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 					InvOverlay, WieldOverlay Texture
 
 					ShortDesc string
+
+					PlaceParam2 uint8
 				}))(obj)).WieldScale)[local302]
 				write32(w, math.Float32bits(x))
 			}
@@ -23791,6 +23813,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).StackMax
 			write16(w, uint16(x))
 		}
@@ -23827,6 +23851,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Usable
 			if x {
 				write8(w, 1)
@@ -23867,6 +23893,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).CanPointLiquids
 			if x {
 				write8(w, 1)
@@ -23907,6 +23935,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).ToolCaps).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -23946,6 +23976,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).Groups)) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -23982,6 +24014,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Groups)))
 			write16(w, uint16(x))
 		}
@@ -24017,6 +24051,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).Groups {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -24051,6 +24087,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 					InvOverlay, WieldOverlay Texture
 
 					ShortDesc string
+
+					PlaceParam2 uint8
 				}))(obj)).Groups)[local303]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
@@ -24091,6 +24129,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).PlacePredict))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -24127,6 +24167,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).PlacePredict))))
 			write16(w, uint16(x))
 		}
@@ -24163,6 +24205,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).PlacePredict))[:])
 			chk(err)
 		}
@@ -24199,6 +24243,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).PlaceSnd).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -24239,6 +24285,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).PlaceFailSnd).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -24279,6 +24327,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).PointRange
 			write32(w, math.Float32bits(x))
 		}
@@ -24315,6 +24365,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Palette).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -24355,6 +24407,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Color
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -24391,6 +24445,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).InvOverlay).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -24431,6 +24487,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).WieldOverlay).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -24470,6 +24528,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).ShortDesc))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -24506,6 +24566,8 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).ShortDesc))))
 			write16(w, uint16(x))
 		}
@@ -24542,8 +24604,48 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).ShortDesc))[:])
 			chk(err)
+		}
+		{
+			x := (*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				PlaceParam2 uint8
+			}))(obj)).PlaceParam2
+			write8(w, uint8(x))
 		}
 		{
 			buf := w
@@ -24615,6 +24717,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Type).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -24665,6 +24769,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).Name) = string(local306)
 		var local308 []uint8
 		var local309 uint16
@@ -24709,6 +24815,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).Desc) = string(local308)
 		if err := pcall(func() {
 			((*(*(struct {
@@ -24743,6 +24851,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).InvImg).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -24783,6 +24893,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).WieldImg).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -24822,6 +24934,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).WieldScale {
 			{
 				p := &((*(*(struct {
@@ -24856,6 +24970,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 					InvOverlay, WieldOverlay Texture
 
 					ShortDesc string
+
+					PlaceParam2 uint8
 				}))(obj)).WieldScale)[local310]
 				*p = math.Float32frombits(read32(r))
 			}
@@ -24893,6 +25009,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).StackMax
 			*p = read16(r)
 		}
@@ -24929,6 +25047,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Usable
 			switch n := read8(r); n {
 			case 0:
@@ -24972,6 +25092,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).CanPointLiquids
 			switch n := read8(r); n {
 			case 0:
@@ -25015,6 +25137,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).ToolCaps).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -25059,6 +25183,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).Groups) = make([]Group, local311)
 		for local312 := range (*(*(struct {
 			Type ItemType
@@ -25092,6 +25218,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).Groups {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -25126,6 +25254,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 					InvOverlay, WieldOverlay Texture
 
 					ShortDesc string
+
+					PlaceParam2 uint8
 				}))(obj)).Groups)[local312]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
@@ -25177,6 +25307,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).PlacePredict) = string(local313)
 		if err := pcall(func() {
 			((*(*(struct {
@@ -25211,6 +25343,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).PlaceSnd).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -25251,6 +25385,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).PlaceFailSnd).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -25291,6 +25427,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).PointRange
 			*p = math.Float32frombits(read32(r))
 		}
@@ -25327,6 +25465,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Palette).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -25367,6 +25507,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).Color
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -25403,6 +25545,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).InvOverlay).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -25443,6 +25587,8 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				InvOverlay, WieldOverlay Texture
 
 				ShortDesc string
+
+				PlaceParam2 uint8
 			}))(obj)).WieldOverlay).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -25493,7 +25639,47 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			InvOverlay, WieldOverlay Texture
 
 			ShortDesc string
+
+			PlaceParam2 uint8
 		}))(obj)).ShortDesc) = string(local315)
+		{
+			p := &(*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				PlaceParam2 uint8
+			}))(obj)).PlaceParam2
+			*p = read8(r)
+		}
 		if r.N > 0 {
 			chk(fmt.Errorf("%d bytes of trailing data", r.N))
 		}
