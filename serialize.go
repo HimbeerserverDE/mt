@@ -2142,52 +2142,68 @@ func (obj *ToCltKick) deserialize(r io.Reader) {
 func (obj *ToCltBlkData) serialize(w io.Writer) {
 	for local65 := range (*(*(struct {
 		Blkpos [3]int16
-		Blk    MapBlk
+		//mt:zstd
+		Blk MapBlk
 	}))(obj)).Blkpos {
 		{
 			x := ((*(*(struct {
 				Blkpos [3]int16
-				Blk    MapBlk
+				//mt:zstd
+				Blk MapBlk
 			}))(obj)).Blkpos)[local65]
 			write16(w, uint16(x))
 		}
 	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Blkpos [3]int16
-			Blk    MapBlk
-		}))(obj)).Blk).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
+	{
+		w, err := zstd.NewWriter(w)
+		chk(err)
+		if err := pcall(func() {
+			((*(*(struct {
+				Blkpos [3]int16
+				//mt:zstd
+				Blk MapBlk
+			}))(obj)).Blk).serialize(w)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlk", err))
 		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlk", err))
+		chk(w.Close())
 	}
 }
 
 func (obj *ToCltBlkData) deserialize(r io.Reader) {
 	for local66 := range (*(*(struct {
 		Blkpos [3]int16
-		Blk    MapBlk
+		//mt:zstd
+		Blk MapBlk
 	}))(obj)).Blkpos {
 		{
 			p := &((*(*(struct {
 				Blkpos [3]int16
-				Blk    MapBlk
+				//mt:zstd
+				Blk MapBlk
 			}))(obj)).Blkpos)[local66]
 			*p = int16(read16(r))
 		}
 	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Blkpos [3]int16
-			Blk    MapBlk
-		}))(obj)).Blk).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
+	{
+		r, err := zstd.NewReader(byteReader{r})
+		chk(err)
+		if err := pcall(func() {
+			((*(*(struct {
+				Blkpos [3]int16
+				//mt:zstd
+				Blk MapBlk
+			}))(obj)).Blk).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlk", err))
 		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlk", err))
+		r.Close()
 	}
 }
 
@@ -22709,7 +22725,6 @@ func (obj *MapBlk) serialize(w io.Writer) {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22727,7 +22742,6 @@ func (obj *MapBlk) serialize(w io.Writer) {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22754,75 +22768,65 @@ func (obj *MapBlk) serialize(w io.Writer) {
 			write8(w, uint8(x))
 		}
 	}
+	for local287 := range (*(*(struct {
+		Flags   MapBlkFlags
+		LitFrom LitFromBlks
+
+		Param0 [4096]Content
+		Param1 [4096]uint8
+		Param2 [4096]uint8
+
+		NodeMetas map[uint16]*NodeMeta
+	}))(obj)).Param0 {
+		if err := pcall(func() {
+			(((*(*(struct {
+				Flags   MapBlkFlags
+				LitFrom LitFromBlks
+
+				Param0 [4096]Content
+				Param1 [4096]uint8
+				Param2 [4096]uint8
+
+				NodeMetas map[uint16]*NodeMeta
+			}))(obj)).Param0)[local287]).serialize(w)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
+		}
+	}
 	{
-		w, err := zstd.NewWriter(w)
-		chk(err)
-		for local287 := range (*(*(struct {
+		_, err := w.Write(((*(*(struct {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
 
 			NodeMetas map[uint16]*NodeMeta
-		}))(obj)).Param0 {
-			if err := pcall(func() {
-				(((*(*(struct {
-					Flags   MapBlkFlags
-					LitFrom LitFromBlks
+		}))(obj)).Param1)[:])
+		chk(err)
+	}
+	{
+		_, err := w.Write(((*(*(struct {
+			Flags   MapBlkFlags
+			LitFrom LitFromBlks
 
-					//mt:zstd
-					Param0 [4096]Content
-					Param1 [4096]uint8
-					Param2 [4096]uint8
+			Param0 [4096]Content
+			Param1 [4096]uint8
+			Param2 [4096]uint8
 
-					NodeMetas map[uint16]*NodeMeta
-				}))(obj)).Param0)[local287]).serialize(w)
-			}); err != nil {
-				if err == io.EOF {
-					chk(io.EOF)
-				}
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-			}
-		}
-		{
-			_, err := w.Write(((*(*(struct {
-				Flags   MapBlkFlags
-				LitFrom LitFromBlks
-
-				//mt:zstd
-				Param0 [4096]Content
-				Param1 [4096]uint8
-				Param2 [4096]uint8
-
-				NodeMetas map[uint16]*NodeMeta
-			}))(obj)).Param1)[:])
-			chk(err)
-		}
-		{
-			_, err := w.Write(((*(*(struct {
-				Flags   MapBlkFlags
-				LitFrom LitFromBlks
-
-				//mt:zstd
-				Param0 [4096]Content
-				Param1 [4096]uint8
-				Param2 [4096]uint8
-
-				NodeMetas map[uint16]*NodeMeta
-			}))(obj)).Param2)[:])
-			chk(err)
-		}
-		chk(w.Close())
+			NodeMetas map[uint16]*NodeMeta
+		}))(obj)).Param2)[:])
+		chk(err)
 	}
 	{
 		x := (*(*(struct {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22879,7 +22883,6 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22897,7 +22900,6 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
@@ -22932,75 +22934,65 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 			chk(fmt.Errorf("const %v: %v", "uint8(1 + 1) // Size of param1 and param2 combined, in bytes.", local291))
 		}
 	}
+	for local293 := range (*(*(struct {
+		Flags   MapBlkFlags
+		LitFrom LitFromBlks
+
+		Param0 [4096]Content
+		Param1 [4096]uint8
+		Param2 [4096]uint8
+
+		NodeMetas map[uint16]*NodeMeta
+	}))(obj)).Param0 {
+		if err := pcall(func() {
+			(((*(*(struct {
+				Flags   MapBlkFlags
+				LitFrom LitFromBlks
+
+				Param0 [4096]Content
+				Param1 [4096]uint8
+				Param2 [4096]uint8
+
+				NodeMetas map[uint16]*NodeMeta
+			}))(obj)).Param0)[local293]).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
+		}
+	}
 	{
-		r, err := zstd.NewReader(byteReader{r})
-		chk(err)
-		for local293 := range (*(*(struct {
+		_, err := io.ReadFull(r, ((*(*(struct {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8
 
 			NodeMetas map[uint16]*NodeMeta
-		}))(obj)).Param0 {
-			if err := pcall(func() {
-				(((*(*(struct {
-					Flags   MapBlkFlags
-					LitFrom LitFromBlks
+		}))(obj)).Param1)[:])
+		chk(err)
+	}
+	{
+		_, err := io.ReadFull(r, ((*(*(struct {
+			Flags   MapBlkFlags
+			LitFrom LitFromBlks
 
-					//mt:zstd
-					Param0 [4096]Content
-					Param1 [4096]uint8
-					Param2 [4096]uint8
+			Param0 [4096]Content
+			Param1 [4096]uint8
+			Param2 [4096]uint8
 
-					NodeMetas map[uint16]*NodeMeta
-				}))(obj)).Param0)[local293]).deserialize(r)
-			}); err != nil {
-				if err == io.EOF {
-					chk(io.EOF)
-				}
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-			}
-		}
-		{
-			_, err := io.ReadFull(r, ((*(*(struct {
-				Flags   MapBlkFlags
-				LitFrom LitFromBlks
-
-				//mt:zstd
-				Param0 [4096]Content
-				Param1 [4096]uint8
-				Param2 [4096]uint8
-
-				NodeMetas map[uint16]*NodeMeta
-			}))(obj)).Param1)[:])
-			chk(err)
-		}
-		{
-			_, err := io.ReadFull(r, ((*(*(struct {
-				Flags   MapBlkFlags
-				LitFrom LitFromBlks
-
-				//mt:zstd
-				Param0 [4096]Content
-				Param1 [4096]uint8
-				Param2 [4096]uint8
-
-				NodeMetas map[uint16]*NodeMeta
-			}))(obj)).Param2)[:])
-			chk(err)
-		}
-		r.Close()
+			NodeMetas map[uint16]*NodeMeta
+		}))(obj)).Param2)[:])
+		chk(err)
 	}
 	{
 		p := &(*(*(struct {
 			Flags   MapBlkFlags
 			LitFrom LitFromBlks
 
-			//mt:zstd
 			Param0 [4096]Content
 			Param1 [4096]uint8
 			Param2 [4096]uint8

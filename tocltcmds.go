@@ -123,7 +123,9 @@ func (cmd ToCltKick) String() (msg string) {
 // ToCltBlkData tells the client the contents of a nearby MapBlk.
 type ToCltBlkData struct {
 	Blkpos [3]int16
-	Blk    MapBlk
+	//mt:zstd
+	Blk MapBlk
+	//mt:end
 }
 
 // ToCltAddNode tells the client that a nearby node changed
