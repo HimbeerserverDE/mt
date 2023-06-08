@@ -414,9 +414,43 @@ type ToCltAddParticleSpawner struct {
 	AnimParams   TileAnim
 	Glow         uint8
 	AOCollision  bool
-	NodeParam0   Content
-	NodeParam2   uint8
-	NodeTile     uint8
+
+	PosStartBias     float32
+	VelStartBias     float32
+	AccStartBias     float32
+	ExpTimeStartBias float32
+	SizeStartBias    float32
+
+	PosEnd RangeV3F32
+	VelEnd RangeV3F32
+	AccEnd RangeV3F32
+
+	Drag   TweenRangeV3F32
+	Jitter TweenRangeV3F32
+	Bounce TweenRangeF32
+
+	Attraction AttractionKind
+
+	//mt:if %s.Attraction > NoAttraction
+	AttractStrength           TweenRangeF32
+	AttractorOrigin           TweenV3F32
+	AttractorOriginAttachedAO uint16
+	Flags                     ParticleSpawnerFlags
+
+	//mt:if %s.Attraction > PointAttraction
+	AttractorAngle           TweenV3F32
+	AttractorAngleAttachedAO uint16
+	//mt:end
+	//mt:end
+
+	Radius TweenRangeV3F32
+
+	//mt:len16
+	Textures []ParticleTexture
+
+	NodeParam0 Content
+	NodeParam2 uint8
+	NodeTile   uint8
 }
 
 type HUD struct {
