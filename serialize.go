@@ -18583,7 +18583,15 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 	{
 		x := (*(*(struct {
 			ShadowIntensity float32
+			Saturation      float32
 		}))(obj)).ShadowIntensity
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity float32
+			Saturation      float32
+		}))(obj)).Saturation
 		write32(w, math.Float32bits(x))
 	}
 }
@@ -18592,7 +18600,15 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 	{
 		p := &(*(*(struct {
 			ShadowIntensity float32
+			Saturation      float32
 		}))(obj)).ShadowIntensity
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity float32
+			Saturation      float32
+		}))(obj)).Saturation
 		*p = math.Float32frombits(read32(r))
 	}
 }
