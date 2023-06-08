@@ -167,7 +167,7 @@ type ToSrvSRPBytesM struct {
 
 // ToSrvCltInfo tells the server some information about the game window.
 type ToSrvCltInfo struct {
-	RenderTargetSize [2]int16
+	RenderTargetSize [2]uint32
 	GUIScaling       float32
 	HUDScaling       float32
 	MaxFormspecInfo  [2]float32

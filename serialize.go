@@ -1626,24 +1626,24 @@ func (obj *ToSrvSRPBytesM) deserialize(r io.Reader) {
 
 func (obj *ToSrvCltInfo) serialize(w io.Writer) {
 	for local58 := range (*(*(struct {
-		RenderTargetSize [2]int16
+		RenderTargetSize [2]uint32
 		GUIScaling       float32
 		HUDScaling       float32
 		MaxFormspecInfo  [2]float32
 	}))(obj)).RenderTargetSize {
 		{
 			x := ((*(*(struct {
-				RenderTargetSize [2]int16
+				RenderTargetSize [2]uint32
 				GUIScaling       float32
 				HUDScaling       float32
 				MaxFormspecInfo  [2]float32
 			}))(obj)).RenderTargetSize)[local58]
-			write16(w, uint16(x))
+			write32(w, uint32(x))
 		}
 	}
 	{
 		x := (*(*(struct {
-			RenderTargetSize [2]int16
+			RenderTargetSize [2]uint32
 			GUIScaling       float32
 			HUDScaling       float32
 			MaxFormspecInfo  [2]float32
@@ -1652,7 +1652,7 @@ func (obj *ToSrvCltInfo) serialize(w io.Writer) {
 	}
 	{
 		x := (*(*(struct {
-			RenderTargetSize [2]int16
+			RenderTargetSize [2]uint32
 			GUIScaling       float32
 			HUDScaling       float32
 			MaxFormspecInfo  [2]float32
@@ -1660,14 +1660,14 @@ func (obj *ToSrvCltInfo) serialize(w io.Writer) {
 		write32(w, math.Float32bits(x))
 	}
 	for local59 := range (*(*(struct {
-		RenderTargetSize [2]int16
+		RenderTargetSize [2]uint32
 		GUIScaling       float32
 		HUDScaling       float32
 		MaxFormspecInfo  [2]float32
 	}))(obj)).MaxFormspecInfo {
 		{
 			x := ((*(*(struct {
-				RenderTargetSize [2]int16
+				RenderTargetSize [2]uint32
 				GUIScaling       float32
 				HUDScaling       float32
 				MaxFormspecInfo  [2]float32
@@ -1679,24 +1679,24 @@ func (obj *ToSrvCltInfo) serialize(w io.Writer) {
 
 func (obj *ToSrvCltInfo) deserialize(r io.Reader) {
 	for local60 := range (*(*(struct {
-		RenderTargetSize [2]int16
+		RenderTargetSize [2]uint32
 		GUIScaling       float32
 		HUDScaling       float32
 		MaxFormspecInfo  [2]float32
 	}))(obj)).RenderTargetSize {
 		{
 			p := &((*(*(struct {
-				RenderTargetSize [2]int16
+				RenderTargetSize [2]uint32
 				GUIScaling       float32
 				HUDScaling       float32
 				MaxFormspecInfo  [2]float32
 			}))(obj)).RenderTargetSize)[local60]
-			*p = int16(read16(r))
+			*p = read32(r)
 		}
 	}
 	{
 		p := &(*(*(struct {
-			RenderTargetSize [2]int16
+			RenderTargetSize [2]uint32
 			GUIScaling       float32
 			HUDScaling       float32
 			MaxFormspecInfo  [2]float32
@@ -1705,7 +1705,7 @@ func (obj *ToSrvCltInfo) deserialize(r io.Reader) {
 	}
 	{
 		p := &(*(*(struct {
-			RenderTargetSize [2]int16
+			RenderTargetSize [2]uint32
 			GUIScaling       float32
 			HUDScaling       float32
 			MaxFormspecInfo  [2]float32
@@ -1713,14 +1713,14 @@ func (obj *ToSrvCltInfo) deserialize(r io.Reader) {
 		*p = math.Float32frombits(read32(r))
 	}
 	for local61 := range (*(*(struct {
-		RenderTargetSize [2]int16
+		RenderTargetSize [2]uint32
 		GUIScaling       float32
 		HUDScaling       float32
 		MaxFormspecInfo  [2]float32
 	}))(obj)).MaxFormspecInfo {
 		{
 			p := &((*(*(struct {
-				RenderTargetSize [2]int16
+				RenderTargetSize [2]uint32
 				GUIScaling       float32
 				HUDScaling       float32
 				MaxFormspecInfo  [2]float32
