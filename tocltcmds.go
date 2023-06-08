@@ -234,7 +234,8 @@ type ToCltAOMsgs struct {
 
 // ToCltHP updates the player's HP on the client.
 type ToCltHP struct {
-	HP uint16
+	HP           uint16
+	DamageEffect bool
 }
 
 // ToCltMovePlayer tells the client that the player has been moved server-side.

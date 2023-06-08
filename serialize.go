@@ -2920,18 +2920,45 @@ func (obj *ToCltAOMsgs) deserialize(r io.Reader) {
 func (obj *ToCltHP) serialize(w io.Writer) {
 	{
 		x := (*(*(struct {
-			HP uint16
+			HP           uint16
+			DamageEffect bool
 		}))(obj)).HP
 		write16(w, uint16(x))
+	}
+	{
+		x := (*(*(struct {
+			HP           uint16
+			DamageEffect bool
+		}))(obj)).DamageEffect
+		if x {
+			write8(w, 1)
+		} else {
+			write8(w, 0)
+		}
 	}
 }
 
 func (obj *ToCltHP) deserialize(r io.Reader) {
 	{
 		p := &(*(*(struct {
-			HP uint16
+			HP           uint16
+			DamageEffect bool
 		}))(obj)).HP
 		*p = read16(r)
+	}
+	{
+		p := &(*(*(struct {
+			HP           uint16
+			DamageEffect bool
+		}))(obj)).DamageEffect
+		switch n := read8(r); n {
+		case 0:
+			*p = false
+		case 1:
+			*p = true
+		default:
+			chk(fmt.Errorf("invalid bool: %d", n))
+		}
 	}
 }
 
