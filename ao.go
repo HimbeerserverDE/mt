@@ -69,6 +69,7 @@ type AOProps struct {
 	Shaded           bool
 	ShowOnMinimap    bool
 	NametagBG        color.NRGBA
+	RotateSelBox     bool
 }
 
 type AOPos struct {

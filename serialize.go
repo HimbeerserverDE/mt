@@ -34362,6 +34362,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).MaxHP
 		write16(w, uint16(x))
 	}
@@ -34401,6 +34402,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).CollideWithNodes
 		if x {
 			write8(w, 1)
@@ -34444,6 +34446,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Weight
 		write32(w, math.Float32bits(x))
 	}
@@ -34483,6 +34486,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).ColBox).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -34526,6 +34530,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).SelBox).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -34569,6 +34574,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Pointable
 		if x {
 			write8(w, 1)
@@ -34611,6 +34617,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Visual))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -34650,6 +34657,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Visual))))
 		write16(w, uint16(x))
 	}
@@ -34689,6 +34697,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Visual))[:])
 		chk(err)
 	}
@@ -34727,6 +34736,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).VisualSize {
 		{
 			x := ((*(*(struct {
@@ -34764,6 +34774,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
+				RotateSelBox     bool
 			}))(obj)).VisualSize)[local352]
 			write32(w, math.Float32bits(x))
 		}
@@ -34803,6 +34814,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Textures)) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -34842,6 +34854,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Textures)))
 		write16(w, uint16(x))
 	}
@@ -34880,6 +34893,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Textures {
 		if err := pcall(func() {
 			(((*(*(struct {
@@ -34917,6 +34931,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
+				RotateSelBox     bool
 			}))(obj)).Textures)[local353]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -34960,6 +34975,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).SpriteSheetSize {
 		{
 			x := ((*(*(struct {
@@ -34997,6 +35013,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
+				RotateSelBox     bool
 			}))(obj)).SpriteSheetSize)[local354]
 			write16(w, uint16(x))
 		}
@@ -35036,6 +35053,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).SpritePos {
 		{
 			x := ((*(*(struct {
@@ -35073,6 +35091,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
+				RotateSelBox     bool
 			}))(obj)).SpritePos)[local355]
 			write16(w, uint16(x))
 		}
@@ -35113,6 +35132,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Visible
 		if x {
 			write8(w, 1)
@@ -35156,6 +35176,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).MakeFootstepSnds
 		if x {
 			write8(w, 1)
@@ -35199,6 +35220,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).RotateSpeed
 		write32(w, math.Float32bits(x))
 	}
@@ -35237,6 +35259,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Mesh))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -35276,6 +35299,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Mesh))))
 		write16(w, uint16(x))
 	}
@@ -35315,6 +35339,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Mesh))[:])
 		chk(err)
 	}
@@ -35353,6 +35378,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Colors)) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -35392,6 +35418,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Colors)))
 		write16(w, uint16(x))
 	}
@@ -35430,6 +35457,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Colors {
 		{
 			x := ((*(*(struct {
@@ -35467,6 +35495,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
+				RotateSelBox     bool
 			}))(obj)).Colors)[local356]
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -35507,6 +35536,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).CollideWithAOs
 		if x {
 			write8(w, 1)
@@ -35550,6 +35580,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).StepHeight
 		write32(w, math.Float32bits(x))
 	}
@@ -35589,6 +35620,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).FaceRotateDir
 		if x {
 			write8(w, 1)
@@ -35632,6 +35664,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).FaceRotateDirOff
 		write32(w, math.Float32bits(x))
 	}
@@ -35671,6 +35704,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).BackfaceCull
 		if x {
 			write8(w, 1)
@@ -35713,6 +35747,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Nametag))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -35752,6 +35787,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Nametag))))
 		write16(w, uint16(x))
 	}
@@ -35791,6 +35827,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Nametag))[:])
 		chk(err)
 	}
@@ -35830,6 +35867,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).NametagColor
 		w.Write([]byte{x.A, x.R, x.G, x.B})
 	}
@@ -35869,6 +35907,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).FaceRotateSpeed
 		write32(w, math.Float32bits(x))
 	}
@@ -35907,6 +35946,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Infotext))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -35946,6 +35986,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Infotext))))
 		write16(w, uint16(x))
 	}
@@ -35985,6 +36026,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Infotext))[:])
 		chk(err)
 	}
@@ -36023,6 +36065,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Itemstring))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -36062,6 +36105,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Itemstring))))
 		write16(w, uint16(x))
 	}
@@ -36101,6 +36145,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Itemstring))[:])
 		chk(err)
 	}
@@ -36140,6 +36185,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Glow
 		write8(w, uint8(x))
 	}
@@ -36179,6 +36225,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).MaxBreath
 		write16(w, uint16(x))
 	}
@@ -36218,6 +36265,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).EyeHeight
 		write32(w, math.Float32bits(x))
 	}
@@ -36257,6 +36305,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).ZoomFOV
 		write32(w, math.Float32bits(x))
 	}
@@ -36296,6 +36345,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).UseTextureAlpha
 		if x {
 			write8(w, 1)
@@ -36339,6 +36389,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).DmgTextureMod).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -36382,6 +36433,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Shaded
 		if x {
 			write8(w, 1)
@@ -36425,6 +36477,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).ShowOnMinimap
 		if x {
 			write8(w, 1)
@@ -36468,8 +36521,53 @@ func (obj *AOProps) serialize(w io.Writer) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).NametagBG
 		w.Write([]byte{x.A, x.R, x.G, x.B})
+	}
+	{
+		x := (*(*(struct {
+			MaxHP            uint16 // Player only.
+			CollideWithNodes bool
+			Weight           float32 // deprecated
+			ColBox, SelBox   Box
+			Pointable        bool
+			Visual           string
+			VisualSize       [3]float32
+			Textures         []Texture
+			SpriteSheetSize  [2]int16 // in sprites.
+			SpritePos        [2]int16 // in sprite sheet.
+			Visible          bool
+			MakeFootstepSnds bool
+			RotateSpeed      float32 // in radians per second.
+			Mesh             string
+			Colors           []color.NRGBA
+			CollideWithAOs   bool
+			StepHeight       float32
+			FaceRotateDir    bool
+			FaceRotateDirOff float32 // in degrees.
+			BackfaceCull     bool
+			Nametag          string
+			NametagColor     color.NRGBA
+			FaceRotateSpeed  float32 // in degrees per second.
+			Infotext         string
+			Itemstring       string
+			Glow             int8
+			MaxBreath        uint16  // Player only.
+			EyeHeight        float32 // Player only.
+			ZoomFOV          float32 // in degrees. Player only.
+			UseTextureAlpha  bool
+			DmgTextureMod    Texture // suffix
+			Shaded           bool
+			ShowOnMinimap    bool
+			NametagBG        color.NRGBA
+			RotateSelBox     bool
+		}))(obj)).RotateSelBox
+		if x {
+			write8(w, 1)
+		} else {
+			write8(w, 0)
+		}
 	}
 }
 
@@ -36521,6 +36619,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).MaxHP
 		*p = read16(r)
 	}
@@ -36560,6 +36659,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).CollideWithNodes
 		switch n := read8(r); n {
 		case 0:
@@ -36606,6 +36706,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Weight
 		*p = math.Float32frombits(read32(r))
 	}
@@ -36645,6 +36746,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).ColBox).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -36688,6 +36790,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).SelBox).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -36731,6 +36834,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Pointable
 		switch n := read8(r); n {
 		case 0:
@@ -36787,6 +36891,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Visual) = string(local359)
 	for local361 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
@@ -36823,6 +36928,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).VisualSize {
 		{
 			p := &((*(*(struct {
@@ -36860,6 +36966,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
+				RotateSelBox     bool
 			}))(obj)).VisualSize)[local361]
 			*p = math.Float32frombits(read32(r))
 		}
@@ -36904,6 +37011,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Textures) = make([]Texture, local362)
 	for local363 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
@@ -36940,6 +37048,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Textures {
 		if err := pcall(func() {
 			(((*(*(struct {
@@ -36977,6 +37086,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
+				RotateSelBox     bool
 			}))(obj)).Textures)[local363]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -37020,6 +37130,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).SpriteSheetSize {
 		{
 			p := &((*(*(struct {
@@ -37057,6 +37168,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
+				RotateSelBox     bool
 			}))(obj)).SpriteSheetSize)[local364]
 			*p = int16(read16(r))
 		}
@@ -37096,6 +37208,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).SpritePos {
 		{
 			p := &((*(*(struct {
@@ -37133,6 +37246,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
+				RotateSelBox     bool
 			}))(obj)).SpritePos)[local365]
 			*p = int16(read16(r))
 		}
@@ -37173,6 +37287,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Visible
 		switch n := read8(r); n {
 		case 0:
@@ -37219,6 +37334,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).MakeFootstepSnds
 		switch n := read8(r); n {
 		case 0:
@@ -37265,6 +37381,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).RotateSpeed
 		*p = math.Float32frombits(read32(r))
 	}
@@ -37314,6 +37431,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Mesh) = string(local366)
 	var local368 uint16
 	{
@@ -37355,6 +37473,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Colors) = make([]color.NRGBA, local368)
 	for local369 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
@@ -37391,6 +37510,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Colors {
 		{
 			p := &((*(*(struct {
@@ -37428,6 +37548,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				Shaded           bool
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
+				RotateSelBox     bool
 			}))(obj)).Colors)[local369]
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -37468,6 +37589,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).CollideWithAOs
 		switch n := read8(r); n {
 		case 0:
@@ -37514,6 +37636,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).StepHeight
 		*p = math.Float32frombits(read32(r))
 	}
@@ -37553,6 +37676,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).FaceRotateDir
 		switch n := read8(r); n {
 		case 0:
@@ -37599,6 +37723,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).FaceRotateDirOff
 		*p = math.Float32frombits(read32(r))
 	}
@@ -37638,6 +37763,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).BackfaceCull
 		switch n := read8(r); n {
 		case 0:
@@ -37694,6 +37820,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Nametag) = string(local370)
 	{
 		p := &(*(*(struct {
@@ -37731,6 +37858,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).NametagColor
 		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 	}
@@ -37770,6 +37898,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).FaceRotateSpeed
 		*p = math.Float32frombits(read32(r))
 	}
@@ -37819,6 +37948,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Infotext) = string(local372)
 	var local374 []uint8
 	var local375 uint16
@@ -37866,6 +37996,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		Shaded           bool
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
+		RotateSelBox     bool
 	}))(obj)).Itemstring) = string(local374)
 	{
 		p := &(*(*(struct {
@@ -37903,6 +38034,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Glow
 		*p = int8(read8(r))
 	}
@@ -37942,6 +38074,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).MaxBreath
 		*p = read16(r)
 	}
@@ -37981,6 +38114,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).EyeHeight
 		*p = math.Float32frombits(read32(r))
 	}
@@ -38020,6 +38154,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).ZoomFOV
 		*p = math.Float32frombits(read32(r))
 	}
@@ -38059,6 +38194,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).UseTextureAlpha
 		switch n := read8(r); n {
 		case 0:
@@ -38105,6 +38241,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).DmgTextureMod).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -38148,6 +38285,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).Shaded
 		switch n := read8(r); n {
 		case 0:
@@ -38194,6 +38332,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).ShowOnMinimap
 		switch n := read8(r); n {
 		case 0:
@@ -38240,8 +38379,56 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			Shaded           bool
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
+			RotateSelBox     bool
 		}))(obj)).NametagBG
 		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
+	}
+	{
+		p := &(*(*(struct {
+			MaxHP            uint16 // Player only.
+			CollideWithNodes bool
+			Weight           float32 // deprecated
+			ColBox, SelBox   Box
+			Pointable        bool
+			Visual           string
+			VisualSize       [3]float32
+			Textures         []Texture
+			SpriteSheetSize  [2]int16 // in sprites.
+			SpritePos        [2]int16 // in sprite sheet.
+			Visible          bool
+			MakeFootstepSnds bool
+			RotateSpeed      float32 // in radians per second.
+			Mesh             string
+			Colors           []color.NRGBA
+			CollideWithAOs   bool
+			StepHeight       float32
+			FaceRotateDir    bool
+			FaceRotateDirOff float32 // in degrees.
+			BackfaceCull     bool
+			Nametag          string
+			NametagColor     color.NRGBA
+			FaceRotateSpeed  float32 // in degrees per second.
+			Infotext         string
+			Itemstring       string
+			Glow             int8
+			MaxBreath        uint16  // Player only.
+			EyeHeight        float32 // Player only.
+			ZoomFOV          float32 // in degrees. Player only.
+			UseTextureAlpha  bool
+			DmgTextureMod    Texture // suffix
+			Shaded           bool
+			ShowOnMinimap    bool
+			NametagBG        color.NRGBA
+			RotateSelBox     bool
+		}))(obj)).RotateSelBox
+		switch n := read8(r); n {
+		case 0:
+			*p = false
+		case 1:
+			*p = true
+		default:
+			chk(fmt.Errorf("invalid bool: %d", n))
+		}
 	}
 }
 
