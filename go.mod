@@ -1,3 +1,3 @@
-module github.com/anon55555/mt
+module github.com/HimbeerserverDE/mt
 
 go 1.16

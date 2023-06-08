@@ -2,7 +2,7 @@
 
 package mt
 
-import "github.com/anon55555/mt/rudp"
+import "github.com/HimbeerserverDE/mt/rudp"
 
 func (*ToCltHello) DefaultPktInfo() rudp.PktInfo                 { return rudp.PktInfo{0, false} }
 func (*ToCltAcceptAuth) DefaultPktInfo() rudp.PktInfo            { return rudp.PktInfo{0, false} }
