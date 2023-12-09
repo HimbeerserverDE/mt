@@ -122,7 +122,7 @@ func structPragma(c *ast.Comment, sp *[]func(), expr string, de bool) {
 		*sp = append(*sp, func() {
 			if de {
 				fmt.Println("if r.N > 0",
-					`{ chk(fmt.Errorf("%d bytes of trailing data", r.N)) }`)
+					`{ chk(mkDeTrailingDataError(r)) }`)
 			} else {
 				fmt.Println("{")
 				fmt.Println("buf := w")
