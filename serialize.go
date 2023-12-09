@@ -834,7 +834,7 @@ func (obj *ToSrvInteract) deserialize(r io.Reader) {
 			}
 		}
 		if r.N > 0 {
-			defer chk(mkDeTrailingDataError(r))
+			chk(mkDeTrailingDataError(r))
 		}
 	}
 	if err := pcall(func() {
@@ -3682,7 +3682,7 @@ func (obj *ToCltNodeDefs) deserialize(r io.Reader) {
 			chk(r.Close())
 		}
 		if r.N > 0 {
-			defer chk(mkDeTrailingDataError(r))
+			chk(mkDeTrailingDataError(r))
 		}
 	}
 }
@@ -4101,7 +4101,7 @@ func (obj *ToCltItemDefs) deserialize(r io.Reader) {
 			chk(r.Close())
 		}
 		if r.N > 0 {
-			defer chk(mkDeTrailingDataError(r))
+			chk(mkDeTrailingDataError(r))
 		}
 	}
 }
@@ -18295,7 +18295,7 @@ func (obj *ToCltNodeMetasChanged) deserialize(r io.Reader) {
 			}
 		}
 		if r.N > 0 {
-			defer chk(mkDeTrailingDataError(r))
+			chk(mkDeTrailingDataError(r))
 		}
 	}
 }
@@ -28748,7 +28748,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			}
 		}
 		if r.N > 0 {
-			defer chk(mkDeTrailingDataError(r))
+			chk(mkDeTrailingDataError(r))
 		}
 	}
 }
@@ -29711,7 +29711,7 @@ func (obj *AOAdd) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOInitData", err))
 		}
 		if r.N > 0 {
-			defer chk(mkDeTrailingDataError(r))
+			chk(mkDeTrailingDataError(r))
 		}
 	}
 }
@@ -29791,7 +29791,7 @@ func (obj *IDAOMsg) deserialize(r io.Reader) {
 			}
 		}
 		if r.N > 0 {
-			defer chk(mkDeTrailingDataError(r))
+			chk(mkDeTrailingDataError(r))
 		}
 	}
 }
@@ -32485,7 +32485,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		if r.N > 0 {
-			defer chk(mkDeTrailingDataError(r))
+			chk(mkDeTrailingDataError(r))
 		}
 	}
 }
@@ -41778,7 +41778,7 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 			}
 		}
 		if r.N > 0 {
-			defer chk(mkDeTrailingDataError(r))
+			chk(mkDeTrailingDataError(r))
 		}
 	}
 }
