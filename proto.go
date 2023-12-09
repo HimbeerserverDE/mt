@@ -75,7 +75,7 @@ func (p Peer) Recv() (_ Pkt, rerr error) {
 	cmd := newCmd()
 
 	if err := deserialize(pkt, cmd); err != nil {
-		return Pkt{}, fmt.Errorf("%T: %w", cmd, err)
+		return Pkt{cmd, pkt.PktInfo}, fmt.Errorf("%T: %w", cmd, err)
 	}
 
 	extra, err := io.ReadAll(pkt)
