@@ -200,13 +200,8 @@ func genSerialize(t types.Type, expr string, pos token.Pos, doc *ast.CommentGrou
 				lenhdr = types.Typ[types.Uint32]
 			case "//mt:opt":
 				fmt.Println("if err := pcall(func() {")
-				defer func() {
-					fmt.Println("}); err != nil && err != io.EOF {")
-					fmt.Println("if _, ok := err.(rudp.TrailingDataError); ok {")
-					fmt.Println("defer chk(err)")
-					fmt.Println("} else { chk(err) }")
-					fmt.Println("}")
-				}()
+				defer fmt.Println("}); err != nil && err != io.EOF",
+					"{ chk(err) }")
 			default:
 				pragma = false
 			}
@@ -272,9 +267,7 @@ func genSerialize(t types.Type, expr string, pos token.Pos, doc *ast.CommentGrou
 		fmt.Println("}); err != nil",
 			`{`,
 			`if err == io.EOF { chk(io.EOF) };`,
-			`if _, ok := err.(rudp.TrailingDataError); ok { defer chk(err) } else {`,
 			`chk(fmt.Errorf("%s: %w", `+strconv.Quote(t.String())+`, err))`,
-			`}`,
 			`}`)
 	case *types.Struct:
 		st := pos2node(pos)[0].(*ast.StructType)

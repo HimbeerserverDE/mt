@@ -14,7 +14,6 @@ import (
 	"sort"
 	"unicode/utf16"
 
-	"github.com/HimbeerserverDE/mt/rudp"
 	"github.com/klauspost/compress/zstd"
 )
 
@@ -88,11 +87,7 @@ func (obj *ToSrvInit) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CompressionModes", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CompressionModes", err))
 	}
 	{
 		x := (*(*(struct {
@@ -171,11 +166,7 @@ func (obj *ToSrvInit) serialize(w io.Writer) {
 			}
 		}
 	}); err != nil && err != io.EOF {
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(err)
-		}
+		chk(err)
 	}
 }
 
@@ -206,11 +197,7 @@ func (obj *ToSrvInit) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CompressionModes", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CompressionModes", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -277,11 +264,7 @@ func (obj *ToSrvInit) deserialize(r io.Reader) {
 			}
 		}
 	}); err != nil && err != io.EOF {
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(err)
-		}
+		chk(err)
 	}
 }
 
@@ -481,11 +464,7 @@ func (obj *ToSrvPlayerPos) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPos", err))
 	}
 }
 
@@ -498,11 +477,7 @@ func (obj *ToSrvPlayerPos) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPos", err))
 	}
 }
 
@@ -749,11 +724,7 @@ func (obj *ToSrvInteract) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Interaction", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Interaction", err))
 	}
 	{
 		x := (*(*(struct {
@@ -809,11 +780,7 @@ func (obj *ToSrvInteract) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPos", err))
 	}
 }
 
@@ -831,11 +798,7 @@ func (obj *ToSrvInteract) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Interaction", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Interaction", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -887,11 +850,7 @@ func (obj *ToSrvInteract) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPos", err))
 	}
 }
 
@@ -918,11 +877,7 @@ func (obj *ToSrvRemovedSounds) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
 		}
 	}
 }
@@ -947,11 +902,7 @@ func (obj *ToSrvRemovedSounds) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
 		}
 	}
 }
@@ -1024,11 +975,7 @@ func (obj *ToSrvNodeMetaFields) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
 		}
 	}
 }
@@ -1089,11 +1036,7 @@ func (obj *ToSrvNodeMetaFields) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
 		}
 	}
 }
@@ -1145,11 +1088,7 @@ func (obj *ToSrvInvFields) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
 		}
 	}
 }
@@ -1192,11 +1131,7 @@ func (obj *ToSrvInvFields) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
 		}
 	}
 }
@@ -1818,11 +1753,7 @@ func (obj *ToCltHello) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CompressionModes", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CompressionModes", err))
 	}
 	{
 		x := (*(*(struct {
@@ -1846,11 +1777,7 @@ func (obj *ToCltHello) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
 	}
 	if len(([]byte((*(*(struct {
 		SerializeVer uint8
@@ -1906,11 +1833,7 @@ func (obj *ToCltHello) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CompressionModes", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CompressionModes", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -1934,11 +1857,7 @@ func (obj *ToCltHello) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
 	}
 	var local62 []uint8
 	var local63 uint16
@@ -1976,11 +1895,7 @@ func (obj *ToCltAcceptAuth) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	{
 		x := (*(*(struct {
@@ -2023,11 +1938,7 @@ func (obj *ToCltAcceptAuth) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
 	}
 }
 
@@ -2047,11 +1958,7 @@ func (obj *ToCltAcceptAuth) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -2094,11 +2001,7 @@ func (obj *ToCltAcceptAuth) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
 	}
 }
 
@@ -2111,11 +2014,7 @@ func (obj *ToCltAcceptSudoMode) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
 	}
 	{
 		local64 := [15]byte{}
@@ -2135,11 +2034,7 @@ func (obj *ToCltAcceptSudoMode) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AuthMethods", err))
 	}
 	{
 		var local65 [15]byte
@@ -2175,11 +2070,7 @@ func (obj *ToCltKick) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.KickReason", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.KickReason", err))
 	}
 	if !((*(*(struct {
 		Reason KickReason
@@ -2280,11 +2171,7 @@ func (obj *ToCltKick) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.KickReason", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.KickReason", err))
 	}
 	if !((*(*(struct {
 		Reason KickReason
@@ -2386,11 +2273,7 @@ func (obj *ToCltBlkData) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlk", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlk", err))
 		}
 		chk(w.Close())
 	}
@@ -2424,11 +2307,7 @@ func (obj *ToCltBlkData) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlk", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlk", err))
 		}
 		r.Close()
 	}
@@ -2459,11 +2338,7 @@ func (obj *ToCltAddNode) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Node", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Node", err))
 	}
 	{
 		x := (*(*(struct {
@@ -2504,11 +2379,7 @@ func (obj *ToCltAddNode) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Node", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Node", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -2623,11 +2494,7 @@ func (obj *ToCltCSMRestrictionFlags) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CSMRestrictionFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CSMRestrictionFlags", err))
 	}
 	{
 		x := (*(*(struct {
@@ -2654,11 +2521,7 @@ func (obj *ToCltCSMRestrictionFlags) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CSMRestrictionFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CSMRestrictionFlags", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -2681,11 +2544,7 @@ func (obj *ToCltAddPlayerVel) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 }
 
@@ -2698,11 +2557,7 @@ func (obj *ToCltAddPlayerVel) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 }
 
@@ -2869,11 +2724,7 @@ func (obj *ToCltChatMsg) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ChatMsgType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ChatMsgType", err))
 	}
 	local82 := utf16.Encode([]rune((*(*(struct {
 		Type ChatMsgType
@@ -2955,11 +2806,7 @@ func (obj *ToCltChatMsg) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ChatMsgType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ChatMsgType", err))
 	}
 	var local88 []uint16
 	var local89 uint16
@@ -3043,11 +2890,7 @@ func (obj *ToCltAORmAdd) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 		}
 	}
 	if len(((*(*(struct {
@@ -3076,11 +2919,7 @@ func (obj *ToCltAORmAdd) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAdd", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAdd", err))
 		}
 	}
 }
@@ -3108,11 +2947,7 @@ func (obj *ToCltAORmAdd) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 		}
 	}
 	var local98 uint16
@@ -3137,11 +2972,7 @@ func (obj *ToCltAORmAdd) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAdd", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAdd", err))
 		}
 	}
 }
@@ -3160,11 +2991,7 @@ func (obj *ToCltAOMsgs) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.IDAOMsg", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.IDAOMsg", err))
 		}
 	}
 }
@@ -3179,11 +3006,7 @@ func (obj *ToCltAOMsgs) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.IDAOMsg", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.IDAOMsg", err))
 			}
 		})
 		if err == io.EOF {
@@ -3255,11 +3078,7 @@ func (obj *ToCltMovePlayer) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	{
 		x := (*(*(struct {
@@ -3287,11 +3106,7 @@ func (obj *ToCltMovePlayer) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -3435,11 +3250,7 @@ func (obj *ToCltDeathScreen) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 }
 
@@ -3467,11 +3278,7 @@ func (obj *ToCltDeathScreen) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 }
 
@@ -4116,11 +3923,7 @@ func (obj *ToCltItemDefs) serialize(w io.Writer) {
 					if err == io.EOF {
 						chk(io.EOF)
 					}
-					if _, ok := err.(rudp.TrailingDataError); ok {
-						defer chk(err)
-					} else {
-						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ItemDef", err))
-					}
+					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ItemDef", err))
 				}
 			}
 			if len(((*(*(struct {
@@ -4245,11 +4048,7 @@ func (obj *ToCltItemDefs) deserialize(r io.Reader) {
 					if err == io.EOF {
 						chk(io.EOF)
 					}
-					if _, ok := err.(rudp.TrailingDataError); ok {
-						defer chk(err)
-					} else {
-						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ItemDef", err))
-					}
+					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ItemDef", err))
 				}
 			}
 			var local132 uint16
@@ -4325,11 +4124,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
 	}
 	if len(([]byte((*(*(struct {
 		ID      SoundID
@@ -4407,11 +4202,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundSrcType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundSrcType", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -4430,11 +4221,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -4453,11 +4240,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
 		x := (*(*(struct {
@@ -4547,11 +4330,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
 	}
 	var local138 []uint8
 	var local139 uint16
@@ -4608,11 +4387,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundSrcType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundSrcType", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -4631,11 +4406,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -4654,11 +4425,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -4745,11 +4512,7 @@ func (obj *ToCltStopSound) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
 	}
 }
 
@@ -4762,11 +4525,7 @@ func (obj *ToCltStopSound) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
 	}
 }
 
@@ -5679,11 +5438,7 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
 	}
 	{
 		x := (*(*(struct {
@@ -5804,11 +5559,7 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -5835,11 +5586,7 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 	}
 	{
 		x := (*(*(struct {
@@ -6214,11 +5961,7 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -6342,11 +6085,7 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -6373,11 +6112,7 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -7557,11 +7292,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerID", err))
 	}
 	{
 		x := (*(*(struct {
@@ -7744,11 +7475,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -7809,11 +7536,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
 	}
 	{
 		x := (*(*(struct {
@@ -8277,11 +8000,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -8342,11 +8061,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -8407,11 +8122,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -8472,11 +8183,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -8537,11 +8244,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -8602,11 +8305,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -8667,11 +8366,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AttractionKind", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AttractionKind", err))
 	}
 	if (*(*(struct {
 		Amount         uint16
@@ -8786,11 +8481,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -8851,11 +8542,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
 		}
 		{
 			x := (*(*(struct {
@@ -8973,11 +8660,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerFlags", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerFlags", err))
 		}
 		if (*(*(struct {
 			Amount         uint16
@@ -9092,11 +8775,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
 			}
 			{
 				x := (*(*(struct {
@@ -9216,11 +8895,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
 	}
 	if len(((*(*(struct {
 		Amount         uint16
@@ -9448,11 +9123,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
 		}
 	}
 	if err := pcall(func() {
@@ -9514,11 +9185,7 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 	}
 	{
 		x := (*(*(struct {
@@ -10664,11 +10331,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerID", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -10857,11 +10520,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -10922,11 +10581,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -11393,11 +11048,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -11458,11 +11109,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -11523,11 +11170,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -11588,11 +11231,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -11653,11 +11292,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -11718,11 +11353,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -11783,11 +11414,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AttractionKind", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AttractionKind", err))
 	}
 	if (*(*(struct {
 		Amount         uint16
@@ -11902,11 +11529,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -11967,11 +11590,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
 		}
 		{
 			p := &(*(*(struct {
@@ -12089,11 +11708,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerFlags", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerFlags", err))
 		}
 		if (*(*(struct {
 			Amount         uint16
@@ -12208,11 +11823,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
 			}
 			{
 				p := &(*(*(struct {
@@ -12332,11 +11943,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
 	}
 	var local183 uint16
 	{
@@ -12510,11 +12117,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
 		}
 	}
 	if err := pcall(func() {
@@ -12576,11 +12179,7 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -12708,11 +12307,7 @@ func (obj *ToCltAddHUD) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -12723,11 +12318,7 @@ func (obj *ToCltAddHUD) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUD", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUD", err))
 	}
 }
 
@@ -12741,11 +12332,7 @@ func (obj *ToCltAddHUD) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -12756,11 +12343,7 @@ func (obj *ToCltAddHUD) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUD", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUD", err))
 	}
 }
 
@@ -12773,11 +12356,7 @@ func (obj *ToCltRmHUD) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
 	}
 }
 
@@ -12790,11 +12369,7 @@ func (obj *ToCltRmHUD) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
 	}
 }
 
@@ -12851,11 +12426,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -12909,11 +12480,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDField", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDField", err))
 	}
 	if !((*(*(struct {
 		ID HUDID
@@ -14335,11 +13902,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 		}
 	}
 	if (*(*(struct {
@@ -14882,11 +14445,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDStyleFlags", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDStyleFlags", err))
 		}
 	}
 }
@@ -14944,11 +14503,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDID", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -15002,11 +14557,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDField", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDField", err))
 	}
 	if !((*(*(struct {
 		ID HUDID
@@ -16246,11 +15797,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 		}
 	}
 	if (*(*(struct {
@@ -16702,11 +16249,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDStyleFlags", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDStyleFlags", err))
 		}
 	}
 }
@@ -16722,11 +16265,7 @@ func (obj *ToCltHUDFlags) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDFlags", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -16738,11 +16277,7 @@ func (obj *ToCltHUDFlags) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDFlags", err))
 	}
 }
 
@@ -16757,11 +16292,7 @@ func (obj *ToCltHUDFlags) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDFlags", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -16773,11 +16304,7 @@ func (obj *ToCltHUDFlags) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDFlags", err))
 	}
 }
 
@@ -16797,11 +16324,7 @@ func (obj *ToCltSetHotbarParam) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HotbarParam", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HotbarParam", err))
 	}
 	if (*(*(struct {
 		Param HotbarParam
@@ -16859,11 +16382,7 @@ func (obj *ToCltSetHotbarParam) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 	}
 }
@@ -16884,11 +16403,7 @@ func (obj *ToCltSetHotbarParam) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HotbarParam", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HotbarParam", err))
 	}
 	if (*(*(struct {
 		Param HotbarParam
@@ -16950,11 +16465,7 @@ func (obj *ToCltSetHotbarParam) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 	}
 }
@@ -17305,11 +16816,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 			}
 		}
 	}
@@ -17753,11 +17260,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 			}
 		}
 	}
@@ -18129,11 +17632,7 @@ func (obj *ToCltEyeOffset) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -18143,11 +17642,7 @@ func (obj *ToCltEyeOffset) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 }
 
@@ -18160,11 +17655,7 @@ func (obj *ToCltEyeOffset) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -18174,11 +17665,7 @@ func (obj *ToCltEyeOffset) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 }
 
@@ -18191,11 +17678,7 @@ func (obj *ToCltDelParticleSpawner) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerID", err))
 	}
 }
 
@@ -18208,11 +17691,7 @@ func (obj *ToCltDelParticleSpawner) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerID", err))
 	}
 }
 
@@ -18383,11 +17862,7 @@ func (obj *ToCltFadeSound) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
 	}
 	{
 		x := (*(*(struct {
@@ -18418,11 +17893,7 @@ func (obj *ToCltFadeSound) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundID", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -18452,11 +17923,7 @@ func (obj *ToCltUpdatePlayerList) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerListUpdateType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerListUpdateType", err))
 	}
 	if len(((*(*(struct {
 		Type    PlayerListUpdateType
@@ -18508,11 +17975,7 @@ func (obj *ToCltUpdatePlayerList) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerListUpdateType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerListUpdateType", err))
 	}
 	var local222 uint16
 	{
@@ -18678,11 +18141,7 @@ func (obj *ToCltModChanSig) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ModChanSig", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ModChanSig", err))
 	}
 	if len(([]byte((*(*(struct {
 		Signal  ModChanSig
@@ -18716,11 +18175,7 @@ func (obj *ToCltModChanSig) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ModChanSig", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ModChanSig", err))
 	}
 	var local232 []uint8
 	var local233 uint16
@@ -18874,11 +18329,7 @@ func (obj *ToCltSunParams) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -18893,11 +18344,7 @@ func (obj *ToCltSunParams) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -18912,11 +18359,7 @@ func (obj *ToCltSunParams) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	{
 		x := (*(*(struct {
@@ -18978,11 +18421,7 @@ func (obj *ToCltSunParams) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -18997,11 +18436,7 @@ func (obj *ToCltSunParams) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -19016,11 +18451,7 @@ func (obj *ToCltSunParams) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -19078,11 +18509,7 @@ func (obj *ToCltMoonParams) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -19095,11 +18522,7 @@ func (obj *ToCltMoonParams) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	{
 		x := (*(*(struct {
@@ -19140,11 +18563,7 @@ func (obj *ToCltMoonParams) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -19157,11 +18576,7 @@ func (obj *ToCltMoonParams) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -19619,11 +19034,7 @@ func (obj *AOCmdProps) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOProps", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOProps", err))
 	}
 }
 
@@ -19636,11 +19047,7 @@ func (obj *AOCmdProps) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOProps", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOProps", err))
 	}
 }
 
@@ -19653,11 +19060,7 @@ func (obj *AOCmdPos) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOPos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOPos", err))
 	}
 }
 
@@ -19670,11 +19073,7 @@ func (obj *AOCmdPos) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOPos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOPos", err))
 	}
 }
 
@@ -19687,11 +19086,7 @@ func (obj *AOCmdTextureMod) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 }
 
@@ -19704,11 +19099,7 @@ func (obj *AOCmdTextureMod) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 }
 
@@ -19721,11 +19112,7 @@ func (obj *AOCmdSprite) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOSprite", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOSprite", err))
 	}
 }
 
@@ -19738,11 +19125,7 @@ func (obj *AOCmdSprite) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOSprite", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOSprite", err))
 	}
 }
 
@@ -19787,11 +19170,7 @@ func (obj *AOCmdArmorGroups) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 		}
 	}
 }
@@ -19816,11 +19195,7 @@ func (obj *AOCmdArmorGroups) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 		}
 	}
 }
@@ -19834,11 +19209,7 @@ func (obj *AOCmdAnim) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAnim", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAnim", err))
 	}
 }
 
@@ -19851,11 +19222,7 @@ func (obj *AOCmdAnim) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAnim", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAnim", err))
 	}
 }
 
@@ -19889,11 +19256,7 @@ func (obj *AOCmdBonePos) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOBonePos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOBonePos", err))
 	}
 }
 
@@ -19922,11 +19285,7 @@ func (obj *AOCmdBonePos) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOBonePos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOBonePos", err))
 	}
 }
 
@@ -19939,11 +19298,7 @@ func (obj *AOCmdAttach) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAttach", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAttach", err))
 	}
 }
 
@@ -19956,11 +19311,7 @@ func (obj *AOCmdAttach) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAttach", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOAttach", err))
 	}
 }
 
@@ -19973,11 +19324,7 @@ func (obj *AOCmdPhysOverride) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOPhysOverride", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOPhysOverride", err))
 	}
 }
 
@@ -19990,11 +19337,7 @@ func (obj *AOCmdPhysOverride) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOPhysOverride", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOPhysOverride", err))
 	}
 }
 
@@ -20007,11 +19350,7 @@ func (obj *AOCmdSpawnInfant) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
 		local243 := genericCAO
@@ -20021,11 +19360,7 @@ func (obj *AOCmdSpawnInfant) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.aoType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.aoType", err))
 		}
 	}
 }
@@ -20039,11 +19374,7 @@ func (obj *AOCmdSpawnInfant) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
 		var local244 aoType
@@ -20054,11 +19385,7 @@ func (obj *AOCmdSpawnInfant) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.aoType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.aoType", err))
 		}
 		if local244 != local245 {
 			chk(fmt.Errorf("const %v: %v", "genericCAO", local244))
@@ -20119,11 +19446,7 @@ func (obj *NodeMeta) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeMetaField", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeMetaField", err))
 		}
 	}
 	chk(((*(*(struct {
@@ -20163,11 +19486,7 @@ func (obj *NodeMeta) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeMetaField", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeMetaField", err))
 		}
 	}
 	chk(((*(*(struct {
@@ -20191,11 +19510,7 @@ func (obj *MinimapMode) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MinimapType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MinimapType", err))
 	}
 	if len(([]byte((*(*(struct {
 		Type  MinimapType
@@ -20248,11 +19563,7 @@ func (obj *MinimapMode) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	{
 		x := (*(*(struct {
@@ -20279,11 +19590,7 @@ func (obj *MinimapMode) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MinimapType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MinimapType", err))
 	}
 	var local249 []uint8
 	var local250 uint16
@@ -20325,11 +19632,7 @@ func (obj *MinimapMode) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -20415,11 +19718,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 	}
 	{
 		ow := w
@@ -20911,11 +20210,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 			}
 		}
 		if err := pcall(func() {
@@ -20989,11 +20284,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Param1Type", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Param1Type", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -21066,11 +20357,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Param2Type", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Param2Type", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -21143,11 +20430,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DrawType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DrawType", err))
 		}
 		if len(([]byte((*(*(struct {
 			Param0 Content
@@ -21568,11 +20851,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
 			}
 		}
 		for local255 := range (*(*(struct {
@@ -21712,11 +20991,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
 			}
 		}
 		{
@@ -21863,11 +21138,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
 			}
 		}
 		{
@@ -22010,11 +21281,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -22087,11 +21354,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.WaveType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.WaveType", err))
 		}
 		{
 			x := (*(*(struct {
@@ -22436,11 +21699,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 			}
 		}
 		{
@@ -23447,11 +22706,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LiquidType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LiquidType", err))
 		}
 		if len(([]byte((*(*(struct {
 			Param0 Content
@@ -24289,11 +23544,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -24366,11 +23617,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -24443,11 +23690,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -24520,11 +23763,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -24597,11 +23836,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -24674,11 +23909,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		{
 			x := (*(*(struct {
@@ -25172,11 +24403,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AlphaUse", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AlphaUse", err))
 		}
 		{
 			x := (*(*(struct {
@@ -25410,11 +24637,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 	}
 	{
 		var n uint16
@@ -25719,11 +24942,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 			}
 		}
 		if err := pcall(func() {
@@ -25797,11 +25016,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Param1Type", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Param1Type", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -25874,11 +25089,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Param2Type", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Param2Type", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -25951,11 +25162,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DrawType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DrawType", err))
 		}
 		var local265 []uint8
 		var local266 uint16
@@ -26251,11 +25458,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
 			}
 		}
 		for local270 := range (*(*(struct {
@@ -26395,11 +25598,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
 			}
 		}
 		{
@@ -26550,11 +25749,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
 			}
 		}
 		{
@@ -26697,11 +25892,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -26774,11 +25965,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.WaveType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.WaveType", err))
 		}
 		{
 			p := &(*(*(struct {
@@ -27057,11 +26244,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 			}
 		}
 		{
@@ -28095,11 +27278,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LiquidType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LiquidType", err))
 		}
 		var local276 []uint8
 		var local277 uint16
@@ -28685,11 +27864,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -28762,11 +27937,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -28839,11 +28010,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBox", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -28916,11 +28083,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -28993,11 +28156,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -29070,11 +28229,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		{
 			p := &(*(*(struct {
@@ -29445,11 +28600,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AlphaUse", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AlphaUse", err))
 		}
 		{
 			p := &(*(*(struct {
@@ -29657,11 +28808,7 @@ func (obj *PointedAO) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 }
 
@@ -29674,11 +28821,7 @@ func (obj *PointedAO) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 }
 
@@ -29765,11 +28908,7 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Keys", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Keys", err))
 	}
 	{
 		x := (*(*(struct {
@@ -29862,11 +29001,7 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Keys", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Keys", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -30031,11 +29166,7 @@ func (obj *Pos) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 }
 
@@ -30046,11 +29177,7 @@ func (obj *Pos) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 }
 
@@ -30084,11 +29211,7 @@ func (obj *MapBlk) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlkFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlkFlags", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -30105,11 +29228,7 @@ func (obj *MapBlk) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LitFromBlks", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LitFromBlks", err))
 	}
 	{
 		local294 := uint8(2) // Size of param0 in bytes.
@@ -30150,11 +29269,7 @@ func (obj *MapBlk) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 		}
 	}
 	{
@@ -30245,11 +29360,7 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlkFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MapBlkFlags", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -30266,11 +29377,7 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LitFromBlks", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LitFromBlks", err))
 	}
 	{
 		var local297 uint8
@@ -30319,11 +29426,7 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 		}
 	}
 	{
@@ -30393,11 +29496,7 @@ func (obj *Node) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 	}
 	{
 		x := (*(*(struct {
@@ -30425,11 +29524,7 @@ func (obj *Node) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -30519,11 +29614,7 @@ func (obj *AOAdd) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
 		local304 := genericCAO
@@ -30533,11 +29624,7 @@ func (obj *AOAdd) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.aoType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.aoType", err))
 		}
 	}
 	{
@@ -30554,11 +29641,7 @@ func (obj *AOAdd) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOInitData", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOInitData", err))
 		}
 		{
 			buf := w
@@ -30590,11 +29673,7 @@ func (obj *AOAdd) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
 		var local305 aoType
@@ -30605,11 +29684,7 @@ func (obj *AOAdd) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.aoType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.aoType", err))
 		}
 		if local305 != local306 {
 			chk(fmt.Errorf("const %v: %v", "genericCAO", local305))
@@ -30633,11 +29708,7 @@ func (obj *AOAdd) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOInitData", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOInitData", err))
 		}
 		if r.N > 0 {
 			chk(mkDeTrailingDataError(r))
@@ -30656,11 +29727,7 @@ func (obj *IDAOMsg) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
 		ow := w
@@ -30702,11 +29769,7 @@ func (obj *IDAOMsg) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
 		var n uint16
@@ -30787,11 +29850,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ItemType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ItemType", err))
 		}
 		if len(([]byte((*(*(struct {
 			Type ItemType
@@ -31080,11 +30139,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -31129,11 +30184,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		for local308 := range (*(*(struct {
 			Type ItemType
@@ -31389,11 +30440,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolCaps", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolCaps", err))
 		}
 		if len(((*(*(struct {
 			Type ItemType
@@ -31557,11 +30604,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 			}
 		}
 		if len(([]byte((*(*(struct {
@@ -31729,11 +30772,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -31778,11 +30817,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		{
 			x := (*(*(struct {
@@ -31868,11 +30903,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		{
 			x := (*(*(struct {
@@ -31958,11 +30989,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -32007,11 +31034,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		if len(([]byte((*(*(struct {
 			Type ItemType
@@ -32219,11 +31242,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -32268,11 +31287,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		{
 			buf := w
@@ -32354,11 +31369,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ItemType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ItemType", err))
 		}
 		var local312 []uint8
 		var local313 uint16
@@ -32501,11 +31512,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -32550,11 +31557,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		for local316 := range (*(*(struct {
 			Type ItemType
@@ -32816,11 +31819,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolCaps", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolCaps", err))
 		}
 		var local317 uint16
 		{
@@ -32946,11 +31945,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 			}
 		}
 		var local319 []uint8
@@ -33045,11 +32040,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -33094,11 +32085,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		{
 			p := &(*(*(struct {
@@ -33184,11 +32171,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		{
 			p := &(*(*(struct {
@@ -33274,11 +32257,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -33323,11 +32302,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 		var local321 []uint8
 		var local322 uint16
@@ -33462,11 +32437,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -33511,11 +32482,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
 		}
 		if r.N > 0 {
 			chk(mkDeTrailingDataError(r))
@@ -33556,11 +32523,7 @@ func (obj *TileAnim) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AnimType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AnimType", err))
 	}
 	if !((*(*(struct {
 		Type AnimType
@@ -33702,11 +32665,7 @@ func (obj *TileAnim) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AnimType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AnimType", err))
 	}
 	if !((*(*(struct {
 		Type AnimType
@@ -33934,11 +32893,7 @@ func (obj *TweenRangeV3F32) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -33948,11 +32903,7 @@ func (obj *TweenRangeV3F32) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 }
 
@@ -33965,11 +32916,7 @@ func (obj *TweenRangeV3F32) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -33979,11 +32926,7 @@ func (obj *TweenRangeV3F32) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
 	}
 }
 
@@ -33996,11 +32939,7 @@ func (obj *TweenRangeF32) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -34010,11 +32949,7 @@ func (obj *TweenRangeF32) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
 	}
 }
 
@@ -34027,11 +32962,7 @@ func (obj *TweenRangeF32) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -34041,11 +32972,7 @@ func (obj *TweenRangeF32) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
 	}
 }
 
@@ -34137,11 +33064,7 @@ func (obj *ParticleTexture) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTextureFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTextureFlags", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -34156,11 +33079,7 @@ func (obj *ParticleTexture) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenF32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenF32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -34175,11 +33094,7 @@ func (obj *ParticleTexture) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV2F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV2F32", err))
 	}
 	if (*(*(struct {
 		Flags ParticleTextureFlags
@@ -34202,11 +33117,7 @@ func (obj *ParticleTexture) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
 		}
 	}
 }
@@ -34225,11 +33136,7 @@ func (obj *ParticleTexture) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTextureFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTextureFlags", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -34244,11 +33151,7 @@ func (obj *ParticleTexture) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenF32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenF32", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -34263,11 +33166,7 @@ func (obj *ParticleTexture) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV2F32", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV2F32", err))
 	}
 	if (*(*(struct {
 		Flags ParticleTextureFlags
@@ -34290,11 +33189,7 @@ func (obj *ParticleTexture) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
 		}
 	}
 }
@@ -34337,11 +33232,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDType", err))
 	}
 	for local333 := range (*(*(struct {
 		Type HUDType
@@ -34713,11 +33604,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	for local337 := range (*(*(struct {
 		Type HUDType
@@ -34865,11 +33752,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDStyleFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDStyleFlags", err))
 	}
 }
 
@@ -34897,11 +33780,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDType", err))
 	}
 	for local338 := range (*(*(struct {
 		Type HUDType
@@ -35207,11 +34086,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	for local346 := range (*(*(struct {
 		Type HUDType
@@ -35326,11 +34201,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDStyleFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDStyleFlags", err))
 	}
 }
 
@@ -35621,11 +34492,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -35669,11 +34536,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 	}
 	{
 		x := (*(*(struct {
@@ -36074,11 +34937,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 	}
 	for local354 := range (*(*(struct {
@@ -37536,11 +36395,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	{
 		x := (*(*(struct {
@@ -37897,11 +36752,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -37945,11 +36796,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -38245,11 +37092,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 	}
 	for local364 := range (*(*(struct {
@@ -39404,11 +38247,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -39608,11 +38447,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -39628,11 +38463,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -39648,11 +38479,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 	for local376 := range (*(*(struct {
 		Pos
@@ -39737,11 +38564,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -39757,11 +38580,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -39777,11 +38596,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 	for local377 := range (*(*(struct {
 		Pos
@@ -40128,11 +38943,7 @@ func (obj *AOBonePos) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 	for local384 := range (*(*(struct {
 		Pos Vec
@@ -40158,11 +38969,7 @@ func (obj *AOBonePos) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 	for local385 := range (*(*(struct {
 		Pos Vec
@@ -40191,11 +38998,7 @@ func (obj *AOAttach) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	if len(([]byte((*(*(struct {
 		ParentID     AOID
@@ -40238,11 +39041,7 @@ func (obj *AOAttach) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 	for local386 := range (*(*(struct {
 		ParentID     AOID
@@ -40291,11 +39090,7 @@ func (obj *AOAttach) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	var local387 []uint8
 	var local388 uint16
@@ -40327,11 +39122,7 @@ func (obj *AOAttach) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
 	for local389 := range (*(*(struct {
 		ParentID     AOID
@@ -40541,11 +39332,7 @@ func (obj *NodeMetaField) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
 	}
 	{
 		x := (*(*(struct {
@@ -40570,11 +39357,7 @@ func (obj *NodeMetaField) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Field", err))
 	}
 	{
 		p := &(*(*(struct {
@@ -40675,11 +39458,7 @@ func (obj *TileDef) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -40700,11 +39479,7 @@ func (obj *TileDef) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -40725,11 +39500,7 @@ func (obj *TileDef) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileFlags", err))
 	}
 	if (*(*(struct {
 		Texture
@@ -40862,11 +39633,7 @@ func (obj *TileDef) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AlignType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AlignType", err))
 		}
 	}
 }
@@ -40902,11 +39669,7 @@ func (obj *TileDef) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -40927,11 +39690,7 @@ func (obj *TileDef) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileAnim", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -40952,11 +39711,7 @@ func (obj *TileDef) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileFlags", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileFlags", err))
 	}
 	if (*(*(struct {
 		Texture
@@ -41089,11 +39844,7 @@ func (obj *TileDef) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AlignType", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AlignType", err))
 		}
 	}
 }
@@ -41152,11 +39903,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBoxType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBoxType", err))
 	}
 	if !((*(*(struct {
 		Type NodeBoxType
@@ -41204,11 +39951,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -41228,11 +39971,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -41252,11 +39991,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	if t := (*(*(struct {
@@ -41334,11 +40069,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 			}
 		}
 	}
@@ -41373,11 +40104,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DirBoxes", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DirBoxes", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -41397,11 +40124,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DirBoxes", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DirBoxes", err))
 		}
 		if len(((*(*(struct {
 			Type NodeBoxType
@@ -41465,11 +40188,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 			}
 		}
 		if len(((*(*(struct {
@@ -41534,11 +40253,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 			}
 		}
 	}
@@ -41574,11 +40289,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBoxType", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.NodeBoxType", err))
 	}
 	if !((*(*(struct {
 		Type NodeBoxType
@@ -41626,11 +40337,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -41650,11 +40357,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -41674,11 +40377,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	if t := (*(*(struct {
@@ -41743,11 +40442,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 			}
 		}
 	}
@@ -41782,11 +40477,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DirBoxes", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DirBoxes", err))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -41806,11 +40497,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DirBoxes", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DirBoxes", err))
 		}
 		var local401 uint16
 		{
@@ -41861,11 +40548,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 			}
 		}
 		var local403 uint16
@@ -41917,11 +40600,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 				if err == io.EOF {
 					chk(io.EOF)
 				}
-				if _, ok := err.(rudp.TrailingDataError); ok {
-					defer chk(err)
-				} else {
-					chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 			}
 		}
 	}
@@ -42174,11 +40853,7 @@ func (obj *AOInitData) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -42201,11 +40876,7 @@ func (obj *AOInitData) serialize(w io.Writer) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	for local408 := range (*(*(struct {
 
@@ -42384,11 +41055,7 @@ func (obj *AOInitData) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	if err := pcall(func() {
 		((*(*(struct {
@@ -42411,11 +41078,7 @@ func (obj *AOInitData) deserialize(r io.Reader) {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		if _, ok := err.(rudp.TrailingDataError); ok {
-			defer chk(err)
-		} else {
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
 	for local413 := range (*(*(struct {
 
@@ -42715,11 +41378,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 						if err == io.EOF {
 							chk(io.EOF)
 						}
-						if _, ok := err.(rudp.TrailingDataError); ok {
-							defer chk(err)
-						} else {
-							chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolGroupCap", err))
-						}
+						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolGroupCap", err))
 					}
 				}
 				if len(((*(*(struct {
@@ -42796,11 +41455,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 						if err == io.EOF {
 							chk(io.EOF)
 						}
-						if _, ok := err.(rudp.TrailingDataError); ok {
-							defer chk(err)
-						} else {
-							chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
-						}
+						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 					}
 				}
 				{
@@ -43035,11 +41690,7 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 						if err == io.EOF {
 							chk(io.EOF)
 						}
-						if _, ok := err.(rudp.TrailingDataError); ok {
-							defer chk(err)
-						} else {
-							chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolGroupCap", err))
-						}
+						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolGroupCap", err))
 					}
 				}
 				var local421 uint32
@@ -43100,11 +41751,7 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 						if err == io.EOF {
 							chk(io.EOF)
 						}
-						if _, ok := err.(rudp.TrailingDataError); ok {
-							defer chk(err)
-						} else {
-							chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
-						}
+						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 					}
 				}
 				var local423 uint16
@@ -43310,11 +41957,7 @@ func (obj *Box) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 		}
 	}
 }
@@ -43327,11 +41970,7 @@ func (obj *Box) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 		}
 	}
 }
@@ -43405,11 +42044,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	if len(((*(*(struct {
@@ -43438,11 +42073,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	if len(((*(*(struct {
@@ -43471,11 +42102,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	if len(((*(*(struct {
@@ -43504,11 +42131,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	if len(((*(*(struct {
@@ -43537,11 +42160,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	if len(((*(*(struct {
@@ -43570,11 +42189,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 }
@@ -43602,11 +42217,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	var local438 uint16
@@ -43631,11 +42242,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	var local440 uint16
@@ -43660,11 +42267,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	var local442 uint16
@@ -43689,11 +42292,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	var local444 uint16
@@ -43718,11 +42317,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 	var local446 uint16
@@ -43747,11 +42342,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
 }
@@ -43880,11 +42471,7 @@ func (obj *ToolGroupCap) serialize(w io.Writer) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DigTime", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DigTime", err))
 		}
 	}
 }
@@ -43985,11 +42572,7 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
-			if _, ok := err.(rudp.TrailingDataError); ok {
-				defer chk(err)
-			} else {
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DigTime", err))
-			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DigTime", err))
 		}
 	}
 }
