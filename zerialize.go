@@ -8,8 +8,6 @@ import (
 	"encoding/binary"
 	"errors"
 	"io"
-
-	"github.com/HimbeerserverDE/mt/rudp"
 )
 
 // ErrTooLong reports a length that is too long to serialize.
@@ -55,9 +53,4 @@ func chk(err error) {
 	if err != nil {
 		panic(serializationError{err})
 	}
-}
-
-func mkDeTrailingDataError(r io.Reader) error {
-	buf, _ := io.ReadAll(r)
-	return rudp.TrailingDataError(buf)
 }

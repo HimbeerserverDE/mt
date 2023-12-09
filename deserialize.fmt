@@ -99,7 +99,7 @@ PointedThing	{
 			chk(err)
 			(*p)[i] = msg
 			if r.N > 0 {
-				chk(mkDeTrailingDataError(r))
+				chk(fmt.Errorf("%d bytes of trailing data", r.N))
 			}
 		}
 	}
@@ -111,6 +111,6 @@ PointedThing	{
 			(*p)[i].deserialize(r)
 		}
 		if r.N > 0 {
-			chk(mkDeTrailingDataError(r))
+			chk(fmt.Errorf("%d bytes of trailing data", r.N))
 		}
 	}
