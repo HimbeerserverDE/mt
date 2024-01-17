@@ -15,12 +15,19 @@ const (
 	ZoomKey
 )
 
+type PlayerPosFlags uint8
+
+const (
+	InvertCam PlayerPosFlags = 1
+)
+
 type PlayerPos struct {
 	Pos100, Vel100   [3]int32
 	Pitch100, Yaw100 int32
 	Keys             Keys
 	FOV80            uint8
 	WantedRange      uint8 // in MapBlks.
+	Flags            PlayerPosFlags
 }
 
 func (p PlayerPos) Pos() (pos Pos) {

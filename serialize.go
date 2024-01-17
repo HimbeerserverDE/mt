@@ -29177,6 +29177,7 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 		Keys             Keys
 		FOV80            uint8
 		WantedRange      uint8 // in MapBlks.
+		Flags            PlayerPosFlags
 	}))(obj)).Pos100 {
 		{
 			x := ((*(*(struct {
@@ -29185,6 +29186,7 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 				Keys             Keys
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
+				Flags            PlayerPosFlags
 			}))(obj)).Pos100)[local286]
 			write32(w, uint32(x))
 		}
@@ -29195,6 +29197,7 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 		Keys             Keys
 		FOV80            uint8
 		WantedRange      uint8 // in MapBlks.
+		Flags            PlayerPosFlags
 	}))(obj)).Vel100 {
 		{
 			x := ((*(*(struct {
@@ -29203,6 +29206,7 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 				Keys             Keys
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
+				Flags            PlayerPosFlags
 			}))(obj)).Vel100)[local287]
 			write32(w, uint32(x))
 		}
@@ -29214,6 +29218,7 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 			Keys             Keys
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
 		}))(obj)).Pitch100
 		write32(w, uint32(x))
 	}
@@ -29224,6 +29229,7 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 			Keys             Keys
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
 		}))(obj)).Yaw100
 		write32(w, uint32(x))
 	}
@@ -29234,6 +29240,7 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 			Keys             Keys
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
 		}))(obj)).Keys).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -29248,6 +29255,7 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 			Keys             Keys
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
 		}))(obj)).FOV80
 		write8(w, uint8(x))
 	}
@@ -29258,8 +29266,24 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 			Keys             Keys
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
 		}))(obj)).WantedRange
 		write8(w, uint8(x))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Pos100, Vel100   [3]int32
+			Pitch100, Yaw100 int32
+			Keys             Keys
+			FOV80            uint8
+			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
+		}))(obj)).Flags).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPosFlags", err))
 	}
 }
 
@@ -29270,6 +29294,7 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 		Keys             Keys
 		FOV80            uint8
 		WantedRange      uint8 // in MapBlks.
+		Flags            PlayerPosFlags
 	}))(obj)).Pos100 {
 		{
 			p := &((*(*(struct {
@@ -29278,6 +29303,7 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 				Keys             Keys
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
+				Flags            PlayerPosFlags
 			}))(obj)).Pos100)[local288]
 			*p = int32(read32(r))
 		}
@@ -29288,6 +29314,7 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 		Keys             Keys
 		FOV80            uint8
 		WantedRange      uint8 // in MapBlks.
+		Flags            PlayerPosFlags
 	}))(obj)).Vel100 {
 		{
 			p := &((*(*(struct {
@@ -29296,6 +29323,7 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 				Keys             Keys
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
+				Flags            PlayerPosFlags
 			}))(obj)).Vel100)[local289]
 			*p = int32(read32(r))
 		}
@@ -29307,6 +29335,7 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 			Keys             Keys
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
 		}))(obj)).Pitch100
 		*p = int32(read32(r))
 	}
@@ -29317,6 +29346,7 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 			Keys             Keys
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
 		}))(obj)).Yaw100
 		*p = int32(read32(r))
 	}
@@ -29327,6 +29357,7 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 			Keys             Keys
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
 		}))(obj)).Keys).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -29341,6 +29372,7 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 			Keys             Keys
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
 		}))(obj)).FOV80
 		*p = read8(r)
 	}
@@ -29351,8 +29383,24 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 			Keys             Keys
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
 		}))(obj)).WantedRange
 		*p = read8(r)
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Pos100, Vel100   [3]int32
+			Pitch100, Yaw100 int32
+			Keys             Keys
+			FOV80            uint8
+			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
+		}))(obj)).Flags).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPosFlags", err))
 	}
 }
 
@@ -41904,6 +41952,20 @@ func (obj *Keys) deserialize(r io.Reader) {
 	{
 		p := &*(*(uint32))(obj)
 		*p = read32(r)
+	}
+}
+
+func (obj *PlayerPosFlags) serialize(w io.Writer) {
+	{
+		x := *(*(uint8))(obj)
+		write8(w, uint8(x))
+	}
+}
+
+func (obj *PlayerPosFlags) deserialize(r io.Reader) {
+	{
+		p := &*(*(uint8))(obj)
+		*p = read8(r)
 	}
 }
 
