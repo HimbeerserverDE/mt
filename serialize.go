@@ -4119,6 +4119,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).ID).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -4137,6 +4138,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 		Fade      float32
 		Pitch     float32
 		Ephemeral bool
+		StartTime float32
 	}))(obj)).Name))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -4152,6 +4154,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Name))))
 		write16(w, uint16(x))
 	}
@@ -4167,6 +4170,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Name))[:])
 		chk(err)
 	}
@@ -4182,6 +4186,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Gain
 		write32(w, math.Float32bits(x))
 	}
@@ -4197,6 +4202,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).SrcType).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -4216,6 +4222,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Pos).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -4235,6 +4242,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).SrcAOID).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -4254,6 +4262,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Loop
 		if x {
 			write8(w, 1)
@@ -4273,6 +4282,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Fade
 		write32(w, math.Float32bits(x))
 	}
@@ -4288,6 +4298,7 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Pitch
 		write32(w, math.Float32bits(x))
 	}
@@ -4303,12 +4314,29 @@ func (obj *ToCltPlaySound) serialize(w io.Writer) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Ephemeral
 		if x {
 			write8(w, 1)
 		} else {
 			write8(w, 0)
 		}
+	}
+	{
+		x := (*(*(struct {
+			ID      SoundID
+			Name    string
+			Gain    float32
+			SrcType SoundSrcType
+			Pos
+			SrcAOID   AOID
+			Loop      bool
+			Fade      float32
+			Pitch     float32
+			Ephemeral bool
+			StartTime float32
+		}))(obj)).StartTime
+		write32(w, math.Float32bits(x))
 	}
 }
 
@@ -4325,6 +4353,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).ID).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -4354,6 +4383,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 		Fade      float32
 		Pitch     float32
 		Ephemeral bool
+		StartTime float32
 	}))(obj)).Name) = string(local138)
 	{
 		p := &(*(*(struct {
@@ -4367,6 +4397,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Gain
 		*p = math.Float32frombits(read32(r))
 	}
@@ -4382,6 +4413,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).SrcType).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -4401,6 +4433,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Pos).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -4420,6 +4453,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).SrcAOID).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -4439,6 +4473,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Loop
 		switch n := read8(r); n {
 		case 0:
@@ -4461,6 +4496,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Fade
 		*p = math.Float32frombits(read32(r))
 	}
@@ -4476,6 +4512,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Pitch
 		*p = math.Float32frombits(read32(r))
 	}
@@ -4491,6 +4528,7 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 			Fade      float32
 			Pitch     float32
 			Ephemeral bool
+			StartTime float32
 		}))(obj)).Ephemeral
 		switch n := read8(r); n {
 		case 0:
@@ -4500,6 +4538,22 @@ func (obj *ToCltPlaySound) deserialize(r io.Reader) {
 		default:
 			chk(fmt.Errorf("invalid bool: %d", n))
 		}
+	}
+	{
+		p := &(*(*(struct {
+			ID      SoundID
+			Name    string
+			Gain    float32
+			SrcType SoundSrcType
+			Pos
+			SrcAOID   AOID
+			Loop      bool
+			Fade      float32
+			Pitch     float32
+			Ephemeral bool
+			StartTime float32
+		}))(obj)).StartTime
+		*p = math.Float32frombits(read32(r))
 	}
 }
 
@@ -19713,6 +19767,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Param0).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -19795,6 +19850,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Name))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -19864,6 +19920,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Name))))
 			write16(w, uint16(x))
 		}
@@ -19933,6 +19990,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Name))[:])
 			chk(err)
 		}
@@ -20001,6 +20059,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Groups)) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -20070,6 +20129,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Groups)))
 			write16(w, uint16(x))
 		}
@@ -20138,6 +20198,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Groups {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -20205,6 +20266,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 					MoveResistance    uint8
 					LiquidMovePhysics bool
+					InsideTintShaded  bool
 				}))(obj)).Groups)[local252]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
@@ -20279,6 +20341,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).P1Type).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -20352,6 +20415,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).P2Type).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -20425,6 +20489,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DrawType).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -20497,6 +20562,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Mesh))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -20566,6 +20632,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Mesh))))
 			write16(w, uint16(x))
 		}
@@ -20635,6 +20702,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Mesh))[:])
 			chk(err)
 		}
@@ -20704,6 +20772,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Scale
 			write32(w, math.Float32bits(x))
 		}
@@ -20779,6 +20848,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Tiles {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -20846,6 +20916,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 					MoveResistance    uint8
 					LiquidMovePhysics bool
+					InsideTintShaded  bool
 				}))(obj)).Tiles)[local254]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
@@ -20919,6 +20990,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).OverlayTiles {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -20986,6 +21058,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 					MoveResistance    uint8
 					LiquidMovePhysics bool
+					InsideTintShaded  bool
 				}))(obj)).OverlayTiles)[local255]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
@@ -21066,6 +21139,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).SpecialTiles {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -21133,6 +21207,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 					MoveResistance    uint8
 					LiquidMovePhysics bool
+					InsideTintShaded  bool
 				}))(obj)).SpecialTiles)[local257]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
@@ -21207,6 +21282,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Color
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -21276,6 +21352,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Palette).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -21349,6 +21426,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Waving).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -21422,6 +21500,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).ConnectSides
 			write8(w, uint8(x))
 		}
@@ -21490,6 +21569,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).ConnectTo)) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -21559,6 +21639,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).ConnectTo)))
 			write16(w, uint16(x))
 		}
@@ -21627,6 +21708,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).ConnectTo {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -21694,6 +21776,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 					MoveResistance    uint8
 					LiquidMovePhysics bool
+					InsideTintShaded  bool
 				}))(obj)).ConnectTo)[local258]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
@@ -21768,6 +21851,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).InsideTint
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -21837,6 +21921,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Level
 			write8(w, uint8(x))
 		}
@@ -21906,6 +21991,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Translucent
 			if x {
 				write8(w, 1)
@@ -21979,6 +22065,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Transparent
 			if x {
 				write8(w, 1)
@@ -22052,6 +22139,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LightSrc
 			write8(w, uint8(x))
 		}
@@ -22121,6 +22209,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).GndContent
 			if x {
 				write8(w, 1)
@@ -22194,6 +22283,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Collides
 			if x {
 				write8(w, 1)
@@ -22267,6 +22357,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Pointable
 			if x {
 				write8(w, 1)
@@ -22340,6 +22431,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Diggable
 			if x {
 				write8(w, 1)
@@ -22413,6 +22505,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Climbable
 			if x {
 				write8(w, 1)
@@ -22486,6 +22579,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Replaceable
 			if x {
 				write8(w, 1)
@@ -22559,6 +22653,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).OnRightClick
 			if x {
 				write8(w, 1)
@@ -22632,6 +22727,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DmgPerSec
 			write32(w, uint32(x))
 		}
@@ -22701,6 +22797,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LiquidType).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -22773,6 +22870,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).FlowingAlt))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -22842,6 +22940,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).FlowingAlt))))
 			write16(w, uint16(x))
 		}
@@ -22911,6 +23010,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).FlowingAlt))[:])
 			chk(err)
 		}
@@ -22979,6 +23079,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).SrcAlt))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -23048,6 +23149,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).SrcAlt))))
 			write16(w, uint16(x))
 		}
@@ -23117,6 +23219,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).SrcAlt))[:])
 			chk(err)
 		}
@@ -23186,6 +23289,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Viscosity
 			write8(w, uint8(x))
 		}
@@ -23255,6 +23359,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LiqRenewable
 			if x {
 				write8(w, 1)
@@ -23328,6 +23433,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).FlowRange
 			write8(w, uint8(x))
 		}
@@ -23397,6 +23503,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DrownDmg
 			write8(w, uint8(x))
 		}
@@ -23466,6 +23573,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Floodable
 			if x {
 				write8(w, 1)
@@ -23539,6 +23647,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DrawBox).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -23612,6 +23721,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).ColBox).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -23685,6 +23795,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).SelBox).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -23758,6 +23869,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).FootstepSnd).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -23831,6 +23943,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DiggingSnd).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -23904,6 +24017,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DugSnd).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -23977,6 +24091,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LegacyFaceDir
 			if x {
 				write8(w, 1)
@@ -24050,6 +24165,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LegacyMounted
 			if x {
 				write8(w, 1)
@@ -24122,6 +24238,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).DigPredict))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -24191,6 +24308,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DigPredict))))
 			write16(w, uint16(x))
 		}
@@ -24260,6 +24378,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DigPredict))[:])
 			chk(err)
 		}
@@ -24329,6 +24448,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).MaxLvl
 			write8(w, uint8(x))
 		}
@@ -24398,6 +24518,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).AlphaUse).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -24471,6 +24592,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).MoveResistance
 			write8(w, uint8(x))
 		}
@@ -24540,7 +24662,82 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LiquidMovePhysics
+			if x {
+				write8(w, 1)
+			} else {
+				write8(w, 0)
+			}
+		}
+		{
+			x := (*(*(struct {
+				Param0 Content
+
+				Name   string
+				Groups []Group
+
+				P1Type   Param1Type
+				P2Type   Param2Type
+				DrawType DrawType
+
+				Mesh  string
+				Scale float32
+				//mt:const uint8(6)
+				Tiles        [6]TileDef
+				OverlayTiles [6]TileDef
+				//mt:const uint8(6)
+				SpecialTiles [6]TileDef
+
+				Color   color.NRGBA
+				Palette Texture
+
+				Waving       WaveType
+				ConnectSides uint8
+				ConnectTo    []Content
+				InsideTint   color.NRGBA
+				Level        uint8 // Must be < 128.
+
+				Translucent bool // Sunlight is scattered and becomes normal light.
+				Transparent bool // Sunlight isn't scattered.
+				LightSrc    uint8
+
+				GndContent   bool
+				Collides     bool
+				Pointable    bool
+				Diggable     bool
+				Climbable    bool
+				Replaceable  bool
+				OnRightClick bool
+
+				DmgPerSec int32
+
+				LiquidType   LiquidType
+				FlowingAlt   string
+				SrcAlt       string
+				Viscosity    uint8 // 0-7
+				LiqRenewable bool
+				FlowRange    uint8
+				DrownDmg     uint8
+				Floodable    bool
+
+				DrawBox, ColBox, SelBox NodeBox
+
+				FootstepSnd, DiggingSnd, DugSnd SoundDef
+
+				LegacyFaceDir bool
+				LegacyMounted bool
+
+				DigPredict string
+
+				MaxLvl uint8
+
+				AlphaUse
+
+				MoveResistance    uint8
+				LiquidMovePhysics bool
+				InsideTintShaded  bool
+			}))(obj)).InsideTintShaded
 			if x {
 				write8(w, 1)
 			} else {
@@ -24632,6 +24829,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Param0).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -24733,6 +24931,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Name) = string(local261)
 		var local263 uint16
 		{
@@ -24804,6 +25003,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Groups) = make([]Group, local263)
 		for local264 := range (*(*(struct {
 			Param0 Content
@@ -24870,6 +25070,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Groups {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -24937,6 +25138,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 					MoveResistance    uint8
 					LiquidMovePhysics bool
+					InsideTintShaded  bool
 				}))(obj)).Groups)[local264]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
@@ -25011,6 +25213,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).P1Type).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -25084,6 +25287,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).P2Type).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -25157,6 +25361,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DrawType).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -25240,6 +25445,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Mesh) = string(local265)
 		{
 			p := &(*(*(struct {
@@ -25307,6 +25513,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Scale
 			*p = math.Float32frombits(read32(r))
 		}
@@ -25386,6 +25593,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).Tiles {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -25453,6 +25661,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 					MoveResistance    uint8
 					LiquidMovePhysics bool
+					InsideTintShaded  bool
 				}))(obj)).Tiles)[local269]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
@@ -25526,6 +25735,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).OverlayTiles {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -25593,6 +25803,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 					MoveResistance    uint8
 					LiquidMovePhysics bool
+					InsideTintShaded  bool
 				}))(obj)).OverlayTiles)[local270]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
@@ -25677,6 +25888,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).SpecialTiles {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -25744,6 +25956,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 					MoveResistance    uint8
 					LiquidMovePhysics bool
+					InsideTintShaded  bool
 				}))(obj)).SpecialTiles)[local273]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
@@ -25818,6 +26031,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Color
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -25887,6 +26101,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Palette).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -25960,6 +26175,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Waving).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -26033,6 +26249,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).ConnectSides
 			*p = read8(r)
 		}
@@ -26106,6 +26323,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).ConnectTo) = make([]Content, local274)
 		for local275 := range (*(*(struct {
 			Param0 Content
@@ -26172,6 +26390,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).ConnectTo {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -26239,6 +26458,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 					MoveResistance    uint8
 					LiquidMovePhysics bool
+					InsideTintShaded  bool
 				}))(obj)).ConnectTo)[local275]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
@@ -26313,6 +26533,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).InsideTint
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -26382,6 +26603,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Level
 			*p = read8(r)
 		}
@@ -26451,6 +26673,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Translucent
 			switch n := read8(r); n {
 			case 0:
@@ -26527,6 +26750,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Transparent
 			switch n := read8(r); n {
 			case 0:
@@ -26603,6 +26827,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LightSrc
 			*p = read8(r)
 		}
@@ -26672,6 +26897,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).GndContent
 			switch n := read8(r); n {
 			case 0:
@@ -26748,6 +26974,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Collides
 			switch n := read8(r); n {
 			case 0:
@@ -26824,6 +27051,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Pointable
 			switch n := read8(r); n {
 			case 0:
@@ -26900,6 +27128,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Diggable
 			switch n := read8(r); n {
 			case 0:
@@ -26976,6 +27205,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Climbable
 			switch n := read8(r); n {
 			case 0:
@@ -27052,6 +27282,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Replaceable
 			switch n := read8(r); n {
 			case 0:
@@ -27128,6 +27359,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).OnRightClick
 			switch n := read8(r); n {
 			case 0:
@@ -27204,6 +27436,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DmgPerSec
 			*p = int32(read32(r))
 		}
@@ -27273,6 +27506,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LiquidType).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -27356,6 +27590,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).FlowingAlt) = string(local276)
 		var local278 []uint8
 		var local279 uint16
@@ -27433,6 +27668,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).SrcAlt) = string(local278)
 		{
 			p := &(*(*(struct {
@@ -27500,6 +27736,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Viscosity
 			*p = read8(r)
 		}
@@ -27569,6 +27806,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LiqRenewable
 			switch n := read8(r); n {
 			case 0:
@@ -27645,6 +27883,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).FlowRange
 			*p = read8(r)
 		}
@@ -27714,6 +27953,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DrownDmg
 			*p = read8(r)
 		}
@@ -27783,6 +28023,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).Floodable
 			switch n := read8(r); n {
 			case 0:
@@ -27859,6 +28100,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DrawBox).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -27932,6 +28174,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).ColBox).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -28005,6 +28248,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).SelBox).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -28078,6 +28322,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).FootstepSnd).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -28151,6 +28396,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DiggingSnd).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -28224,6 +28470,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).DugSnd).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -28297,6 +28544,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LegacyFaceDir
 			switch n := read8(r); n {
 			case 0:
@@ -28373,6 +28621,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LegacyMounted
 			switch n := read8(r); n {
 			case 0:
@@ -28459,6 +28708,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			MoveResistance    uint8
 			LiquidMovePhysics bool
+			InsideTintShaded  bool
 		}))(obj)).DigPredict) = string(local280)
 		{
 			p := &(*(*(struct {
@@ -28526,6 +28776,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).MaxLvl
 			*p = read8(r)
 		}
@@ -28595,6 +28846,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).AlphaUse).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -28668,6 +28920,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).MoveResistance
 			*p = read8(r)
 		}
@@ -28737,7 +28990,85 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				MoveResistance    uint8
 				LiquidMovePhysics bool
+				InsideTintShaded  bool
 			}))(obj)).LiquidMovePhysics
+			switch n := read8(r); n {
+			case 0:
+				*p = false
+			case 1:
+				*p = true
+			default:
+				chk(fmt.Errorf("invalid bool: %d", n))
+			}
+		}
+		{
+			p := &(*(*(struct {
+				Param0 Content
+
+				Name   string
+				Groups []Group
+
+				P1Type   Param1Type
+				P2Type   Param2Type
+				DrawType DrawType
+
+				Mesh  string
+				Scale float32
+				//mt:const uint8(6)
+				Tiles        [6]TileDef
+				OverlayTiles [6]TileDef
+				//mt:const uint8(6)
+				SpecialTiles [6]TileDef
+
+				Color   color.NRGBA
+				Palette Texture
+
+				Waving       WaveType
+				ConnectSides uint8
+				ConnectTo    []Content
+				InsideTint   color.NRGBA
+				Level        uint8 // Must be < 128.
+
+				Translucent bool // Sunlight is scattered and becomes normal light.
+				Transparent bool // Sunlight isn't scattered.
+				LightSrc    uint8
+
+				GndContent   bool
+				Collides     bool
+				Pointable    bool
+				Diggable     bool
+				Climbable    bool
+				Replaceable  bool
+				OnRightClick bool
+
+				DmgPerSec int32
+
+				LiquidType   LiquidType
+				FlowingAlt   string
+				SrcAlt       string
+				Viscosity    uint8 // 0-7
+				LiqRenewable bool
+				FlowRange    uint8
+				DrownDmg     uint8
+				Floodable    bool
+
+				DrawBox, ColBox, SelBox NodeBox
+
+				FootstepSnd, DiggingSnd, DugSnd SoundDef
+
+				LegacyFaceDir bool
+				LegacyMounted bool
+
+				DigPredict string
+
+				MaxLvl uint8
+
+				AlphaUse
+
+				MoveResistance    uint8
+				LiquidMovePhysics bool
+				InsideTintShaded  bool
+			}))(obj)).InsideTintShaded
 			switch n := read8(r); n {
 			case 0:
 				*p = false
@@ -29841,10 +30172,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Type).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -29885,10 +30222,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).Name))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -29926,10 +30269,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Name))))
 			write16(w, uint16(x))
 		}
@@ -29967,10 +30316,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Name))[:])
 			chk(err)
 		}
@@ -30007,10 +30362,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).Desc))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -30048,10 +30409,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Desc))))
 			write16(w, uint16(x))
 		}
@@ -30089,10 +30456,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Desc))[:])
 			chk(err)
 		}
@@ -30130,10 +30503,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).InvImg).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30175,10 +30554,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).WieldImg).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30219,10 +30604,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).WieldScale {
 			{
 				x := ((*(*(struct {
@@ -30258,10 +30649,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 					ShortDesc string
 
-					PlaceParam2 uint8
+					// Use PlaceParam2 instead, this is just for serialization.
+					PlaceParam2Legacy uint8
 
 					SoundUse    SoundDef
 					SoundUseAir SoundDef
+
+					HasPlaceParam2 bool
+
+					//mt:if %s.HasPlaceParam2
+					PlaceParam2 uint8
 				}))(obj)).WieldScale)[local308]
 				write32(w, math.Float32bits(x))
 			}
@@ -30300,10 +30697,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).StackMax
 			write16(w, uint16(x))
 		}
@@ -30341,10 +30744,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Usable
 			if x {
 				write8(w, 1)
@@ -30386,10 +30795,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).CanPointLiquids
 			if x {
 				write8(w, 1)
@@ -30431,10 +30846,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).ToolCaps).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30475,10 +30896,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).Groups)) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -30516,10 +30943,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Groups)))
 			write16(w, uint16(x))
 		}
@@ -30556,10 +30989,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).Groups {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -30595,10 +31034,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 					ShortDesc string
 
-					PlaceParam2 uint8
+					// Use PlaceParam2 instead, this is just for serialization.
+					PlaceParam2Legacy uint8
 
 					SoundUse    SoundDef
 					SoundUseAir SoundDef
+
+					HasPlaceParam2 bool
+
+					//mt:if %s.HasPlaceParam2
+					PlaceParam2 uint8
 				}))(obj)).Groups)[local309]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
@@ -30640,10 +31085,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).PlacePredict))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -30681,10 +31132,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).PlacePredict))))
 			write16(w, uint16(x))
 		}
@@ -30722,10 +31179,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).PlacePredict))[:])
 			chk(err)
 		}
@@ -30763,10 +31226,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).PlaceSnd).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30808,10 +31277,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).PlaceFailSnd).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30853,10 +31328,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).PointRange
 			write32(w, math.Float32bits(x))
 		}
@@ -30894,10 +31375,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Palette).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30939,10 +31426,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Color
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -30980,10 +31473,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).InvOverlay).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -31025,10 +31524,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).WieldOverlay).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -31069,10 +31574,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).ShortDesc))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -31110,10 +31621,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).ShortDesc))))
 			write16(w, uint16(x))
 		}
@@ -31151,10 +31668,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).ShortDesc))[:])
 			chk(err)
 		}
@@ -31192,11 +31715,17 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
-			}))(obj)).PlaceParam2
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+			}))(obj)).PlaceParam2Legacy
 			write8(w, uint8(x))
 		}
 		if err := pcall(func() {
@@ -31233,10 +31762,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).SoundUse).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -31278,16 +31813,165 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).SoundUseAir).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
+		}
+		{
+			x := (*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+			}))(obj)).HasPlaceParam2
+			if x {
+				write8(w, 1)
+			} else {
+				write8(w, 0)
+			}
+		}
+		if (*(*(struct {
+			Type ItemType
+
+			Name, Desc string
+
+			InvImg, WieldImg Texture
+			WieldScale       [3]float32
+
+			StackMax uint16
+
+			Usable          bool
+			CanPointLiquids bool
+
+			ToolCaps ToolCaps
+
+			Groups []Group
+
+			PlacePredict string
+
+			PlaceSnd, PlaceFailSnd SoundDef
+
+			PointRange float32
+
+			// Set index in Palette with "palette_index" item meta field,
+			// this overrides Color.
+			Palette Texture
+			Color   color.NRGBA
+
+			// Texture overlays.
+			InvOverlay, WieldOverlay Texture
+
+			ShortDesc string
+
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
+		}))(obj)).HasPlaceParam2 {
+			{
+				x := (*(*(struct {
+					Type ItemType
+
+					Name, Desc string
+
+					InvImg, WieldImg Texture
+					WieldScale       [3]float32
+
+					StackMax uint16
+
+					Usable          bool
+					CanPointLiquids bool
+
+					ToolCaps ToolCaps
+
+					Groups []Group
+
+					PlacePredict string
+
+					PlaceSnd, PlaceFailSnd SoundDef
+
+					PointRange float32
+
+					// Set index in Palette with "palette_index" item meta field,
+					// this overrides Color.
+					Palette Texture
+					Color   color.NRGBA
+
+					// Texture overlays.
+					InvOverlay, WieldOverlay Texture
+
+					ShortDesc string
+
+					// Use PlaceParam2 instead, this is just for serialization.
+					PlaceParam2Legacy uint8
+
+					SoundUse    SoundDef
+					SoundUseAir SoundDef
+
+					HasPlaceParam2 bool
+
+					//mt:if %s.HasPlaceParam2
+					PlaceParam2 uint8
+				}))(obj)).PlaceParam2
+				write8(w, uint8(x))
+			}
 		}
 		{
 			buf := w
@@ -31360,10 +32044,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Type).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -31415,10 +32105,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).Name) = string(local312)
 		var local314 []uint8
 		var local315 uint16
@@ -31464,10 +32160,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).Desc) = string(local314)
 		if err := pcall(func() {
 			((*(*(struct {
@@ -31503,10 +32205,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).InvImg).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -31548,10 +32256,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).WieldImg).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -31592,10 +32306,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).WieldScale {
 			{
 				p := &((*(*(struct {
@@ -31631,10 +32351,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 					ShortDesc string
 
-					PlaceParam2 uint8
+					// Use PlaceParam2 instead, this is just for serialization.
+					PlaceParam2Legacy uint8
 
 					SoundUse    SoundDef
 					SoundUseAir SoundDef
+
+					HasPlaceParam2 bool
+
+					//mt:if %s.HasPlaceParam2
+					PlaceParam2 uint8
 				}))(obj)).WieldScale)[local316]
 				*p = math.Float32frombits(read32(r))
 			}
@@ -31673,10 +32399,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).StackMax
 			*p = read16(r)
 		}
@@ -31714,10 +32446,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Usable
 			switch n := read8(r); n {
 			case 0:
@@ -31762,10 +32500,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).CanPointLiquids
 			switch n := read8(r); n {
 			case 0:
@@ -31810,10 +32554,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).ToolCaps).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -31859,10 +32609,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).Groups) = make([]Group, local317)
 		for local318 := range (*(*(struct {
 			Type ItemType
@@ -31897,10 +32653,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).Groups {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -31936,10 +32698,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 					ShortDesc string
 
-					PlaceParam2 uint8
+					// Use PlaceParam2 instead, this is just for serialization.
+					PlaceParam2Legacy uint8
 
 					SoundUse    SoundDef
 					SoundUseAir SoundDef
+
+					HasPlaceParam2 bool
+
+					//mt:if %s.HasPlaceParam2
+					PlaceParam2 uint8
 				}))(obj)).Groups)[local318]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
@@ -31992,10 +32760,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).PlacePredict) = string(local319)
 		if err := pcall(func() {
 			((*(*(struct {
@@ -32031,10 +32805,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).PlaceSnd).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32076,10 +32856,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).PlaceFailSnd).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32121,10 +32907,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).PointRange
 			*p = math.Float32frombits(read32(r))
 		}
@@ -32162,10 +32954,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Palette).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32207,10 +33005,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).Color
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -32248,10 +33052,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).InvOverlay).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32293,10 +33103,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).WieldOverlay).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32348,10 +33164,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			PlaceParam2 uint8
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
 
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
 		}))(obj)).ShortDesc) = string(local321)
 		{
 			p := &(*(*(struct {
@@ -32387,11 +33209,17 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
-			}))(obj)).PlaceParam2
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+			}))(obj)).PlaceParam2Legacy
 			*p = read8(r)
 		}
 		if err := pcall(func() {
@@ -32428,10 +33256,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).SoundUse).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32473,16 +33307,168 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				PlaceParam2 uint8
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
 
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
 			}))(obj)).SoundUseAir).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.SoundDef", err))
+		}
+		{
+			p := &(*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				// Use PlaceParam2 instead, this is just for serialization.
+				PlaceParam2Legacy uint8
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+			}))(obj)).HasPlaceParam2
+			switch n := read8(r); n {
+			case 0:
+				*p = false
+			case 1:
+				*p = true
+			default:
+				chk(fmt.Errorf("invalid bool: %d", n))
+			}
+		}
+		if (*(*(struct {
+			Type ItemType
+
+			Name, Desc string
+
+			InvImg, WieldImg Texture
+			WieldScale       [3]float32
+
+			StackMax uint16
+
+			Usable          bool
+			CanPointLiquids bool
+
+			ToolCaps ToolCaps
+
+			Groups []Group
+
+			PlacePredict string
+
+			PlaceSnd, PlaceFailSnd SoundDef
+
+			PointRange float32
+
+			// Set index in Palette with "palette_index" item meta field,
+			// this overrides Color.
+			Palette Texture
+			Color   color.NRGBA
+
+			// Texture overlays.
+			InvOverlay, WieldOverlay Texture
+
+			ShortDesc string
+
+			// Use PlaceParam2 instead, this is just for serialization.
+			PlaceParam2Legacy uint8
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
+		}))(obj)).HasPlaceParam2 {
+			{
+				p := &(*(*(struct {
+					Type ItemType
+
+					Name, Desc string
+
+					InvImg, WieldImg Texture
+					WieldScale       [3]float32
+
+					StackMax uint16
+
+					Usable          bool
+					CanPointLiquids bool
+
+					ToolCaps ToolCaps
+
+					Groups []Group
+
+					PlacePredict string
+
+					PlaceSnd, PlaceFailSnd SoundDef
+
+					PointRange float32
+
+					// Set index in Palette with "palette_index" item meta field,
+					// this overrides Color.
+					Palette Texture
+					Color   color.NRGBA
+
+					// Texture overlays.
+					InvOverlay, WieldOverlay Texture
+
+					ShortDesc string
+
+					// Use PlaceParam2 instead, this is just for serialization.
+					PlaceParam2Legacy uint8
+
+					SoundUse    SoundDef
+					SoundUseAir SoundDef
+
+					HasPlaceParam2 bool
+
+					//mt:if %s.HasPlaceParam2
+					PlaceParam2 uint8
+				}))(obj)).PlaceParam2
+				*p = read8(r)
+			}
 		}
 		if r.N > 0 {
 			chk(fmt.Errorf("%d bytes of trailing data", r.N))
@@ -39168,6 +40154,9 @@ func (obj *AOPhysOverride) serialize(w io.Writer) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).Walk
 		write32(w, math.Float32bits(x))
 	}
@@ -39177,6 +40166,9 @@ func (obj *AOPhysOverride) serialize(w io.Writer) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).Jump
 		write32(w, math.Float32bits(x))
 	}
@@ -39186,6 +40178,9 @@ func (obj *AOPhysOverride) serialize(w io.Writer) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).Gravity
 		write32(w, math.Float32bits(x))
 	}
@@ -39195,6 +40190,9 @@ func (obj *AOPhysOverride) serialize(w io.Writer) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).NoSneak
 		if x {
 			write8(w, 1)
@@ -39208,6 +40206,9 @@ func (obj *AOPhysOverride) serialize(w io.Writer) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).NoSneakGlitch
 		if x {
 			write8(w, 1)
@@ -39221,12 +40222,99 @@ func (obj *AOPhysOverride) serialize(w io.Writer) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).OldSneak
 		if x {
 			write8(w, 1)
 		} else {
 			write8(w, 0)
 		}
+	}
+	{
+		x := (*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).Climb
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).Crouch
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).Fluidity
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).FluiditySmooth
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).Sink
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).Acceleration
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).AccelerationAir
+		write32(w, math.Float32bits(x))
 	}
 }
 
@@ -39237,6 +40325,9 @@ func (obj *AOPhysOverride) deserialize(r io.Reader) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).Walk
 		*p = math.Float32frombits(read32(r))
 	}
@@ -39246,6 +40337,9 @@ func (obj *AOPhysOverride) deserialize(r io.Reader) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).Jump
 		*p = math.Float32frombits(read32(r))
 	}
@@ -39255,6 +40349,9 @@ func (obj *AOPhysOverride) deserialize(r io.Reader) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).Gravity
 		*p = math.Float32frombits(read32(r))
 	}
@@ -39264,6 +40361,9 @@ func (obj *AOPhysOverride) deserialize(r io.Reader) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).NoSneak
 		switch n := read8(r); n {
 		case 0:
@@ -39280,6 +40380,9 @@ func (obj *AOPhysOverride) deserialize(r io.Reader) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).NoSneakGlitch
 		switch n := read8(r); n {
 		case 0:
@@ -39296,6 +40399,9 @@ func (obj *AOPhysOverride) deserialize(r io.Reader) {
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
 		}))(obj)).OldSneak
 		switch n := read8(r); n {
 		case 0:
@@ -39305,6 +40411,90 @@ func (obj *AOPhysOverride) deserialize(r io.Reader) {
 		default:
 			chk(fmt.Errorf("invalid bool: %d", n))
 		}
+	}
+	{
+		p := &(*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).Climb
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).Crouch
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).Fluidity
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).FluiditySmooth
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).Sink
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).Acceleration
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Walk, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+		}))(obj)).AccelerationAir
+		*p = math.Float32frombits(read32(r))
 	}
 }
 

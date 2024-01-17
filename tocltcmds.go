@@ -328,6 +328,7 @@ type ToCltPlaySound struct {
 	Fade      float32
 	Pitch     float32
 	Ephemeral bool
+	StartTime float32
 }
 
 // ToCltStopSound tells the client to stop playing a sound.

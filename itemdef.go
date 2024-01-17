@@ -52,10 +52,17 @@ type ItemDef struct {
 
 	ShortDesc string
 
-	PlaceParam2 uint8
+	// Use PlaceParam2 instead, this is just for serialization.
+	PlaceParam2Legacy uint8
 
 	SoundUse    SoundDef
 	SoundUseAir SoundDef
+
+	HasPlaceParam2 bool
+
+	//mt:if %s.HasPlaceParam2
+	PlaceParam2 uint8
+	//mt:end
 
 	//mt:end
 }

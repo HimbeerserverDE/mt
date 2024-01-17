@@ -159,6 +159,7 @@ type NodeDef struct {
 
 	MoveResistance    uint8
 	LiquidMovePhysics bool
+	InsideTintShaded  bool
 
 	//mt:end
 }

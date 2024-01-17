@@ -114,6 +114,9 @@ type AOPhysOverride struct {
 
 	// Player only.
 	NoSneak, NoSneakGlitch, OldSneak bool
+	Climb, Crouch                    float32
+	Fluidity, FluiditySmooth, Sink   float32
+	Acceleration, AccelerationAir    float32
 }
 
 type AOCmdProps struct {
