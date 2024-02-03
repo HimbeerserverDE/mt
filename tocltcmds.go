@@ -666,6 +666,9 @@ type ToCltSkyParams struct {
 	//mt:end
 
 	BodyOrbitTilt float32
+
+	FogDistance int16
+	FogStart    float32
 }
 
 // ToCltOverrideDayNightRatio overrides the client's day-night ratio
@@ -683,7 +686,7 @@ type ToCltLocalPlayerAnim struct {
 // ToCltEyeOffset tells the client where to position the camera
 // relative to the player.
 type ToCltEyeOffset struct {
-	First, Third Vec
+	First, Third, ThirdFront Vec
 }
 
 // ToCltDelParticleSpawner tells the client to delete a particle spawner.
