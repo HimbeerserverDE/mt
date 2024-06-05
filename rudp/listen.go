@@ -1,7 +1,9 @@
 package rudp
 
 import (
+	"crypto/rand"
 	"errors"
+	"io"
 	"net"
 	"sync"
 )
@@ -79,7 +81,6 @@ func (c *udpClt) RemoteAddr() net.Addr { return c.addr }
 type Listener struct {
 	pc net.PacketConn
 
-	peerID PeerID
 	conns  chan *Conn
 	errs   chan error
 	closed chan struct{}
@@ -188,19 +189,36 @@ func (l *Listener) add(addr net.Addr) (*udpClt, error) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 
-	start := l.peerID
-	l.peerID++
-	for l.peerID < PeerIDCltMin || l.ids[l.peerID] {
-		if l.peerID == start {
+	randPeerID := func() (PeerID, error) {
+		peerIDBytes := make([]byte, 2)
+		if _, err := io.ReadFull(rand.Reader, peerIDBytes); err != nil {
+			return 0, err
+		}
+
+		return PeerID(be.Uint16(peerIDBytes)), nil
+	}
+
+	peerID, err := randPeerID()
+	if err != nil {
+		return nil, err
+	}
+
+	attempts := 0
+	for peerID < PeerIDCltMin || l.ids[peerID] {
+		if attempts >= (1<<16)-int(PeerIDCltMin) {
 			return nil, ErrOutOfPeerIDs
 		}
-		l.peerID++
+
+		peerID, err = randPeerID()
+		if err != nil {
+			return nil, err
+		}
 	}
-	l.ids[l.peerID] = true
+	l.ids[peerID] = true
 
 	clt := &udpClt{
 		l:      l,
-		id:     l.peerID,
+		id:     peerID,
 		addr:   addr,
 		pkts:   make(chan []byte),
 		closed: make(chan struct{}),
