@@ -171,6 +171,7 @@ type ToSrvCltInfo struct {
 	GUIScaling       float32
 	HUDScaling       float32
 	MaxFormspecInfo  [2]float32
+	TouchControls    bool
 }
 
 type ToSrvDisco struct{}

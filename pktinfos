@@ -52,6 +52,7 @@ ToCltNodeMetasChanged	0	rel
 ToCltSunParams	0	rel
 ToCltMoonParams	0	rel
 ToCltStarParams	0	rel
+ToCltMovePlayerRel	0	rel
 ToCltSRPBytesSaltB	0	rel
 ToCltFormspecPrepend	0	rel
 ToCltMinimapModes	0	rel

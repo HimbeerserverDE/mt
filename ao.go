@@ -12,6 +12,14 @@ type aoType uint8
 
 const genericCAO aoType = 101
 
+type AbsoluteFlag uint8
+
+const (
+	PosAbs AbsoluteFlag = 1 << iota
+	RotAbs
+	ScaleAbs
+)
+
 type AOInitData struct {
 	// Version.
 	//mt:const uint8(1)
@@ -39,7 +47,7 @@ type AOProps struct {
 	CollideWithNodes bool
 	Weight           float32 // deprecated
 	ColBox, SelBox   Box
-	Pointable        bool
+	Pointable        PointabilityType
 	Visual           string
 	VisualSize       [3]float32
 	Textures         []Texture
@@ -96,9 +104,14 @@ type AOAnim struct {
 	NoLoop bool
 }
 
-type AOBonePos struct {
-	Pos Vec
-	Rot [3]float32
+type AOBoneOverride struct {
+	Pos              Vec
+	Rot              [3]float32
+	Scale            [3]float32
+	PosInterpTimer   float32
+	RotInterpTimer   float32
+	ScaleInterpTimer float32
+	Absolute         AbsoluteFlag
 }
 
 type AOAttach struct {
@@ -110,13 +123,14 @@ type AOAttach struct {
 }
 
 type AOPhysOverride struct {
-	Walk, Jump, Gravity float32
+	Speed, Jump, Gravity float32
 
 	// Player only.
 	NoSneak, NoSneakGlitch, OldSneak bool
 	Climb, Crouch                    float32
 	Fluidity, FluiditySmooth, Sink   float32
 	Acceleration, AccelerationAir    float32
+	Fast, AccelerationFast, Walk     float32
 }
 
 type AOCmdProps struct {
@@ -148,8 +162,8 @@ type AOCmdAnim struct {
 }
 
 type AOCmdBonePos struct {
-	Bone string
-	Pos  AOBonePos
+	Bone     string
+	Override AOBoneOverride
 }
 
 type AOCmdAttach struct {

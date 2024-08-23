@@ -52,6 +52,7 @@
 90	SunParams
 91	MoonParams
 92	StarParams
+93	MovePlayerRel
 96	SRPBytesSaltB
 97	FormspecPrepend
 98	MinimapModes

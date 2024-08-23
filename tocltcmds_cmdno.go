@@ -56,6 +56,7 @@ func (*ToCltNodeMetasChanged) toCltCmdNo() uint16      { return 89 }
 func (*ToCltSunParams) toCltCmdNo() uint16             { return 90 }
 func (*ToCltMoonParams) toCltCmdNo() uint16            { return 91 }
 func (*ToCltStarParams) toCltCmdNo() uint16            { return 92 }
+func (*ToCltMovePlayerRel) toCltCmdNo() uint16         { return 93 }
 func (*ToCltSRPBytesSaltB) toCltCmdNo() uint16         { return 96 }
 func (*ToCltFormspecPrepend) toCltCmdNo() uint16       { return 97 }
 func (*ToCltMinimapModes) toCltCmdNo() uint16          { return 98 }
@@ -116,6 +117,7 @@ var newToCltCmd = map[uint16]func() Cmd{
 	90: func() Cmd { return new(ToCltSunParams) },
 	91: func() Cmd { return new(ToCltMoonParams) },
 	92: func() Cmd { return new(ToCltStarParams) },
+	93: func() Cmd { return new(ToCltMovePlayerRel) },
 	96: func() Cmd { return new(ToCltSRPBytesSaltB) },
 	97: func() Cmd { return new(ToCltFormspecPrepend) },
 	98: func() Cmd { return new(ToCltMinimapModes) },

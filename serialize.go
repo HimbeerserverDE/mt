@@ -1630,6 +1630,7 @@ func (obj *ToSrvCltInfo) serialize(w io.Writer) {
 		GUIScaling       float32
 		HUDScaling       float32
 		MaxFormspecInfo  [2]float32
+		TouchControls    bool
 	}))(obj)).RenderTargetSize {
 		{
 			x := ((*(*(struct {
@@ -1637,6 +1638,7 @@ func (obj *ToSrvCltInfo) serialize(w io.Writer) {
 				GUIScaling       float32
 				HUDScaling       float32
 				MaxFormspecInfo  [2]float32
+				TouchControls    bool
 			}))(obj)).RenderTargetSize)[local58]
 			write32(w, uint32(x))
 		}
@@ -1647,6 +1649,7 @@ func (obj *ToSrvCltInfo) serialize(w io.Writer) {
 			GUIScaling       float32
 			HUDScaling       float32
 			MaxFormspecInfo  [2]float32
+			TouchControls    bool
 		}))(obj)).GUIScaling
 		write32(w, math.Float32bits(x))
 	}
@@ -1656,6 +1659,7 @@ func (obj *ToSrvCltInfo) serialize(w io.Writer) {
 			GUIScaling       float32
 			HUDScaling       float32
 			MaxFormspecInfo  [2]float32
+			TouchControls    bool
 		}))(obj)).HUDScaling
 		write32(w, math.Float32bits(x))
 	}
@@ -1664,6 +1668,7 @@ func (obj *ToSrvCltInfo) serialize(w io.Writer) {
 		GUIScaling       float32
 		HUDScaling       float32
 		MaxFormspecInfo  [2]float32
+		TouchControls    bool
 	}))(obj)).MaxFormspecInfo {
 		{
 			x := ((*(*(struct {
@@ -1671,8 +1676,23 @@ func (obj *ToSrvCltInfo) serialize(w io.Writer) {
 				GUIScaling       float32
 				HUDScaling       float32
 				MaxFormspecInfo  [2]float32
+				TouchControls    bool
 			}))(obj)).MaxFormspecInfo)[local59]
 			write32(w, math.Float32bits(x))
+		}
+	}
+	{
+		x := (*(*(struct {
+			RenderTargetSize [2]uint32
+			GUIScaling       float32
+			HUDScaling       float32
+			MaxFormspecInfo  [2]float32
+			TouchControls    bool
+		}))(obj)).TouchControls
+		if x {
+			write8(w, 1)
+		} else {
+			write8(w, 0)
 		}
 	}
 }
@@ -1683,6 +1703,7 @@ func (obj *ToSrvCltInfo) deserialize(r io.Reader) {
 		GUIScaling       float32
 		HUDScaling       float32
 		MaxFormspecInfo  [2]float32
+		TouchControls    bool
 	}))(obj)).RenderTargetSize {
 		{
 			p := &((*(*(struct {
@@ -1690,6 +1711,7 @@ func (obj *ToSrvCltInfo) deserialize(r io.Reader) {
 				GUIScaling       float32
 				HUDScaling       float32
 				MaxFormspecInfo  [2]float32
+				TouchControls    bool
 			}))(obj)).RenderTargetSize)[local60]
 			*p = read32(r)
 		}
@@ -1700,6 +1722,7 @@ func (obj *ToSrvCltInfo) deserialize(r io.Reader) {
 			GUIScaling       float32
 			HUDScaling       float32
 			MaxFormspecInfo  [2]float32
+			TouchControls    bool
 		}))(obj)).GUIScaling
 		*p = math.Float32frombits(read32(r))
 	}
@@ -1709,6 +1732,7 @@ func (obj *ToSrvCltInfo) deserialize(r io.Reader) {
 			GUIScaling       float32
 			HUDScaling       float32
 			MaxFormspecInfo  [2]float32
+			TouchControls    bool
 		}))(obj)).HUDScaling
 		*p = math.Float32frombits(read32(r))
 	}
@@ -1717,6 +1741,7 @@ func (obj *ToSrvCltInfo) deserialize(r io.Reader) {
 		GUIScaling       float32
 		HUDScaling       float32
 		MaxFormspecInfo  [2]float32
+		TouchControls    bool
 	}))(obj)).MaxFormspecInfo {
 		{
 			p := &((*(*(struct {
@@ -1724,8 +1749,26 @@ func (obj *ToSrvCltInfo) deserialize(r io.Reader) {
 				GUIScaling       float32
 				HUDScaling       float32
 				MaxFormspecInfo  [2]float32
+				TouchControls    bool
 			}))(obj)).MaxFormspecInfo)[local61]
 			*p = math.Float32frombits(read32(r))
+		}
+	}
+	{
+		p := &(*(*(struct {
+			RenderTargetSize [2]uint32
+			GUIScaling       float32
+			HUDScaling       float32
+			MaxFormspecInfo  [2]float32
+			TouchControls    bool
+		}))(obj)).TouchControls
+		switch n := read8(r); n {
+		case 0:
+			*p = false
+		case 1:
+			*p = true
+		default:
+			chk(fmt.Errorf("invalid bool: %d", n))
 		}
 	}
 }
@@ -5147,18 +5190,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 		Collide        bool
 
 		//mt:len32
-		Texture
+		TextureName Texture
 
 		Vertical    bool
 		CollisionRm bool
 		AnimParams  TileAnim
 		Glow        uint8
 		AOCollision bool
-		Drag        [3]float32
-		Bounce      RangeV3F32
 		NodeParam0  Content
 		NodeParam2  uint8
 		NodeTile    uint8
+		Drag        [3]float32
+		Jitter      RangeV3F32
+		Bounce      RangeF32
+		Texture     ParticleTexture
 	}))(obj)).Pos {
 		{
 			x := ((*(*(struct {
@@ -5168,18 +5213,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 				Collide        bool
 
 				//mt:len32
-				Texture
+				TextureName Texture
 
 				Vertical    bool
 				CollisionRm bool
 				AnimParams  TileAnim
 				Glow        uint8
 				AOCollision bool
-				Drag        [3]float32
-				Bounce      RangeV3F32
 				NodeParam0  Content
 				NodeParam2  uint8
 				NodeTile    uint8
+				Drag        [3]float32
+				Jitter      RangeV3F32
+				Bounce      RangeF32
+				Texture     ParticleTexture
 			}))(obj)).Pos)[local154]
 			write32(w, math.Float32bits(x))
 		}
@@ -5191,18 +5238,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 		Collide        bool
 
 		//mt:len32
-		Texture
+		TextureName Texture
 
 		Vertical    bool
 		CollisionRm bool
 		AnimParams  TileAnim
 		Glow        uint8
 		AOCollision bool
-		Drag        [3]float32
-		Bounce      RangeV3F32
 		NodeParam0  Content
 		NodeParam2  uint8
 		NodeTile    uint8
+		Drag        [3]float32
+		Jitter      RangeV3F32
+		Bounce      RangeF32
+		Texture     ParticleTexture
 	}))(obj)).Vel {
 		{
 			x := ((*(*(struct {
@@ -5212,18 +5261,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 				Collide        bool
 
 				//mt:len32
-				Texture
+				TextureName Texture
 
 				Vertical    bool
 				CollisionRm bool
 				AnimParams  TileAnim
 				Glow        uint8
 				AOCollision bool
-				Drag        [3]float32
-				Bounce      RangeV3F32
 				NodeParam0  Content
 				NodeParam2  uint8
 				NodeTile    uint8
+				Drag        [3]float32
+				Jitter      RangeV3F32
+				Bounce      RangeF32
+				Texture     ParticleTexture
 			}))(obj)).Vel)[local155]
 			write32(w, math.Float32bits(x))
 		}
@@ -5235,18 +5286,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 		Collide        bool
 
 		//mt:len32
-		Texture
+		TextureName Texture
 
 		Vertical    bool
 		CollisionRm bool
 		AnimParams  TileAnim
 		Glow        uint8
 		AOCollision bool
-		Drag        [3]float32
-		Bounce      RangeV3F32
 		NodeParam0  Content
 		NodeParam2  uint8
 		NodeTile    uint8
+		Drag        [3]float32
+		Jitter      RangeV3F32
+		Bounce      RangeF32
+		Texture     ParticleTexture
 	}))(obj)).Acc {
 		{
 			x := ((*(*(struct {
@@ -5256,18 +5309,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 				Collide        bool
 
 				//mt:len32
-				Texture
+				TextureName Texture
 
 				Vertical    bool
 				CollisionRm bool
 				AnimParams  TileAnim
 				Glow        uint8
 				AOCollision bool
-				Drag        [3]float32
-				Bounce      RangeV3F32
 				NodeParam0  Content
 				NodeParam2  uint8
 				NodeTile    uint8
+				Drag        [3]float32
+				Jitter      RangeV3F32
+				Bounce      RangeF32
+				Texture     ParticleTexture
 			}))(obj)).Acc)[local156]
 			write32(w, math.Float32bits(x))
 		}
@@ -5280,18 +5335,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).ExpirationTime
 		write32(w, math.Float32bits(x))
 	}
@@ -5303,18 +5360,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).Size
 		write32(w, math.Float32bits(x))
 	}
@@ -5326,18 +5385,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).Collide
 		if x {
 			write8(w, 1)
@@ -5352,19 +5413,21 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 		Collide        bool
 
 		//mt:len32
-		Texture
+		TextureName Texture
 
 		Vertical    bool
 		CollisionRm bool
 		AnimParams  TileAnim
 		Glow        uint8
 		AOCollision bool
-		Drag        [3]float32
-		Bounce      RangeV3F32
 		NodeParam0  Content
 		NodeParam2  uint8
 		NodeTile    uint8
-	}))(obj)).Texture))))) > math.MaxUint32 {
+		Drag        [3]float32
+		Jitter      RangeV3F32
+		Bounce      RangeF32
+		Texture     ParticleTexture
+	}))(obj)).TextureName))))) > math.MaxUint32 {
 		chk(ErrTooLong)
 	}
 	{
@@ -5375,19 +5438,21 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
-		}))(obj)).Texture))))))
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
+		}))(obj)).TextureName))))))
 		write32(w, uint32(x))
 	}
 	{
@@ -5398,19 +5463,21 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
-		}))(obj)).Texture))))[:])
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
+		}))(obj)).TextureName))))[:])
 		chk(err)
 	}
 	{
@@ -5421,18 +5488,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).Vertical
 		if x {
 			write8(w, 1)
@@ -5448,18 +5517,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).CollisionRm
 		if x {
 			write8(w, 1)
@@ -5475,18 +5546,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).AnimParams).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -5502,18 +5575,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).Glow
 		write8(w, uint8(x))
 	}
@@ -5525,18 +5600,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).AOCollision
 		if x {
 			write8(w, 1)
@@ -5544,50 +5621,6 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			write8(w, 0)
 		}
 	}
-	for local157 := range (*(*(struct {
-		Pos, Vel, Acc  [3]float32
-		ExpirationTime float32 // in seconds.
-		Size           float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		Vertical    bool
-		CollisionRm bool
-		AnimParams  TileAnim
-		Glow        uint8
-		AOCollision bool
-		Drag        [3]float32
-		Bounce      RangeV3F32
-		NodeParam0  Content
-		NodeParam2  uint8
-		NodeTile    uint8
-	}))(obj)).Drag {
-		{
-			x := ((*(*(struct {
-				Pos, Vel, Acc  [3]float32
-				ExpirationTime float32 // in seconds.
-				Size           float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				Vertical    bool
-				CollisionRm bool
-				AnimParams  TileAnim
-				Glow        uint8
-				AOCollision bool
-				Drag        [3]float32
-				Bounce      RangeV3F32
-				NodeParam0  Content
-				NodeParam2  uint8
-				NodeTile    uint8
-			}))(obj)).Drag)[local157]
-			write32(w, math.Float32bits(x))
-		}
-	}
 	if err := pcall(func() {
 		((*(*(struct {
 			Pos, Vel, Acc  [3]float32
@@ -5596,45 +5629,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
-		}))(obj)).Bounce).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Pos, Vel, Acc  [3]float32
-			ExpirationTime float32 // in seconds.
-			Size           float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			Vertical    bool
-			CollisionRm bool
-			AnimParams  TileAnim
-			Glow        uint8
-			AOCollision bool
 			Drag        [3]float32
-			Bounce      RangeV3F32
-			NodeParam0  Content
-			NodeParam2  uint8
-			NodeTile    uint8
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).NodeParam0).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -5650,18 +5658,20 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).NodeParam2
 		write8(w, uint8(x))
 	}
@@ -5673,20 +5683,157 @@ func (obj *ToCltSpawnParticle) serialize(w io.Writer) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).NodeTile
 		write8(w, uint8(x))
+	}
+	for local157 := range (*(*(struct {
+		Pos, Vel, Acc  [3]float32
+		ExpirationTime float32 // in seconds.
+		Size           float32
+		Collide        bool
+
+		//mt:len32
+		TextureName Texture
+
+		Vertical    bool
+		CollisionRm bool
+		AnimParams  TileAnim
+		Glow        uint8
+		AOCollision bool
+		NodeParam0  Content
+		NodeParam2  uint8
+		NodeTile    uint8
+		Drag        [3]float32
+		Jitter      RangeV3F32
+		Bounce      RangeF32
+		Texture     ParticleTexture
+	}))(obj)).Drag {
+		{
+			x := ((*(*(struct {
+				Pos, Vel, Acc  [3]float32
+				ExpirationTime float32 // in seconds.
+				Size           float32
+				Collide        bool
+
+				//mt:len32
+				TextureName Texture
+
+				Vertical    bool
+				CollisionRm bool
+				AnimParams  TileAnim
+				Glow        uint8
+				AOCollision bool
+				NodeParam0  Content
+				NodeParam2  uint8
+				NodeTile    uint8
+				Drag        [3]float32
+				Jitter      RangeV3F32
+				Bounce      RangeF32
+				Texture     ParticleTexture
+			}))(obj)).Drag)[local157]
+			write32(w, math.Float32bits(x))
+		}
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Pos, Vel, Acc  [3]float32
+			ExpirationTime float32 // in seconds.
+			Size           float32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			Vertical    bool
+			CollisionRm bool
+			AnimParams  TileAnim
+			Glow        uint8
+			AOCollision bool
+			NodeParam0  Content
+			NodeParam2  uint8
+			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
+		}))(obj)).Jitter).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Pos, Vel, Acc  [3]float32
+			ExpirationTime float32 // in seconds.
+			Size           float32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			Vertical    bool
+			CollisionRm bool
+			AnimParams  TileAnim
+			Glow        uint8
+			AOCollision bool
+			NodeParam0  Content
+			NodeParam2  uint8
+			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
+		}))(obj)).Bounce).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Pos, Vel, Acc  [3]float32
+			ExpirationTime float32 // in seconds.
+			Size           float32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			Vertical    bool
+			CollisionRm bool
+			AnimParams  TileAnim
+			Glow        uint8
+			AOCollision bool
+			NodeParam0  Content
+			NodeParam2  uint8
+			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
+		}))(obj)).Texture).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
 	}
 }
 
@@ -5698,18 +5845,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 		Collide        bool
 
 		//mt:len32
-		Texture
+		TextureName Texture
 
 		Vertical    bool
 		CollisionRm bool
 		AnimParams  TileAnim
 		Glow        uint8
 		AOCollision bool
-		Drag        [3]float32
-		Bounce      RangeV3F32
 		NodeParam0  Content
 		NodeParam2  uint8
 		NodeTile    uint8
+		Drag        [3]float32
+		Jitter      RangeV3F32
+		Bounce      RangeF32
+		Texture     ParticleTexture
 	}))(obj)).Pos {
 		{
 			p := &((*(*(struct {
@@ -5719,18 +5868,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 				Collide        bool
 
 				//mt:len32
-				Texture
+				TextureName Texture
 
 				Vertical    bool
 				CollisionRm bool
 				AnimParams  TileAnim
 				Glow        uint8
 				AOCollision bool
-				Drag        [3]float32
-				Bounce      RangeV3F32
 				NodeParam0  Content
 				NodeParam2  uint8
 				NodeTile    uint8
+				Drag        [3]float32
+				Jitter      RangeV3F32
+				Bounce      RangeF32
+				Texture     ParticleTexture
 			}))(obj)).Pos)[local158]
 			*p = math.Float32frombits(read32(r))
 		}
@@ -5742,18 +5893,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 		Collide        bool
 
 		//mt:len32
-		Texture
+		TextureName Texture
 
 		Vertical    bool
 		CollisionRm bool
 		AnimParams  TileAnim
 		Glow        uint8
 		AOCollision bool
-		Drag        [3]float32
-		Bounce      RangeV3F32
 		NodeParam0  Content
 		NodeParam2  uint8
 		NodeTile    uint8
+		Drag        [3]float32
+		Jitter      RangeV3F32
+		Bounce      RangeF32
+		Texture     ParticleTexture
 	}))(obj)).Vel {
 		{
 			p := &((*(*(struct {
@@ -5763,18 +5916,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 				Collide        bool
 
 				//mt:len32
-				Texture
+				TextureName Texture
 
 				Vertical    bool
 				CollisionRm bool
 				AnimParams  TileAnim
 				Glow        uint8
 				AOCollision bool
-				Drag        [3]float32
-				Bounce      RangeV3F32
 				NodeParam0  Content
 				NodeParam2  uint8
 				NodeTile    uint8
+				Drag        [3]float32
+				Jitter      RangeV3F32
+				Bounce      RangeF32
+				Texture     ParticleTexture
 			}))(obj)).Vel)[local159]
 			*p = math.Float32frombits(read32(r))
 		}
@@ -5786,18 +5941,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 		Collide        bool
 
 		//mt:len32
-		Texture
+		TextureName Texture
 
 		Vertical    bool
 		CollisionRm bool
 		AnimParams  TileAnim
 		Glow        uint8
 		AOCollision bool
-		Drag        [3]float32
-		Bounce      RangeV3F32
 		NodeParam0  Content
 		NodeParam2  uint8
 		NodeTile    uint8
+		Drag        [3]float32
+		Jitter      RangeV3F32
+		Bounce      RangeF32
+		Texture     ParticleTexture
 	}))(obj)).Acc {
 		{
 			p := &((*(*(struct {
@@ -5807,18 +5964,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 				Collide        bool
 
 				//mt:len32
-				Texture
+				TextureName Texture
 
 				Vertical    bool
 				CollisionRm bool
 				AnimParams  TileAnim
 				Glow        uint8
 				AOCollision bool
-				Drag        [3]float32
-				Bounce      RangeV3F32
 				NodeParam0  Content
 				NodeParam2  uint8
 				NodeTile    uint8
+				Drag        [3]float32
+				Jitter      RangeV3F32
+				Bounce      RangeF32
+				Texture     ParticleTexture
 			}))(obj)).Acc)[local160]
 			*p = math.Float32frombits(read32(r))
 		}
@@ -5831,18 +5990,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).ExpirationTime
 		*p = math.Float32frombits(read32(r))
 	}
@@ -5854,18 +6015,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).Size
 		*p = math.Float32frombits(read32(r))
 	}
@@ -5877,18 +6040,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).Collide
 		switch n := read8(r); n {
 		case 0:
@@ -5917,19 +6082,21 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 		Collide        bool
 
 		//mt:len32
-		Texture
+		TextureName Texture
 
 		Vertical    bool
 		CollisionRm bool
 		AnimParams  TileAnim
 		Glow        uint8
 		AOCollision bool
-		Drag        [3]float32
-		Bounce      RangeV3F32
 		NodeParam0  Content
 		NodeParam2  uint8
 		NodeTile    uint8
-	}))(obj)).Texture))) = string(local161)
+		Drag        [3]float32
+		Jitter      RangeV3F32
+		Bounce      RangeF32
+		Texture     ParticleTexture
+	}))(obj)).TextureName))) = string(local161)
 	{
 		p := &(*(*(struct {
 			Pos, Vel, Acc  [3]float32
@@ -5938,18 +6105,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).Vertical
 		switch n := read8(r); n {
 		case 0:
@@ -5968,18 +6137,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).CollisionRm
 		switch n := read8(r); n {
 		case 0:
@@ -5998,18 +6169,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).AnimParams).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -6025,18 +6198,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).Glow
 		*p = read8(r)
 	}
@@ -6048,18 +6223,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
 		}))(obj)).AOCollision
 		switch n := read8(r); n {
 		case 0:
@@ -6070,6 +6247,85 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 			chk(fmt.Errorf("invalid bool: %d", n))
 		}
 	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Pos, Vel, Acc  [3]float32
+			ExpirationTime float32 // in seconds.
+			Size           float32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			Vertical    bool
+			CollisionRm bool
+			AnimParams  TileAnim
+			Glow        uint8
+			AOCollision bool
+			NodeParam0  Content
+			NodeParam2  uint8
+			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
+		}))(obj)).NodeParam0).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
+	}
+	{
+		p := &(*(*(struct {
+			Pos, Vel, Acc  [3]float32
+			ExpirationTime float32 // in seconds.
+			Size           float32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			Vertical    bool
+			CollisionRm bool
+			AnimParams  TileAnim
+			Glow        uint8
+			AOCollision bool
+			NodeParam0  Content
+			NodeParam2  uint8
+			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
+		}))(obj)).NodeParam2
+		*p = read8(r)
+	}
+	{
+		p := &(*(*(struct {
+			Pos, Vel, Acc  [3]float32
+			ExpirationTime float32 // in seconds.
+			Size           float32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			Vertical    bool
+			CollisionRm bool
+			AnimParams  TileAnim
+			Glow        uint8
+			AOCollision bool
+			NodeParam0  Content
+			NodeParam2  uint8
+			NodeTile    uint8
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
+		}))(obj)).NodeTile
+		*p = read8(r)
+	}
 	for local163 := range (*(*(struct {
 		Pos, Vel, Acc  [3]float32
 		ExpirationTime float32 // in seconds.
@@ -6077,18 +6333,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 		Collide        bool
 
 		//mt:len32
-		Texture
+		TextureName Texture
 
 		Vertical    bool
 		CollisionRm bool
 		AnimParams  TileAnim
 		Glow        uint8
 		AOCollision bool
-		Drag        [3]float32
-		Bounce      RangeV3F32
 		NodeParam0  Content
 		NodeParam2  uint8
 		NodeTile    uint8
+		Drag        [3]float32
+		Jitter      RangeV3F32
+		Bounce      RangeF32
+		Texture     ParticleTexture
 	}))(obj)).Drag {
 		{
 			p := &((*(*(struct {
@@ -6098,18 +6356,20 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 				Collide        bool
 
 				//mt:len32
-				Texture
+				TextureName Texture
 
 				Vertical    bool
 				CollisionRm bool
 				AnimParams  TileAnim
 				Glow        uint8
 				AOCollision bool
-				Drag        [3]float32
-				Bounce      RangeV3F32
 				NodeParam0  Content
 				NodeParam2  uint8
 				NodeTile    uint8
+				Drag        [3]float32
+				Jitter      RangeV3F32
+				Bounce      RangeF32
+				Texture     ParticleTexture
 			}))(obj)).Drag)[local163]
 			*p = math.Float32frombits(read32(r))
 		}
@@ -6122,19 +6382,21 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
-		}))(obj)).Bounce).deserialize(r)
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
+		}))(obj)).Jitter).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
 			chk(io.EOF)
@@ -6149,70 +6411,55 @@ func (obj *ToCltSpawnParticle) deserialize(r io.Reader) {
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
-		}))(obj)).NodeParam0).deserialize(r)
+			Drag        [3]float32
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
+		}))(obj)).Bounce).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Content", err))
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
 	}
-	{
-		p := &(*(*(struct {
+	if err := pcall(func() {
+		((*(*(struct {
 			Pos, Vel, Acc  [3]float32
 			ExpirationTime float32 // in seconds.
 			Size           float32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			Vertical    bool
 			CollisionRm bool
 			AnimParams  TileAnim
 			Glow        uint8
 			AOCollision bool
-			Drag        [3]float32
-			Bounce      RangeV3F32
 			NodeParam0  Content
 			NodeParam2  uint8
 			NodeTile    uint8
-		}))(obj)).NodeParam2
-		*p = read8(r)
-	}
-	{
-		p := &(*(*(struct {
-			Pos, Vel, Acc  [3]float32
-			ExpirationTime float32 // in seconds.
-			Size           float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			Vertical    bool
-			CollisionRm bool
-			AnimParams  TileAnim
-			Glow        uint8
-			AOCollision bool
 			Drag        [3]float32
-			Bounce      RangeV3F32
-			NodeParam0  Content
-			NodeParam2  uint8
-			NodeTile    uint8
-		}))(obj)).NodeTile
-		*p = read8(r)
+			Jitter      RangeV3F32
+			Bounce      RangeF32
+			Texture     ParticleTexture
+		}))(obj)).Texture).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
 	}
 }
 
@@ -6221,13 +6468,13 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		x := (*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -6237,15 +6484,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -6253,24 +6496,20 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).Amount
 		write16(w, uint16(x))
 	}
@@ -6278,13 +6517,13 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		x := (*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -6294,15 +6533,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -6310,91 +6545,34 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).Duration
 		write32(w, math.Float32bits(x))
 	}
-	for local164 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Pos {
-		for local165 := range ((*(*(struct {
+	if err := pcall(func() {
+		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -6404,15 +6582,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -6420,148 +6594,38 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Pos)[local164] {
-			{
-				x := (((*(*(struct {
-					Amount         uint16
-					Duration       float32
-					Pos, Vel, Acc  [2][3]float32
-					ExpirationTime [2]float32 // in seconds.
-					Size           [2]float32
-					Collide        bool
-
-					//mt:len32
-					Texture
-
-					ID           ParticleSpawnerID
-					Vertical     bool
-					CollisionRm  bool
-					AttachedAOID AOID
-					AnimParams   TileAnim
-					Glow         uint8
-					AOCollision  bool
-
-					PosStartBias     float32
-					VelStartBias     float32
-					AccStartBias     float32
-					ExpTimeStartBias float32
-					SizeStartBias    float32
-
-					PosEnd RangeV3F32
-					VelEnd RangeV3F32
-					AccEnd RangeV3F32
-
-					Drag   TweenRangeV3F32
-					Jitter TweenRangeV3F32
-					Bounce TweenRangeF32
-
-					Attraction AttractionKind
-
-					//mt:if %s.Attraction > NoAttraction
-					AttractStrength           TweenRangeF32
-					AttractorOrigin           TweenV3F32
-					AttractorOriginAttachedAO uint16
-					Flags                     ParticleSpawnerFlags
-
-					//mt:if %s.Attraction > PointAttraction
-					AttractorAngle           TweenV3F32
-					AttractorAngleAttachedAO uint16
-
-					Radius TweenRangeV3F32
-
-					//mt:len16
-					Textures []ParticleTexture
-
-					NodeParam0 Content
-					NodeParam2 uint8
-					NodeTile   uint8
-				}))(obj)).Pos)[local164])[local165]
-				write32(w, math.Float32bits(x))
-			}
+		}))(obj)).Pos).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
 		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
 	}
-	for local166 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Vel {
-		for local167 := range ((*(*(struct {
+	if err := pcall(func() {
+		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -6571,15 +6635,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -6587,148 +6647,38 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Vel)[local166] {
-			{
-				x := (((*(*(struct {
-					Amount         uint16
-					Duration       float32
-					Pos, Vel, Acc  [2][3]float32
-					ExpirationTime [2]float32 // in seconds.
-					Size           [2]float32
-					Collide        bool
-
-					//mt:len32
-					Texture
-
-					ID           ParticleSpawnerID
-					Vertical     bool
-					CollisionRm  bool
-					AttachedAOID AOID
-					AnimParams   TileAnim
-					Glow         uint8
-					AOCollision  bool
-
-					PosStartBias     float32
-					VelStartBias     float32
-					AccStartBias     float32
-					ExpTimeStartBias float32
-					SizeStartBias    float32
-
-					PosEnd RangeV3F32
-					VelEnd RangeV3F32
-					AccEnd RangeV3F32
-
-					Drag   TweenRangeV3F32
-					Jitter TweenRangeV3F32
-					Bounce TweenRangeF32
-
-					Attraction AttractionKind
-
-					//mt:if %s.Attraction > NoAttraction
-					AttractStrength           TweenRangeF32
-					AttractorOrigin           TweenV3F32
-					AttractorOriginAttachedAO uint16
-					Flags                     ParticleSpawnerFlags
-
-					//mt:if %s.Attraction > PointAttraction
-					AttractorAngle           TweenV3F32
-					AttractorAngleAttachedAO uint16
-
-					Radius TweenRangeV3F32
-
-					//mt:len16
-					Textures []ParticleTexture
-
-					NodeParam0 Content
-					NodeParam2 uint8
-					NodeTile   uint8
-				}))(obj)).Vel)[local166])[local167]
-				write32(w, math.Float32bits(x))
-			}
+		}))(obj)).Vel).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
 		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
 	}
-	for local168 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Acc {
-		for local169 := range ((*(*(struct {
+	if err := pcall(func() {
+		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -6738,15 +6688,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -6754,319 +6700,144 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
+		}))(obj)).Acc).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
 
 			NodeParam0 Content
 			NodeParam2 uint8
 			NodeTile   uint8
-		}))(obj)).Acc)[local168] {
-			{
-				x := (((*(*(struct {
-					Amount         uint16
-					Duration       float32
-					Pos, Vel, Acc  [2][3]float32
-					ExpirationTime [2]float32 // in seconds.
-					Size           [2]float32
-					Collide        bool
 
-					//mt:len32
-					Texture
+			Texture ParticleTexture
 
-					ID           ParticleSpawnerID
-					Vertical     bool
-					CollisionRm  bool
-					AttachedAOID AOID
-					AnimParams   TileAnim
-					Glow         uint8
-					AOCollision  bool
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
 
-					PosStartBias     float32
-					VelStartBias     float32
-					AccStartBias     float32
-					ExpTimeStartBias float32
-					SizeStartBias    float32
+			Attraction AttractionKind
 
-					PosEnd RangeV3F32
-					VelEnd RangeV3F32
-					AccEnd RangeV3F32
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
 
-					Drag   TweenRangeV3F32
-					Jitter TweenRangeV3F32
-					Bounce TweenRangeF32
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
 
-					Attraction AttractionKind
+			Radius TweenRangeV3F32
 
-					//mt:if %s.Attraction > NoAttraction
-					AttractStrength           TweenRangeF32
-					AttractorOrigin           TweenV3F32
-					AttractorOriginAttachedAO uint16
-					Flags                     ParticleSpawnerFlags
-
-					//mt:if %s.Attraction > PointAttraction
-					AttractorAngle           TweenV3F32
-					AttractorAngleAttachedAO uint16
-
-					Radius TweenRangeV3F32
-
-					//mt:len16
-					Textures []ParticleTexture
-
-					NodeParam0 Content
-					NodeParam2 uint8
-					NodeTile   uint8
-				}))(obj)).Acc)[local168])[local169]
-				write32(w, math.Float32bits(x))
-			}
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).ExpirationTime).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
 		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
 	}
-	for local170 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
 
-		//mt:len32
-		Texture
+			//mt:len32
+			TextureName Texture
 
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
 
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
+			Texture ParticleTexture
 
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
 
-		Attraction AttractionKind
+			Attraction AttractionKind
 
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
 
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
 
-		Radius TweenRangeV3F32
+			Radius TweenRangeV3F32
 
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).ExpirationTime {
-		{
-			x := ((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).ExpirationTime)[local170]
-			write32(w, math.Float32bits(x))
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Size).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
 		}
-	}
-	for local171 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Size {
-		{
-			x := ((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).Size)[local171]
-			write32(w, math.Float32bits(x))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
 	}
 	{
 		x := (*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -7076,15 +6847,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -7092,24 +6859,20 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).Collide
 		if x {
 			write8(w, 1)
@@ -7120,13 +6883,13 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 	if len(([]byte(*(*string)(&((*(*(struct {
 		Amount         uint16
 		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
+		Pos, Vel, Acc  TweenRangeV3F32
+		ExpirationTime TweenRangeF32 // in seconds.
+		Size           TweenRangeF32
 		Collide        bool
 
 		//mt:len32
-		Texture
+		TextureName Texture
 
 		ID           ParticleSpawnerID
 		Vertical     bool
@@ -7136,15 +6899,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		Glow         uint8
 		AOCollision  bool
 
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
+		NodeParam0 Content
+		NodeParam2 uint8
+		NodeTile   uint8
 
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
+		Texture ParticleTexture
 
 		Drag   TweenRangeV3F32
 		Jitter TweenRangeV3F32
@@ -7152,38 +6911,34 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 		Attraction AttractionKind
 
-		//mt:if %s.Attraction > NoAttraction
+		//mt:if %s.Attraction != NoAttraction
 		AttractStrength           TweenRangeF32
 		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
+		AttractorOriginAttachedAO AOID
 		Flags                     ParticleSpawnerFlags
 
-		//mt:if %s.Attraction > PointAttraction
+		//mt:if %s.Attraction != PointAttraction
 		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
+		AttractorAngleAttachedAO AOID
 
 		Radius TweenRangeV3F32
 
 		//mt:len16
 		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Texture))))) > math.MaxUint32 {
+	}))(obj)).TextureName))))) > math.MaxUint32 {
 		chk(ErrTooLong)
 	}
 	{
 		x := uint32(len(([]byte(*(*string)(&((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -7193,15 +6948,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -7209,38 +6960,34 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Texture))))))
+		}))(obj)).TextureName))))))
 		write32(w, uint32(x))
 	}
 	{
 		_, err := w.Write(([]byte(*(*string)(&((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -7250,15 +6997,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -7266,38 +7009,34 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Texture))))[:])
+		}))(obj)).TextureName))))[:])
 		chk(err)
 	}
 	if err := pcall(func() {
 		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -7307,15 +7046,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -7323,24 +7058,20 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).ID).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -7352,13 +7083,13 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		x := (*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -7368,15 +7099,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -7384,24 +7111,20 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).Vertical
 		if x {
 			write8(w, 1)
@@ -7413,13 +7136,13 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		x := (*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -7429,15 +7152,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -7445,24 +7164,20 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).CollisionRm
 		if x {
 			write8(w, 1)
@@ -7474,13 +7189,13 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -7490,15 +7205,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -7506,24 +7217,20 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).AttachedAOID).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -7535,13 +7242,13 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -7551,15 +7258,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -7567,24 +7270,20 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).AnimParams).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -7596,13 +7295,13 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		x := (*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -7612,15 +7311,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -7628,24 +7323,20 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).Glow
 		write8(w, uint8(x))
 	}
@@ -7653,13 +7344,13 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		x := (*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -7669,15 +7360,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -7685,24 +7372,20 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).AOCollision
 		if x {
 			write8(w, 1)
@@ -7710,302 +7393,17 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			write8(w, 0)
 		}
 	}
-	{
-		x := (*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).PosStartBias
-		write32(w, math.Float32bits(x))
-	}
-	{
-		x := (*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).VelStartBias
-		write32(w, math.Float32bits(x))
-	}
-	{
-		x := (*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).AccStartBias
-		write32(w, math.Float32bits(x))
-	}
-	{
-		x := (*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).ExpTimeStartBias
-		write32(w, math.Float32bits(x))
-	}
-	{
-		x := (*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).SizeStartBias
-		write32(w, math.Float32bits(x))
-	}
 	if err := pcall(func() {
 		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -8015,15 +7413,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -8031,1209 +7425,20 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).PosEnd).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).VelEnd).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).AccEnd).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Drag).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Jitter).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Bounce).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Attraction).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AttractionKind", err))
-	}
-	if (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Attraction > NoAttraction {
-		if err := pcall(func() {
-			((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).AttractStrength).serialize(w)
-		}); err != nil {
-			if err == io.EOF {
-				chk(io.EOF)
-			}
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
-		}
-		if err := pcall(func() {
-			((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).AttractorOrigin).serialize(w)
-		}); err != nil {
-			if err == io.EOF {
-				chk(io.EOF)
-			}
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
-		}
-		{
-			x := (*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).AttractorOriginAttachedAO
-			write16(w, uint16(x))
-		}
-		if err := pcall(func() {
-			((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).Flags).serialize(w)
-		}); err != nil {
-			if err == io.EOF {
-				chk(io.EOF)
-			}
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerFlags", err))
-		}
-		if (*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Attraction > PointAttraction {
-			if err := pcall(func() {
-				((*(*(struct {
-					Amount         uint16
-					Duration       float32
-					Pos, Vel, Acc  [2][3]float32
-					ExpirationTime [2]float32 // in seconds.
-					Size           [2]float32
-					Collide        bool
-
-					//mt:len32
-					Texture
-
-					ID           ParticleSpawnerID
-					Vertical     bool
-					CollisionRm  bool
-					AttachedAOID AOID
-					AnimParams   TileAnim
-					Glow         uint8
-					AOCollision  bool
-
-					PosStartBias     float32
-					VelStartBias     float32
-					AccStartBias     float32
-					ExpTimeStartBias float32
-					SizeStartBias    float32
-
-					PosEnd RangeV3F32
-					VelEnd RangeV3F32
-					AccEnd RangeV3F32
-
-					Drag   TweenRangeV3F32
-					Jitter TweenRangeV3F32
-					Bounce TweenRangeF32
-
-					Attraction AttractionKind
-
-					//mt:if %s.Attraction > NoAttraction
-					AttractStrength           TweenRangeF32
-					AttractorOrigin           TweenV3F32
-					AttractorOriginAttachedAO uint16
-					Flags                     ParticleSpawnerFlags
-
-					//mt:if %s.Attraction > PointAttraction
-					AttractorAngle           TweenV3F32
-					AttractorAngleAttachedAO uint16
-
-					Radius TweenRangeV3F32
-
-					//mt:len16
-					Textures []ParticleTexture
-
-					NodeParam0 Content
-					NodeParam2 uint8
-					NodeTile   uint8
-				}))(obj)).AttractorAngle).serialize(w)
-			}); err != nil {
-				if err == io.EOF {
-					chk(io.EOF)
-				}
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
-			}
-			{
-				x := (*(*(struct {
-					Amount         uint16
-					Duration       float32
-					Pos, Vel, Acc  [2][3]float32
-					ExpirationTime [2]float32 // in seconds.
-					Size           [2]float32
-					Collide        bool
-
-					//mt:len32
-					Texture
-
-					ID           ParticleSpawnerID
-					Vertical     bool
-					CollisionRm  bool
-					AttachedAOID AOID
-					AnimParams   TileAnim
-					Glow         uint8
-					AOCollision  bool
-
-					PosStartBias     float32
-					VelStartBias     float32
-					AccStartBias     float32
-					ExpTimeStartBias float32
-					SizeStartBias    float32
-
-					PosEnd RangeV3F32
-					VelEnd RangeV3F32
-					AccEnd RangeV3F32
-
-					Drag   TweenRangeV3F32
-					Jitter TweenRangeV3F32
-					Bounce TweenRangeF32
-
-					Attraction AttractionKind
-
-					//mt:if %s.Attraction > NoAttraction
-					AttractStrength           TweenRangeF32
-					AttractorOrigin           TweenV3F32
-					AttractorOriginAttachedAO uint16
-					Flags                     ParticleSpawnerFlags
-
-					//mt:if %s.Attraction > PointAttraction
-					AttractorAngle           TweenV3F32
-					AttractorAngleAttachedAO uint16
-
-					Radius TweenRangeV3F32
-
-					//mt:len16
-					Textures []ParticleTexture
-
-					NodeParam0 Content
-					NodeParam2 uint8
-					NodeTile   uint8
-				}))(obj)).AttractorAngleAttachedAO
-				write16(w, uint16(x))
-			}
-		}
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Radius).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-	}
-	if len(((*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Textures)) > math.MaxUint16 {
-		chk(ErrTooLong)
-	}
-	{
-		x := uint16(len(((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Textures)))
-		write16(w, uint16(x))
-	}
-	for local172 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Textures {
-		if err := pcall(func() {
-			(((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).Textures)[local172]).serialize(w)
-		}); err != nil {
-			if err == io.EOF {
-				chk(io.EOF)
-			}
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
-		}
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).NodeParam0).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -9245,13 +7450,13 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		x := (*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -9261,15 +7466,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -9277,24 +7478,20 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).NodeParam2
 		write8(w, uint8(x))
 	}
@@ -9302,13 +7499,13 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 		x := (*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -9318,15 +7515,11 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -9334,26 +7527,949 @@ func (obj *ToCltAddParticleSpawner) serialize(w io.Writer) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
+		}))(obj)).NodeTile
+		write8(w, uint8(x))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
 
 			NodeParam0 Content
 			NodeParam2 uint8
 			NodeTile   uint8
-		}))(obj)).NodeTile
-		write8(w, uint8(x))
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Texture).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Drag).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Jitter).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Bounce).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Attraction).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AttractionKind", err))
+	}
+	if (*(*(struct {
+		Amount         uint16
+		Duration       float32
+		Pos, Vel, Acc  TweenRangeV3F32
+		ExpirationTime TweenRangeF32 // in seconds.
+		Size           TweenRangeF32
+		Collide        bool
+
+		//mt:len32
+		TextureName Texture
+
+		ID           ParticleSpawnerID
+		Vertical     bool
+		CollisionRm  bool
+		AttachedAOID AOID
+		AnimParams   TileAnim
+		Glow         uint8
+		AOCollision  bool
+
+		NodeParam0 Content
+		NodeParam2 uint8
+		NodeTile   uint8
+
+		Texture ParticleTexture
+
+		Drag   TweenRangeV3F32
+		Jitter TweenRangeV3F32
+		Bounce TweenRangeF32
+
+		Attraction AttractionKind
+
+		//mt:if %s.Attraction != NoAttraction
+		AttractStrength           TweenRangeF32
+		AttractorOrigin           TweenV3F32
+		AttractorOriginAttachedAO AOID
+		Flags                     ParticleSpawnerFlags
+
+		//mt:if %s.Attraction != PointAttraction
+		AttractorAngle           TweenV3F32
+		AttractorAngleAttachedAO AOID
+
+		Radius TweenRangeV3F32
+
+		//mt:len16
+		Textures []ParticleTexture
+	}))(obj)).Attraction != NoAttraction {
+		if err := pcall(func() {
+			((*(*(struct {
+				Amount         uint16
+				Duration       float32
+				Pos, Vel, Acc  TweenRangeV3F32
+				ExpirationTime TweenRangeF32 // in seconds.
+				Size           TweenRangeF32
+				Collide        bool
+
+				//mt:len32
+				TextureName Texture
+
+				ID           ParticleSpawnerID
+				Vertical     bool
+				CollisionRm  bool
+				AttachedAOID AOID
+				AnimParams   TileAnim
+				Glow         uint8
+				AOCollision  bool
+
+				NodeParam0 Content
+				NodeParam2 uint8
+				NodeTile   uint8
+
+				Texture ParticleTexture
+
+				Drag   TweenRangeV3F32
+				Jitter TweenRangeV3F32
+				Bounce TweenRangeF32
+
+				Attraction AttractionKind
+
+				//mt:if %s.Attraction != NoAttraction
+				AttractStrength           TweenRangeF32
+				AttractorOrigin           TweenV3F32
+				AttractorOriginAttachedAO AOID
+				Flags                     ParticleSpawnerFlags
+
+				//mt:if %s.Attraction != PointAttraction
+				AttractorAngle           TweenV3F32
+				AttractorAngleAttachedAO AOID
+
+				Radius TweenRangeV3F32
+
+				//mt:len16
+				Textures []ParticleTexture
+			}))(obj)).AttractStrength).serialize(w)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Amount         uint16
+				Duration       float32
+				Pos, Vel, Acc  TweenRangeV3F32
+				ExpirationTime TweenRangeF32 // in seconds.
+				Size           TweenRangeF32
+				Collide        bool
+
+				//mt:len32
+				TextureName Texture
+
+				ID           ParticleSpawnerID
+				Vertical     bool
+				CollisionRm  bool
+				AttachedAOID AOID
+				AnimParams   TileAnim
+				Glow         uint8
+				AOCollision  bool
+
+				NodeParam0 Content
+				NodeParam2 uint8
+				NodeTile   uint8
+
+				Texture ParticleTexture
+
+				Drag   TweenRangeV3F32
+				Jitter TweenRangeV3F32
+				Bounce TweenRangeF32
+
+				Attraction AttractionKind
+
+				//mt:if %s.Attraction != NoAttraction
+				AttractStrength           TweenRangeF32
+				AttractorOrigin           TweenV3F32
+				AttractorOriginAttachedAO AOID
+				Flags                     ParticleSpawnerFlags
+
+				//mt:if %s.Attraction != PointAttraction
+				AttractorAngle           TweenV3F32
+				AttractorAngleAttachedAO AOID
+
+				Radius TweenRangeV3F32
+
+				//mt:len16
+				Textures []ParticleTexture
+			}))(obj)).AttractorOrigin).serialize(w)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Amount         uint16
+				Duration       float32
+				Pos, Vel, Acc  TweenRangeV3F32
+				ExpirationTime TweenRangeF32 // in seconds.
+				Size           TweenRangeF32
+				Collide        bool
+
+				//mt:len32
+				TextureName Texture
+
+				ID           ParticleSpawnerID
+				Vertical     bool
+				CollisionRm  bool
+				AttachedAOID AOID
+				AnimParams   TileAnim
+				Glow         uint8
+				AOCollision  bool
+
+				NodeParam0 Content
+				NodeParam2 uint8
+				NodeTile   uint8
+
+				Texture ParticleTexture
+
+				Drag   TweenRangeV3F32
+				Jitter TweenRangeV3F32
+				Bounce TweenRangeF32
+
+				Attraction AttractionKind
+
+				//mt:if %s.Attraction != NoAttraction
+				AttractStrength           TweenRangeF32
+				AttractorOrigin           TweenV3F32
+				AttractorOriginAttachedAO AOID
+				Flags                     ParticleSpawnerFlags
+
+				//mt:if %s.Attraction != PointAttraction
+				AttractorAngle           TweenV3F32
+				AttractorAngleAttachedAO AOID
+
+				Radius TweenRangeV3F32
+
+				//mt:len16
+				Textures []ParticleTexture
+			}))(obj)).AttractorOriginAttachedAO).serialize(w)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Amount         uint16
+				Duration       float32
+				Pos, Vel, Acc  TweenRangeV3F32
+				ExpirationTime TweenRangeF32 // in seconds.
+				Size           TweenRangeF32
+				Collide        bool
+
+				//mt:len32
+				TextureName Texture
+
+				ID           ParticleSpawnerID
+				Vertical     bool
+				CollisionRm  bool
+				AttachedAOID AOID
+				AnimParams   TileAnim
+				Glow         uint8
+				AOCollision  bool
+
+				NodeParam0 Content
+				NodeParam2 uint8
+				NodeTile   uint8
+
+				Texture ParticleTexture
+
+				Drag   TweenRangeV3F32
+				Jitter TweenRangeV3F32
+				Bounce TweenRangeF32
+
+				Attraction AttractionKind
+
+				//mt:if %s.Attraction != NoAttraction
+				AttractStrength           TweenRangeF32
+				AttractorOrigin           TweenV3F32
+				AttractorOriginAttachedAO AOID
+				Flags                     ParticleSpawnerFlags
+
+				//mt:if %s.Attraction != PointAttraction
+				AttractorAngle           TweenV3F32
+				AttractorAngleAttachedAO AOID
+
+				Radius TweenRangeV3F32
+
+				//mt:len16
+				Textures []ParticleTexture
+			}))(obj)).Flags).serialize(w)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerFlags", err))
+		}
+		if (*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Attraction != PointAttraction {
+			if err := pcall(func() {
+				((*(*(struct {
+					Amount         uint16
+					Duration       float32
+					Pos, Vel, Acc  TweenRangeV3F32
+					ExpirationTime TweenRangeF32 // in seconds.
+					Size           TweenRangeF32
+					Collide        bool
+
+					//mt:len32
+					TextureName Texture
+
+					ID           ParticleSpawnerID
+					Vertical     bool
+					CollisionRm  bool
+					AttachedAOID AOID
+					AnimParams   TileAnim
+					Glow         uint8
+					AOCollision  bool
+
+					NodeParam0 Content
+					NodeParam2 uint8
+					NodeTile   uint8
+
+					Texture ParticleTexture
+
+					Drag   TweenRangeV3F32
+					Jitter TweenRangeV3F32
+					Bounce TweenRangeF32
+
+					Attraction AttractionKind
+
+					//mt:if %s.Attraction != NoAttraction
+					AttractStrength           TweenRangeF32
+					AttractorOrigin           TweenV3F32
+					AttractorOriginAttachedAO AOID
+					Flags                     ParticleSpawnerFlags
+
+					//mt:if %s.Attraction != PointAttraction
+					AttractorAngle           TweenV3F32
+					AttractorAngleAttachedAO AOID
+
+					Radius TweenRangeV3F32
+
+					//mt:len16
+					Textures []ParticleTexture
+				}))(obj)).AttractorAngle).serialize(w)
+			}); err != nil {
+				if err == io.EOF {
+					chk(io.EOF)
+				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
+			}
+			if err := pcall(func() {
+				((*(*(struct {
+					Amount         uint16
+					Duration       float32
+					Pos, Vel, Acc  TweenRangeV3F32
+					ExpirationTime TweenRangeF32 // in seconds.
+					Size           TweenRangeF32
+					Collide        bool
+
+					//mt:len32
+					TextureName Texture
+
+					ID           ParticleSpawnerID
+					Vertical     bool
+					CollisionRm  bool
+					AttachedAOID AOID
+					AnimParams   TileAnim
+					Glow         uint8
+					AOCollision  bool
+
+					NodeParam0 Content
+					NodeParam2 uint8
+					NodeTile   uint8
+
+					Texture ParticleTexture
+
+					Drag   TweenRangeV3F32
+					Jitter TweenRangeV3F32
+					Bounce TweenRangeF32
+
+					Attraction AttractionKind
+
+					//mt:if %s.Attraction != NoAttraction
+					AttractStrength           TweenRangeF32
+					AttractorOrigin           TweenV3F32
+					AttractorOriginAttachedAO AOID
+					Flags                     ParticleSpawnerFlags
+
+					//mt:if %s.Attraction != PointAttraction
+					AttractorAngle           TweenV3F32
+					AttractorAngleAttachedAO AOID
+
+					Radius TweenRangeV3F32
+
+					//mt:len16
+					Textures []ParticleTexture
+				}))(obj)).AttractorAngleAttachedAO).serialize(w)
+			}); err != nil {
+				if err == io.EOF {
+					chk(io.EOF)
+				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
+			}
+		}
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Radius).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
+	}
+	if len(((*(*(struct {
+		Amount         uint16
+		Duration       float32
+		Pos, Vel, Acc  TweenRangeV3F32
+		ExpirationTime TweenRangeF32 // in seconds.
+		Size           TweenRangeF32
+		Collide        bool
+
+		//mt:len32
+		TextureName Texture
+
+		ID           ParticleSpawnerID
+		Vertical     bool
+		CollisionRm  bool
+		AttachedAOID AOID
+		AnimParams   TileAnim
+		Glow         uint8
+		AOCollision  bool
+
+		NodeParam0 Content
+		NodeParam2 uint8
+		NodeTile   uint8
+
+		Texture ParticleTexture
+
+		Drag   TweenRangeV3F32
+		Jitter TweenRangeV3F32
+		Bounce TweenRangeF32
+
+		Attraction AttractionKind
+
+		//mt:if %s.Attraction != NoAttraction
+		AttractStrength           TweenRangeF32
+		AttractorOrigin           TweenV3F32
+		AttractorOriginAttachedAO AOID
+		Flags                     ParticleSpawnerFlags
+
+		//mt:if %s.Attraction != PointAttraction
+		AttractorAngle           TweenV3F32
+		AttractorAngleAttachedAO AOID
+
+		Radius TweenRangeV3F32
+
+		//mt:len16
+		Textures []ParticleTexture
+	}))(obj)).Textures)) > math.MaxUint16 {
+		chk(ErrTooLong)
+	}
+	{
+		x := uint16(len(((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Textures)))
+		write16(w, uint16(x))
+	}
+	for local164 := range (*(*(struct {
+		Amount         uint16
+		Duration       float32
+		Pos, Vel, Acc  TweenRangeV3F32
+		ExpirationTime TweenRangeF32 // in seconds.
+		Size           TweenRangeF32
+		Collide        bool
+
+		//mt:len32
+		TextureName Texture
+
+		ID           ParticleSpawnerID
+		Vertical     bool
+		CollisionRm  bool
+		AttachedAOID AOID
+		AnimParams   TileAnim
+		Glow         uint8
+		AOCollision  bool
+
+		NodeParam0 Content
+		NodeParam2 uint8
+		NodeTile   uint8
+
+		Texture ParticleTexture
+
+		Drag   TweenRangeV3F32
+		Jitter TweenRangeV3F32
+		Bounce TweenRangeF32
+
+		Attraction AttractionKind
+
+		//mt:if %s.Attraction != NoAttraction
+		AttractStrength           TweenRangeF32
+		AttractorOrigin           TweenV3F32
+		AttractorOriginAttachedAO AOID
+		Flags                     ParticleSpawnerFlags
+
+		//mt:if %s.Attraction != PointAttraction
+		AttractorAngle           TweenV3F32
+		AttractorAngleAttachedAO AOID
+
+		Radius TweenRangeV3F32
+
+		//mt:len16
+		Textures []ParticleTexture
+	}))(obj)).Textures {
+		if err := pcall(func() {
+			(((*(*(struct {
+				Amount         uint16
+				Duration       float32
+				Pos, Vel, Acc  TweenRangeV3F32
+				ExpirationTime TweenRangeF32 // in seconds.
+				Size           TweenRangeF32
+				Collide        bool
+
+				//mt:len32
+				TextureName Texture
+
+				ID           ParticleSpawnerID
+				Vertical     bool
+				CollisionRm  bool
+				AttachedAOID AOID
+				AnimParams   TileAnim
+				Glow         uint8
+				AOCollision  bool
+
+				NodeParam0 Content
+				NodeParam2 uint8
+				NodeTile   uint8
+
+				Texture ParticleTexture
+
+				Drag   TweenRangeV3F32
+				Jitter TweenRangeV3F32
+				Bounce TweenRangeF32
+
+				Attraction AttractionKind
+
+				//mt:if %s.Attraction != NoAttraction
+				AttractStrength           TweenRangeF32
+				AttractorOrigin           TweenV3F32
+				AttractorOriginAttachedAO AOID
+				Flags                     ParticleSpawnerFlags
+
+				//mt:if %s.Attraction != PointAttraction
+				AttractorAngle           TweenV3F32
+				AttractorAngleAttachedAO AOID
+
+				Radius TweenRangeV3F32
+
+				//mt:len16
+				Textures []ParticleTexture
+			}))(obj)).Textures)[local164]).serialize(w)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
+		}
 	}
 }
 
@@ -9362,13 +8478,13 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		p := &(*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -9378,15 +8494,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -9394,24 +8506,20 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).Amount
 		*p = read16(r)
 	}
@@ -9419,13 +8527,13 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		p := &(*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -9435,15 +8543,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -9451,91 +8555,34 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).Duration
 		*p = math.Float32frombits(read32(r))
 	}
-	for local173 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Pos {
-		for local174 := range ((*(*(struct {
+	if err := pcall(func() {
+		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -9545,15 +8592,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -9561,148 +8604,38 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Pos)[local173] {
-			{
-				p := &(((*(*(struct {
-					Amount         uint16
-					Duration       float32
-					Pos, Vel, Acc  [2][3]float32
-					ExpirationTime [2]float32 // in seconds.
-					Size           [2]float32
-					Collide        bool
-
-					//mt:len32
-					Texture
-
-					ID           ParticleSpawnerID
-					Vertical     bool
-					CollisionRm  bool
-					AttachedAOID AOID
-					AnimParams   TileAnim
-					Glow         uint8
-					AOCollision  bool
-
-					PosStartBias     float32
-					VelStartBias     float32
-					AccStartBias     float32
-					ExpTimeStartBias float32
-					SizeStartBias    float32
-
-					PosEnd RangeV3F32
-					VelEnd RangeV3F32
-					AccEnd RangeV3F32
-
-					Drag   TweenRangeV3F32
-					Jitter TweenRangeV3F32
-					Bounce TweenRangeF32
-
-					Attraction AttractionKind
-
-					//mt:if %s.Attraction > NoAttraction
-					AttractStrength           TweenRangeF32
-					AttractorOrigin           TweenV3F32
-					AttractorOriginAttachedAO uint16
-					Flags                     ParticleSpawnerFlags
-
-					//mt:if %s.Attraction > PointAttraction
-					AttractorAngle           TweenV3F32
-					AttractorAngleAttachedAO uint16
-
-					Radius TweenRangeV3F32
-
-					//mt:len16
-					Textures []ParticleTexture
-
-					NodeParam0 Content
-					NodeParam2 uint8
-					NodeTile   uint8
-				}))(obj)).Pos)[local173])[local174]
-				*p = math.Float32frombits(read32(r))
-			}
+		}))(obj)).Pos).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
 		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
 	}
-	for local175 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Vel {
-		for local176 := range ((*(*(struct {
+	if err := pcall(func() {
+		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -9712,15 +8645,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -9728,148 +8657,38 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Vel)[local175] {
-			{
-				p := &(((*(*(struct {
-					Amount         uint16
-					Duration       float32
-					Pos, Vel, Acc  [2][3]float32
-					ExpirationTime [2]float32 // in seconds.
-					Size           [2]float32
-					Collide        bool
-
-					//mt:len32
-					Texture
-
-					ID           ParticleSpawnerID
-					Vertical     bool
-					CollisionRm  bool
-					AttachedAOID AOID
-					AnimParams   TileAnim
-					Glow         uint8
-					AOCollision  bool
-
-					PosStartBias     float32
-					VelStartBias     float32
-					AccStartBias     float32
-					ExpTimeStartBias float32
-					SizeStartBias    float32
-
-					PosEnd RangeV3F32
-					VelEnd RangeV3F32
-					AccEnd RangeV3F32
-
-					Drag   TweenRangeV3F32
-					Jitter TweenRangeV3F32
-					Bounce TweenRangeF32
-
-					Attraction AttractionKind
-
-					//mt:if %s.Attraction > NoAttraction
-					AttractStrength           TweenRangeF32
-					AttractorOrigin           TweenV3F32
-					AttractorOriginAttachedAO uint16
-					Flags                     ParticleSpawnerFlags
-
-					//mt:if %s.Attraction > PointAttraction
-					AttractorAngle           TweenV3F32
-					AttractorAngleAttachedAO uint16
-
-					Radius TweenRangeV3F32
-
-					//mt:len16
-					Textures []ParticleTexture
-
-					NodeParam0 Content
-					NodeParam2 uint8
-					NodeTile   uint8
-				}))(obj)).Vel)[local175])[local176]
-				*p = math.Float32frombits(read32(r))
-			}
+		}))(obj)).Vel).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
 		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
 	}
-	for local177 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Acc {
-		for local178 := range ((*(*(struct {
+	if err := pcall(func() {
+		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -9879,15 +8698,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -9895,319 +8710,144 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
+		}))(obj)).Acc).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
 
 			NodeParam0 Content
 			NodeParam2 uint8
 			NodeTile   uint8
-		}))(obj)).Acc)[local177] {
-			{
-				p := &(((*(*(struct {
-					Amount         uint16
-					Duration       float32
-					Pos, Vel, Acc  [2][3]float32
-					ExpirationTime [2]float32 // in seconds.
-					Size           [2]float32
-					Collide        bool
 
-					//mt:len32
-					Texture
+			Texture ParticleTexture
 
-					ID           ParticleSpawnerID
-					Vertical     bool
-					CollisionRm  bool
-					AttachedAOID AOID
-					AnimParams   TileAnim
-					Glow         uint8
-					AOCollision  bool
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
 
-					PosStartBias     float32
-					VelStartBias     float32
-					AccStartBias     float32
-					ExpTimeStartBias float32
-					SizeStartBias    float32
+			Attraction AttractionKind
 
-					PosEnd RangeV3F32
-					VelEnd RangeV3F32
-					AccEnd RangeV3F32
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
 
-					Drag   TweenRangeV3F32
-					Jitter TweenRangeV3F32
-					Bounce TweenRangeF32
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
 
-					Attraction AttractionKind
+			Radius TweenRangeV3F32
 
-					//mt:if %s.Attraction > NoAttraction
-					AttractStrength           TweenRangeF32
-					AttractorOrigin           TweenV3F32
-					AttractorOriginAttachedAO uint16
-					Flags                     ParticleSpawnerFlags
-
-					//mt:if %s.Attraction > PointAttraction
-					AttractorAngle           TweenV3F32
-					AttractorAngleAttachedAO uint16
-
-					Radius TweenRangeV3F32
-
-					//mt:len16
-					Textures []ParticleTexture
-
-					NodeParam0 Content
-					NodeParam2 uint8
-					NodeTile   uint8
-				}))(obj)).Acc)[local177])[local178]
-				*p = math.Float32frombits(read32(r))
-			}
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).ExpirationTime).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
 		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
 	}
-	for local179 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
 
-		//mt:len32
-		Texture
+			//mt:len32
+			TextureName Texture
 
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
 
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
+			Texture ParticleTexture
 
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
 
-		Attraction AttractionKind
+			Attraction AttractionKind
 
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
 
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
 
-		Radius TweenRangeV3F32
+			Radius TweenRangeV3F32
 
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).ExpirationTime {
-		{
-			p := &((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).ExpirationTime)[local179]
-			*p = math.Float32frombits(read32(r))
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Size).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
 		}
-	}
-	for local180 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Size {
-		{
-			p := &((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).Size)[local180]
-			*p = math.Float32frombits(read32(r))
-		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
 	}
 	{
 		p := &(*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -10217,15 +8857,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -10233,24 +8869,20 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).Collide
 		switch n := read8(r); n {
 		case 0:
@@ -10261,27 +8893,27 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			chk(fmt.Errorf("invalid bool: %d", n))
 		}
 	}
-	var local181 []uint8
-	var local182 uint32
+	var local165 []uint8
+	var local166 uint32
 	{
-		p := &local182
+		p := &local166
 		*p = read32(r)
 	}
-	(local181) = make([]uint8, local182)
+	(local165) = make([]uint8, local166)
 	{
-		_, err := io.ReadFull(r, (local181)[:])
+		_, err := io.ReadFull(r, (local165)[:])
 		chk(err)
 	}
 	(*(*string)(&((*(*(struct {
 		Amount         uint16
 		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
+		Pos, Vel, Acc  TweenRangeV3F32
+		ExpirationTime TweenRangeF32 // in seconds.
+		Size           TweenRangeF32
 		Collide        bool
 
 		//mt:len32
-		Texture
+		TextureName Texture
 
 		ID           ParticleSpawnerID
 		Vertical     bool
@@ -10291,15 +8923,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		Glow         uint8
 		AOCollision  bool
 
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
+		NodeParam0 Content
+		NodeParam2 uint8
+		NodeTile   uint8
 
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
+		Texture ParticleTexture
 
 		Drag   TweenRangeV3F32
 		Jitter TweenRangeV3F32
@@ -10307,36 +8935,32 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 		Attraction AttractionKind
 
-		//mt:if %s.Attraction > NoAttraction
+		//mt:if %s.Attraction != NoAttraction
 		AttractStrength           TweenRangeF32
 		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
+		AttractorOriginAttachedAO AOID
 		Flags                     ParticleSpawnerFlags
 
-		//mt:if %s.Attraction > PointAttraction
+		//mt:if %s.Attraction != PointAttraction
 		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
+		AttractorAngleAttachedAO AOID
 
 		Radius TweenRangeV3F32
 
 		//mt:len16
 		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Texture))) = string(local181)
+	}))(obj)).TextureName))) = string(local165)
 	if err := pcall(func() {
 		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -10346,15 +8970,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -10362,24 +8982,20 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).ID).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -10391,13 +9007,13 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		p := &(*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -10407,15 +9023,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -10423,24 +9035,20 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).Vertical
 		switch n := read8(r); n {
 		case 0:
@@ -10455,13 +9063,13 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		p := &(*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -10471,15 +9079,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -10487,24 +9091,20 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).CollisionRm
 		switch n := read8(r); n {
 		case 0:
@@ -10519,13 +9119,13 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -10535,15 +9135,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -10551,24 +9147,20 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).AttachedAOID).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -10580,13 +9172,13 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -10596,15 +9188,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -10612,24 +9200,20 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).AnimParams).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -10641,13 +9225,13 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		p := &(*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -10657,15 +9241,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -10673,24 +9253,20 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).Glow
 		*p = read8(r)
 	}
@@ -10698,13 +9274,13 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		p := &(*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -10714,15 +9290,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -10730,24 +9302,20 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).AOCollision
 		switch n := read8(r); n {
 		case 0:
@@ -10758,302 +9326,17 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			chk(fmt.Errorf("invalid bool: %d", n))
 		}
 	}
-	{
-		p := &(*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).PosStartBias
-		*p = math.Float32frombits(read32(r))
-	}
-	{
-		p := &(*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).VelStartBias
-		*p = math.Float32frombits(read32(r))
-	}
-	{
-		p := &(*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).AccStartBias
-		*p = math.Float32frombits(read32(r))
-	}
-	{
-		p := &(*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).ExpTimeStartBias
-		*p = math.Float32frombits(read32(r))
-	}
-	{
-		p := &(*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).SizeStartBias
-		*p = math.Float32frombits(read32(r))
-	}
 	if err := pcall(func() {
 		((*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -11063,15 +9346,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -11079,1155 +9358,20 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).PosEnd).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).VelEnd).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).AccEnd).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Drag).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Jitter).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Bounce).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Attraction).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AttractionKind", err))
-	}
-	if (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Attraction > NoAttraction {
-		if err := pcall(func() {
-			((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).AttractStrength).deserialize(r)
-		}); err != nil {
-			if err == io.EOF {
-				chk(io.EOF)
-			}
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
-		}
-		if err := pcall(func() {
-			((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).AttractorOrigin).deserialize(r)
-		}); err != nil {
-			if err == io.EOF {
-				chk(io.EOF)
-			}
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
-		}
-		{
-			p := &(*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).AttractorOriginAttachedAO
-			*p = read16(r)
-		}
-		if err := pcall(func() {
-			((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).Flags).deserialize(r)
-		}); err != nil {
-			if err == io.EOF {
-				chk(io.EOF)
-			}
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerFlags", err))
-		}
-		if (*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Attraction > PointAttraction {
-			if err := pcall(func() {
-				((*(*(struct {
-					Amount         uint16
-					Duration       float32
-					Pos, Vel, Acc  [2][3]float32
-					ExpirationTime [2]float32 // in seconds.
-					Size           [2]float32
-					Collide        bool
-
-					//mt:len32
-					Texture
-
-					ID           ParticleSpawnerID
-					Vertical     bool
-					CollisionRm  bool
-					AttachedAOID AOID
-					AnimParams   TileAnim
-					Glow         uint8
-					AOCollision  bool
-
-					PosStartBias     float32
-					VelStartBias     float32
-					AccStartBias     float32
-					ExpTimeStartBias float32
-					SizeStartBias    float32
-
-					PosEnd RangeV3F32
-					VelEnd RangeV3F32
-					AccEnd RangeV3F32
-
-					Drag   TweenRangeV3F32
-					Jitter TweenRangeV3F32
-					Bounce TweenRangeF32
-
-					Attraction AttractionKind
-
-					//mt:if %s.Attraction > NoAttraction
-					AttractStrength           TweenRangeF32
-					AttractorOrigin           TweenV3F32
-					AttractorOriginAttachedAO uint16
-					Flags                     ParticleSpawnerFlags
-
-					//mt:if %s.Attraction > PointAttraction
-					AttractorAngle           TweenV3F32
-					AttractorAngleAttachedAO uint16
-
-					Radius TweenRangeV3F32
-
-					//mt:len16
-					Textures []ParticleTexture
-
-					NodeParam0 Content
-					NodeParam2 uint8
-					NodeTile   uint8
-				}))(obj)).AttractorAngle).deserialize(r)
-			}); err != nil {
-				if err == io.EOF {
-					chk(io.EOF)
-				}
-				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
-			}
-			{
-				p := &(*(*(struct {
-					Amount         uint16
-					Duration       float32
-					Pos, Vel, Acc  [2][3]float32
-					ExpirationTime [2]float32 // in seconds.
-					Size           [2]float32
-					Collide        bool
-
-					//mt:len32
-					Texture
-
-					ID           ParticleSpawnerID
-					Vertical     bool
-					CollisionRm  bool
-					AttachedAOID AOID
-					AnimParams   TileAnim
-					Glow         uint8
-					AOCollision  bool
-
-					PosStartBias     float32
-					VelStartBias     float32
-					AccStartBias     float32
-					ExpTimeStartBias float32
-					SizeStartBias    float32
-
-					PosEnd RangeV3F32
-					VelEnd RangeV3F32
-					AccEnd RangeV3F32
-
-					Drag   TweenRangeV3F32
-					Jitter TweenRangeV3F32
-					Bounce TweenRangeF32
-
-					Attraction AttractionKind
-
-					//mt:if %s.Attraction > NoAttraction
-					AttractStrength           TweenRangeF32
-					AttractorOrigin           TweenV3F32
-					AttractorOriginAttachedAO uint16
-					Flags                     ParticleSpawnerFlags
-
-					//mt:if %s.Attraction > PointAttraction
-					AttractorAngle           TweenV3F32
-					AttractorAngleAttachedAO uint16
-
-					Radius TweenRangeV3F32
-
-					//mt:len16
-					Textures []ParticleTexture
-
-					NodeParam0 Content
-					NodeParam2 uint8
-					NodeTile   uint8
-				}))(obj)).AttractorAngleAttachedAO
-				*p = read16(r)
-			}
-		}
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
-		}))(obj)).Radius).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
-	}
-	var local183 uint16
-	{
-		p := &local183
-		*p = read16(r)
-	}
-	((*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Textures) = make([]ParticleTexture, local183)
-	for local184 := range (*(*(struct {
-		Amount         uint16
-		Duration       float32
-		Pos, Vel, Acc  [2][3]float32
-		ExpirationTime [2]float32 // in seconds.
-		Size           [2]float32
-		Collide        bool
-
-		//mt:len32
-		Texture
-
-		ID           ParticleSpawnerID
-		Vertical     bool
-		CollisionRm  bool
-		AttachedAOID AOID
-		AnimParams   TileAnim
-		Glow         uint8
-		AOCollision  bool
-
-		PosStartBias     float32
-		VelStartBias     float32
-		AccStartBias     float32
-		ExpTimeStartBias float32
-		SizeStartBias    float32
-
-		PosEnd RangeV3F32
-		VelEnd RangeV3F32
-		AccEnd RangeV3F32
-
-		Drag   TweenRangeV3F32
-		Jitter TweenRangeV3F32
-		Bounce TweenRangeF32
-
-		Attraction AttractionKind
-
-		//mt:if %s.Attraction > NoAttraction
-		AttractStrength           TweenRangeF32
-		AttractorOrigin           TweenV3F32
-		AttractorOriginAttachedAO uint16
-		Flags                     ParticleSpawnerFlags
-
-		//mt:if %s.Attraction > PointAttraction
-		AttractorAngle           TweenV3F32
-		AttractorAngleAttachedAO uint16
-
-		Radius TweenRangeV3F32
-
-		//mt:len16
-		Textures []ParticleTexture
-
-		NodeParam0 Content
-		NodeParam2 uint8
-		NodeTile   uint8
-	}))(obj)).Textures {
-		if err := pcall(func() {
-			(((*(*(struct {
-				Amount         uint16
-				Duration       float32
-				Pos, Vel, Acc  [2][3]float32
-				ExpirationTime [2]float32 // in seconds.
-				Size           [2]float32
-				Collide        bool
-
-				//mt:len32
-				Texture
-
-				ID           ParticleSpawnerID
-				Vertical     bool
-				CollisionRm  bool
-				AttachedAOID AOID
-				AnimParams   TileAnim
-				Glow         uint8
-				AOCollision  bool
-
-				PosStartBias     float32
-				VelStartBias     float32
-				AccStartBias     float32
-				ExpTimeStartBias float32
-				SizeStartBias    float32
-
-				PosEnd RangeV3F32
-				VelEnd RangeV3F32
-				AccEnd RangeV3F32
-
-				Drag   TweenRangeV3F32
-				Jitter TweenRangeV3F32
-				Bounce TweenRangeF32
-
-				Attraction AttractionKind
-
-				//mt:if %s.Attraction > NoAttraction
-				AttractStrength           TweenRangeF32
-				AttractorOrigin           TweenV3F32
-				AttractorOriginAttachedAO uint16
-				Flags                     ParticleSpawnerFlags
-
-				//mt:if %s.Attraction > PointAttraction
-				AttractorAngle           TweenV3F32
-				AttractorAngleAttachedAO uint16
-
-				Radius TweenRangeV3F32
-
-				//mt:len16
-				Textures []ParticleTexture
-
-				NodeParam0 Content
-				NodeParam2 uint8
-				NodeTile   uint8
-			}))(obj)).Textures)[local184]).deserialize(r)
-		}); err != nil {
-			if err == io.EOF {
-				chk(io.EOF)
-			}
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
-		}
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Amount         uint16
-			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
-			Collide        bool
-
-			//mt:len32
-			Texture
-
-			ID           ParticleSpawnerID
-			Vertical     bool
-			CollisionRm  bool
-			AttachedAOID AOID
-			AnimParams   TileAnim
-			Glow         uint8
-			AOCollision  bool
-
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
-
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
-
-			Drag   TweenRangeV3F32
-			Jitter TweenRangeV3F32
-			Bounce TweenRangeF32
-
-			Attraction AttractionKind
-
-			//mt:if %s.Attraction > NoAttraction
-			AttractStrength           TweenRangeF32
-			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
-			Flags                     ParticleSpawnerFlags
-
-			//mt:if %s.Attraction > PointAttraction
-			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
-
-			Radius TweenRangeV3F32
-
-			//mt:len16
-			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).NodeParam0).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -12239,13 +9383,13 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		p := &(*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -12255,15 +9399,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -12271,24 +9411,20 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
-
-			NodeParam0 Content
-			NodeParam2 uint8
-			NodeTile   uint8
 		}))(obj)).NodeParam2
 		*p = read8(r)
 	}
@@ -12296,13 +9432,13 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 		p := &(*(*(struct {
 			Amount         uint16
 			Duration       float32
-			Pos, Vel, Acc  [2][3]float32
-			ExpirationTime [2]float32 // in seconds.
-			Size           [2]float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
 			Collide        bool
 
 			//mt:len32
-			Texture
+			TextureName Texture
 
 			ID           ParticleSpawnerID
 			Vertical     bool
@@ -12312,15 +9448,11 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 			Glow         uint8
 			AOCollision  bool
 
-			PosStartBias     float32
-			VelStartBias     float32
-			AccStartBias     float32
-			ExpTimeStartBias float32
-			SizeStartBias    float32
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
 
-			PosEnd RangeV3F32
-			VelEnd RangeV3F32
-			AccEnd RangeV3F32
+			Texture ParticleTexture
 
 			Drag   TweenRangeV3F32
 			Jitter TweenRangeV3F32
@@ -12328,26 +9460,903 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 
 			Attraction AttractionKind
 
-			//mt:if %s.Attraction > NoAttraction
+			//mt:if %s.Attraction != NoAttraction
 			AttractStrength           TweenRangeF32
 			AttractorOrigin           TweenV3F32
-			AttractorOriginAttachedAO uint16
+			AttractorOriginAttachedAO AOID
 			Flags                     ParticleSpawnerFlags
 
-			//mt:if %s.Attraction > PointAttraction
+			//mt:if %s.Attraction != PointAttraction
 			AttractorAngle           TweenV3F32
-			AttractorAngleAttachedAO uint16
+			AttractorAngleAttachedAO AOID
 
 			Radius TweenRangeV3F32
 
 			//mt:len16
 			Textures []ParticleTexture
+		}))(obj)).NodeTile
+		*p = read8(r)
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
 
 			NodeParam0 Content
 			NodeParam2 uint8
 			NodeTile   uint8
-		}))(obj)).NodeTile
-		*p = read8(r)
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Texture).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Drag).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Jitter).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Bounce).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Attraction).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AttractionKind", err))
+	}
+	if (*(*(struct {
+		Amount         uint16
+		Duration       float32
+		Pos, Vel, Acc  TweenRangeV3F32
+		ExpirationTime TweenRangeF32 // in seconds.
+		Size           TweenRangeF32
+		Collide        bool
+
+		//mt:len32
+		TextureName Texture
+
+		ID           ParticleSpawnerID
+		Vertical     bool
+		CollisionRm  bool
+		AttachedAOID AOID
+		AnimParams   TileAnim
+		Glow         uint8
+		AOCollision  bool
+
+		NodeParam0 Content
+		NodeParam2 uint8
+		NodeTile   uint8
+
+		Texture ParticleTexture
+
+		Drag   TweenRangeV3F32
+		Jitter TweenRangeV3F32
+		Bounce TweenRangeF32
+
+		Attraction AttractionKind
+
+		//mt:if %s.Attraction != NoAttraction
+		AttractStrength           TweenRangeF32
+		AttractorOrigin           TweenV3F32
+		AttractorOriginAttachedAO AOID
+		Flags                     ParticleSpawnerFlags
+
+		//mt:if %s.Attraction != PointAttraction
+		AttractorAngle           TweenV3F32
+		AttractorAngleAttachedAO AOID
+
+		Radius TweenRangeV3F32
+
+		//mt:len16
+		Textures []ParticleTexture
+	}))(obj)).Attraction != NoAttraction {
+		if err := pcall(func() {
+			((*(*(struct {
+				Amount         uint16
+				Duration       float32
+				Pos, Vel, Acc  TweenRangeV3F32
+				ExpirationTime TweenRangeF32 // in seconds.
+				Size           TweenRangeF32
+				Collide        bool
+
+				//mt:len32
+				TextureName Texture
+
+				ID           ParticleSpawnerID
+				Vertical     bool
+				CollisionRm  bool
+				AttachedAOID AOID
+				AnimParams   TileAnim
+				Glow         uint8
+				AOCollision  bool
+
+				NodeParam0 Content
+				NodeParam2 uint8
+				NodeTile   uint8
+
+				Texture ParticleTexture
+
+				Drag   TweenRangeV3F32
+				Jitter TweenRangeV3F32
+				Bounce TweenRangeF32
+
+				Attraction AttractionKind
+
+				//mt:if %s.Attraction != NoAttraction
+				AttractStrength           TweenRangeF32
+				AttractorOrigin           TweenV3F32
+				AttractorOriginAttachedAO AOID
+				Flags                     ParticleSpawnerFlags
+
+				//mt:if %s.Attraction != PointAttraction
+				AttractorAngle           TweenV3F32
+				AttractorAngleAttachedAO AOID
+
+				Radius TweenRangeV3F32
+
+				//mt:len16
+				Textures []ParticleTexture
+			}))(obj)).AttractStrength).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeF32", err))
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Amount         uint16
+				Duration       float32
+				Pos, Vel, Acc  TweenRangeV3F32
+				ExpirationTime TweenRangeF32 // in seconds.
+				Size           TweenRangeF32
+				Collide        bool
+
+				//mt:len32
+				TextureName Texture
+
+				ID           ParticleSpawnerID
+				Vertical     bool
+				CollisionRm  bool
+				AttachedAOID AOID
+				AnimParams   TileAnim
+				Glow         uint8
+				AOCollision  bool
+
+				NodeParam0 Content
+				NodeParam2 uint8
+				NodeTile   uint8
+
+				Texture ParticleTexture
+
+				Drag   TweenRangeV3F32
+				Jitter TweenRangeV3F32
+				Bounce TweenRangeF32
+
+				Attraction AttractionKind
+
+				//mt:if %s.Attraction != NoAttraction
+				AttractStrength           TweenRangeF32
+				AttractorOrigin           TweenV3F32
+				AttractorOriginAttachedAO AOID
+				Flags                     ParticleSpawnerFlags
+
+				//mt:if %s.Attraction != PointAttraction
+				AttractorAngle           TweenV3F32
+				AttractorAngleAttachedAO AOID
+
+				Radius TweenRangeV3F32
+
+				//mt:len16
+				Textures []ParticleTexture
+			}))(obj)).AttractorOrigin).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Amount         uint16
+				Duration       float32
+				Pos, Vel, Acc  TweenRangeV3F32
+				ExpirationTime TweenRangeF32 // in seconds.
+				Size           TweenRangeF32
+				Collide        bool
+
+				//mt:len32
+				TextureName Texture
+
+				ID           ParticleSpawnerID
+				Vertical     bool
+				CollisionRm  bool
+				AttachedAOID AOID
+				AnimParams   TileAnim
+				Glow         uint8
+				AOCollision  bool
+
+				NodeParam0 Content
+				NodeParam2 uint8
+				NodeTile   uint8
+
+				Texture ParticleTexture
+
+				Drag   TweenRangeV3F32
+				Jitter TweenRangeV3F32
+				Bounce TweenRangeF32
+
+				Attraction AttractionKind
+
+				//mt:if %s.Attraction != NoAttraction
+				AttractStrength           TweenRangeF32
+				AttractorOrigin           TweenV3F32
+				AttractorOriginAttachedAO AOID
+				Flags                     ParticleSpawnerFlags
+
+				//mt:if %s.Attraction != PointAttraction
+				AttractorAngle           TweenV3F32
+				AttractorAngleAttachedAO AOID
+
+				Radius TweenRangeV3F32
+
+				//mt:len16
+				Textures []ParticleTexture
+			}))(obj)).AttractorOriginAttachedAO).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Amount         uint16
+				Duration       float32
+				Pos, Vel, Acc  TweenRangeV3F32
+				ExpirationTime TweenRangeF32 // in seconds.
+				Size           TweenRangeF32
+				Collide        bool
+
+				//mt:len32
+				TextureName Texture
+
+				ID           ParticleSpawnerID
+				Vertical     bool
+				CollisionRm  bool
+				AttachedAOID AOID
+				AnimParams   TileAnim
+				Glow         uint8
+				AOCollision  bool
+
+				NodeParam0 Content
+				NodeParam2 uint8
+				NodeTile   uint8
+
+				Texture ParticleTexture
+
+				Drag   TweenRangeV3F32
+				Jitter TweenRangeV3F32
+				Bounce TweenRangeF32
+
+				Attraction AttractionKind
+
+				//mt:if %s.Attraction != NoAttraction
+				AttractStrength           TweenRangeF32
+				AttractorOrigin           TweenV3F32
+				AttractorOriginAttachedAO AOID
+				Flags                     ParticleSpawnerFlags
+
+				//mt:if %s.Attraction != PointAttraction
+				AttractorAngle           TweenV3F32
+				AttractorAngleAttachedAO AOID
+
+				Radius TweenRangeV3F32
+
+				//mt:len16
+				Textures []ParticleTexture
+			}))(obj)).Flags).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleSpawnerFlags", err))
+		}
+		if (*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Attraction != PointAttraction {
+			if err := pcall(func() {
+				((*(*(struct {
+					Amount         uint16
+					Duration       float32
+					Pos, Vel, Acc  TweenRangeV3F32
+					ExpirationTime TweenRangeF32 // in seconds.
+					Size           TweenRangeF32
+					Collide        bool
+
+					//mt:len32
+					TextureName Texture
+
+					ID           ParticleSpawnerID
+					Vertical     bool
+					CollisionRm  bool
+					AttachedAOID AOID
+					AnimParams   TileAnim
+					Glow         uint8
+					AOCollision  bool
+
+					NodeParam0 Content
+					NodeParam2 uint8
+					NodeTile   uint8
+
+					Texture ParticleTexture
+
+					Drag   TweenRangeV3F32
+					Jitter TweenRangeV3F32
+					Bounce TweenRangeF32
+
+					Attraction AttractionKind
+
+					//mt:if %s.Attraction != NoAttraction
+					AttractStrength           TweenRangeF32
+					AttractorOrigin           TweenV3F32
+					AttractorOriginAttachedAO AOID
+					Flags                     ParticleSpawnerFlags
+
+					//mt:if %s.Attraction != PointAttraction
+					AttractorAngle           TweenV3F32
+					AttractorAngleAttachedAO AOID
+
+					Radius TweenRangeV3F32
+
+					//mt:len16
+					Textures []ParticleTexture
+				}))(obj)).AttractorAngle).deserialize(r)
+			}); err != nil {
+				if err == io.EOF {
+					chk(io.EOF)
+				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenV3F32", err))
+			}
+			if err := pcall(func() {
+				((*(*(struct {
+					Amount         uint16
+					Duration       float32
+					Pos, Vel, Acc  TweenRangeV3F32
+					ExpirationTime TweenRangeF32 // in seconds.
+					Size           TweenRangeF32
+					Collide        bool
+
+					//mt:len32
+					TextureName Texture
+
+					ID           ParticleSpawnerID
+					Vertical     bool
+					CollisionRm  bool
+					AttachedAOID AOID
+					AnimParams   TileAnim
+					Glow         uint8
+					AOCollision  bool
+
+					NodeParam0 Content
+					NodeParam2 uint8
+					NodeTile   uint8
+
+					Texture ParticleTexture
+
+					Drag   TweenRangeV3F32
+					Jitter TweenRangeV3F32
+					Bounce TweenRangeF32
+
+					Attraction AttractionKind
+
+					//mt:if %s.Attraction != NoAttraction
+					AttractStrength           TweenRangeF32
+					AttractorOrigin           TweenV3F32
+					AttractorOriginAttachedAO AOID
+					Flags                     ParticleSpawnerFlags
+
+					//mt:if %s.Attraction != PointAttraction
+					AttractorAngle           TweenV3F32
+					AttractorAngleAttachedAO AOID
+
+					Radius TweenRangeV3F32
+
+					//mt:len16
+					Textures []ParticleTexture
+				}))(obj)).AttractorAngleAttachedAO).deserialize(r)
+			}); err != nil {
+				if err == io.EOF {
+					chk(io.EOF)
+				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
+			}
+		}
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Amount         uint16
+			Duration       float32
+			Pos, Vel, Acc  TweenRangeV3F32
+			ExpirationTime TweenRangeF32 // in seconds.
+			Size           TweenRangeF32
+			Collide        bool
+
+			//mt:len32
+			TextureName Texture
+
+			ID           ParticleSpawnerID
+			Vertical     bool
+			CollisionRm  bool
+			AttachedAOID AOID
+			AnimParams   TileAnim
+			Glow         uint8
+			AOCollision  bool
+
+			NodeParam0 Content
+			NodeParam2 uint8
+			NodeTile   uint8
+
+			Texture ParticleTexture
+
+			Drag   TweenRangeV3F32
+			Jitter TweenRangeV3F32
+			Bounce TweenRangeF32
+
+			Attraction AttractionKind
+
+			//mt:if %s.Attraction != NoAttraction
+			AttractStrength           TweenRangeF32
+			AttractorOrigin           TweenV3F32
+			AttractorOriginAttachedAO AOID
+			Flags                     ParticleSpawnerFlags
+
+			//mt:if %s.Attraction != PointAttraction
+			AttractorAngle           TweenV3F32
+			AttractorAngleAttachedAO AOID
+
+			Radius TweenRangeV3F32
+
+			//mt:len16
+			Textures []ParticleTexture
+		}))(obj)).Radius).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenRangeV3F32", err))
+	}
+	var local167 uint16
+	{
+		p := &local167
+		*p = read16(r)
+	}
+	((*(*(struct {
+		Amount         uint16
+		Duration       float32
+		Pos, Vel, Acc  TweenRangeV3F32
+		ExpirationTime TweenRangeF32 // in seconds.
+		Size           TweenRangeF32
+		Collide        bool
+
+		//mt:len32
+		TextureName Texture
+
+		ID           ParticleSpawnerID
+		Vertical     bool
+		CollisionRm  bool
+		AttachedAOID AOID
+		AnimParams   TileAnim
+		Glow         uint8
+		AOCollision  bool
+
+		NodeParam0 Content
+		NodeParam2 uint8
+		NodeTile   uint8
+
+		Texture ParticleTexture
+
+		Drag   TweenRangeV3F32
+		Jitter TweenRangeV3F32
+		Bounce TweenRangeF32
+
+		Attraction AttractionKind
+
+		//mt:if %s.Attraction != NoAttraction
+		AttractStrength           TweenRangeF32
+		AttractorOrigin           TweenV3F32
+		AttractorOriginAttachedAO AOID
+		Flags                     ParticleSpawnerFlags
+
+		//mt:if %s.Attraction != PointAttraction
+		AttractorAngle           TweenV3F32
+		AttractorAngleAttachedAO AOID
+
+		Radius TweenRangeV3F32
+
+		//mt:len16
+		Textures []ParticleTexture
+	}))(obj)).Textures) = make([]ParticleTexture, local167)
+	for local168 := range (*(*(struct {
+		Amount         uint16
+		Duration       float32
+		Pos, Vel, Acc  TweenRangeV3F32
+		ExpirationTime TweenRangeF32 // in seconds.
+		Size           TweenRangeF32
+		Collide        bool
+
+		//mt:len32
+		TextureName Texture
+
+		ID           ParticleSpawnerID
+		Vertical     bool
+		CollisionRm  bool
+		AttachedAOID AOID
+		AnimParams   TileAnim
+		Glow         uint8
+		AOCollision  bool
+
+		NodeParam0 Content
+		NodeParam2 uint8
+		NodeTile   uint8
+
+		Texture ParticleTexture
+
+		Drag   TweenRangeV3F32
+		Jitter TweenRangeV3F32
+		Bounce TweenRangeF32
+
+		Attraction AttractionKind
+
+		//mt:if %s.Attraction != NoAttraction
+		AttractStrength           TweenRangeF32
+		AttractorOrigin           TweenV3F32
+		AttractorOriginAttachedAO AOID
+		Flags                     ParticleSpawnerFlags
+
+		//mt:if %s.Attraction != PointAttraction
+		AttractorAngle           TweenV3F32
+		AttractorAngleAttachedAO AOID
+
+		Radius TweenRangeV3F32
+
+		//mt:len16
+		Textures []ParticleTexture
+	}))(obj)).Textures {
+		if err := pcall(func() {
+			(((*(*(struct {
+				Amount         uint16
+				Duration       float32
+				Pos, Vel, Acc  TweenRangeV3F32
+				ExpirationTime TweenRangeF32 // in seconds.
+				Size           TweenRangeF32
+				Collide        bool
+
+				//mt:len32
+				TextureName Texture
+
+				ID           ParticleSpawnerID
+				Vertical     bool
+				CollisionRm  bool
+				AttachedAOID AOID
+				AnimParams   TileAnim
+				Glow         uint8
+				AOCollision  bool
+
+				NodeParam0 Content
+				NodeParam2 uint8
+				NodeTile   uint8
+
+				Texture ParticleTexture
+
+				Drag   TweenRangeV3F32
+				Jitter TweenRangeV3F32
+				Bounce TweenRangeF32
+
+				Attraction AttractionKind
+
+				//mt:if %s.Attraction != NoAttraction
+				AttractStrength           TweenRangeF32
+				AttractorOrigin           TweenV3F32
+				AttractorOriginAttachedAO AOID
+				Flags                     ParticleSpawnerFlags
+
+				//mt:if %s.Attraction != PointAttraction
+				AttractorAngle           TweenV3F32
+				AttractorAngleAttachedAO AOID
+
+				Radius TweenRangeV3F32
+
+				//mt:len16
+				Textures []ParticleTexture
+			}))(obj)).Textures)[local168]).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ParticleTexture", err))
+		}
 	}
 }
 
@@ -12632,7 +10641,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDPos {
-		for local185 := range (*(*(struct {
+		for local169 := range (*(*(struct {
 			ID HUDID
 
 			Field HUDField
@@ -12726,7 +10735,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 
 					//mt:if %s.Field == HUDStyle
 					Style HUDStyleFlags
-				}))(obj)).Pos)[local185]
+				}))(obj)).Pos)[local169]
 				write32(w, math.Float32bits(x))
 			}
 		}
@@ -12975,7 +10984,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDScale {
-		for local186 := range (*(*(struct {
+		for local170 := range (*(*(struct {
 			ID HUDID
 
 			Field HUDField
@@ -13069,7 +11078,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 
 					//mt:if %s.Field == HUDStyle
 					Style HUDStyleFlags
-				}))(obj)).Scale)[local186]
+				}))(obj)).Scale)[local170]
 				write32(w, math.Float32bits(x))
 			}
 		}
@@ -13612,7 +11621,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDAlign {
-		for local187 := range (*(*(struct {
+		for local171 := range (*(*(struct {
 			ID HUDID
 
 			Field HUDField
@@ -13706,7 +11715,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 
 					//mt:if %s.Field == HUDStyle
 					Style HUDStyleFlags
-				}))(obj)).Align)[local187]
+				}))(obj)).Align)[local171]
 				write32(w, math.Float32bits(x))
 			}
 		}
@@ -13758,7 +11767,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDOffset {
-		for local188 := range (*(*(struct {
+		for local172 := range (*(*(struct {
 			ID HUDID
 
 			Field HUDField
@@ -13852,7 +11861,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 
 					//mt:if %s.Field == HUDStyle
 					Style HUDStyleFlags
-				}))(obj)).Offset)[local188]
+				}))(obj)).Offset)[local172]
 				write32(w, math.Float32bits(x))
 			}
 		}
@@ -14006,7 +12015,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDSize {
-		for local189 := range (*(*(struct {
+		for local173 := range (*(*(struct {
 			ID HUDID
 
 			Field HUDField
@@ -14100,7 +12109,7 @@ func (obj *ToCltChangeHUD) serialize(w io.Writer) {
 
 					//mt:if %s.Field == HUDStyle
 					Style HUDStyleFlags
-				}))(obj)).Size)[local189]
+				}))(obj)).Size)[local173]
 				write32(w, uint32(x))
 			}
 		}
@@ -14709,7 +12718,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDPos {
-		for local190 := range (*(*(struct {
+		for local174 := range (*(*(struct {
 			ID HUDID
 
 			Field HUDField
@@ -14803,7 +12812,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 
 					//mt:if %s.Field == HUDStyle
 					Style HUDStyleFlags
-				}))(obj)).Pos)[local190]
+				}))(obj)).Pos)[local174]
 				*p = math.Float32frombits(read32(r))
 			}
 		}
@@ -14855,15 +12864,15 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDName {
-		var local191 []uint8
-		var local192 uint16
+		var local175 []uint8
+		var local176 uint16
 		{
-			p := &local192
+			p := &local176
 			*p = read16(r)
 		}
-		(local191) = make([]uint8, local192)
+		(local175) = make([]uint8, local176)
 		{
-			_, err := io.ReadFull(r, (local191)[:])
+			_, err := io.ReadFull(r, (local175)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -14912,7 +12921,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 
 			//mt:if %s.Field == HUDStyle
 			Style HUDStyleFlags
-		}))(obj)).Name) = string(local191)
+		}))(obj)).Name) = string(local175)
 	}
 	if (*(*(struct {
 		ID HUDID
@@ -14961,7 +12970,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDScale {
-		for local193 := range (*(*(struct {
+		for local177 := range (*(*(struct {
 			ID HUDID
 
 			Field HUDField
@@ -15055,7 +13064,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 
 					//mt:if %s.Field == HUDStyle
 					Style HUDStyleFlags
-				}))(obj)).Scale)[local193]
+				}))(obj)).Scale)[local177]
 				*p = math.Float32frombits(read32(r))
 			}
 		}
@@ -15107,15 +13116,15 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDText {
-		var local194 []uint8
-		var local195 uint16
+		var local178 []uint8
+		var local179 uint16
 		{
-			p := &local195
+			p := &local179
 			*p = read16(r)
 		}
-		(local194) = make([]uint8, local195)
+		(local178) = make([]uint8, local179)
 		{
-			_, err := io.ReadFull(r, (local194)[:])
+			_, err := io.ReadFull(r, (local178)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -15164,7 +13173,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 
 			//mt:if %s.Field == HUDStyle
 			Style HUDStyleFlags
-		}))(obj)).Text) = string(local194)
+		}))(obj)).Text) = string(local178)
 	}
 	if (*(*(struct {
 		ID HUDID
@@ -15507,7 +13516,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDAlign {
-		for local196 := range (*(*(struct {
+		for local180 := range (*(*(struct {
 			ID HUDID
 
 			Field HUDField
@@ -15601,7 +13610,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 
 					//mt:if %s.Field == HUDStyle
 					Style HUDStyleFlags
-				}))(obj)).Align)[local196]
+				}))(obj)).Align)[local180]
 				*p = math.Float32frombits(read32(r))
 			}
 		}
@@ -15653,7 +13662,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDOffset {
-		for local197 := range (*(*(struct {
+		for local181 := range (*(*(struct {
 			ID HUDID
 
 			Field HUDField
@@ -15747,7 +13756,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 
 					//mt:if %s.Field == HUDStyle
 					Style HUDStyleFlags
-				}))(obj)).Offset)[local197]
+				}))(obj)).Offset)[local181]
 				*p = math.Float32frombits(read32(r))
 			}
 		}
@@ -15901,7 +13910,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDSize {
-		for local198 := range (*(*(struct {
+		for local182 := range (*(*(struct {
 			ID HUDID
 
 			Field HUDField
@@ -15995,7 +14004,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 
 					//mt:if %s.Field == HUDStyle
 					Style HUDStyleFlags
-				}))(obj)).Size)[local198]
+				}))(obj)).Size)[local182]
 				*p = int32(read32(r))
 			}
 		}
@@ -16145,15 +14154,15 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 		//mt:if %s.Field == HUDStyle
 		Style HUDStyleFlags
 	}))(obj)).Field == HUDText2 {
-		var local199 []uint8
-		var local200 uint16
+		var local183 []uint8
+		var local184 uint16
 		{
-			p := &local200
+			p := &local184
 			*p = read16(r)
 		}
-		(local199) = make([]uint8, local200)
+		(local183) = make([]uint8, local184)
 		{
-			_, err := io.ReadFull(r, (local199)[:])
+			_, err := io.ReadFull(r, (local183)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -16202,7 +14211,7 @@ func (obj *ToCltChangeHUD) deserialize(r io.Reader) {
 
 			//mt:if %s.Field == HUDStyle
 			Style HUDStyleFlags
-		}))(obj)).Text2) = string(local199)
+		}))(obj)).Text2) = string(local183)
 	}
 	if (*(*(struct {
 		ID HUDID
@@ -16391,9 +14400,9 @@ func (obj *ToCltSetHotbarParam) serialize(w io.Writer) {
 		Img Texture
 	}))(obj)).Param == HotbarSize {
 		{
-			local201 := uint16(4) // Size of Size field.
+			local185 := uint16(4) // Size of Size field.
 			{
-				x := local201
+				x := local185
 				write16(w, uint16(x))
 			}
 		}
@@ -16470,14 +14479,14 @@ func (obj *ToCltSetHotbarParam) deserialize(r io.Reader) {
 		Img Texture
 	}))(obj)).Param == HotbarSize {
 		{
-			var local202 uint16
-			local203 := uint16(4) // Size of Size field.
+			var local186 uint16
+			local187 := uint16(4) // Size of Size field.
 			{
-				p := &local202
+				p := &local186
 				*p = read16(r)
 			}
-			if local202 != local203 {
-				chk(fmt.Errorf("const %v: %v", "uint16(4) // Size of Size field.", local202))
+			if local186 != local187 {
+				chk(fmt.Errorf("const %v: %v", "uint16(4) // Size of Size field.", local186))
 			}
 		}
 		{
@@ -16565,6 +14574,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).BgColor
 		w.Write([]byte{x.A, x.R, x.G, x.B})
 	}
@@ -16589,6 +14599,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 		FogDistance int16
 		FogStart    float32
+		FogColor    color.NRGBA
 	}))(obj)).Type))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -16614,6 +14625,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).Type))))
 		write16(w, uint16(x))
 	}
@@ -16639,6 +14651,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).Type))[:])
 		chk(err)
 	}
@@ -16664,6 +14677,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).Clouds
 		if x {
 			write8(w, 1)
@@ -16693,6 +14707,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).SunFogTint
 		w.Write([]byte{x.A, x.R, x.G, x.B})
 	}
@@ -16718,6 +14733,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).MoonFogTint
 		w.Write([]byte{x.A, x.R, x.G, x.B})
 	}
@@ -16742,6 +14758,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 		FogDistance int16
 		FogStart    float32
+		FogColor    color.NRGBA
 	}))(obj)).FogTintType))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -16767,6 +14784,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).FogTintType))))
 		write16(w, uint16(x))
 	}
@@ -16792,6 +14810,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).FogTintType))[:])
 		chk(err)
 	}
@@ -16816,6 +14835,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 		FogDistance int16
 		FogStart    float32
+		FogColor    color.NRGBA
 	}))(obj)).Type == "skybox" {
 		if len(((*(*(struct {
 			BgColor     color.NRGBA
@@ -16838,6 +14858,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).Textures)) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -16863,10 +14884,11 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).Textures)))
 			write16(w, uint16(x))
 		}
-		for local204 := range (*(*(struct {
+		for local188 := range (*(*(struct {
 			BgColor     color.NRGBA
 			Type        string
 			Clouds      bool
@@ -16887,6 +14909,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).Textures {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -16910,7 +14933,8 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 					FogDistance int16
 					FogStart    float32
-				}))(obj)).Textures)[local204]).serialize(w)
+					FogColor    color.NRGBA
+				}))(obj)).Textures)[local188]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -16940,6 +14964,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 		FogDistance int16
 		FogStart    float32
+		FogColor    color.NRGBA
 	}))(obj)).Type == "regular" {
 		{
 			x := (*(*(struct {
@@ -16963,6 +14988,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).DaySky
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -16988,6 +15014,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).DayHorizon
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -17013,6 +15040,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).DawnSky
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -17038,6 +15066,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).DawnHorizon
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -17063,6 +15092,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).NightSky
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -17088,6 +15118,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).NightHorizon
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -17113,6 +15144,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).Indoor
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -17139,6 +15171,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).BodyOrbitTilt
 		write32(w, math.Float32bits(x))
 	}
@@ -17164,6 +15197,7 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).FogDistance
 		write16(w, uint16(x))
 	}
@@ -17189,8 +15223,35 @@ func (obj *ToCltSkyParams) serialize(w io.Writer) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).FogStart
 		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			BgColor     color.NRGBA
+			Type        string
+			Clouds      bool
+			SunFogTint  color.NRGBA
+			MoonFogTint color.NRGBA
+			FogTintType string
+
+			//mt:if %s.Type == "skybox"
+			Textures []Texture
+
+			//mt:if %s.Type == "regular"
+			DaySky, DayHorizon,
+			DawnSky, DawnHorizon,
+			NightSky, NightHorizon,
+			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
+
+			FogDistance int16
+			FogStart    float32
+			FogColor    color.NRGBA
+		}))(obj)).FogColor
+		w.Write([]byte{x.A, x.R, x.G, x.B})
 	}
 }
 
@@ -17217,18 +15278,19 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).BgColor
 		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 	}
-	var local205 []uint8
-	var local206 uint16
+	var local189 []uint8
+	var local190 uint16
 	{
-		p := &local206
+		p := &local190
 		*p = read16(r)
 	}
-	(local205) = make([]uint8, local206)
+	(local189) = make([]uint8, local190)
 	{
-		_, err := io.ReadFull(r, (local205)[:])
+		_, err := io.ReadFull(r, (local189)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -17252,7 +15314,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 		FogDistance int16
 		FogStart    float32
-	}))(obj)).Type) = string(local205)
+		FogColor    color.NRGBA
+	}))(obj)).Type) = string(local189)
 	{
 		p := &(*(*(struct {
 			BgColor     color.NRGBA
@@ -17275,6 +15338,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).Clouds
 		switch n := read8(r); n {
 		case 0:
@@ -17307,6 +15371,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).SunFogTint
 		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 	}
@@ -17332,18 +15397,19 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).MoonFogTint
 		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 	}
-	var local207 []uint8
-	var local208 uint16
+	var local191 []uint8
+	var local192 uint16
 	{
-		p := &local208
+		p := &local192
 		*p = read16(r)
 	}
-	(local207) = make([]uint8, local208)
+	(local191) = make([]uint8, local192)
 	{
-		_, err := io.ReadFull(r, (local207)[:])
+		_, err := io.ReadFull(r, (local191)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -17367,7 +15433,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 		FogDistance int16
 		FogStart    float32
-	}))(obj)).FogTintType) = string(local207)
+		FogColor    color.NRGBA
+	}))(obj)).FogTintType) = string(local191)
 	if (*(*(struct {
 		BgColor     color.NRGBA
 		Type        string
@@ -17389,10 +15456,11 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 		FogDistance int16
 		FogStart    float32
+		FogColor    color.NRGBA
 	}))(obj)).Type == "skybox" {
-		var local209 uint16
+		var local193 uint16
 		{
-			p := &local209
+			p := &local193
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -17416,8 +15484,9 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 			FogDistance int16
 			FogStart    float32
-		}))(obj)).Textures) = make([]Texture, local209)
-		for local210 := range (*(*(struct {
+			FogColor    color.NRGBA
+		}))(obj)).Textures) = make([]Texture, local193)
+		for local194 := range (*(*(struct {
 			BgColor     color.NRGBA
 			Type        string
 			Clouds      bool
@@ -17438,6 +15507,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).Textures {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -17461,7 +15531,8 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 					FogDistance int16
 					FogStart    float32
-				}))(obj)).Textures)[local210]).deserialize(r)
+					FogColor    color.NRGBA
+				}))(obj)).Textures)[local194]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -17491,6 +15562,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 		FogDistance int16
 		FogStart    float32
+		FogColor    color.NRGBA
 	}))(obj)).Type == "regular" {
 		{
 			p := &(*(*(struct {
@@ -17514,6 +15586,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).DaySky
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17539,6 +15612,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).DayHorizon
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17564,6 +15638,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).DawnSky
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17589,6 +15664,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).DawnHorizon
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17614,6 +15690,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).NightSky
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17639,6 +15716,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).NightHorizon
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17664,6 +15742,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 				FogDistance int16
 				FogStart    float32
+				FogColor    color.NRGBA
 			}))(obj)).Indoor
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -17690,6 +15769,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).BodyOrbitTilt
 		*p = math.Float32frombits(read32(r))
 	}
@@ -17715,6 +15795,7 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).FogDistance
 		*p = int16(read16(r))
 	}
@@ -17740,8 +15821,35 @@ func (obj *ToCltSkyParams) deserialize(r io.Reader) {
 
 			FogDistance int16
 			FogStart    float32
+			FogColor    color.NRGBA
 		}))(obj)).FogStart
 		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			BgColor     color.NRGBA
+			Type        string
+			Clouds      bool
+			SunFogTint  color.NRGBA
+			MoonFogTint color.NRGBA
+			FogTintType string
+
+			//mt:if %s.Type == "skybox"
+			Textures []Texture
+
+			//mt:if %s.Type == "regular"
+			DaySky, DayHorizon,
+			DawnSky, DawnHorizon,
+			NightSky, NightHorizon,
+			Indoor color.NRGBA
+
+			BodyOrbitTilt float32
+
+			FogDistance int16
+			FogStart    float32
+			FogColor    color.NRGBA
+		}))(obj)).FogColor
+		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 	}
 }
 
@@ -17791,7 +15899,7 @@ func (obj *ToCltOverrideDayNightRatio) deserialize(r io.Reader) {
 }
 
 func (obj *ToCltLocalPlayerAnim) serialize(w io.Writer) {
-	for local211 := range (*(*(struct {
+	for local195 := range (*(*(struct {
 		Idle, Walk, Dig, WalkDig [2]int32
 		Speed                    float32
 	}))(obj)).Idle {
@@ -17799,11 +15907,11 @@ func (obj *ToCltLocalPlayerAnim) serialize(w io.Writer) {
 			x := ((*(*(struct {
 				Idle, Walk, Dig, WalkDig [2]int32
 				Speed                    float32
-			}))(obj)).Idle)[local211]
+			}))(obj)).Idle)[local195]
 			write32(w, uint32(x))
 		}
 	}
-	for local212 := range (*(*(struct {
+	for local196 := range (*(*(struct {
 		Idle, Walk, Dig, WalkDig [2]int32
 		Speed                    float32
 	}))(obj)).Walk {
@@ -17811,11 +15919,11 @@ func (obj *ToCltLocalPlayerAnim) serialize(w io.Writer) {
 			x := ((*(*(struct {
 				Idle, Walk, Dig, WalkDig [2]int32
 				Speed                    float32
-			}))(obj)).Walk)[local212]
+			}))(obj)).Walk)[local196]
 			write32(w, uint32(x))
 		}
 	}
-	for local213 := range (*(*(struct {
+	for local197 := range (*(*(struct {
 		Idle, Walk, Dig, WalkDig [2]int32
 		Speed                    float32
 	}))(obj)).Dig {
@@ -17823,11 +15931,11 @@ func (obj *ToCltLocalPlayerAnim) serialize(w io.Writer) {
 			x := ((*(*(struct {
 				Idle, Walk, Dig, WalkDig [2]int32
 				Speed                    float32
-			}))(obj)).Dig)[local213]
+			}))(obj)).Dig)[local197]
 			write32(w, uint32(x))
 		}
 	}
-	for local214 := range (*(*(struct {
+	for local198 := range (*(*(struct {
 		Idle, Walk, Dig, WalkDig [2]int32
 		Speed                    float32
 	}))(obj)).WalkDig {
@@ -17835,7 +15943,7 @@ func (obj *ToCltLocalPlayerAnim) serialize(w io.Writer) {
 			x := ((*(*(struct {
 				Idle, Walk, Dig, WalkDig [2]int32
 				Speed                    float32
-			}))(obj)).WalkDig)[local214]
+			}))(obj)).WalkDig)[local198]
 			write32(w, uint32(x))
 		}
 	}
@@ -17849,7 +15957,7 @@ func (obj *ToCltLocalPlayerAnim) serialize(w io.Writer) {
 }
 
 func (obj *ToCltLocalPlayerAnim) deserialize(r io.Reader) {
-	for local215 := range (*(*(struct {
+	for local199 := range (*(*(struct {
 		Idle, Walk, Dig, WalkDig [2]int32
 		Speed                    float32
 	}))(obj)).Idle {
@@ -17857,11 +15965,11 @@ func (obj *ToCltLocalPlayerAnim) deserialize(r io.Reader) {
 			p := &((*(*(struct {
 				Idle, Walk, Dig, WalkDig [2]int32
 				Speed                    float32
-			}))(obj)).Idle)[local215]
+			}))(obj)).Idle)[local199]
 			*p = int32(read32(r))
 		}
 	}
-	for local216 := range (*(*(struct {
+	for local200 := range (*(*(struct {
 		Idle, Walk, Dig, WalkDig [2]int32
 		Speed                    float32
 	}))(obj)).Walk {
@@ -17869,11 +15977,11 @@ func (obj *ToCltLocalPlayerAnim) deserialize(r io.Reader) {
 			p := &((*(*(struct {
 				Idle, Walk, Dig, WalkDig [2]int32
 				Speed                    float32
-			}))(obj)).Walk)[local216]
+			}))(obj)).Walk)[local200]
 			*p = int32(read32(r))
 		}
 	}
-	for local217 := range (*(*(struct {
+	for local201 := range (*(*(struct {
 		Idle, Walk, Dig, WalkDig [2]int32
 		Speed                    float32
 	}))(obj)).Dig {
@@ -17881,11 +15989,11 @@ func (obj *ToCltLocalPlayerAnim) deserialize(r io.Reader) {
 			p := &((*(*(struct {
 				Idle, Walk, Dig, WalkDig [2]int32
 				Speed                    float32
-			}))(obj)).Dig)[local217]
+			}))(obj)).Dig)[local201]
 			*p = int32(read32(r))
 		}
 	}
-	for local218 := range (*(*(struct {
+	for local202 := range (*(*(struct {
 		Idle, Walk, Dig, WalkDig [2]int32
 		Speed                    float32
 	}))(obj)).WalkDig {
@@ -17893,7 +16001,7 @@ func (obj *ToCltLocalPlayerAnim) deserialize(r io.Reader) {
 			p := &((*(*(struct {
 				Idle, Walk, Dig, WalkDig [2]int32
 				Speed                    float32
-			}))(obj)).WalkDig)[local218]
+			}))(obj)).WalkDig)[local202]
 			*p = int32(read32(r))
 		}
 	}
@@ -18054,7 +16162,7 @@ func (obj *ToCltCloudParams) serialize(w io.Writer) {
 		}))(obj)).Thickness
 		write32(w, math.Float32bits(x))
 	}
-	for local219 := range (*(*(struct {
+	for local203 := range (*(*(struct {
 		Density      float32
 		DiffuseColor color.NRGBA
 		AmbientColor color.NRGBA
@@ -18070,7 +16178,7 @@ func (obj *ToCltCloudParams) serialize(w io.Writer) {
 				Height       float32
 				Thickness    float32
 				Speed        [2]float32
-			}))(obj)).Speed)[local219]
+			}))(obj)).Speed)[local203]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -18132,7 +16240,7 @@ func (obj *ToCltCloudParams) deserialize(r io.Reader) {
 		}))(obj)).Thickness
 		*p = math.Float32frombits(read32(r))
 	}
-	for local220 := range (*(*(struct {
+	for local204 := range (*(*(struct {
 		Density      float32
 		DiffuseColor color.NRGBA
 		AmbientColor color.NRGBA
@@ -18148,7 +16256,7 @@ func (obj *ToCltCloudParams) deserialize(r io.Reader) {
 				Height       float32
 				Thickness    float32
 				Speed        [2]float32
-			}))(obj)).Speed)[local220]
+			}))(obj)).Speed)[local204]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -18241,28 +16349,28 @@ func (obj *ToCltUpdatePlayerList) serialize(w io.Writer) {
 		}))(obj)).Players)))
 		write16(w, uint16(x))
 	}
-	for local221 := range (*(*(struct {
+	for local205 := range (*(*(struct {
 		Type    PlayerListUpdateType
 		Players []string
 	}))(obj)).Players {
 		if len(([]byte(((*(*(struct {
 			Type    PlayerListUpdateType
 			Players []string
-		}))(obj)).Players)[local221]))) > math.MaxUint16 {
+		}))(obj)).Players)[local205]))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
 		{
 			x := uint16(len(([]byte(((*(*(struct {
 				Type    PlayerListUpdateType
 				Players []string
-			}))(obj)).Players)[local221]))))
+			}))(obj)).Players)[local205]))))
 			write16(w, uint16(x))
 		}
 		{
 			_, err := w.Write(([]byte(((*(*(struct {
 				Type    PlayerListUpdateType
 				Players []string
-			}))(obj)).Players)[local221]))[:])
+			}))(obj)).Players)[local205]))[:])
 			chk(err)
 		}
 	}
@@ -18280,34 +16388,34 @@ func (obj *ToCltUpdatePlayerList) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerListUpdateType", err))
 	}
-	var local222 uint16
+	var local206 uint16
 	{
-		p := &local222
+		p := &local206
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Type    PlayerListUpdateType
 		Players []string
-	}))(obj)).Players) = make([]string, local222)
-	for local223 := range (*(*(struct {
+	}))(obj)).Players) = make([]string, local206)
+	for local207 := range (*(*(struct {
 		Type    PlayerListUpdateType
 		Players []string
 	}))(obj)).Players {
-		var local224 []uint8
-		var local225 uint16
+		var local208 []uint8
+		var local209 uint16
 		{
-			p := &local225
+			p := &local209
 			*p = read16(r)
 		}
-		(local224) = make([]uint8, local225)
+		(local208) = make([]uint8, local209)
 		{
-			_, err := io.ReadFull(r, (local224)[:])
+			_, err := io.ReadFull(r, (local208)[:])
 			chk(err)
 		}
 		(((*(*(struct {
 			Type    PlayerListUpdateType
 			Players []string
-		}))(obj)).Players)[local223]) = string(local224)
+		}))(obj)).Players)[local207]) = string(local208)
 	}
 }
 
@@ -18384,54 +16492,54 @@ func (obj *ToCltModChanMsg) serialize(w io.Writer) {
 }
 
 func (obj *ToCltModChanMsg) deserialize(r io.Reader) {
-	var local226 []uint8
-	var local227 uint16
+	var local210 []uint8
+	var local211 uint16
 	{
-		p := &local227
+		p := &local211
 		*p = read16(r)
 	}
-	(local226) = make([]uint8, local227)
+	(local210) = make([]uint8, local211)
 	{
-		_, err := io.ReadFull(r, (local226)[:])
+		_, err := io.ReadFull(r, (local210)[:])
 		chk(err)
 	}
 	((*(*(struct {
 		Channel string
 		Sender  string
 		Msg     string
-	}))(obj)).Channel) = string(local226)
-	var local228 []uint8
-	var local229 uint16
+	}))(obj)).Channel) = string(local210)
+	var local212 []uint8
+	var local213 uint16
 	{
-		p := &local229
+		p := &local213
 		*p = read16(r)
 	}
-	(local228) = make([]uint8, local229)
+	(local212) = make([]uint8, local213)
 	{
-		_, err := io.ReadFull(r, (local228)[:])
+		_, err := io.ReadFull(r, (local212)[:])
 		chk(err)
 	}
 	((*(*(struct {
 		Channel string
 		Sender  string
 		Msg     string
-	}))(obj)).Sender) = string(local228)
-	var local230 []uint8
-	var local231 uint16
+	}))(obj)).Sender) = string(local212)
+	var local214 []uint8
+	var local215 uint16
 	{
-		p := &local231
+		p := &local215
 		*p = read16(r)
 	}
-	(local230) = make([]uint8, local231)
+	(local214) = make([]uint8, local215)
 	{
-		_, err := io.ReadFull(r, (local230)[:])
+		_, err := io.ReadFull(r, (local214)[:])
 		chk(err)
 	}
 	((*(*(struct {
 		Channel string
 		Sender  string
 		Msg     string
-	}))(obj)).Msg) = string(local230)
+	}))(obj)).Msg) = string(local214)
 }
 
 func (obj *ToCltModChanSig) serialize(w io.Writer) {
@@ -18480,21 +16588,21 @@ func (obj *ToCltModChanSig) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ModChanSig", err))
 	}
-	var local232 []uint8
-	var local233 uint16
+	var local216 []uint8
+	var local217 uint16
 	{
-		p := &local233
+		p := &local217
 		*p = read16(r)
 	}
-	(local232) = make([]uint8, local233)
+	(local216) = make([]uint8, local217)
 	{
-		_, err := io.ReadFull(r, (local232)[:])
+		_, err := io.ReadFull(r, (local216)[:])
 		chk(err)
 	}
 	((*(*(struct {
 		Signal  ModChanSig
 		Channel string
-	}))(obj)).Channel) = string(local232)
+	}))(obj)).Channel) = string(local216)
 }
 
 func (obj *ToCltNodeMetasChanged) serialize(w io.Writer) {
@@ -19009,6 +17117,32 @@ func (obj *ToCltStarParams) deserialize(r io.Reader) {
 	}
 }
 
+func (obj *ToCltMovePlayerRel) serialize(w io.Writer) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Pos
+		}))(obj)).Pos).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
+	}
+}
+
+func (obj *ToCltMovePlayerRel) deserialize(r io.Reader) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Pos
+		}))(obj)).Pos).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
+	}
+}
+
 func (obj *ToCltSRPBytesSaltB) serialize(w io.Writer) {
 	if len(((*(*(struct {
 		Salt, B []byte
@@ -19047,28 +17181,28 @@ func (obj *ToCltSRPBytesSaltB) serialize(w io.Writer) {
 }
 
 func (obj *ToCltSRPBytesSaltB) deserialize(r io.Reader) {
-	var local234 uint16
+	var local218 uint16
 	{
-		p := &local234
+		p := &local218
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Salt, B []byte
-	}))(obj)).Salt) = make([]byte, local234)
+	}))(obj)).Salt) = make([]byte, local218)
 	{
 		_, err := io.ReadFull(r, ((*(*(struct {
 			Salt, B []byte
 		}))(obj)).Salt)[:])
 		chk(err)
 	}
-	var local235 uint16
+	var local219 uint16
 	{
-		p := &local235
+		p := &local219
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Salt, B []byte
-	}))(obj)).B) = make([]byte, local235)
+	}))(obj)).B) = make([]byte, local219)
 	{
 		_, err := io.ReadFull(r, ((*(*(struct {
 			Salt, B []byte
@@ -19098,20 +17232,20 @@ func (obj *ToCltFormspecPrepend) serialize(w io.Writer) {
 }
 
 func (obj *ToCltFormspecPrepend) deserialize(r io.Reader) {
-	var local236 []uint8
-	var local237 uint16
+	var local220 []uint8
+	var local221 uint16
 	{
-		p := &local237
+		p := &local221
 		*p = read16(r)
 	}
-	(local236) = make([]uint8, local237)
+	(local220) = make([]uint8, local221)
 	{
-		_, err := io.ReadFull(r, (local236)[:])
+		_, err := io.ReadFull(r, (local220)[:])
 		chk(err)
 	}
 	((*(*(struct {
 		Prepend string
-	}))(obj)).Prepend) = string(local236)
+	}))(obj)).Prepend) = string(local220)
 }
 
 func (obj *ToCltLighting) serialize(w io.Writer) {
@@ -19125,6 +17259,7 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).ShadowIntensity
 		write32(w, math.Float32bits(x))
 	}
@@ -19138,6 +17273,7 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).Saturation
 		write32(w, math.Float32bits(x))
 	}
@@ -19151,6 +17287,7 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).LuminanceMin
 		write32(w, math.Float32bits(x))
 	}
@@ -19164,6 +17301,7 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).LuminanceMax
 		write32(w, math.Float32bits(x))
 	}
@@ -19177,6 +17315,7 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).ExposureCorrection
 		write32(w, math.Float32bits(x))
 	}
@@ -19190,6 +17329,7 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).SpeedDarkBright
 		write32(w, math.Float32bits(x))
 	}
@@ -19203,6 +17343,7 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).SpeedBrightDark
 		write32(w, math.Float32bits(x))
 	}
@@ -19216,7 +17357,22 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).CenterWeightPower
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+		}))(obj)).VolumetricStrength
 		write32(w, math.Float32bits(x))
 	}
 }
@@ -19232,6 +17388,7 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).ShadowIntensity
 		*p = math.Float32frombits(read32(r))
 	}
@@ -19245,6 +17402,7 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).Saturation
 		*p = math.Float32frombits(read32(r))
 	}
@@ -19258,6 +17416,7 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).LuminanceMin
 		*p = math.Float32frombits(read32(r))
 	}
@@ -19271,6 +17430,7 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).LuminanceMax
 		*p = math.Float32frombits(read32(r))
 	}
@@ -19284,6 +17444,7 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).ExposureCorrection
 		*p = math.Float32frombits(read32(r))
 	}
@@ -19297,6 +17458,7 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).SpeedDarkBright
 		*p = math.Float32frombits(read32(r))
 	}
@@ -19310,6 +17472,7 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).SpeedBrightDark
 		*p = math.Float32frombits(read32(r))
 	}
@@ -19323,7 +17486,22 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedDarkBright    float32
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
+			VolumetricStrength float32
 		}))(obj)).CenterWeightPower
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+		}))(obj)).VolumetricStrength
 		*p = math.Float32frombits(read32(r))
 	}
 }
@@ -19462,13 +17640,13 @@ func (obj *AOCmdArmorGroups) serialize(w io.Writer) {
 		}))(obj)).Armor)))
 		write16(w, uint16(x))
 	}
-	for local238 := range (*(*(struct {
+	for local222 := range (*(*(struct {
 		Armor []Group
 	}))(obj)).Armor {
 		if err := pcall(func() {
 			(((*(*(struct {
 				Armor []Group
-			}))(obj)).Armor)[local238]).serialize(w)
+			}))(obj)).Armor)[local222]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -19479,21 +17657,21 @@ func (obj *AOCmdArmorGroups) serialize(w io.Writer) {
 }
 
 func (obj *AOCmdArmorGroups) deserialize(r io.Reader) {
-	var local239 uint16
+	var local223 uint16
 	{
-		p := &local239
+		p := &local223
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Armor []Group
-	}))(obj)).Armor) = make([]Group, local239)
-	for local240 := range (*(*(struct {
+	}))(obj)).Armor) = make([]Group, local223)
+	for local224 := range (*(*(struct {
 		Armor []Group
 	}))(obj)).Armor {
 		if err := pcall(func() {
 			(((*(*(struct {
 				Armor []Group
-			}))(obj)).Armor)[local240]).deserialize(r)
+			}))(obj)).Armor)[local224]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -19531,64 +17709,64 @@ func (obj *AOCmdAnim) deserialize(r io.Reader) {
 
 func (obj *AOCmdBonePos) serialize(w io.Writer) {
 	if len(([]byte((*(*(struct {
-		Bone string
-		Pos  AOBonePos
+		Bone     string
+		Override AOBoneOverride
 	}))(obj)).Bone))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
 	{
 		x := uint16(len(([]byte((*(*(struct {
-			Bone string
-			Pos  AOBonePos
+			Bone     string
+			Override AOBoneOverride
 		}))(obj)).Bone))))
 		write16(w, uint16(x))
 	}
 	{
 		_, err := w.Write(([]byte((*(*(struct {
-			Bone string
-			Pos  AOBonePos
+			Bone     string
+			Override AOBoneOverride
 		}))(obj)).Bone))[:])
 		chk(err)
 	}
 	if err := pcall(func() {
 		((*(*(struct {
-			Bone string
-			Pos  AOBonePos
-		}))(obj)).Pos).serialize(w)
+			Bone     string
+			Override AOBoneOverride
+		}))(obj)).Override).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOBonePos", err))
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOBoneOverride", err))
 	}
 }
 
 func (obj *AOCmdBonePos) deserialize(r io.Reader) {
-	var local241 []uint8
-	var local242 uint16
+	var local225 []uint8
+	var local226 uint16
 	{
-		p := &local242
+		p := &local226
 		*p = read16(r)
 	}
-	(local241) = make([]uint8, local242)
+	(local225) = make([]uint8, local226)
 	{
-		_, err := io.ReadFull(r, (local241)[:])
+		_, err := io.ReadFull(r, (local225)[:])
 		chk(err)
 	}
 	((*(*(struct {
-		Bone string
-		Pos  AOBonePos
-	}))(obj)).Bone) = string(local241)
+		Bone     string
+		Override AOBoneOverride
+	}))(obj)).Bone) = string(local225)
 	if err := pcall(func() {
 		((*(*(struct {
-			Bone string
-			Pos  AOBonePos
-		}))(obj)).Pos).deserialize(r)
+			Bone     string
+			Override AOBoneOverride
+		}))(obj)).Override).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOBonePos", err))
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOBoneOverride", err))
 	}
 }
 
@@ -19656,9 +17834,9 @@ func (obj *AOCmdSpawnInfant) serialize(w io.Writer) {
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
-		local243 := genericCAO
+		local227 := genericCAO
 		if err := pcall(func() {
-			(local243).serialize(w)
+			(local227).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -19680,18 +17858,18 @@ func (obj *AOCmdSpawnInfant) deserialize(r io.Reader) {
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
-		var local244 aoType
-		local245 := genericCAO
+		var local228 aoType
+		local229 := genericCAO
 		if err := pcall(func() {
-			(local244).deserialize(r)
+			(local228).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.aoType", err))
 		}
-		if local244 != local245 {
-			chk(fmt.Errorf("const %v: %v", "genericCAO", local244))
+		if local228 != local229 {
+			chk(fmt.Errorf("const %v: %v", "genericCAO", local228))
 		}
 	}
 }
@@ -19732,7 +17910,7 @@ func (obj *NodeMeta) serialize(w io.Writer) {
 		}))(obj)).Fields)))
 		write32(w, uint32(x))
 	}
-	for local246 := range (*(*(struct {
+	for local230 := range (*(*(struct {
 		//mt:len32
 		Fields []NodeMetaField
 
@@ -19744,7 +17922,7 @@ func (obj *NodeMeta) serialize(w io.Writer) {
 				Fields []NodeMetaField
 
 				Inv Inv
-			}))(obj)).Fields)[local246]).serialize(w)
+			}))(obj)).Fields)[local230]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -19761,9 +17939,9 @@ func (obj *NodeMeta) serialize(w io.Writer) {
 }
 
 func (obj *NodeMeta) deserialize(r io.Reader) {
-	var local247 uint32
+	var local231 uint32
 	{
-		p := &local247
+		p := &local231
 		*p = read32(r)
 	}
 	((*(*(struct {
@@ -19771,8 +17949,8 @@ func (obj *NodeMeta) deserialize(r io.Reader) {
 		Fields []NodeMetaField
 
 		Inv Inv
-	}))(obj)).Fields) = make([]NodeMetaField, local247)
-	for local248 := range (*(*(struct {
+	}))(obj)).Fields) = make([]NodeMetaField, local231)
+	for local232 := range (*(*(struct {
 		//mt:len32
 		Fields []NodeMetaField
 
@@ -19784,7 +17962,7 @@ func (obj *NodeMeta) deserialize(r io.Reader) {
 				Fields []NodeMetaField
 
 				Inv Inv
-			}))(obj)).Fields)[local248]).deserialize(r)
+			}))(obj)).Fields)[local232]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -19895,15 +18073,15 @@ func (obj *MinimapMode) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.MinimapType", err))
 	}
-	var local249 []uint8
-	var local250 uint16
+	var local233 []uint8
+	var local234 uint16
 	{
-		p := &local250
+		p := &local234
 		*p = read16(r)
 	}
-	(local249) = make([]uint8, local250)
+	(local233) = make([]uint8, local234)
 	{
-		_, err := io.ReadFull(r, (local249)[:])
+		_, err := io.ReadFull(r, (local233)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -19912,7 +18090,7 @@ func (obj *MinimapMode) deserialize(r io.Reader) {
 		Size  uint16
 		Texture
 		Scale uint16
-	}))(obj)).Label) = string(local249)
+	}))(obj)).Label) = string(local233)
 	{
 		p := &(*(*(struct {
 			Type  MinimapType
@@ -20028,9 +18206,9 @@ func (obj *NodeDef) serialize(w io.Writer) {
 		ow := w
 		w := new(bytes.Buffer)
 		{
-			local251 := uint8(13)
+			local235 := uint8(13)
 			{
-				x := local251
+				x := local235
 				write8(w, uint8(x))
 			}
 		}
@@ -20382,7 +18560,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			}))(obj)).Groups)))
 			write16(w, uint16(x))
 		}
-		for local252 := range (*(*(struct {
+		for local236 := range (*(*(struct {
 			Param0 Content
 
 			Name   string
@@ -20516,7 +18694,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 					MoveResistance    uint8
 					LiquidMovePhysics bool
 					InsideTintShaded  bool
-				}))(obj)).Groups)[local252]).serialize(w)
+				}))(obj)).Groups)[local236]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -21026,13 +19204,13 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			write32(w, math.Float32bits(x))
 		}
 		{
-			local253 := uint8(6)
+			local237 := uint8(6)
 			{
-				x := local253
+				x := local237
 				write8(w, uint8(x))
 			}
 		}
-		for local254 := range (*(*(struct {
+		for local238 := range (*(*(struct {
 			Param0 Content
 
 			Name   string
@@ -21166,7 +19344,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 					MoveResistance    uint8
 					LiquidMovePhysics bool
 					InsideTintShaded  bool
-				}))(obj)).Tiles)[local254]).serialize(w)
+				}))(obj)).Tiles)[local238]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -21174,7 +19352,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
 			}
 		}
-		for local255 := range (*(*(struct {
+		for local239 := range (*(*(struct {
 			Param0 Content
 
 			Name   string
@@ -21308,7 +19486,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 					MoveResistance    uint8
 					LiquidMovePhysics bool
 					InsideTintShaded  bool
-				}))(obj)).OverlayTiles)[local255]).serialize(w)
+				}))(obj)).OverlayTiles)[local239]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -21317,13 +19495,13 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			}
 		}
 		{
-			local256 := uint8(6)
+			local240 := uint8(6)
 			{
-				x := local256
+				x := local240
 				write8(w, uint8(x))
 			}
 		}
-		for local257 := range (*(*(struct {
+		for local241 := range (*(*(struct {
 			Param0 Content
 
 			Name   string
@@ -21457,7 +19635,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 					MoveResistance    uint8
 					LiquidMovePhysics bool
 					InsideTintShaded  bool
-				}))(obj)).SpecialTiles)[local257]).serialize(w)
+				}))(obj)).SpecialTiles)[local241]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -21892,7 +20070,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 			}))(obj)).ConnectTo)))
 			write16(w, uint16(x))
 		}
-		for local258 := range (*(*(struct {
+		for local242 := range (*(*(struct {
 			Param0 Content
 
 			Name   string
@@ -22026,7 +20204,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 					MoveResistance    uint8
 					LiquidMovePhysics bool
 					InsideTintShaded  bool
-				}))(obj)).ConnectTo)[local258]).serialize(w)
+				}))(obj)).ConnectTo)[local242]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -25094,25 +23272,25 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 		}
 		r := &io.LimitedReader{R: r, N: int64(n)}
 		{
-			var local259 uint8
-			local260 := uint8(13)
+			var local243 uint8
+			local244 := uint8(13)
 			{
-				p := &local259
+				p := &local243
 				*p = read8(r)
 			}
-			if local259 != local260 {
-				chk(fmt.Errorf("const %v: %v", "uint8(13)", local259))
+			if local243 != local244 {
+				chk(fmt.Errorf("const %v: %v", "uint8(13)", local243))
 			}
 		}
-		var local261 []uint8
-		var local262 uint16
+		var local245 []uint8
+		var local246 uint16
 		{
-			p := &local262
+			p := &local246
 			*p = read16(r)
 		}
-		(local261) = make([]uint8, local262)
+		(local245) = make([]uint8, local246)
 		{
-			_, err := io.ReadFull(r, (local261)[:])
+			_, err := io.ReadFull(r, (local245)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -25181,10 +23359,10 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			MoveResistance    uint8
 			LiquidMovePhysics bool
 			InsideTintShaded  bool
-		}))(obj)).Name) = string(local261)
-		var local263 uint16
+		}))(obj)).Name) = string(local245)
+		var local247 uint16
 		{
-			p := &local263
+			p := &local247
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -25253,8 +23431,8 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			MoveResistance    uint8
 			LiquidMovePhysics bool
 			InsideTintShaded  bool
-		}))(obj)).Groups) = make([]Group, local263)
-		for local264 := range (*(*(struct {
+		}))(obj)).Groups) = make([]Group, local247)
+		for local248 := range (*(*(struct {
 			Param0 Content
 
 			Name   string
@@ -25388,7 +23566,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 					MoveResistance    uint8
 					LiquidMovePhysics bool
 					InsideTintShaded  bool
-				}))(obj)).Groups)[local264]).deserialize(r)
+				}))(obj)).Groups)[local248]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -25618,15 +23796,15 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DrawType", err))
 		}
-		var local265 []uint8
-		var local266 uint16
+		var local249 []uint8
+		var local250 uint16
 		{
-			p := &local266
+			p := &local250
 			*p = read16(r)
 		}
-		(local265) = make([]uint8, local266)
+		(local249) = make([]uint8, local250)
 		{
-			_, err := io.ReadFull(r, (local265)[:])
+			_, err := io.ReadFull(r, (local249)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -25695,7 +23873,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			MoveResistance    uint8
 			LiquidMovePhysics bool
 			InsideTintShaded  bool
-		}))(obj)).Mesh) = string(local265)
+		}))(obj)).Mesh) = string(local249)
 		{
 			p := &(*(*(struct {
 				Param0 Content
@@ -25767,17 +23945,17 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			*p = math.Float32frombits(read32(r))
 		}
 		{
-			var local267 uint8
-			local268 := uint8(6)
+			var local251 uint8
+			local252 := uint8(6)
 			{
-				p := &local267
+				p := &local251
 				*p = read8(r)
 			}
-			if local267 != local268 {
-				chk(fmt.Errorf("const %v: %v", "uint8(6)", local267))
+			if local251 != local252 {
+				chk(fmt.Errorf("const %v: %v", "uint8(6)", local251))
 			}
 		}
-		for local269 := range (*(*(struct {
+		for local253 := range (*(*(struct {
 			Param0 Content
 
 			Name   string
@@ -25911,7 +24089,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 					MoveResistance    uint8
 					LiquidMovePhysics bool
 					InsideTintShaded  bool
-				}))(obj)).Tiles)[local269]).deserialize(r)
+				}))(obj)).Tiles)[local253]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -25919,7 +24097,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TileDef", err))
 			}
 		}
-		for local270 := range (*(*(struct {
+		for local254 := range (*(*(struct {
 			Param0 Content
 
 			Name   string
@@ -26053,7 +24231,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 					MoveResistance    uint8
 					LiquidMovePhysics bool
 					InsideTintShaded  bool
-				}))(obj)).OverlayTiles)[local270]).deserialize(r)
+				}))(obj)).OverlayTiles)[local254]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -26062,17 +24240,17 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			}
 		}
 		{
-			var local271 uint8
-			local272 := uint8(6)
+			var local255 uint8
+			local256 := uint8(6)
 			{
-				p := &local271
+				p := &local255
 				*p = read8(r)
 			}
-			if local271 != local272 {
-				chk(fmt.Errorf("const %v: %v", "uint8(6)", local271))
+			if local255 != local256 {
+				chk(fmt.Errorf("const %v: %v", "uint8(6)", local255))
 			}
 		}
-		for local273 := range (*(*(struct {
+		for local257 := range (*(*(struct {
 			Param0 Content
 
 			Name   string
@@ -26206,7 +24384,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 					MoveResistance    uint8
 					LiquidMovePhysics bool
 					InsideTintShaded  bool
-				}))(obj)).SpecialTiles)[local273]).deserialize(r)
+				}))(obj)).SpecialTiles)[local257]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -26502,9 +24680,9 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			}))(obj)).ConnectSides
 			*p = read8(r)
 		}
-		var local274 uint16
+		var local258 uint16
 		{
-			p := &local274
+			p := &local258
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -26573,8 +24751,8 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			MoveResistance    uint8
 			LiquidMovePhysics bool
 			InsideTintShaded  bool
-		}))(obj)).ConnectTo) = make([]Content, local274)
-		for local275 := range (*(*(struct {
+		}))(obj)).ConnectTo) = make([]Content, local258)
+		for local259 := range (*(*(struct {
 			Param0 Content
 
 			Name   string
@@ -26708,7 +24886,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 					MoveResistance    uint8
 					LiquidMovePhysics bool
 					InsideTintShaded  bool
-				}))(obj)).ConnectTo)[local275]).deserialize(r)
+				}))(obj)).ConnectTo)[local259]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -27763,15 +25941,15 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LiquidType", err))
 		}
-		var local276 []uint8
-		var local277 uint16
+		var local260 []uint8
+		var local261 uint16
 		{
-			p := &local277
+			p := &local261
 			*p = read16(r)
 		}
-		(local276) = make([]uint8, local277)
+		(local260) = make([]uint8, local261)
 		{
-			_, err := io.ReadFull(r, (local276)[:])
+			_, err := io.ReadFull(r, (local260)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -27840,16 +26018,16 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			MoveResistance    uint8
 			LiquidMovePhysics bool
 			InsideTintShaded  bool
-		}))(obj)).FlowingAlt) = string(local276)
-		var local278 []uint8
-		var local279 uint16
+		}))(obj)).FlowingAlt) = string(local260)
+		var local262 []uint8
+		var local263 uint16
 		{
-			p := &local279
+			p := &local263
 			*p = read16(r)
 		}
-		(local278) = make([]uint8, local279)
+		(local262) = make([]uint8, local263)
 		{
-			_, err := io.ReadFull(r, (local278)[:])
+			_, err := io.ReadFull(r, (local262)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -27918,7 +26096,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			MoveResistance    uint8
 			LiquidMovePhysics bool
 			InsideTintShaded  bool
-		}))(obj)).SrcAlt) = string(local278)
+		}))(obj)).SrcAlt) = string(local262)
 		{
 			p := &(*(*(struct {
 				Param0 Content
@@ -28881,15 +27059,15 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 				chk(fmt.Errorf("invalid bool: %d", n))
 			}
 		}
-		var local280 []uint8
-		var local281 uint16
+		var local264 []uint8
+		var local265 uint16
 		{
-			p := &local281
+			p := &local265
 			*p = read16(r)
 		}
-		(local280) = make([]uint8, local281)
+		(local264) = make([]uint8, local265)
 		{
-			_, err := io.ReadFull(r, (local280)[:])
+			_, err := io.ReadFull(r, (local264)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -28958,7 +27136,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 			MoveResistance    uint8
 			LiquidMovePhysics bool
 			InsideTintShaded  bool
-		}))(obj)).DigPredict) = string(local280)
+		}))(obj)).DigPredict) = string(local264)
 		{
 			p := &(*(*(struct {
 				Param0 Content
@@ -29334,46 +27512,46 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 }
 
 func (obj *PointedNode) serialize(w io.Writer) {
-	for local282 := range (*(*(struct {
+	for local266 := range (*(*(struct {
 		Under, Above [3]int16
 	}))(obj)).Under {
 		{
 			x := ((*(*(struct {
 				Under, Above [3]int16
-			}))(obj)).Under)[local282]
+			}))(obj)).Under)[local266]
 			write16(w, uint16(x))
 		}
 	}
-	for local283 := range (*(*(struct {
+	for local267 := range (*(*(struct {
 		Under, Above [3]int16
 	}))(obj)).Above {
 		{
 			x := ((*(*(struct {
 				Under, Above [3]int16
-			}))(obj)).Above)[local283]
+			}))(obj)).Above)[local267]
 			write16(w, uint16(x))
 		}
 	}
 }
 
 func (obj *PointedNode) deserialize(r io.Reader) {
-	for local284 := range (*(*(struct {
+	for local268 := range (*(*(struct {
 		Under, Above [3]int16
 	}))(obj)).Under {
 		{
 			p := &((*(*(struct {
 				Under, Above [3]int16
-			}))(obj)).Under)[local284]
+			}))(obj)).Under)[local268]
 			*p = int16(read16(r))
 		}
 	}
-	for local285 := range (*(*(struct {
+	for local269 := range (*(*(struct {
 		Under, Above [3]int16
 	}))(obj)).Above {
 		{
 			p := &((*(*(struct {
 				Under, Above [3]int16
-			}))(obj)).Above)[local285]
+			}))(obj)).Above)[local269]
 			*p = int16(read16(r))
 		}
 	}
@@ -29420,7 +27598,7 @@ func (obj *CompressionModes) deserialize(r io.Reader) {
 }
 
 func (obj *PlayerPos) serialize(w io.Writer) {
-	for local286 := range (*(*(struct {
+	for local270 := range (*(*(struct {
 		Pos100, Vel100   [3]int32
 		Pitch100, Yaw100 int32
 		Keys             Keys
@@ -29436,11 +27614,11 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
 				Flags            PlayerPosFlags
-			}))(obj)).Pos100)[local286]
+			}))(obj)).Pos100)[local270]
 			write32(w, uint32(x))
 		}
 	}
-	for local287 := range (*(*(struct {
+	for local271 := range (*(*(struct {
 		Pos100, Vel100   [3]int32
 		Pitch100, Yaw100 int32
 		Keys             Keys
@@ -29456,7 +27634,7 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
 				Flags            PlayerPosFlags
-			}))(obj)).Vel100)[local287]
+			}))(obj)).Vel100)[local271]
 			write32(w, uint32(x))
 		}
 	}
@@ -29537,7 +27715,7 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 }
 
 func (obj *PlayerPos) deserialize(r io.Reader) {
-	for local288 := range (*(*(struct {
+	for local272 := range (*(*(struct {
 		Pos100, Vel100   [3]int32
 		Pitch100, Yaw100 int32
 		Keys             Keys
@@ -29553,11 +27731,11 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
 				Flags            PlayerPosFlags
-			}))(obj)).Pos100)[local288]
+			}))(obj)).Pos100)[local272]
 			*p = int32(read32(r))
 		}
 	}
-	for local289 := range (*(*(struct {
+	for local273 := range (*(*(struct {
 		Pos100, Vel100   [3]int32
 		Pitch100, Yaw100 int32
 		Keys             Keys
@@ -29573,7 +27751,7 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
 				Flags            PlayerPosFlags
-			}))(obj)).Vel100)[local289]
+			}))(obj)).Vel100)[local273]
 			*p = int32(read32(r))
 		}
 	}
@@ -29737,15 +27915,15 @@ func (obj *Field) serialize(w io.Writer) {
 }
 
 func (obj *Field) deserialize(r io.Reader) {
-	var local290 []uint8
-	var local291 uint16
+	var local274 []uint8
+	var local275 uint16
 	{
-		p := &local291
+		p := &local275
 		*p = read16(r)
 	}
-	(local290) = make([]uint8, local291)
+	(local274) = make([]uint8, local275)
 	{
-		_, err := io.ReadFull(r, (local290)[:])
+		_, err := io.ReadFull(r, (local274)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -29753,16 +27931,16 @@ func (obj *Field) deserialize(r io.Reader) {
 
 		//mt:len32
 		Value string
-	}))(obj)).Name) = string(local290)
-	var local292 []uint8
-	var local293 uint32
+	}))(obj)).Name) = string(local274)
+	var local276 []uint8
+	var local277 uint32
 	{
-		p := &local293
+		p := &local277
 		*p = read32(r)
 	}
-	(local292) = make([]uint8, local293)
+	(local276) = make([]uint8, local277)
 	{
-		_, err := io.ReadFull(r, (local292)[:])
+		_, err := io.ReadFull(r, (local276)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -29770,7 +27948,7 @@ func (obj *Field) deserialize(r io.Reader) {
 
 		//mt:len32
 		Value string
-	}))(obj)).Value) = string(local292)
+	}))(obj)).Value) = string(local276)
 }
 
 func (obj *AuthMethods) serialize(w io.Writer) {
@@ -29859,20 +28037,20 @@ func (obj *MapBlk) serialize(w io.Writer) {
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LitFromBlks", err))
 	}
 	{
-		local294 := uint8(2) // Size of param0 in bytes.
+		local278 := uint8(2) // Size of param0 in bytes.
 		{
-			x := local294
+			x := local278
 			write8(w, uint8(x))
 		}
 	}
 	{
-		local295 := uint8(1 + 1) // Size of param1 and param2 combined, in bytes.
+		local279 := uint8(1 + 1) // Size of param1 and param2 combined, in bytes.
 		{
-			x := local295
+			x := local279
 			write8(w, uint8(x))
 		}
 	}
-	for local296 := range (*(*(struct {
+	for local280 := range (*(*(struct {
 		Flags   MapBlkFlags
 		LitFrom LitFromBlks
 
@@ -29892,7 +28070,7 @@ func (obj *MapBlk) serialize(w io.Writer) {
 				Param2 [4096]uint8
 
 				NodeMetas map[uint16]*NodeMeta
-			}))(obj)).Param0)[local296]).serialize(w)
+			}))(obj)).Param0)[local280]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -30008,28 +28186,28 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.LitFromBlks", err))
 	}
 	{
-		var local297 uint8
-		local298 := uint8(2) // Size of param0 in bytes.
+		var local281 uint8
+		local282 := uint8(2) // Size of param0 in bytes.
 		{
-			p := &local297
+			p := &local281
 			*p = read8(r)
 		}
-		if local297 != local298 {
-			chk(fmt.Errorf("const %v: %v", "uint8(2)     // Size of param0 in bytes.", local297))
+		if local281 != local282 {
+			chk(fmt.Errorf("const %v: %v", "uint8(2)     // Size of param0 in bytes.", local281))
 		}
 	}
 	{
-		var local299 uint8
-		local300 := uint8(1 + 1) // Size of param1 and param2 combined, in bytes.
+		var local283 uint8
+		local284 := uint8(1 + 1) // Size of param1 and param2 combined, in bytes.
 		{
-			p := &local299
+			p := &local283
 			*p = read8(r)
 		}
-		if local299 != local300 {
-			chk(fmt.Errorf("const %v: %v", "uint8(1 + 1) // Size of param1 and param2 combined, in bytes.", local299))
+		if local283 != local284 {
+			chk(fmt.Errorf("const %v: %v", "uint8(1 + 1) // Size of param1 and param2 combined, in bytes.", local283))
 		}
 	}
-	for local301 := range (*(*(struct {
+	for local285 := range (*(*(struct {
 		Flags   MapBlkFlags
 		LitFrom LitFromBlks
 
@@ -30049,7 +28227,7 @@ func (obj *MapBlk) deserialize(r io.Reader) {
 				Param2 [4096]uint8
 
 				NodeMetas map[uint16]*NodeMeta
-			}))(obj)).Param0)[local301]).deserialize(r)
+			}))(obj)).Param0)[local285]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -30185,18 +28363,18 @@ func (obj *CSMRestrictionFlags) deserialize(r io.Reader) {
 }
 
 func (obj *Vec) serialize(w io.Writer) {
-	for local302 := range *(*([3]float32))(obj) {
+	for local286 := range *(*([3]float32))(obj) {
 		{
-			x := (*(*([3]float32))(obj))[local302]
+			x := (*(*([3]float32))(obj))[local286]
 			write32(w, math.Float32bits(x))
 		}
 	}
 }
 
 func (obj *Vec) deserialize(r io.Reader) {
-	for local303 := range *(*([3]float32))(obj) {
+	for local287 := range *(*([3]float32))(obj) {
 		{
-			p := &(*(*([3]float32))(obj))[local303]
+			p := &(*(*([3]float32))(obj))[local287]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -30245,9 +28423,9 @@ func (obj *AOAdd) serialize(w io.Writer) {
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
-		local304 := genericCAO
+		local288 := genericCAO
 		if err := pcall(func() {
-			(local304).serialize(w)
+			(local288).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -30304,18 +28482,18 @@ func (obj *AOAdd) deserialize(r io.Reader) {
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
 	{
-		var local305 aoType
-		local306 := genericCAO
+		var local289 aoType
+		local290 := genericCAO
 		if err := pcall(func() {
-			(local305).deserialize(r)
+			(local289).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.aoType", err))
 		}
-		if local305 != local306 {
-			chk(fmt.Errorf("const %v: %v", "genericCAO", local305))
+		if local289 != local290 {
+			chk(fmt.Errorf("const %v: %v", "genericCAO", local289))
 		}
 	}
 	{
@@ -30429,9 +28607,9 @@ func (obj *ItemDef) serialize(w io.Writer) {
 		ow := w
 		w := new(bytes.Buffer)
 		{
-			local307 := uint8(6)
+			local291 := uint8(6)
 			{
-				x := local307
+				x := local291
 				write8(w, uint8(x))
 			}
 		}
@@ -30469,9 +28647,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -30479,6 +28654,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Type).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30519,9 +28704,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -30529,6 +28711,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
 		}))(obj)).Name))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -30566,9 +28758,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -30576,6 +28765,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Name))))
 			write16(w, uint16(x))
 		}
@@ -30613,9 +28812,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -30623,6 +28819,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Name))[:])
 			chk(err)
 		}
@@ -30659,9 +28865,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -30669,6 +28872,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
 		}))(obj)).Desc))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -30706,9 +28919,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -30716,6 +28926,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Desc))))
 			write16(w, uint16(x))
 		}
@@ -30753,9 +28973,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -30763,6 +28980,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Desc))[:])
 			chk(err)
 		}
@@ -30800,9 +29027,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -30810,6 +29034,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).InvImg).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30851,9 +29085,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -30861,6 +29092,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).WieldImg).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -30868,7 +29109,7 @@ func (obj *ItemDef) serialize(w io.Writer) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
-		for local308 := range (*(*(struct {
+		for local292 := range (*(*(struct {
 			Type ItemType
 
 			Name, Desc string
@@ -30901,9 +29142,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -30911,6 +29149,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
 		}))(obj)).WieldScale {
 			{
 				x := ((*(*(struct {
@@ -30946,9 +29194,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 					ShortDesc string
 
-					// Use PlaceParam2 instead, this is just for serialization.
-					PlaceParam2Legacy uint8
-
 					SoundUse    SoundDef
 					SoundUseAir SoundDef
 
@@ -30956,7 +29201,17 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 					//mt:if %s.HasPlaceParam2
 					PlaceParam2 uint8
-				}))(obj)).WieldScale)[local308]
+
+					WallmountedRotateVertical bool
+					TouchInteraction          TouchInteraction
+
+					Pointabilities string
+
+					HasWearBarParams bool
+
+					//mt:if %s.HasWearBarParams
+					WearBarParams WearBarParams
+				}))(obj)).WieldScale)[local292]
 				write32(w, math.Float32bits(x))
 			}
 		}
@@ -30994,9 +29249,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31004,6 +29256,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).StackMax
 			write16(w, uint16(x))
 		}
@@ -31041,9 +29303,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31051,6 +29310,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Usable
 			if x {
 				write8(w, 1)
@@ -31092,9 +29361,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31102,6 +29368,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).CanPointLiquids
 			if x {
 				write8(w, 1)
@@ -31143,9 +29419,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31153,6 +29426,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).ToolCaps).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -31193,9 +29476,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -31203,6 +29483,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
 		}))(obj)).Groups)) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -31240,9 +29530,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31250,10 +29537,20 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Groups)))
 			write16(w, uint16(x))
 		}
-		for local309 := range (*(*(struct {
+		for local293 := range (*(*(struct {
 			Type ItemType
 
 			Name, Desc string
@@ -31286,9 +29583,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -31296,6 +29590,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
 		}))(obj)).Groups {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -31331,9 +29635,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 					ShortDesc string
 
-					// Use PlaceParam2 instead, this is just for serialization.
-					PlaceParam2Legacy uint8
-
 					SoundUse    SoundDef
 					SoundUseAir SoundDef
 
@@ -31341,7 +29642,17 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 					//mt:if %s.HasPlaceParam2
 					PlaceParam2 uint8
-				}))(obj)).Groups)[local309]).serialize(w)
+
+					WallmountedRotateVertical bool
+					TouchInteraction          TouchInteraction
+
+					Pointabilities string
+
+					HasWearBarParams bool
+
+					//mt:if %s.HasWearBarParams
+					WearBarParams WearBarParams
+				}))(obj)).Groups)[local293]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -31382,9 +29693,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -31392,6 +29700,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
 		}))(obj)).PlacePredict))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -31429,9 +29747,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31439,6 +29754,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).PlacePredict))))
 			write16(w, uint16(x))
 		}
@@ -31476,9 +29801,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31486,6 +29808,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).PlacePredict))[:])
 			chk(err)
 		}
@@ -31523,9 +29855,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31533,6 +29862,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).PlaceSnd).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -31574,9 +29913,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31584,6 +29920,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).PlaceFailSnd).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -31625,9 +29971,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31635,6 +29978,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).PointRange
 			write32(w, math.Float32bits(x))
 		}
@@ -31672,9 +30025,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31682,6 +30032,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Palette).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -31723,9 +30083,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31733,6 +30090,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Color
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
@@ -31770,9 +30137,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31780,6 +30144,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).InvOverlay).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -31821,9 +30195,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31831,6 +30202,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).WieldOverlay).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -31871,9 +30252,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -31881,6 +30259,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
 		}))(obj)).ShortDesc))) > math.MaxUint16 {
 			chk(ErrTooLong)
 		}
@@ -31918,9 +30306,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31928,6 +30313,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).ShortDesc))))
 			write16(w, uint16(x))
 		}
@@ -31965,9 +30360,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -31975,55 +30367,18 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).ShortDesc))[:])
 			chk(err)
-		}
-		{
-			x := (*(*(struct {
-				Type ItemType
-
-				Name, Desc string
-
-				InvImg, WieldImg Texture
-				WieldScale       [3]float32
-
-				StackMax uint16
-
-				Usable          bool
-				CanPointLiquids bool
-
-				ToolCaps ToolCaps
-
-				Groups []Group
-
-				PlacePredict string
-
-				PlaceSnd, PlaceFailSnd SoundDef
-
-				PointRange float32
-
-				// Set index in Palette with "palette_index" item meta field,
-				// this overrides Color.
-				Palette Texture
-				Color   color.NRGBA
-
-				// Texture overlays.
-				InvOverlay, WieldOverlay Texture
-
-				ShortDesc string
-
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
-				SoundUse    SoundDef
-				SoundUseAir SoundDef
-
-				HasPlaceParam2 bool
-
-				//mt:if %s.HasPlaceParam2
-				PlaceParam2 uint8
-			}))(obj)).PlaceParam2Legacy
-			write8(w, uint8(x))
 		}
 		if err := pcall(func() {
 			((*(*(struct {
@@ -32059,9 +30414,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -32069,6 +30421,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).SoundUse).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -32110,9 +30472,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -32120,6 +30479,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).SoundUseAir).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
@@ -32161,9 +30530,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -32171,6 +30537,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).HasPlaceParam2
 			if x {
 				write8(w, 1)
@@ -32211,9 +30587,6 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -32221,6 +30594,16 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
 		}))(obj)).HasPlaceParam2 {
 			{
 				x := (*(*(struct {
@@ -32256,8 +30639,446 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 					ShortDesc string
 
-					// Use PlaceParam2 instead, this is just for serialization.
-					PlaceParam2Legacy uint8
+					SoundUse    SoundDef
+					SoundUseAir SoundDef
+
+					HasPlaceParam2 bool
+
+					//mt:if %s.HasPlaceParam2
+					PlaceParam2 uint8
+
+					WallmountedRotateVertical bool
+					TouchInteraction          TouchInteraction
+
+					Pointabilities string
+
+					HasWearBarParams bool
+
+					//mt:if %s.HasWearBarParams
+					WearBarParams WearBarParams
+				}))(obj)).PlaceParam2
+				write8(w, uint8(x))
+			}
+		}
+		{
+			x := (*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
+			}))(obj)).WallmountedRotateVertical
+			if x {
+				write8(w, 1)
+			} else {
+				write8(w, 0)
+			}
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
+			}))(obj)).TouchInteraction).serialize(w)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TouchInteraction", err))
+		}
+		if len(([]byte((*(*(struct {
+			Type ItemType
+
+			Name, Desc string
+
+			InvImg, WieldImg Texture
+			WieldScale       [3]float32
+
+			StackMax uint16
+
+			Usable          bool
+			CanPointLiquids bool
+
+			ToolCaps ToolCaps
+
+			Groups []Group
+
+			PlacePredict string
+
+			PlaceSnd, PlaceFailSnd SoundDef
+
+			PointRange float32
+
+			// Set index in Palette with "palette_index" item meta field,
+			// this overrides Color.
+			Palette Texture
+			Color   color.NRGBA
+
+			// Texture overlays.
+			InvOverlay, WieldOverlay Texture
+
+			ShortDesc string
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
+		}))(obj)).Pointabilities))) > math.MaxUint16 {
+			chk(ErrTooLong)
+		}
+		{
+			x := uint16(len(([]byte((*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
+			}))(obj)).Pointabilities))))
+			write16(w, uint16(x))
+		}
+		{
+			_, err := w.Write(([]byte((*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
+			}))(obj)).Pointabilities))[:])
+			chk(err)
+		}
+		{
+			x := (*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
+			}))(obj)).HasWearBarParams
+			if x {
+				write8(w, 1)
+			} else {
+				write8(w, 0)
+			}
+		}
+		if (*(*(struct {
+			Type ItemType
+
+			Name, Desc string
+
+			InvImg, WieldImg Texture
+			WieldScale       [3]float32
+
+			StackMax uint16
+
+			Usable          bool
+			CanPointLiquids bool
+
+			ToolCaps ToolCaps
+
+			Groups []Group
+
+			PlacePredict string
+
+			PlaceSnd, PlaceFailSnd SoundDef
+
+			PointRange float32
+
+			// Set index in Palette with "palette_index" item meta field,
+			// this overrides Color.
+			Palette Texture
+			Color   color.NRGBA
+
+			// Texture overlays.
+			InvOverlay, WieldOverlay Texture
+
+			ShortDesc string
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
+		}))(obj)).HasWearBarParams {
+			if err := pcall(func() {
+				((*(*(struct {
+					Type ItemType
+
+					Name, Desc string
+
+					InvImg, WieldImg Texture
+					WieldScale       [3]float32
+
+					StackMax uint16
+
+					Usable          bool
+					CanPointLiquids bool
+
+					ToolCaps ToolCaps
+
+					Groups []Group
+
+					PlacePredict string
+
+					PlaceSnd, PlaceFailSnd SoundDef
+
+					PointRange float32
+
+					// Set index in Palette with "palette_index" item meta field,
+					// this overrides Color.
+					Palette Texture
+					Color   color.NRGBA
+
+					// Texture overlays.
+					InvOverlay, WieldOverlay Texture
+
+					ShortDesc string
 
 					SoundUse    SoundDef
 					SoundUseAir SoundDef
@@ -32266,8 +31087,22 @@ func (obj *ItemDef) serialize(w io.Writer) {
 
 					//mt:if %s.HasPlaceParam2
 					PlaceParam2 uint8
-				}))(obj)).PlaceParam2
-				write8(w, uint8(x))
+
+					WallmountedRotateVertical bool
+					TouchInteraction          TouchInteraction
+
+					Pointabilities string
+
+					HasWearBarParams bool
+
+					//mt:if %s.HasWearBarParams
+					WearBarParams WearBarParams
+				}))(obj)).WearBarParams).serialize(w)
+			}); err != nil {
+				if err == io.EOF {
+					chk(io.EOF)
+				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.WearBarParams", err))
 			}
 		}
 		{
@@ -32297,14 +31132,14 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 		}
 		r := &io.LimitedReader{R: r, N: int64(n)}
 		{
-			var local310 uint8
-			local311 := uint8(6)
+			var local294 uint8
+			local295 := uint8(6)
 			{
-				p := &local310
+				p := &local294
 				*p = read8(r)
 			}
-			if local310 != local311 {
-				chk(fmt.Errorf("const %v: %v", "uint8(6)", local310))
+			if local294 != local295 {
+				chk(fmt.Errorf("const %v: %v", "uint8(6)", local294))
 			}
 		}
 		if err := pcall(func() {
@@ -32341,9 +31176,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -32351,6 +31183,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Type).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32358,15 +31200,15 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ItemType", err))
 		}
-		var local312 []uint8
-		var local313 uint16
+		var local296 []uint8
+		var local297 uint16
 		{
-			p := &local313
+			p := &local297
 			*p = read16(r)
 		}
-		(local312) = make([]uint8, local313)
+		(local296) = make([]uint8, local297)
 		{
-			_, err := io.ReadFull(r, (local312)[:])
+			_, err := io.ReadFull(r, (local296)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -32402,9 +31244,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -32412,16 +31251,26 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
-		}))(obj)).Name) = string(local312)
-		var local314 []uint8
-		var local315 uint16
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
+		}))(obj)).Name) = string(local296)
+		var local298 []uint8
+		var local299 uint16
 		{
-			p := &local315
+			p := &local299
 			*p = read16(r)
 		}
-		(local314) = make([]uint8, local315)
+		(local298) = make([]uint8, local299)
 		{
-			_, err := io.ReadFull(r, (local314)[:])
+			_, err := io.ReadFull(r, (local298)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -32457,9 +31306,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -32467,7 +31313,17 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
-		}))(obj)).Desc) = string(local314)
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
+		}))(obj)).Desc) = string(local298)
 		if err := pcall(func() {
 			((*(*(struct {
 				Type ItemType
@@ -32502,9 +31358,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -32512,6 +31365,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).InvImg).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32553,9 +31416,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -32563,6 +31423,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).WieldImg).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32570,7 +31440,7 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
-		for local316 := range (*(*(struct {
+		for local300 := range (*(*(struct {
 			Type ItemType
 
 			Name, Desc string
@@ -32603,9 +31473,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -32613,6 +31480,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
 		}))(obj)).WieldScale {
 			{
 				p := &((*(*(struct {
@@ -32648,9 +31525,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 					ShortDesc string
 
-					// Use PlaceParam2 instead, this is just for serialization.
-					PlaceParam2Legacy uint8
-
 					SoundUse    SoundDef
 					SoundUseAir SoundDef
 
@@ -32658,7 +31532,17 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 					//mt:if %s.HasPlaceParam2
 					PlaceParam2 uint8
-				}))(obj)).WieldScale)[local316]
+
+					WallmountedRotateVertical bool
+					TouchInteraction          TouchInteraction
+
+					Pointabilities string
+
+					HasWearBarParams bool
+
+					//mt:if %s.HasWearBarParams
+					WearBarParams WearBarParams
+				}))(obj)).WieldScale)[local300]
 				*p = math.Float32frombits(read32(r))
 			}
 		}
@@ -32696,9 +31580,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -32706,6 +31587,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).StackMax
 			*p = read16(r)
 		}
@@ -32743,9 +31634,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -32753,6 +31641,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Usable
 			switch n := read8(r); n {
 			case 0:
@@ -32797,9 +31695,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -32807,6 +31702,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).CanPointLiquids
 			switch n := read8(r); n {
 			case 0:
@@ -32851,9 +31756,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -32861,6 +31763,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).ToolCaps).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -32868,9 +31780,9 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolCaps", err))
 		}
-		var local317 uint16
+		var local301 uint16
 		{
-			p := &local317
+			p := &local301
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -32906,9 +31818,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -32916,8 +31825,18 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
-		}))(obj)).Groups) = make([]Group, local317)
-		for local318 := range (*(*(struct {
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
+		}))(obj)).Groups) = make([]Group, local301)
+		for local302 := range (*(*(struct {
 			Type ItemType
 
 			Name, Desc string
@@ -32950,9 +31869,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -32960,6 +31876,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
 		}))(obj)).Groups {
 			if err := pcall(func() {
 				(((*(*(struct {
@@ -32995,9 +31921,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 					ShortDesc string
 
-					// Use PlaceParam2 instead, this is just for serialization.
-					PlaceParam2Legacy uint8
-
 					SoundUse    SoundDef
 					SoundUseAir SoundDef
 
@@ -33005,7 +31928,17 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 					//mt:if %s.HasPlaceParam2
 					PlaceParam2 uint8
-				}))(obj)).Groups)[local318]).deserialize(r)
+
+					WallmountedRotateVertical bool
+					TouchInteraction          TouchInteraction
+
+					Pointabilities string
+
+					HasWearBarParams bool
+
+					//mt:if %s.HasWearBarParams
+					WearBarParams WearBarParams
+				}))(obj)).Groups)[local302]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -33013,15 +31946,15 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 			}
 		}
-		var local319 []uint8
-		var local320 uint16
+		var local303 []uint8
+		var local304 uint16
 		{
-			p := &local320
+			p := &local304
 			*p = read16(r)
 		}
-		(local319) = make([]uint8, local320)
+		(local303) = make([]uint8, local304)
 		{
-			_, err := io.ReadFull(r, (local319)[:])
+			_, err := io.ReadFull(r, (local303)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -33057,9 +31990,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -33067,7 +31997,17 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
-		}))(obj)).PlacePredict) = string(local319)
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
+		}))(obj)).PlacePredict) = string(local303)
 		if err := pcall(func() {
 			((*(*(struct {
 				Type ItemType
@@ -33102,9 +32042,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -33112,6 +32049,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).PlaceSnd).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -33153,9 +32100,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -33163,6 +32107,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).PlaceFailSnd).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -33204,9 +32158,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -33214,6 +32165,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).PointRange
 			*p = math.Float32frombits(read32(r))
 		}
@@ -33251,9 +32212,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -33261,6 +32219,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Palette).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -33302,9 +32270,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -33312,6 +32277,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).Color
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
@@ -33349,9 +32324,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -33359,6 +32331,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).InvOverlay).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -33400,9 +32382,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -33410,6 +32389,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).WieldOverlay).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -33417,15 +32406,15 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
-		var local321 []uint8
-		var local322 uint16
+		var local305 []uint8
+		var local306 uint16
 		{
-			p := &local322
+			p := &local306
 			*p = read16(r)
 		}
-		(local321) = make([]uint8, local322)
+		(local305) = make([]uint8, local306)
 		{
-			_, err := io.ReadFull(r, (local321)[:])
+			_, err := io.ReadFull(r, (local305)[:])
 			chk(err)
 		}
 		((*(*(struct {
@@ -33461,9 +32450,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -33471,54 +32457,17 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
-		}))(obj)).ShortDesc) = string(local321)
-		{
-			p := &(*(*(struct {
-				Type ItemType
 
-				Name, Desc string
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
 
-				InvImg, WieldImg Texture
-				WieldScale       [3]float32
+			Pointabilities string
 
-				StackMax uint16
+			HasWearBarParams bool
 
-				Usable          bool
-				CanPointLiquids bool
-
-				ToolCaps ToolCaps
-
-				Groups []Group
-
-				PlacePredict string
-
-				PlaceSnd, PlaceFailSnd SoundDef
-
-				PointRange float32
-
-				// Set index in Palette with "palette_index" item meta field,
-				// this overrides Color.
-				Palette Texture
-				Color   color.NRGBA
-
-				// Texture overlays.
-				InvOverlay, WieldOverlay Texture
-
-				ShortDesc string
-
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
-				SoundUse    SoundDef
-				SoundUseAir SoundDef
-
-				HasPlaceParam2 bool
-
-				//mt:if %s.HasPlaceParam2
-				PlaceParam2 uint8
-			}))(obj)).PlaceParam2Legacy
-			*p = read8(r)
-		}
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
+		}))(obj)).ShortDesc) = string(local305)
 		if err := pcall(func() {
 			((*(*(struct {
 				Type ItemType
@@ -33553,9 +32502,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -33563,6 +32509,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).SoundUse).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -33604,9 +32560,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -33614,6 +32567,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).SoundUseAir).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
@@ -33655,9 +32618,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				ShortDesc string
 
-				// Use PlaceParam2 instead, this is just for serialization.
-				PlaceParam2Legacy uint8
-
 				SoundUse    SoundDef
 				SoundUseAir SoundDef
 
@@ -33665,6 +32625,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 				//mt:if %s.HasPlaceParam2
 				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
 			}))(obj)).HasPlaceParam2
 			switch n := read8(r); n {
 			case 0:
@@ -33708,9 +32678,6 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			ShortDesc string
 
-			// Use PlaceParam2 instead, this is just for serialization.
-			PlaceParam2Legacy uint8
-
 			SoundUse    SoundDef
 			SoundUseAir SoundDef
 
@@ -33718,6 +32685,16 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 			//mt:if %s.HasPlaceParam2
 			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
 		}))(obj)).HasPlaceParam2 {
 			{
 				p := &(*(*(struct {
@@ -33753,8 +32730,353 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 					ShortDesc string
 
-					// Use PlaceParam2 instead, this is just for serialization.
-					PlaceParam2Legacy uint8
+					SoundUse    SoundDef
+					SoundUseAir SoundDef
+
+					HasPlaceParam2 bool
+
+					//mt:if %s.HasPlaceParam2
+					PlaceParam2 uint8
+
+					WallmountedRotateVertical bool
+					TouchInteraction          TouchInteraction
+
+					Pointabilities string
+
+					HasWearBarParams bool
+
+					//mt:if %s.HasWearBarParams
+					WearBarParams WearBarParams
+				}))(obj)).PlaceParam2
+				*p = read8(r)
+			}
+		}
+		{
+			p := &(*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
+			}))(obj)).WallmountedRotateVertical
+			switch n := read8(r); n {
+			case 0:
+				*p = false
+			case 1:
+				*p = true
+			default:
+				chk(fmt.Errorf("invalid bool: %d", n))
+			}
+		}
+		if err := pcall(func() {
+			((*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
+			}))(obj)).TouchInteraction).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TouchInteraction", err))
+		}
+		var local307 []uint8
+		var local308 uint16
+		{
+			p := &local308
+			*p = read16(r)
+		}
+		(local307) = make([]uint8, local308)
+		{
+			_, err := io.ReadFull(r, (local307)[:])
+			chk(err)
+		}
+		((*(*(struct {
+			Type ItemType
+
+			Name, Desc string
+
+			InvImg, WieldImg Texture
+			WieldScale       [3]float32
+
+			StackMax uint16
+
+			Usable          bool
+			CanPointLiquids bool
+
+			ToolCaps ToolCaps
+
+			Groups []Group
+
+			PlacePredict string
+
+			PlaceSnd, PlaceFailSnd SoundDef
+
+			PointRange float32
+
+			// Set index in Palette with "palette_index" item meta field,
+			// this overrides Color.
+			Palette Texture
+			Color   color.NRGBA
+
+			// Texture overlays.
+			InvOverlay, WieldOverlay Texture
+
+			ShortDesc string
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
+		}))(obj)).Pointabilities) = string(local307)
+		{
+			p := &(*(*(struct {
+				Type ItemType
+
+				Name, Desc string
+
+				InvImg, WieldImg Texture
+				WieldScale       [3]float32
+
+				StackMax uint16
+
+				Usable          bool
+				CanPointLiquids bool
+
+				ToolCaps ToolCaps
+
+				Groups []Group
+
+				PlacePredict string
+
+				PlaceSnd, PlaceFailSnd SoundDef
+
+				PointRange float32
+
+				// Set index in Palette with "palette_index" item meta field,
+				// this overrides Color.
+				Palette Texture
+				Color   color.NRGBA
+
+				// Texture overlays.
+				InvOverlay, WieldOverlay Texture
+
+				ShortDesc string
+
+				SoundUse    SoundDef
+				SoundUseAir SoundDef
+
+				HasPlaceParam2 bool
+
+				//mt:if %s.HasPlaceParam2
+				PlaceParam2 uint8
+
+				WallmountedRotateVertical bool
+				TouchInteraction          TouchInteraction
+
+				Pointabilities string
+
+				HasWearBarParams bool
+
+				//mt:if %s.HasWearBarParams
+				WearBarParams WearBarParams
+			}))(obj)).HasWearBarParams
+			switch n := read8(r); n {
+			case 0:
+				*p = false
+			case 1:
+				*p = true
+			default:
+				chk(fmt.Errorf("invalid bool: %d", n))
+			}
+		}
+		if (*(*(struct {
+			Type ItemType
+
+			Name, Desc string
+
+			InvImg, WieldImg Texture
+			WieldScale       [3]float32
+
+			StackMax uint16
+
+			Usable          bool
+			CanPointLiquids bool
+
+			ToolCaps ToolCaps
+
+			Groups []Group
+
+			PlacePredict string
+
+			PlaceSnd, PlaceFailSnd SoundDef
+
+			PointRange float32
+
+			// Set index in Palette with "palette_index" item meta field,
+			// this overrides Color.
+			Palette Texture
+			Color   color.NRGBA
+
+			// Texture overlays.
+			InvOverlay, WieldOverlay Texture
+
+			ShortDesc string
+
+			SoundUse    SoundDef
+			SoundUseAir SoundDef
+
+			HasPlaceParam2 bool
+
+			//mt:if %s.HasPlaceParam2
+			PlaceParam2 uint8
+
+			WallmountedRotateVertical bool
+			TouchInteraction          TouchInteraction
+
+			Pointabilities string
+
+			HasWearBarParams bool
+
+			//mt:if %s.HasWearBarParams
+			WearBarParams WearBarParams
+		}))(obj)).HasWearBarParams {
+			if err := pcall(func() {
+				((*(*(struct {
+					Type ItemType
+
+					Name, Desc string
+
+					InvImg, WieldImg Texture
+					WieldScale       [3]float32
+
+					StackMax uint16
+
+					Usable          bool
+					CanPointLiquids bool
+
+					ToolCaps ToolCaps
+
+					Groups []Group
+
+					PlacePredict string
+
+					PlaceSnd, PlaceFailSnd SoundDef
+
+					PointRange float32
+
+					// Set index in Palette with "palette_index" item meta field,
+					// this overrides Color.
+					Palette Texture
+					Color   color.NRGBA
+
+					// Texture overlays.
+					InvOverlay, WieldOverlay Texture
+
+					ShortDesc string
 
 					SoundUse    SoundDef
 					SoundUseAir SoundDef
@@ -33763,8 +33085,22 @@ func (obj *ItemDef) deserialize(r io.Reader) {
 
 					//mt:if %s.HasPlaceParam2
 					PlaceParam2 uint8
-				}))(obj)).PlaceParam2
-				*p = read8(r)
+
+					WallmountedRotateVertical bool
+					TouchInteraction          TouchInteraction
+
+					Pointabilities string
+
+					HasWearBarParams bool
+
+					//mt:if %s.HasWearBarParams
+					WearBarParams WearBarParams
+				}))(obj)).WearBarParams).deserialize(r)
+			}); err != nil {
+				if err == io.EOF {
+					chk(io.EOF)
+				}
+				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.WearBarParams", err))
 			}
 		}
 		if r.N > 0 {
@@ -33866,7 +33202,7 @@ func (obj *TileAnim) serialize(w io.Writer) {
 		Duration float32 // in seconds
 
 	}))(obj)).Type == VerticalFrameAnim {
-		for local323 := range (*(*(struct {
+		for local309 := range (*(*(struct {
 			Type AnimType
 
 			//mt:if %s.Type == SpriteSheetAnim
@@ -33892,7 +33228,7 @@ func (obj *TileAnim) serialize(w io.Writer) {
 					//mt:if %s.Type != NoAnim
 					Duration float32 // in seconds
 
-				}))(obj)).NFrames)[local323]
+				}))(obj)).NFrames)[local309]
 				write16(w, uint16(x))
 			}
 		}
@@ -34008,7 +33344,7 @@ func (obj *TileAnim) deserialize(r io.Reader) {
 		Duration float32 // in seconds
 
 	}))(obj)).Type == VerticalFrameAnim {
-		for local324 := range (*(*(struct {
+		for local310 := range (*(*(struct {
 			Type AnimType
 
 			//mt:if %s.Type == SpriteSheetAnim
@@ -34034,7 +33370,7 @@ func (obj *TileAnim) deserialize(r io.Reader) {
 					//mt:if %s.Type != NoAnim
 					Duration float32 // in seconds
 
-				}))(obj)).NFrames)[local324]
+				}))(obj)).NFrames)[local310]
 				*p = read16(r)
 			}
 		}
@@ -34071,74 +33407,6 @@ func (obj *TileAnim) deserialize(r io.Reader) {
 	}
 }
 
-func (obj *RangeV3F32) serialize(w io.Writer) {
-	for local325 := range (*(*(struct {
-		Min, Max [3]float32
-		Bias     float32
-	}))(obj)).Min {
-		{
-			x := ((*(*(struct {
-				Min, Max [3]float32
-				Bias     float32
-			}))(obj)).Min)[local325]
-			write32(w, math.Float32bits(x))
-		}
-	}
-	for local326 := range (*(*(struct {
-		Min, Max [3]float32
-		Bias     float32
-	}))(obj)).Max {
-		{
-			x := ((*(*(struct {
-				Min, Max [3]float32
-				Bias     float32
-			}))(obj)).Max)[local326]
-			write32(w, math.Float32bits(x))
-		}
-	}
-	{
-		x := (*(*(struct {
-			Min, Max [3]float32
-			Bias     float32
-		}))(obj)).Bias
-		write32(w, math.Float32bits(x))
-	}
-}
-
-func (obj *RangeV3F32) deserialize(r io.Reader) {
-	for local327 := range (*(*(struct {
-		Min, Max [3]float32
-		Bias     float32
-	}))(obj)).Min {
-		{
-			p := &((*(*(struct {
-				Min, Max [3]float32
-				Bias     float32
-			}))(obj)).Min)[local327]
-			*p = math.Float32frombits(read32(r))
-		}
-	}
-	for local328 := range (*(*(struct {
-		Min, Max [3]float32
-		Bias     float32
-	}))(obj)).Max {
-		{
-			p := &((*(*(struct {
-				Min, Max [3]float32
-				Bias     float32
-			}))(obj)).Max)[local328]
-			*p = math.Float32frombits(read32(r))
-		}
-	}
-	{
-		p := &(*(*(struct {
-			Min, Max [3]float32
-			Bias     float32
-		}))(obj)).Bias
-		*p = math.Float32frombits(read32(r))
-	}
-}
-
 func (obj *Content) serialize(w io.Writer) {
 	{
 		x := *(*(uint16))(obj)
@@ -34153,183 +33421,119 @@ func (obj *Content) deserialize(r io.Reader) {
 	}
 }
 
-func (obj *ParticleSpawnerID) serialize(w io.Writer) {
-	{
-		x := *(*(uint32))(obj)
-		write32(w, uint32(x))
-	}
-}
-
-func (obj *ParticleSpawnerID) deserialize(r io.Reader) {
-	{
-		p := &*(*(uint32))(obj)
-		*p = read32(r)
-	}
-}
-
-func (obj *TweenRangeV3F32) serialize(w io.Writer) {
-	if err := pcall(func() {
-		((*(*(struct {
-			Start, End RangeV3F32
-		}))(obj)).Start).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Start, End RangeV3F32
-		}))(obj)).End).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-	}
-}
-
-func (obj *TweenRangeV3F32) deserialize(r io.Reader) {
-	if err := pcall(func() {
-		((*(*(struct {
-			Start, End RangeV3F32
-		}))(obj)).Start).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Start, End RangeV3F32
-		}))(obj)).End).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
-	}
-}
-
-func (obj *TweenRangeF32) serialize(w io.Writer) {
-	if err := pcall(func() {
-		((*(*(struct {
-			Start, End RangeF32
-		}))(obj)).Start).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Start, End RangeF32
-		}))(obj)).End).serialize(w)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
-	}
-}
-
-func (obj *TweenRangeF32) deserialize(r io.Reader) {
-	if err := pcall(func() {
-		((*(*(struct {
-			Start, End RangeF32
-		}))(obj)).Start).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
-	}
-	if err := pcall(func() {
-		((*(*(struct {
-			Start, End RangeF32
-		}))(obj)).End).deserialize(r)
-	}); err != nil {
-		if err == io.EOF {
-			chk(io.EOF)
-		}
-		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
-	}
-}
-
-func (obj *AttractionKind) serialize(w io.Writer) {
-	{
-		x := *(*(uint8))(obj)
-		write8(w, uint8(x))
-	}
-}
-
-func (obj *AttractionKind) deserialize(r io.Reader) {
-	{
-		p := &*(*(uint8))(obj)
-		*p = read8(r)
-	}
-}
-
-func (obj *TweenV3F32) serialize(w io.Writer) {
-	for local329 := range (*(*(struct {
-		Start, End [3]float32
-	}))(obj)).Start {
+func (obj *RangeV3F32) serialize(w io.Writer) {
+	for local311 := range (*(*(struct {
+		Min, Max [3]float32
+		Bias     float32
+	}))(obj)).Min {
 		{
 			x := ((*(*(struct {
-				Start, End [3]float32
-			}))(obj)).Start)[local329]
+				Min, Max [3]float32
+				Bias     float32
+			}))(obj)).Min)[local311]
 			write32(w, math.Float32bits(x))
 		}
 	}
-	for local330 := range (*(*(struct {
-		Start, End [3]float32
-	}))(obj)).End {
+	for local312 := range (*(*(struct {
+		Min, Max [3]float32
+		Bias     float32
+	}))(obj)).Max {
 		{
 			x := ((*(*(struct {
-				Start, End [3]float32
-			}))(obj)).End)[local330]
+				Min, Max [3]float32
+				Bias     float32
+			}))(obj)).Max)[local312]
 			write32(w, math.Float32bits(x))
 		}
 	}
+	{
+		x := (*(*(struct {
+			Min, Max [3]float32
+			Bias     float32
+		}))(obj)).Bias
+		write32(w, math.Float32bits(x))
+	}
 }
 
-func (obj *TweenV3F32) deserialize(r io.Reader) {
-	for local331 := range (*(*(struct {
-		Start, End [3]float32
-	}))(obj)).Start {
+func (obj *RangeV3F32) deserialize(r io.Reader) {
+	for local313 := range (*(*(struct {
+		Min, Max [3]float32
+		Bias     float32
+	}))(obj)).Min {
 		{
 			p := &((*(*(struct {
-				Start, End [3]float32
-			}))(obj)).Start)[local331]
+				Min, Max [3]float32
+				Bias     float32
+			}))(obj)).Min)[local313]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	for local332 := range (*(*(struct {
-		Start, End [3]float32
-	}))(obj)).End {
+	for local314 := range (*(*(struct {
+		Min, Max [3]float32
+		Bias     float32
+	}))(obj)).Max {
 		{
 			p := &((*(*(struct {
-				Start, End [3]float32
-			}))(obj)).End)[local332]
+				Min, Max [3]float32
+				Bias     float32
+			}))(obj)).Max)[local314]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-}
-
-func (obj *ParticleSpawnerFlags) serialize(w io.Writer) {
 	{
-		x := *(*(uint8))(obj)
-		write8(w, uint8(x))
+		p := &(*(*(struct {
+			Min, Max [3]float32
+			Bias     float32
+		}))(obj)).Bias
+		*p = math.Float32frombits(read32(r))
 	}
 }
 
-func (obj *ParticleSpawnerFlags) deserialize(r io.Reader) {
+func (obj *RangeF32) serialize(w io.Writer) {
 	{
-		p := &*(*(uint8))(obj)
-		*p = read8(r)
+		x := (*(*(struct {
+			Min, Max float32
+			Bias     float32
+		}))(obj)).Min
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Min, Max float32
+			Bias     float32
+		}))(obj)).Max
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Min, Max float32
+			Bias     float32
+		}))(obj)).Bias
+		write32(w, math.Float32bits(x))
+	}
+}
+
+func (obj *RangeF32) deserialize(r io.Reader) {
+	{
+		p := &(*(*(struct {
+			Min, Max float32
+			Bias     float32
+		}))(obj)).Min
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Min, Max float32
+			Bias     float32
+		}))(obj)).Max
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Min, Max float32
+			Bias     float32
+		}))(obj)).Bias
+		*p = math.Float32frombits(read32(r))
 	}
 }
 
@@ -34477,6 +33681,420 @@ func (obj *ParticleTexture) deserialize(r io.Reader) {
 	}
 }
 
+func (obj *TweenRangeV3F32) serialize(w io.Writer) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeV3F32
+		}))(obj)).Style).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenStyle", err))
+	}
+	{
+		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeV3F32
+		}))(obj)).Reps
+		write16(w, uint16(x))
+	}
+	{
+		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeV3F32
+		}))(obj)).Beginning
+		write32(w, math.Float32bits(x))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeV3F32
+		}))(obj)).Start).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeV3F32
+		}))(obj)).End).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
+	}
+}
+
+func (obj *TweenRangeV3F32) deserialize(r io.Reader) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeV3F32
+		}))(obj)).Style).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenStyle", err))
+	}
+	{
+		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeV3F32
+		}))(obj)).Reps
+		*p = read16(r)
+	}
+	{
+		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeV3F32
+		}))(obj)).Beginning
+		*p = math.Float32frombits(read32(r))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeV3F32
+		}))(obj)).Start).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeV3F32
+		}))(obj)).End).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeV3F32", err))
+	}
+}
+
+func (obj *TweenRangeF32) serialize(w io.Writer) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeF32
+		}))(obj)).Style).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenStyle", err))
+	}
+	{
+		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeF32
+		}))(obj)).Reps
+		write16(w, uint16(x))
+	}
+	{
+		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeF32
+		}))(obj)).Beginning
+		write32(w, math.Float32bits(x))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeF32
+		}))(obj)).Start).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeF32
+		}))(obj)).End).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
+	}
+}
+
+func (obj *TweenRangeF32) deserialize(r io.Reader) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeF32
+		}))(obj)).Style).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenStyle", err))
+	}
+	{
+		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeF32
+		}))(obj)).Reps
+		*p = read16(r)
+	}
+	{
+		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeF32
+		}))(obj)).Beginning
+		*p = math.Float32frombits(read32(r))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeF32
+		}))(obj)).Start).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End RangeF32
+		}))(obj)).End).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.RangeF32", err))
+	}
+}
+
+func (obj *ParticleSpawnerID) serialize(w io.Writer) {
+	{
+		x := *(*(uint32))(obj)
+		write32(w, uint32(x))
+	}
+}
+
+func (obj *ParticleSpawnerID) deserialize(r io.Reader) {
+	{
+		p := &*(*(uint32))(obj)
+		*p = read32(r)
+	}
+}
+
+func (obj *AttractionKind) serialize(w io.Writer) {
+	{
+		x := *(*(uint8))(obj)
+		write8(w, uint8(x))
+	}
+}
+
+func (obj *AttractionKind) deserialize(r io.Reader) {
+	{
+		p := &*(*(uint8))(obj)
+		*p = read8(r)
+	}
+}
+
+func (obj *TweenV3F32) serialize(w io.Writer) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [3]float32
+		}))(obj)).Style).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenStyle", err))
+	}
+	{
+		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [3]float32
+		}))(obj)).Reps
+		write16(w, uint16(x))
+	}
+	{
+		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [3]float32
+		}))(obj)).Beginning
+		write32(w, math.Float32bits(x))
+	}
+	for local315 := range (*(*(struct {
+		Style      TweenStyle
+		Reps       uint16
+		Beginning  float32
+		Start, End [3]float32
+	}))(obj)).Start {
+		{
+			x := ((*(*(struct {
+				Style      TweenStyle
+				Reps       uint16
+				Beginning  float32
+				Start, End [3]float32
+			}))(obj)).Start)[local315]
+			write32(w, math.Float32bits(x))
+		}
+	}
+	for local316 := range (*(*(struct {
+		Style      TweenStyle
+		Reps       uint16
+		Beginning  float32
+		Start, End [3]float32
+	}))(obj)).End {
+		{
+			x := ((*(*(struct {
+				Style      TweenStyle
+				Reps       uint16
+				Beginning  float32
+				Start, End [3]float32
+			}))(obj)).End)[local316]
+			write32(w, math.Float32bits(x))
+		}
+	}
+}
+
+func (obj *TweenV3F32) deserialize(r io.Reader) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [3]float32
+		}))(obj)).Style).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenStyle", err))
+	}
+	{
+		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [3]float32
+		}))(obj)).Reps
+		*p = read16(r)
+	}
+	{
+		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [3]float32
+		}))(obj)).Beginning
+		*p = math.Float32frombits(read32(r))
+	}
+	for local317 := range (*(*(struct {
+		Style      TweenStyle
+		Reps       uint16
+		Beginning  float32
+		Start, End [3]float32
+	}))(obj)).Start {
+		{
+			p := &((*(*(struct {
+				Style      TweenStyle
+				Reps       uint16
+				Beginning  float32
+				Start, End [3]float32
+			}))(obj)).Start)[local317]
+			*p = math.Float32frombits(read32(r))
+		}
+	}
+	for local318 := range (*(*(struct {
+		Style      TweenStyle
+		Reps       uint16
+		Beginning  float32
+		Start, End [3]float32
+	}))(obj)).End {
+		{
+			p := &((*(*(struct {
+				Style      TweenStyle
+				Reps       uint16
+				Beginning  float32
+				Start, End [3]float32
+			}))(obj)).End)[local318]
+			*p = math.Float32frombits(read32(r))
+		}
+	}
+}
+
+func (obj *ParticleSpawnerFlags) serialize(w io.Writer) {
+	{
+		x := *(*(uint8))(obj)
+		write8(w, uint8(x))
+	}
+}
+
+func (obj *ParticleSpawnerFlags) deserialize(r io.Reader) {
+	{
+		p := &*(*(uint8))(obj)
+		*p = read8(r)
+	}
+}
+
 func (obj *HUDID) serialize(w io.Writer) {
 	{
 		x := *(*(uint32))(obj)
@@ -34517,7 +34135,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDType", err))
 	}
-	for local333 := range (*(*(struct {
+	for local319 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -34553,7 +34171,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Pos)[local333]
+			}))(obj)).Pos)[local319]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -34619,7 +34237,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		}))(obj)).Name))[:])
 		chk(err)
 	}
-	for local334 := range (*(*(struct {
+	for local320 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -34655,7 +34273,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Scale)[local334]
+			}))(obj)).Scale)[local320]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -34784,7 +34402,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		}))(obj)).Dir
 		write32(w, uint32(x))
 	}
-	for local335 := range (*(*(struct {
+	for local321 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -34820,11 +34438,11 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Align)[local335]
+			}))(obj)).Align)[local321]
 			write32(w, math.Float32bits(x))
 		}
 	}
-	for local336 := range (*(*(struct {
+	for local322 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -34860,7 +34478,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Offset)[local336]
+			}))(obj)).Offset)[local322]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -34889,7 +34507,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
-	for local337 := range (*(*(struct {
+	for local323 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -34925,7 +34543,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Size)[local337]
+			}))(obj)).Size)[local323]
 			write32(w, uint32(x))
 		}
 	}
@@ -35065,7 +34683,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDType", err))
 	}
-	for local338 := range (*(*(struct {
+	for local324 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -35101,19 +34719,19 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Pos)[local338]
+			}))(obj)).Pos)[local324]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	var local339 []uint8
-	var local340 uint16
+	var local325 []uint8
+	var local326 uint16
 	{
-		p := &local340
+		p := &local326
 		*p = read16(r)
 	}
-	(local339) = make([]uint8, local340)
+	(local325) = make([]uint8, local326)
 	{
-		_, err := io.ReadFull(r, (local339)[:])
+		_, err := io.ReadFull(r, (local325)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -35133,8 +34751,8 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
-	}))(obj)).Name) = string(local339)
-	for local341 := range (*(*(struct {
+	}))(obj)).Name) = string(local325)
+	for local327 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -35170,19 +34788,19 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Scale)[local341]
+			}))(obj)).Scale)[local327]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	var local342 []uint8
-	var local343 uint16
+	var local328 []uint8
+	var local329 uint16
 	{
-		p := &local343
+		p := &local329
 		*p = read16(r)
 	}
-	(local342) = make([]uint8, local343)
+	(local328) = make([]uint8, local329)
 	{
-		_, err := io.ReadFull(r, (local342)[:])
+		_, err := io.ReadFull(r, (local328)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -35202,7 +34820,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
-	}))(obj)).Text) = string(local342)
+	}))(obj)).Text) = string(local328)
 	{
 		p := &(*(*(struct {
 			Type HUDType
@@ -35266,7 +34884,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		}))(obj)).Dir
 		*p = read32(r)
 	}
-	for local344 := range (*(*(struct {
+	for local330 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -35302,11 +34920,11 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Align)[local344]
+			}))(obj)).Align)[local330]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	for local345 := range (*(*(struct {
+	for local331 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -35342,7 +34960,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Offset)[local345]
+			}))(obj)).Offset)[local331]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -35371,7 +34989,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
-	for local346 := range (*(*(struct {
+	for local332 := range (*(*(struct {
 		Type HUDType
 
 		Pos      [2]float32
@@ -35407,7 +35025,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
-			}))(obj)).Size)[local346]
+			}))(obj)).Size)[local332]
 			*p = int32(read32(r))
 		}
 	}
@@ -35432,15 +35050,15 @@ func (obj *HUD) deserialize(r io.Reader) {
 		}))(obj)).ZIndex
 		*p = int16(read16(r))
 	}
-	var local347 []uint8
-	var local348 uint16
+	var local333 []uint8
+	var local334 uint16
 	{
-		p := &local348
+		p := &local334
 		*p = read16(r)
 	}
-	(local347) = make([]uint8, local348)
+	(local333) = make([]uint8, local334)
 	{
-		_, err := io.ReadFull(r, (local347)[:])
+		_, err := io.ReadFull(r, (local333)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -35460,7 +35078,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
-	}))(obj)).Text2) = string(local347)
+	}))(obj)).Text2) = string(local333)
 	if err := pcall(func() {
 		((*(*(struct {
 			Type HUDType
@@ -35559,18 +35177,18 @@ func (obj *Texture) serialize(w io.Writer) {
 }
 
 func (obj *Texture) deserialize(r io.Reader) {
-	var local349 []uint8
-	var local350 uint16
+	var local335 []uint8
+	var local336 uint16
 	{
-		p := &local350
+		p := &local336
 		*p = read16(r)
 	}
-	(local349) = make([]uint8, local350)
+	(local335) = make([]uint8, local336)
 	{
-		_, err := io.ReadFull(r, (local349)[:])
+		_, err := io.ReadFull(r, (local335)[:])
 		chk(err)
 	}
-	(*(*(string))(obj)) = string(local349)
+	(*(*(string))(obj)) = string(local335)
 }
 
 func (obj *PlayerListUpdateType) serialize(w io.Writer) {
@@ -35603,9 +35221,9 @@ func (obj *ModChanSig) deserialize(r io.Reader) {
 
 func (obj *AOProps) serialize(w io.Writer) {
 	{
-		local351 := uint8(4)
+		local337 := uint8(4)
 		{
-			x := local351
+			x := local337
 			write8(w, uint8(x))
 		}
 	}
@@ -35615,7 +35233,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -35655,7 +35273,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -35699,7 +35317,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -35739,7 +35357,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -35783,7 +35401,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -35821,13 +35439,13 @@ func (obj *AOProps) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 	}
-	{
-		x := (*(*(struct {
+	if err := pcall(func() {
+		((*(*(struct {
 			MaxHP            uint16 // Player only.
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -35858,19 +35476,19 @@ func (obj *AOProps) serialize(w io.Writer) {
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
 			RotateSelBox     bool
-		}))(obj)).Pointable
-		if x {
-			write8(w, 1)
-		} else {
-			write8(w, 0)
+		}))(obj)).Pointable).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
 		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PointabilityType", err))
 	}
 	if len(([]byte((*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -35910,7 +35528,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -35950,7 +35568,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -35984,12 +35602,12 @@ func (obj *AOProps) serialize(w io.Writer) {
 		}))(obj)).Visual))[:])
 		chk(err)
 	}
-	for local352 := range (*(*(struct {
+	for local338 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -36027,7 +35645,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				CollideWithNodes bool
 				Weight           float32 // deprecated
 				ColBox, SelBox   Box
-				Pointable        bool
+				Pointable        PointabilityType
 				Visual           string
 				VisualSize       [3]float32
 				Textures         []Texture
@@ -36058,7 +35676,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
 				RotateSelBox     bool
-			}))(obj)).VisualSize)[local352]
+			}))(obj)).VisualSize)[local338]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -36067,7 +35685,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -36107,7 +35725,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -36141,12 +35759,12 @@ func (obj *AOProps) serialize(w io.Writer) {
 		}))(obj)).Textures)))
 		write16(w, uint16(x))
 	}
-	for local353 := range (*(*(struct {
+	for local339 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -36184,7 +35802,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				CollideWithNodes bool
 				Weight           float32 // deprecated
 				ColBox, SelBox   Box
-				Pointable        bool
+				Pointable        PointabilityType
 				Visual           string
 				VisualSize       [3]float32
 				Textures         []Texture
@@ -36215,7 +35833,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
 				RotateSelBox     bool
-			}))(obj)).Textures)[local353]).serialize(w)
+			}))(obj)).Textures)[local339]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -36223,12 +35841,12 @@ func (obj *AOProps) serialize(w io.Writer) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 	}
-	for local354 := range (*(*(struct {
+	for local340 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -36266,7 +35884,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				CollideWithNodes bool
 				Weight           float32 // deprecated
 				ColBox, SelBox   Box
-				Pointable        bool
+				Pointable        PointabilityType
 				Visual           string
 				VisualSize       [3]float32
 				Textures         []Texture
@@ -36297,16 +35915,16 @@ func (obj *AOProps) serialize(w io.Writer) {
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
 				RotateSelBox     bool
-			}))(obj)).SpriteSheetSize)[local354]
+			}))(obj)).SpriteSheetSize)[local340]
 			write16(w, uint16(x))
 		}
 	}
-	for local355 := range (*(*(struct {
+	for local341 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -36344,7 +35962,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				CollideWithNodes bool
 				Weight           float32 // deprecated
 				ColBox, SelBox   Box
-				Pointable        bool
+				Pointable        PointabilityType
 				Visual           string
 				VisualSize       [3]float32
 				Textures         []Texture
@@ -36375,7 +35993,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
 				RotateSelBox     bool
-			}))(obj)).SpritePos)[local355]
+			}))(obj)).SpritePos)[local341]
 			write16(w, uint16(x))
 		}
 	}
@@ -36385,7 +36003,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -36429,7 +36047,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -36473,7 +36091,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -36512,7 +36130,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -36552,7 +36170,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -36592,7 +36210,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -36631,7 +36249,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -36671,7 +36289,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -36705,12 +36323,12 @@ func (obj *AOProps) serialize(w io.Writer) {
 		}))(obj)).Colors)))
 		write16(w, uint16(x))
 	}
-	for local356 := range (*(*(struct {
+	for local342 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -36748,7 +36366,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				CollideWithNodes bool
 				Weight           float32 // deprecated
 				ColBox, SelBox   Box
-				Pointable        bool
+				Pointable        PointabilityType
 				Visual           string
 				VisualSize       [3]float32
 				Textures         []Texture
@@ -36779,7 +36397,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
 				RotateSelBox     bool
-			}))(obj)).Colors)[local356]
+			}))(obj)).Colors)[local342]
 			w.Write([]byte{x.A, x.R, x.G, x.B})
 		}
 	}
@@ -36789,7 +36407,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -36833,7 +36451,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -36873,7 +36491,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -36917,7 +36535,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -36957,7 +36575,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37000,7 +36618,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -37040,7 +36658,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37080,7 +36698,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37120,7 +36738,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37160,7 +36778,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37199,7 +36817,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -37239,7 +36857,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37279,7 +36897,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37318,7 +36936,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -37358,7 +36976,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37398,7 +37016,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37438,7 +37056,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37478,7 +37096,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37518,7 +37136,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37558,7 +37176,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37598,7 +37216,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37642,7 +37260,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37686,7 +37304,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37730,7 +37348,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37774,7 +37392,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37814,7 +37432,7 @@ func (obj *AOProps) serialize(w io.Writer) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37856,14 +37474,14 @@ func (obj *AOProps) serialize(w io.Writer) {
 
 func (obj *AOProps) deserialize(r io.Reader) {
 	{
-		var local357 uint8
-		local358 := uint8(4)
+		var local343 uint8
+		local344 := uint8(4)
 		{
-			p := &local357
+			p := &local343
 			*p = read8(r)
 		}
-		if local357 != local358 {
-			chk(fmt.Errorf("const %v: %v", "uint8(4)", local357))
+		if local343 != local344 {
+			chk(fmt.Errorf("const %v: %v", "uint8(4)", local343))
 		}
 	}
 	{
@@ -37872,7 +37490,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37912,7 +37530,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37959,7 +37577,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -37999,7 +37617,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -38043,7 +37661,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -38081,13 +37699,13 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 	}
-	{
-		p := &(*(*(struct {
+	if err := pcall(func() {
+		((*(*(struct {
 			MaxHP            uint16 // Player only.
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -38118,25 +37736,22 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			ShowOnMinimap    bool
 			NametagBG        color.NRGBA
 			RotateSelBox     bool
-		}))(obj)).Pointable
-		switch n := read8(r); n {
-		case 0:
-			*p = false
-		case 1:
-			*p = true
-		default:
-			chk(fmt.Errorf("invalid bool: %d", n))
+		}))(obj)).Pointable).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
 		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PointabilityType", err))
 	}
-	var local359 []uint8
-	var local360 uint16
+	var local345 []uint8
+	var local346 uint16
 	{
-		p := &local360
+		p := &local346
 		*p = read16(r)
 	}
-	(local359) = make([]uint8, local360)
+	(local345) = make([]uint8, local346)
 	{
-		_, err := io.ReadFull(r, (local359)[:])
+		_, err := io.ReadFull(r, (local345)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -38144,7 +37759,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -38175,13 +37790,13 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
 		RotateSelBox     bool
-	}))(obj)).Visual) = string(local359)
-	for local361 := range (*(*(struct {
+	}))(obj)).Visual) = string(local345)
+	for local347 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -38219,7 +37834,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				CollideWithNodes bool
 				Weight           float32 // deprecated
 				ColBox, SelBox   Box
-				Pointable        bool
+				Pointable        PointabilityType
 				Visual           string
 				VisualSize       [3]float32
 				Textures         []Texture
@@ -38250,13 +37865,13 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
 				RotateSelBox     bool
-			}))(obj)).VisualSize)[local361]
+			}))(obj)).VisualSize)[local347]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	var local362 uint16
+	var local348 uint16
 	{
-		p := &local362
+		p := &local348
 		*p = read16(r)
 	}
 	((*(*(struct {
@@ -38264,7 +37879,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -38295,13 +37910,13 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
 		RotateSelBox     bool
-	}))(obj)).Textures) = make([]Texture, local362)
-	for local363 := range (*(*(struct {
+	}))(obj)).Textures) = make([]Texture, local348)
+	for local349 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -38339,7 +37954,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				CollideWithNodes bool
 				Weight           float32 // deprecated
 				ColBox, SelBox   Box
-				Pointable        bool
+				Pointable        PointabilityType
 				Visual           string
 				VisualSize       [3]float32
 				Textures         []Texture
@@ -38370,7 +37985,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
 				RotateSelBox     bool
-			}))(obj)).Textures)[local363]).deserialize(r)
+			}))(obj)).Textures)[local349]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -38378,12 +37993,12 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Texture", err))
 		}
 	}
-	for local364 := range (*(*(struct {
+	for local350 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -38421,7 +38036,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				CollideWithNodes bool
 				Weight           float32 // deprecated
 				ColBox, SelBox   Box
-				Pointable        bool
+				Pointable        PointabilityType
 				Visual           string
 				VisualSize       [3]float32
 				Textures         []Texture
@@ -38452,16 +38067,16 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
 				RotateSelBox     bool
-			}))(obj)).SpriteSheetSize)[local364]
+			}))(obj)).SpriteSheetSize)[local350]
 			*p = int16(read16(r))
 		}
 	}
-	for local365 := range (*(*(struct {
+	for local351 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -38499,7 +38114,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				CollideWithNodes bool
 				Weight           float32 // deprecated
 				ColBox, SelBox   Box
-				Pointable        bool
+				Pointable        PointabilityType
 				Visual           string
 				VisualSize       [3]float32
 				Textures         []Texture
@@ -38530,7 +38145,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
 				RotateSelBox     bool
-			}))(obj)).SpritePos)[local365]
+			}))(obj)).SpritePos)[local351]
 			*p = int16(read16(r))
 		}
 	}
@@ -38540,7 +38155,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -38587,7 +38202,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -38634,7 +38249,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -38668,15 +38283,15 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		}))(obj)).RotateSpeed
 		*p = math.Float32frombits(read32(r))
 	}
-	var local366 []uint8
-	var local367 uint16
+	var local352 []uint8
+	var local353 uint16
 	{
-		p := &local367
+		p := &local353
 		*p = read16(r)
 	}
-	(local366) = make([]uint8, local367)
+	(local352) = make([]uint8, local353)
 	{
-		_, err := io.ReadFull(r, (local366)[:])
+		_, err := io.ReadFull(r, (local352)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -38684,7 +38299,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -38715,10 +38330,10 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
 		RotateSelBox     bool
-	}))(obj)).Mesh) = string(local366)
-	var local368 uint16
+	}))(obj)).Mesh) = string(local352)
+	var local354 uint16
 	{
-		p := &local368
+		p := &local354
 		*p = read16(r)
 	}
 	((*(*(struct {
@@ -38726,7 +38341,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -38757,13 +38372,13 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
 		RotateSelBox     bool
-	}))(obj)).Colors) = make([]color.NRGBA, local368)
-	for local369 := range (*(*(struct {
+	}))(obj)).Colors) = make([]color.NRGBA, local354)
+	for local355 := range (*(*(struct {
 		MaxHP            uint16 // Player only.
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -38801,7 +38416,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				CollideWithNodes bool
 				Weight           float32 // deprecated
 				ColBox, SelBox   Box
-				Pointable        bool
+				Pointable        PointabilityType
 				Visual           string
 				VisualSize       [3]float32
 				Textures         []Texture
@@ -38832,7 +38447,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 				ShowOnMinimap    bool
 				NametagBG        color.NRGBA
 				RotateSelBox     bool
-			}))(obj)).Colors)[local369]
+			}))(obj)).Colors)[local355]
 			*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 		}
 	}
@@ -38842,7 +38457,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -38889,7 +38504,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -38929,7 +38544,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -38976,7 +38591,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39016,7 +38631,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39057,15 +38672,15 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			chk(fmt.Errorf("invalid bool: %d", n))
 		}
 	}
-	var local370 []uint8
-	var local371 uint16
+	var local356 []uint8
+	var local357 uint16
 	{
-		p := &local371
+		p := &local357
 		*p = read16(r)
 	}
-	(local370) = make([]uint8, local371)
+	(local356) = make([]uint8, local357)
 	{
-		_, err := io.ReadFull(r, (local370)[:])
+		_, err := io.ReadFull(r, (local356)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -39073,7 +38688,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -39104,14 +38719,14 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
 		RotateSelBox     bool
-	}))(obj)).Nametag) = string(local370)
+	}))(obj)).Nametag) = string(local356)
 	{
 		p := &(*(*(struct {
 			MaxHP            uint16 // Player only.
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39151,7 +38766,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39185,15 +38800,15 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		}))(obj)).FaceRotateSpeed
 		*p = math.Float32frombits(read32(r))
 	}
-	var local372 []uint8
-	var local373 uint16
+	var local358 []uint8
+	var local359 uint16
 	{
-		p := &local373
+		p := &local359
 		*p = read16(r)
 	}
-	(local372) = make([]uint8, local373)
+	(local358) = make([]uint8, local359)
 	{
-		_, err := io.ReadFull(r, (local372)[:])
+		_, err := io.ReadFull(r, (local358)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -39201,7 +38816,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -39232,16 +38847,16 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
 		RotateSelBox     bool
-	}))(obj)).Infotext) = string(local372)
-	var local374 []uint8
-	var local375 uint16
+	}))(obj)).Infotext) = string(local358)
+	var local360 []uint8
+	var local361 uint16
 	{
-		p := &local375
+		p := &local361
 		*p = read16(r)
 	}
-	(local374) = make([]uint8, local375)
+	(local360) = make([]uint8, local361)
 	{
-		_, err := io.ReadFull(r, (local374)[:])
+		_, err := io.ReadFull(r, (local360)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -39249,7 +38864,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		CollideWithNodes bool
 		Weight           float32 // deprecated
 		ColBox, SelBox   Box
-		Pointable        bool
+		Pointable        PointabilityType
 		Visual           string
 		VisualSize       [3]float32
 		Textures         []Texture
@@ -39280,14 +38895,14 @@ func (obj *AOProps) deserialize(r io.Reader) {
 		ShowOnMinimap    bool
 		NametagBG        color.NRGBA
 		RotateSelBox     bool
-	}))(obj)).Itemstring) = string(local374)
+	}))(obj)).Itemstring) = string(local360)
 	{
 		p := &(*(*(struct {
 			MaxHP            uint16 // Player only.
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39327,7 +38942,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39367,7 +38982,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39407,7 +39022,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39447,7 +39062,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39494,7 +39109,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39538,7 +39153,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39585,7 +39200,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39632,7 +39247,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39672,7 +39287,7 @@ func (obj *AOProps) deserialize(r io.Reader) {
 			CollideWithNodes bool
 			Weight           float32 // deprecated
 			ColBox, SelBox   Box
-			Pointable        bool
+			Pointable        PointabilityType
 			Visual           string
 			VisualSize       [3]float32
 			Textures         []Texture
@@ -39764,7 +39379,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local376 := range (*(*(struct {
+	for local362 := range (*(*(struct {
 		Pos
 		Vel, Acc Vec
 		Rot      [3]float32
@@ -39782,7 +39397,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 				Interpolate    bool
 				End            bool
 				UpdateInterval float32
-			}))(obj)).Rot)[local376]
+			}))(obj)).Rot)[local362]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -39881,7 +39496,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local377 := range (*(*(struct {
+	for local363 := range (*(*(struct {
 		Pos
 		Vel, Acc Vec
 		Rot      [3]float32
@@ -39899,7 +39514,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 				Interpolate    bool
 				End            bool
 				UpdateInterval float32
-			}))(obj)).Rot)[local377]
+			}))(obj)).Rot)[local363]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -39956,7 +39571,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 }
 
 func (obj *AOSprite) serialize(w io.Writer) {
-	for local378 := range (*(*(struct {
+	for local364 := range (*(*(struct {
 		Frame0          [2]int16
 		Frames          uint16
 		FrameDuration   float32
@@ -39968,7 +39583,7 @@ func (obj *AOSprite) serialize(w io.Writer) {
 				Frames          uint16
 				FrameDuration   float32
 				ViewAngleFrames bool
-			}))(obj)).Frame0)[local378]
+			}))(obj)).Frame0)[local364]
 			write16(w, uint16(x))
 		}
 	}
@@ -40006,7 +39621,7 @@ func (obj *AOSprite) serialize(w io.Writer) {
 }
 
 func (obj *AOSprite) deserialize(r io.Reader) {
-	for local379 := range (*(*(struct {
+	for local365 := range (*(*(struct {
 		Frame0          [2]int16
 		Frames          uint16
 		FrameDuration   float32
@@ -40018,7 +39633,7 @@ func (obj *AOSprite) deserialize(r io.Reader) {
 				Frames          uint16
 				FrameDuration   float32
 				ViewAngleFrames bool
-			}))(obj)).Frame0)[local379]
+			}))(obj)).Frame0)[local365]
 			*p = int16(read16(r))
 		}
 	}
@@ -40089,21 +39704,21 @@ func (obj *Group) serialize(w io.Writer) {
 }
 
 func (obj *Group) deserialize(r io.Reader) {
-	var local380 []uint8
-	var local381 uint16
+	var local366 []uint8
+	var local367 uint16
 	{
-		p := &local381
+		p := &local367
 		*p = read16(r)
 	}
-	(local380) = make([]uint8, local381)
+	(local366) = make([]uint8, local367)
 	{
-		_, err := io.ReadFull(r, (local380)[:])
+		_, err := io.ReadFull(r, (local366)[:])
 		chk(err)
 	}
 	((*(*(struct {
 		Name   string
 		Rating int16
-	}))(obj)).Name) = string(local380)
+	}))(obj)).Name) = string(local366)
 	{
 		p := &(*(*(struct {
 			Name   string
@@ -40114,7 +39729,7 @@ func (obj *Group) deserialize(r io.Reader) {
 }
 
 func (obj *AOAnim) serialize(w io.Writer) {
-	for local382 := range (*(*(struct {
+	for local368 := range (*(*(struct {
 		Frames [2]int32
 		Speed  float32
 		Blend  float32
@@ -40126,7 +39741,7 @@ func (obj *AOAnim) serialize(w io.Writer) {
 				Speed  float32
 				Blend  float32
 				NoLoop bool
-			}))(obj)).Frames)[local382]
+			}))(obj)).Frames)[local368]
 			write32(w, uint32(x))
 		}
 	}
@@ -40164,7 +39779,7 @@ func (obj *AOAnim) serialize(w io.Writer) {
 }
 
 func (obj *AOAnim) deserialize(r io.Reader) {
-	for local383 := range (*(*(struct {
+	for local369 := range (*(*(struct {
 		Frames [2]int32
 		Speed  float32
 		Blend  float32
@@ -40176,7 +39791,7 @@ func (obj *AOAnim) deserialize(r io.Reader) {
 				Speed  float32
 				Blend  float32
 				NoLoop bool
-			}))(obj)).Frames)[local383]
+			}))(obj)).Frames)[local369]
 			*p = int32(read32(r))
 		}
 	}
@@ -40216,11 +39831,16 @@ func (obj *AOAnim) deserialize(r io.Reader) {
 	}
 }
 
-func (obj *AOBonePos) serialize(w io.Writer) {
+func (obj *AOBoneOverride) serialize(w io.Writer) {
 	if err := pcall(func() {
 		((*(*(struct {
-			Pos Vec
-			Rot [3]float32
+			Pos              Vec
+			Rot              [3]float32
+			Scale            [3]float32
+			PosInterpTimer   float32
+			RotInterpTimer   float32
+			ScaleInterpTimer float32
+			Absolute         AbsoluteFlag
 		}))(obj)).Pos).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -40228,25 +39848,114 @@ func (obj *AOBonePos) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local384 := range (*(*(struct {
-		Pos Vec
-		Rot [3]float32
+	for local370 := range (*(*(struct {
+		Pos              Vec
+		Rot              [3]float32
+		Scale            [3]float32
+		PosInterpTimer   float32
+		RotInterpTimer   float32
+		ScaleInterpTimer float32
+		Absolute         AbsoluteFlag
 	}))(obj)).Rot {
 		{
 			x := ((*(*(struct {
-				Pos Vec
-				Rot [3]float32
-			}))(obj)).Rot)[local384]
+				Pos              Vec
+				Rot              [3]float32
+				Scale            [3]float32
+				PosInterpTimer   float32
+				RotInterpTimer   float32
+				ScaleInterpTimer float32
+				Absolute         AbsoluteFlag
+			}))(obj)).Rot)[local370]
 			write32(w, math.Float32bits(x))
 		}
 	}
-}
-
-func (obj *AOBonePos) deserialize(r io.Reader) {
+	for local371 := range (*(*(struct {
+		Pos              Vec
+		Rot              [3]float32
+		Scale            [3]float32
+		PosInterpTimer   float32
+		RotInterpTimer   float32
+		ScaleInterpTimer float32
+		Absolute         AbsoluteFlag
+	}))(obj)).Scale {
+		{
+			x := ((*(*(struct {
+				Pos              Vec
+				Rot              [3]float32
+				Scale            [3]float32
+				PosInterpTimer   float32
+				RotInterpTimer   float32
+				ScaleInterpTimer float32
+				Absolute         AbsoluteFlag
+			}))(obj)).Scale)[local371]
+			write32(w, math.Float32bits(x))
+		}
+	}
+	{
+		x := (*(*(struct {
+			Pos              Vec
+			Rot              [3]float32
+			Scale            [3]float32
+			PosInterpTimer   float32
+			RotInterpTimer   float32
+			ScaleInterpTimer float32
+			Absolute         AbsoluteFlag
+		}))(obj)).PosInterpTimer
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Pos              Vec
+			Rot              [3]float32
+			Scale            [3]float32
+			PosInterpTimer   float32
+			RotInterpTimer   float32
+			ScaleInterpTimer float32
+			Absolute         AbsoluteFlag
+		}))(obj)).RotInterpTimer
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Pos              Vec
+			Rot              [3]float32
+			Scale            [3]float32
+			PosInterpTimer   float32
+			RotInterpTimer   float32
+			ScaleInterpTimer float32
+			Absolute         AbsoluteFlag
+		}))(obj)).ScaleInterpTimer
+		write32(w, math.Float32bits(x))
+	}
 	if err := pcall(func() {
 		((*(*(struct {
-			Pos Vec
-			Rot [3]float32
+			Pos              Vec
+			Rot              [3]float32
+			Scale            [3]float32
+			PosInterpTimer   float32
+			RotInterpTimer   float32
+			ScaleInterpTimer float32
+			Absolute         AbsoluteFlag
+		}))(obj)).Absolute).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AbsoluteFlag", err))
+	}
+}
+
+func (obj *AOBoneOverride) deserialize(r io.Reader) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Pos              Vec
+			Rot              [3]float32
+			Scale            [3]float32
+			PosInterpTimer   float32
+			RotInterpTimer   float32
+			ScaleInterpTimer float32
+			Absolute         AbsoluteFlag
 		}))(obj)).Pos).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -40254,17 +39963,101 @@ func (obj *AOBonePos) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local385 := range (*(*(struct {
-		Pos Vec
-		Rot [3]float32
+	for local372 := range (*(*(struct {
+		Pos              Vec
+		Rot              [3]float32
+		Scale            [3]float32
+		PosInterpTimer   float32
+		RotInterpTimer   float32
+		ScaleInterpTimer float32
+		Absolute         AbsoluteFlag
 	}))(obj)).Rot {
 		{
 			p := &((*(*(struct {
-				Pos Vec
-				Rot [3]float32
-			}))(obj)).Rot)[local385]
+				Pos              Vec
+				Rot              [3]float32
+				Scale            [3]float32
+				PosInterpTimer   float32
+				RotInterpTimer   float32
+				ScaleInterpTimer float32
+				Absolute         AbsoluteFlag
+			}))(obj)).Rot)[local372]
 			*p = math.Float32frombits(read32(r))
 		}
+	}
+	for local373 := range (*(*(struct {
+		Pos              Vec
+		Rot              [3]float32
+		Scale            [3]float32
+		PosInterpTimer   float32
+		RotInterpTimer   float32
+		ScaleInterpTimer float32
+		Absolute         AbsoluteFlag
+	}))(obj)).Scale {
+		{
+			p := &((*(*(struct {
+				Pos              Vec
+				Rot              [3]float32
+				Scale            [3]float32
+				PosInterpTimer   float32
+				RotInterpTimer   float32
+				ScaleInterpTimer float32
+				Absolute         AbsoluteFlag
+			}))(obj)).Scale)[local373]
+			*p = math.Float32frombits(read32(r))
+		}
+	}
+	{
+		p := &(*(*(struct {
+			Pos              Vec
+			Rot              [3]float32
+			Scale            [3]float32
+			PosInterpTimer   float32
+			RotInterpTimer   float32
+			ScaleInterpTimer float32
+			Absolute         AbsoluteFlag
+		}))(obj)).PosInterpTimer
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Pos              Vec
+			Rot              [3]float32
+			Scale            [3]float32
+			PosInterpTimer   float32
+			RotInterpTimer   float32
+			ScaleInterpTimer float32
+			Absolute         AbsoluteFlag
+		}))(obj)).RotInterpTimer
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Pos              Vec
+			Rot              [3]float32
+			Scale            [3]float32
+			PosInterpTimer   float32
+			RotInterpTimer   float32
+			ScaleInterpTimer float32
+			Absolute         AbsoluteFlag
+		}))(obj)).ScaleInterpTimer
+		*p = math.Float32frombits(read32(r))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Pos              Vec
+			Rot              [3]float32
+			Scale            [3]float32
+			PosInterpTimer   float32
+			RotInterpTimer   float32
+			ScaleInterpTimer float32
+			Absolute         AbsoluteFlag
+		}))(obj)).Absolute).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AbsoluteFlag", err))
 	}
 }
 
@@ -40326,7 +40119,7 @@ func (obj *AOAttach) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local386 := range (*(*(struct {
+	for local374 := range (*(*(struct {
 		ParentID     AOID
 		Bone         string
 		Pos          Vec
@@ -40340,7 +40133,7 @@ func (obj *AOAttach) serialize(w io.Writer) {
 				Pos          Vec
 				Rot          [3]float32
 				ForceVisible bool
-			}))(obj)).Rot)[local386]
+			}))(obj)).Rot)[local374]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -40375,15 +40168,15 @@ func (obj *AOAttach) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.AOID", err))
 	}
-	var local387 []uint8
-	var local388 uint16
+	var local375 []uint8
+	var local376 uint16
 	{
-		p := &local388
+		p := &local376
 		*p = read16(r)
 	}
-	(local387) = make([]uint8, local388)
+	(local375) = make([]uint8, local376)
 	{
-		_, err := io.ReadFull(r, (local387)[:])
+		_, err := io.ReadFull(r, (local375)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -40392,7 +40185,7 @@ func (obj *AOAttach) deserialize(r io.Reader) {
 		Pos          Vec
 		Rot          [3]float32
 		ForceVisible bool
-	}))(obj)).Bone) = string(local387)
+	}))(obj)).Bone) = string(local375)
 	if err := pcall(func() {
 		((*(*(struct {
 			ParentID     AOID
@@ -40407,7 +40200,7 @@ func (obj *AOAttach) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 	}
-	for local389 := range (*(*(struct {
+	for local377 := range (*(*(struct {
 		ParentID     AOID
 		Bone         string
 		Pos          Vec
@@ -40421,7 +40214,7 @@ func (obj *AOAttach) deserialize(r io.Reader) {
 				Pos          Vec
 				Rot          [3]float32
 				ForceVisible bool
-			}))(obj)).Rot)[local389]
+			}))(obj)).Rot)[local377]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -40447,49 +40240,53 @@ func (obj *AOAttach) deserialize(r io.Reader) {
 func (obj *AOPhysOverride) serialize(w io.Writer) {
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
-		}))(obj)).Walk
+			Fast, AccelerationFast, Walk     float32
+		}))(obj)).Speed
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Jump
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Gravity
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).NoSneak
 		if x {
 			write8(w, 1)
@@ -40499,13 +40296,14 @@ func (obj *AOPhysOverride) serialize(w io.Writer) {
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).NoSneakGlitch
 		if x {
 			write8(w, 1)
@@ -40515,13 +40313,14 @@ func (obj *AOPhysOverride) serialize(w io.Writer) {
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).OldSneak
 		if x {
 			write8(w, 1)
@@ -40531,86 +40330,132 @@ func (obj *AOPhysOverride) serialize(w io.Writer) {
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Climb
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Crouch
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Fluidity
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).FluiditySmooth
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Sink
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Acceleration
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).AccelerationAir
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Speed, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
+		}))(obj)).Fast
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Speed, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
+		}))(obj)).AccelerationFast
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Speed, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
+		}))(obj)).Walk
 		write32(w, math.Float32bits(x))
 	}
 }
@@ -40618,49 +40463,53 @@ func (obj *AOPhysOverride) serialize(w io.Writer) {
 func (obj *AOPhysOverride) deserialize(r io.Reader) {
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
-		}))(obj)).Walk
+			Fast, AccelerationFast, Walk     float32
+		}))(obj)).Speed
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Jump
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Gravity
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).NoSneak
 		switch n := read8(r); n {
 		case 0:
@@ -40673,13 +40522,14 @@ func (obj *AOPhysOverride) deserialize(r io.Reader) {
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).NoSneakGlitch
 		switch n := read8(r); n {
 		case 0:
@@ -40692,13 +40542,14 @@ func (obj *AOPhysOverride) deserialize(r io.Reader) {
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).OldSneak
 		switch n := read8(r); n {
 		case 0:
@@ -40711,86 +40562,132 @@ func (obj *AOPhysOverride) deserialize(r io.Reader) {
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Climb
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Crouch
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Fluidity
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).FluiditySmooth
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Sink
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).Acceleration
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			Walk, Jump, Gravity float32
+			Speed, Jump, Gravity float32
 
 			// Player only.
 			NoSneak, NoSneakGlitch, OldSneak bool
 			Climb, Crouch                    float32
 			Fluidity, FluiditySmooth, Sink   float32
 			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
 		}))(obj)).AccelerationAir
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Speed, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
+		}))(obj)).Fast
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Speed, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
+		}))(obj)).AccelerationFast
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Speed, Jump, Gravity float32
+
+			// Player only.
+			NoSneak, NoSneakGlitch, OldSneak bool
+			Climb, Crouch                    float32
+			Fluidity, FluiditySmooth, Sink   float32
+			Acceleration, AccelerationAir    float32
+			Fast, AccelerationFast, Walk     float32
+		}))(obj)).Walk
 		*p = math.Float32frombits(read32(r))
 	}
 }
@@ -40920,9 +40817,9 @@ func (obj *DrawType) deserialize(r io.Reader) {
 
 func (obj *TileDef) serialize(w io.Writer) {
 	{
-		local390 := uint8(6)
+		local378 := uint8(6)
 		{
-			x := local390
+			x := local378
 			write8(w, uint8(x))
 		}
 	}
@@ -41127,14 +41024,14 @@ func (obj *TileDef) serialize(w io.Writer) {
 
 func (obj *TileDef) deserialize(r io.Reader) {
 	{
-		var local391 uint8
-		local392 := uint8(6)
+		var local379 uint8
+		local380 := uint8(6)
 		{
-			p := &local391
+			p := &local379
 			*p = read8(r)
 		}
-		if local391 != local392 {
-			chk(fmt.Errorf("const %v: %v", "uint8(6)", local391))
+		if local379 != local380 {
+			chk(fmt.Errorf("const %v: %v", "uint8(6)", local379))
 		}
 	}
 	if err := pcall(func() {
@@ -41366,9 +41263,9 @@ func (obj *LiquidType) deserialize(r io.Reader) {
 
 func (obj *NodeBox) serialize(w io.Writer) {
 	{
-		local393 := uint8(6)
+		local381 := uint8(6)
 		{
-			x := local393
+			x := local381
 			write8(w, uint8(x))
 		}
 	}
@@ -41525,7 +41422,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			}))(obj)).Fixed)))
 			write16(w, uint16(x))
 		}
-		for local394 := range (*(*(struct {
+		for local382 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -41551,7 +41448,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).Fixed)[local394]).serialize(w)
+				}))(obj)).Fixed)[local382]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -41644,7 +41541,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			}))(obj)).DiscoAll)))
 			write16(w, uint16(x))
 		}
-		for local395 := range (*(*(struct {
+		for local383 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -41670,7 +41567,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoAll)[local395]).serialize(w)
+				}))(obj)).DiscoAll)[local383]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -41709,7 +41606,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			}))(obj)).DiscoSides)))
 			write16(w, uint16(x))
 		}
-		for local396 := range (*(*(struct {
+		for local384 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -41735,7 +41632,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoSides)[local396]).serialize(w)
+				}))(obj)).DiscoSides)[local384]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -41748,14 +41645,14 @@ func (obj *NodeBox) serialize(w io.Writer) {
 
 func (obj *NodeBox) deserialize(r io.Reader) {
 	{
-		var local397 uint8
-		local398 := uint8(6)
+		var local385 uint8
+		local386 := uint8(6)
 		{
-			p := &local397
+			p := &local385
 			*p = read8(r)
 		}
-		if local397 != local398 {
-			chk(fmt.Errorf("const %v: %v", "uint8(6)", local397))
+		if local385 != local386 {
+			chk(fmt.Errorf("const %v: %v", "uint8(6)", local385))
 		}
 	}
 	if err := pcall(func() {
@@ -41880,9 +41777,9 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 		ConnDirs, DiscoDirs  DirBoxes
 		DiscoAll, DiscoSides []Box
 	}))(obj)).Type; t == FixedBox || t == LeveledBox || t == ConnectedBox {
-		var local399 uint16
+		var local387 uint16
 		{
-			p := &local399
+			p := &local387
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -41897,8 +41794,8 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			//mt:if %s.Type == ConnectedBox
 			ConnDirs, DiscoDirs  DirBoxes
 			DiscoAll, DiscoSides []Box
-		}))(obj)).Fixed) = make([]Box, local399)
-		for local400 := range (*(*(struct {
+		}))(obj)).Fixed) = make([]Box, local387)
+		for local388 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -41924,7 +41821,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).Fixed)[local400]).deserialize(r)
+				}))(obj)).Fixed)[local388]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -41986,9 +41883,9 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DirBoxes", err))
 		}
-		var local401 uint16
+		var local389 uint16
 		{
-			p := &local401
+			p := &local389
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -42003,8 +41900,8 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			//mt:if %s.Type == ConnectedBox
 			ConnDirs, DiscoDirs  DirBoxes
 			DiscoAll, DiscoSides []Box
-		}))(obj)).DiscoAll) = make([]Box, local401)
-		for local402 := range (*(*(struct {
+		}))(obj)).DiscoAll) = make([]Box, local389)
+		for local390 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -42030,7 +41927,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoAll)[local402]).deserialize(r)
+				}))(obj)).DiscoAll)[local390]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -42038,9 +41935,9 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 			}
 		}
-		var local403 uint16
+		var local391 uint16
 		{
-			p := &local403
+			p := &local391
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -42055,8 +41952,8 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			//mt:if %s.Type == ConnectedBox
 			ConnDirs, DiscoDirs  DirBoxes
 			DiscoAll, DiscoSides []Box
-		}))(obj)).DiscoSides) = make([]Box, local403)
-		for local404 := range (*(*(struct {
+		}))(obj)).DiscoSides) = make([]Box, local391)
+		for local392 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -42082,7 +41979,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoSides)[local404]).deserialize(r)
+				}))(obj)).DiscoSides)[local392]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -42138,21 +42035,21 @@ func (obj *SoundDef) serialize(w io.Writer) {
 }
 
 func (obj *SoundDef) deserialize(r io.Reader) {
-	var local405 []uint8
-	var local406 uint16
+	var local393 []uint8
+	var local394 uint16
 	{
-		p := &local406
+		p := &local394
 		*p = read16(r)
 	}
-	(local405) = make([]uint8, local406)
+	(local393) = make([]uint8, local394)
 	{
-		_, err := io.ReadFull(r, (local405)[:])
+		_, err := io.ReadFull(r, (local393)[:])
 		chk(err)
 	}
 	((*(*(struct {
 		Name              string
 		Gain, Pitch, Fade float32
-	}))(obj)).Name) = string(local405)
+	}))(obj)).Name) = string(local393)
 	{
 		p := &(*(*(struct {
 			Name              string
@@ -42248,9 +42145,9 @@ func (obj *LitFromBlks) deserialize(r io.Reader) {
 
 func (obj *AOInitData) serialize(w io.Writer) {
 	{
-		local407 := uint8(1)
+		local395 := uint8(1)
 		{
-			x := local407
+			x := local395
 			write8(w, uint8(x))
 		}
 	}
@@ -42379,7 +42276,7 @@ func (obj *AOInitData) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
-	for local408 := range (*(*(struct {
+	for local396 := range (*(*(struct {
 
 		// For players.
 		Name     string
@@ -42411,7 +42308,7 @@ func (obj *AOInitData) serialize(w io.Writer) {
 
 				// See (de)serialize.fmt.
 				Msgs []AOMsg
-			}))(obj)).Rot)[local408]
+			}))(obj)).Rot)[local396]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -42472,25 +42369,25 @@ func (obj *AOInitData) serialize(w io.Writer) {
 
 func (obj *AOInitData) deserialize(r io.Reader) {
 	{
-		var local409 uint8
-		local410 := uint8(1)
+		var local397 uint8
+		local398 := uint8(1)
 		{
-			p := &local409
+			p := &local397
 			*p = read8(r)
 		}
-		if local409 != local410 {
-			chk(fmt.Errorf("const %v: %v", "uint8(1)", local409))
+		if local397 != local398 {
+			chk(fmt.Errorf("const %v: %v", "uint8(1)", local397))
 		}
 	}
-	var local411 []uint8
-	var local412 uint16
+	var local399 []uint8
+	var local400 uint16
 	{
-		p := &local412
+		p := &local400
 		*p = read16(r)
 	}
-	(local411) = make([]uint8, local412)
+	(local399) = make([]uint8, local400)
 	{
-		_, err := io.ReadFull(r, (local411)[:])
+		_, err := io.ReadFull(r, (local399)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -42508,7 +42405,7 @@ func (obj *AOInitData) deserialize(r io.Reader) {
 
 		// See (de)serialize.fmt.
 		Msgs []AOMsg
-	}))(obj)).Name) = string(local411)
+	}))(obj)).Name) = string(local399)
 	{
 		p := &(*(*(struct {
 
@@ -42581,7 +42478,7 @@ func (obj *AOInitData) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
-	for local413 := range (*(*(struct {
+	for local401 := range (*(*(struct {
 
 		// For players.
 		Name     string
@@ -42613,7 +42510,7 @@ func (obj *AOInitData) deserialize(r io.Reader) {
 
 				// See (de)serialize.fmt.
 				Msgs []AOMsg
-			}))(obj)).Rot)[local413]
+			}))(obj)).Rot)[local401]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -42761,9 +42658,9 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 				PunchUses int32
 			}))(obj)).NonNil {
 				{
-					local414 := uint8(5)
+					local402 := uint8(5)
 					{
-						x := local414
+						x := local402
 						write8(w, uint8(x))
 					}
 				}
@@ -42842,7 +42739,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 					}))(obj)).GroupCaps)))
 					write32(w, uint32(x))
 				}
-				for local415 := range (*(*(struct {
+				for local403 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -42874,7 +42771,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).GroupCaps)[local415]).serialize(w)
+						}))(obj)).GroupCaps)[local403]).serialize(w)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -42919,7 +42816,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 					}))(obj)).DmgGroups)))
 					write32(w, uint32(x))
 				}
-				for local416 := range (*(*(struct {
+				for local404 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -42951,7 +42848,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).DmgGroups)[local416]).serialize(w)
+						}))(obj)).DmgGroups)[local404]).serialize(w)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -43085,14 +42982,14 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 				PunchUses int32
 			}))(obj)).NonNil {
 				{
-					var local417 uint8
-					local418 := uint8(5)
+					var local405 uint8
+					local406 := uint8(5)
 					{
-						p := &local417
+						p := &local405
 						*p = read8(r)
 					}
-					if local417 != local418 {
-						chk(fmt.Errorf("const %v: %v", "uint8(5)", local417))
+					if local405 != local406 {
+						chk(fmt.Errorf("const %v: %v", "uint8(5)", local405))
 					}
 				}
 				{
@@ -43133,9 +43030,9 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 					}))(obj)).MaxDropLvl
 					*p = int16(read16(r))
 				}
-				var local419 uint32
+				var local407 uint32
 				{
-					p := &local419
+					p := &local407
 					*p = read32(r)
 				}
 				((*(*(struct {
@@ -43153,8 +43050,8 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 					//mt:32tou16
 					PunchUses int32
-				}))(obj)).GroupCaps) = make([]ToolGroupCap, local419)
-				for local420 := range (*(*(struct {
+				}))(obj)).GroupCaps) = make([]ToolGroupCap, local407)
+				for local408 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -43186,7 +43083,7 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).GroupCaps)[local420]).deserialize(r)
+						}))(obj)).GroupCaps)[local408]).deserialize(r)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -43194,9 +43091,9 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolGroupCap", err))
 					}
 				}
-				var local421 uint32
+				var local409 uint32
 				{
-					p := &local421
+					p := &local409
 					*p = read32(r)
 				}
 				((*(*(struct {
@@ -43214,8 +43111,8 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 					//mt:32tou16
 					PunchUses int32
-				}))(obj)).DmgGroups) = make([]Group, local421)
-				for local422 := range (*(*(struct {
+				}))(obj)).DmgGroups) = make([]Group, local409)
+				for local410 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -43247,7 +43144,7 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).DmgGroups)[local422]).deserialize(r)
+						}))(obj)).DmgGroups)[local410]).deserialize(r)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -43255,9 +43152,9 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 					}
 				}
-				var local423 uint16
+				var local411 uint16
 				{
-					p := &local423
+					p := &local411
 					*p = read16(r)
 				}
 				(*(*(struct {
@@ -43275,11 +43172,159 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 					//mt:32tou16
 					PunchUses int32
-				}))(obj)).PunchUses = int32(local423)
+				}))(obj)).PunchUses = int32(local411)
 			}
 		}
 		if r.N > 0 {
 			chk(fmt.Errorf("%d bytes of trailing data", r.N))
+		}
+	}
+}
+
+func (obj *TouchInteraction) serialize(w io.Writer) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Nothing, Node, Object TouchInteractionMode
+		}))(obj)).Nothing).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TouchInteractionMode", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Nothing, Node, Object TouchInteractionMode
+		}))(obj)).Node).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TouchInteractionMode", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Nothing, Node, Object TouchInteractionMode
+		}))(obj)).Object).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TouchInteractionMode", err))
+	}
+}
+
+func (obj *TouchInteraction) deserialize(r io.Reader) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Nothing, Node, Object TouchInteractionMode
+		}))(obj)).Nothing).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TouchInteractionMode", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Nothing, Node, Object TouchInteractionMode
+		}))(obj)).Node).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TouchInteractionMode", err))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Nothing, Node, Object TouchInteractionMode
+		}))(obj)).Object).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TouchInteractionMode", err))
+	}
+}
+
+func (obj *WearBarParams) serialize(w io.Writer) {
+	{
+		local412 := uint8(1)
+		{
+			x := local412
+			write8(w, uint8(x))
+		}
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Blend BlendMode
+
+			ColorStops map[float32]color.NRGBA
+		}))(obj)).Blend).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.BlendMode", err))
+	}
+	{
+		x := (*(*(struct {
+			Blend BlendMode
+
+			ColorStops map[float32]color.NRGBA
+		}))(obj)).ColorStops
+		{ // For WearBarParams.ColorStops.
+			if len(x) > math.MaxUint16 {
+				chk(ErrTooLong)
+			}
+			write16(w, uint16(len(x)))
+			for wear, colorStop := range x {
+				write32(w, uint32(wear))
+				chk(serialize(w, colorStop))
+			}
+		}
+	}
+}
+
+func (obj *WearBarParams) deserialize(r io.Reader) {
+	{
+		var local413 uint8
+		local414 := uint8(1)
+		{
+			p := &local413
+			*p = read8(r)
+		}
+		if local413 != local414 {
+			chk(fmt.Errorf("const %v: %v", "uint8(1)", local413))
+		}
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Blend BlendMode
+
+			ColorStops map[float32]color.NRGBA
+		}))(obj)).Blend).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.BlendMode", err))
+	}
+	{
+		p := &(*(*(struct {
+			Blend BlendMode
+
+			ColorStops map[float32]color.NRGBA
+		}))(obj)).ColorStops
+		{ // For WearBarParams.ColorStops.
+			n := read16(r)
+			*p = make(map[float32]color.NRGBA, n)
+			for ; n > 0; n-- {
+				wear := float32(read32(r))
+				var colorStop color.NRGBA
+				chk(deserialize(r, &colorStop))
+				(*p)[wear] = colorStop
+			}
 		}
 	}
 }
@@ -43298,54 +43343,6 @@ func (obj *AnimType) deserialize(r io.Reader) {
 	}
 }
 
-func (obj *RangeF32) serialize(w io.Writer) {
-	{
-		x := (*(*(struct {
-			Min, Max float32
-			Bias     float32
-		}))(obj)).Min
-		write32(w, math.Float32bits(x))
-	}
-	{
-		x := (*(*(struct {
-			Min, Max float32
-			Bias     float32
-		}))(obj)).Max
-		write32(w, math.Float32bits(x))
-	}
-	{
-		x := (*(*(struct {
-			Min, Max float32
-			Bias     float32
-		}))(obj)).Bias
-		write32(w, math.Float32bits(x))
-	}
-}
-
-func (obj *RangeF32) deserialize(r io.Reader) {
-	{
-		p := &(*(*(struct {
-			Min, Max float32
-			Bias     float32
-		}))(obj)).Min
-		*p = math.Float32frombits(read32(r))
-	}
-	{
-		p := &(*(*(struct {
-			Min, Max float32
-			Bias     float32
-		}))(obj)).Max
-		*p = math.Float32frombits(read32(r))
-	}
-	{
-		p := &(*(*(struct {
-			Min, Max float32
-			Bias     float32
-		}))(obj)).Bias
-		*p = math.Float32frombits(read32(r))
-	}
-}
-
 func (obj *ParticleTextureFlags) serialize(w io.Writer) {
 	{
 		x := *(*(uint8))(obj)
@@ -43361,14 +43358,51 @@ func (obj *ParticleTextureFlags) deserialize(r io.Reader) {
 }
 
 func (obj *TweenF32) serialize(w io.Writer) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End float32
+		}))(obj)).Style).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenStyle", err))
+	}
 	{
 		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End float32
+		}))(obj)).Reps
+		write16(w, uint16(x))
+	}
+	{
+		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End float32
+		}))(obj)).Beginning
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
 			Start, End float32
 		}))(obj)).Start
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
 			Start, End float32
 		}))(obj)).End
 		write32(w, math.Float32bits(x))
@@ -43376,14 +43410,51 @@ func (obj *TweenF32) serialize(w io.Writer) {
 }
 
 func (obj *TweenF32) deserialize(r io.Reader) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End float32
+		}))(obj)).Style).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenStyle", err))
+	}
 	{
 		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End float32
+		}))(obj)).Reps
+		*p = read16(r)
+	}
+	{
+		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End float32
+		}))(obj)).Beginning
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
 			Start, End float32
 		}))(obj)).Start
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
 			Start, End float32
 		}))(obj)).End
 		*p = math.Float32frombits(read32(r))
@@ -43391,48 +43462,148 @@ func (obj *TweenF32) deserialize(r io.Reader) {
 }
 
 func (obj *TweenV2F32) serialize(w io.Writer) {
-	for local424 := range (*(*(struct {
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [2]float32
+		}))(obj)).Style).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenStyle", err))
+	}
+	{
+		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [2]float32
+		}))(obj)).Reps
+		write16(w, uint16(x))
+	}
+	{
+		x := (*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [2]float32
+		}))(obj)).Beginning
+		write32(w, math.Float32bits(x))
+	}
+	for local415 := range (*(*(struct {
+		Style      TweenStyle
+		Reps       uint16
+		Beginning  float32
 		Start, End [2]float32
 	}))(obj)).Start {
 		{
 			x := ((*(*(struct {
+				Style      TweenStyle
+				Reps       uint16
+				Beginning  float32
 				Start, End [2]float32
-			}))(obj)).Start)[local424]
+			}))(obj)).Start)[local415]
 			write32(w, math.Float32bits(x))
 		}
 	}
-	for local425 := range (*(*(struct {
+	for local416 := range (*(*(struct {
+		Style      TweenStyle
+		Reps       uint16
+		Beginning  float32
 		Start, End [2]float32
 	}))(obj)).End {
 		{
 			x := ((*(*(struct {
+				Style      TweenStyle
+				Reps       uint16
+				Beginning  float32
 				Start, End [2]float32
-			}))(obj)).End)[local425]
+			}))(obj)).End)[local416]
 			write32(w, math.Float32bits(x))
 		}
 	}
 }
 
 func (obj *TweenV2F32) deserialize(r io.Reader) {
-	for local426 := range (*(*(struct {
+	if err := pcall(func() {
+		((*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [2]float32
+		}))(obj)).Style).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TweenStyle", err))
+	}
+	{
+		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [2]float32
+		}))(obj)).Reps
+		*p = read16(r)
+	}
+	{
+		p := &(*(*(struct {
+			Style      TweenStyle
+			Reps       uint16
+			Beginning  float32
+			Start, End [2]float32
+		}))(obj)).Beginning
+		*p = math.Float32frombits(read32(r))
+	}
+	for local417 := range (*(*(struct {
+		Style      TweenStyle
+		Reps       uint16
+		Beginning  float32
 		Start, End [2]float32
 	}))(obj)).Start {
 		{
 			p := &((*(*(struct {
+				Style      TweenStyle
+				Reps       uint16
+				Beginning  float32
 				Start, End [2]float32
-			}))(obj)).Start)[local426]
+			}))(obj)).Start)[local417]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	for local427 := range (*(*(struct {
+	for local418 := range (*(*(struct {
+		Style      TweenStyle
+		Reps       uint16
+		Beginning  float32
 		Start, End [2]float32
 	}))(obj)).End {
 		{
 			p := &((*(*(struct {
+				Style      TweenStyle
+				Reps       uint16
+				Beginning  float32
 				Start, End [2]float32
-			}))(obj)).End)[local427]
+			}))(obj)).End)[local418]
 			*p = math.Float32frombits(read32(r))
 		}
+	}
+}
+
+func (obj *TweenStyle) serialize(w io.Writer) {
+	{
+		x := *(*(uint8))(obj)
+		write8(w, uint8(x))
+	}
+}
+
+func (obj *TweenStyle) deserialize(r io.Reader) {
+	{
+		p := &*(*(uint8))(obj)
+		*p = read8(r)
 	}
 }
 
@@ -43451,9 +43622,9 @@ func (obj *HUDType) deserialize(r io.Reader) {
 }
 
 func (obj *Box) serialize(w io.Writer) {
-	for local428 := range *(*([2]Vec))(obj) {
+	for local419 := range *(*([2]Vec))(obj) {
 		if err := pcall(func() {
-			((*(*([2]Vec))(obj))[local428]).serialize(w)
+			((*(*([2]Vec))(obj))[local419]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43464,15 +43635,43 @@ func (obj *Box) serialize(w io.Writer) {
 }
 
 func (obj *Box) deserialize(r io.Reader) {
-	for local429 := range *(*([2]Vec))(obj) {
+	for local420 := range *(*([2]Vec))(obj) {
 		if err := pcall(func() {
-			((*(*([2]Vec))(obj))[local429]).deserialize(r)
+			((*(*([2]Vec))(obj))[local420]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 		}
+	}
+}
+
+func (obj *PointabilityType) serialize(w io.Writer) {
+	{
+		x := *(*(uint8))(obj)
+		write8(w, uint8(x))
+	}
+}
+
+func (obj *PointabilityType) deserialize(r io.Reader) {
+	{
+		p := &*(*(uint8))(obj)
+		*p = read8(r)
+	}
+}
+
+func (obj *AbsoluteFlag) serialize(w io.Writer) {
+	{
+		x := *(*(uint8))(obj)
+		write8(w, uint8(x))
+	}
+}
+
+func (obj *AbsoluteFlag) deserialize(r io.Reader) {
+	{
+		p := &*(*(uint8))(obj)
+		*p = read8(r)
 	}
 }
 
@@ -43532,7 +43731,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Top)))
 		write16(w, uint16(x))
 	}
-	for local430 := range (*(*(struct {
+	for local421 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Top {
@@ -43540,7 +43739,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Top)[local430]).serialize(w)
+			}))(obj)).Top)[local421]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43561,7 +43760,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Bot)))
 		write16(w, uint16(x))
 	}
-	for local431 := range (*(*(struct {
+	for local422 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Bot {
@@ -43569,7 +43768,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Bot)[local431]).serialize(w)
+			}))(obj)).Bot)[local422]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43590,7 +43789,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Front)))
 		write16(w, uint16(x))
 	}
-	for local432 := range (*(*(struct {
+	for local423 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Front {
@@ -43598,7 +43797,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Front)[local432]).serialize(w)
+			}))(obj)).Front)[local423]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43619,7 +43818,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Left)))
 		write16(w, uint16(x))
 	}
-	for local433 := range (*(*(struct {
+	for local424 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Left {
@@ -43627,7 +43826,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Left)[local433]).serialize(w)
+			}))(obj)).Left)[local424]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43648,7 +43847,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Back)))
 		write16(w, uint16(x))
 	}
-	for local434 := range (*(*(struct {
+	for local425 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Back {
@@ -43656,7 +43855,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Back)[local434]).serialize(w)
+			}))(obj)).Back)[local425]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43677,7 +43876,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Right)))
 		write16(w, uint16(x))
 	}
-	for local435 := range (*(*(struct {
+	for local426 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Right {
@@ -43685,7 +43884,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Right)[local435]).serialize(w)
+			}))(obj)).Right)[local426]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43696,16 +43895,16 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 }
 
 func (obj *DirBoxes) deserialize(r io.Reader) {
-	var local436 uint16
+	var local427 uint16
 	{
-		p := &local436
+		p := &local427
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Top) = make([]Box, local436)
-	for local437 := range (*(*(struct {
+	}))(obj)).Top) = make([]Box, local427)
+	for local428 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Top {
@@ -43713,7 +43912,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Top)[local437]).deserialize(r)
+			}))(obj)).Top)[local428]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43721,16 +43920,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
-	var local438 uint16
+	var local429 uint16
 	{
-		p := &local438
+		p := &local429
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Bot) = make([]Box, local438)
-	for local439 := range (*(*(struct {
+	}))(obj)).Bot) = make([]Box, local429)
+	for local430 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Bot {
@@ -43738,7 +43937,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Bot)[local439]).deserialize(r)
+			}))(obj)).Bot)[local430]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43746,16 +43945,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
-	var local440 uint16
+	var local431 uint16
 	{
-		p := &local440
+		p := &local431
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Front) = make([]Box, local440)
-	for local441 := range (*(*(struct {
+	}))(obj)).Front) = make([]Box, local431)
+	for local432 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Front {
@@ -43763,7 +43962,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Front)[local441]).deserialize(r)
+			}))(obj)).Front)[local432]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43771,16 +43970,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
-	var local442 uint16
+	var local433 uint16
 	{
-		p := &local442
+		p := &local433
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Left) = make([]Box, local442)
-	for local443 := range (*(*(struct {
+	}))(obj)).Left) = make([]Box, local433)
+	for local434 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Left {
@@ -43788,7 +43987,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Left)[local443]).deserialize(r)
+			}))(obj)).Left)[local434]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43796,16 +43995,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
-	var local444 uint16
+	var local435 uint16
 	{
-		p := &local444
+		p := &local435
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Back) = make([]Box, local444)
-	for local445 := range (*(*(struct {
+	}))(obj)).Back) = make([]Box, local435)
+	for local436 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Back {
@@ -43813,7 +44012,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Back)[local445]).deserialize(r)
+			}))(obj)).Back)[local436]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43821,16 +44020,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 		}
 	}
-	var local446 uint16
+	var local437 uint16
 	{
-		p := &local446
+		p := &local437
 		*p = read16(r)
 	}
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Right) = make([]Box, local446)
-	for local447 := range (*(*(struct {
+	}))(obj)).Right) = make([]Box, local437)
+	for local438 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Right {
@@ -43838,7 +44037,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Right)[local447]).deserialize(r)
+			}))(obj)).Right)[local438]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43945,7 +44144,7 @@ func (obj *ToolGroupCap) serialize(w io.Writer) {
 		}))(obj)).Times)))
 		write32(w, uint32(x))
 	}
-	for local448 := range (*(*(struct {
+	for local439 := range (*(*(struct {
 		Name string
 
 		//mt:32to16
@@ -43967,7 +44166,7 @@ func (obj *ToolGroupCap) serialize(w io.Writer) {
 
 				//mt:len32
 				Times []DigTime
-			}))(obj)).Times)[local448]).serialize(w)
+			}))(obj)).Times)[local439]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -43978,15 +44177,15 @@ func (obj *ToolGroupCap) serialize(w io.Writer) {
 }
 
 func (obj *ToolGroupCap) deserialize(r io.Reader) {
-	var local449 []uint8
-	var local450 uint16
+	var local440 []uint8
+	var local441 uint16
 	{
-		p := &local450
+		p := &local441
 		*p = read16(r)
 	}
-	(local449) = make([]uint8, local450)
+	(local440) = make([]uint8, local441)
 	{
-		_, err := io.ReadFull(r, (local449)[:])
+		_, err := io.ReadFull(r, (local440)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -43999,10 +44198,10 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 		//mt:len32
 		Times []DigTime
-	}))(obj)).Name) = string(local449)
-	var local451 int16
+	}))(obj)).Name) = string(local440)
+	var local442 int16
 	{
-		p := &local451
+		p := &local442
 		*p = int16(read16(r))
 	}
 	(*(*(struct {
@@ -44015,7 +44214,7 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 		//mt:len32
 		Times []DigTime
-	}))(obj)).Uses = int32(local451)
+	}))(obj)).Uses = int32(local442)
 	{
 		p := &(*(*(struct {
 			Name string
@@ -44030,9 +44229,9 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 		}))(obj)).MaxLvl
 		*p = int16(read16(r))
 	}
-	var local452 uint32
+	var local443 uint32
 	{
-		p := &local452
+		p := &local443
 		*p = read32(r)
 	}
 	((*(*(struct {
@@ -44045,8 +44244,8 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 		//mt:len32
 		Times []DigTime
-	}))(obj)).Times) = make([]DigTime, local452)
-	for local453 := range (*(*(struct {
+	}))(obj)).Times) = make([]DigTime, local443)
+	for local444 := range (*(*(struct {
 		Name string
 
 		//mt:32to16
@@ -44068,13 +44267,41 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 				//mt:len32
 				Times []DigTime
-			}))(obj)).Times)[local453]).deserialize(r)
+			}))(obj)).Times)[local444]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DigTime", err))
 		}
+	}
+}
+
+func (obj *TouchInteractionMode) serialize(w io.Writer) {
+	{
+		x := *(*(uint8))(obj)
+		write8(w, uint8(x))
+	}
+}
+
+func (obj *TouchInteractionMode) deserialize(r io.Reader) {
+	{
+		p := &*(*(uint8))(obj)
+		*p = read8(r)
+	}
+}
+
+func (obj *BlendMode) serialize(w io.Writer) {
+	{
+		x := *(*(uint8))(obj)
+		write8(w, uint8(x))
+	}
+}
+
+func (obj *BlendMode) deserialize(r io.Reader) {
+	{
+		p := &*(*(uint8))(obj)
+		*p = read8(r)
 	}
 }
 

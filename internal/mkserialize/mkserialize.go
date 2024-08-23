@@ -567,6 +567,7 @@ var typeNames = []string{
 	"ToCltSunParams",
 	"ToCltMoonParams",
 	"ToCltStarParams",
+	"ToCltMovePlayerRel",
 	"ToCltSRPBytesSaltB",
 	"ToCltFormspecPrepend",
 	"ToCltLighting",

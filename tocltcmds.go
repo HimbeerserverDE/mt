@@ -381,18 +381,20 @@ type ToCltSpawnParticle struct {
 	Collide        bool
 
 	//mt:len32
-	Texture
+	TextureName Texture
 
 	Vertical    bool
 	CollisionRm bool
 	AnimParams  TileAnim
 	Glow        uint8
 	AOCollision bool
-	Drag        [3]float32
-	Bounce      RangeV3F32
 	NodeParam0  Content
 	NodeParam2  uint8
 	NodeTile    uint8
+	Drag        [3]float32
+	Jitter      RangeV3F32
+	Bounce      RangeF32
+	Texture     ParticleTexture
 }
 
 type ParticleSpawnerID uint32
@@ -401,13 +403,13 @@ type ParticleSpawnerID uint32
 type ToCltAddParticleSpawner struct {
 	Amount         uint16
 	Duration       float32
-	Pos, Vel, Acc  [2][3]float32
-	ExpirationTime [2]float32 // in seconds.
-	Size           [2]float32
+	Pos, Vel, Acc  TweenRangeV3F32
+	ExpirationTime TweenRangeF32 // in seconds.
+	Size           TweenRangeF32
 	Collide        bool
 
 	//mt:len32
-	Texture
+	TextureName Texture
 
 	ID           ParticleSpawnerID
 	Vertical     bool
@@ -417,15 +419,11 @@ type ToCltAddParticleSpawner struct {
 	Glow         uint8
 	AOCollision  bool
 
-	PosStartBias     float32
-	VelStartBias     float32
-	AccStartBias     float32
-	ExpTimeStartBias float32
-	SizeStartBias    float32
+	NodeParam0 Content
+	NodeParam2 uint8
+	NodeTile   uint8
 
-	PosEnd RangeV3F32
-	VelEnd RangeV3F32
-	AccEnd RangeV3F32
+	Texture ParticleTexture
 
 	Drag   TweenRangeV3F32
 	Jitter TweenRangeV3F32
@@ -433,15 +431,15 @@ type ToCltAddParticleSpawner struct {
 
 	Attraction AttractionKind
 
-	//mt:if %s.Attraction > NoAttraction
+	//mt:if %s.Attraction != NoAttraction
 	AttractStrength           TweenRangeF32
 	AttractorOrigin           TweenV3F32
-	AttractorOriginAttachedAO uint16
+	AttractorOriginAttachedAO AOID
 	Flags                     ParticleSpawnerFlags
 
-	//mt:if %s.Attraction > PointAttraction
+	//mt:if %s.Attraction != PointAttraction
 	AttractorAngle           TweenV3F32
-	AttractorAngleAttachedAO uint16
+	AttractorAngleAttachedAO AOID
 	//mt:end
 	//mt:end
 
@@ -449,10 +447,6 @@ type ToCltAddParticleSpawner struct {
 
 	//mt:len16
 	Textures []ParticleTexture
-
-	NodeParam0 Content
-	NodeParam2 uint8
-	NodeTile   uint8
 }
 
 type HUD struct {
@@ -669,6 +663,7 @@ type ToCltSkyParams struct {
 
 	FogDistance int16
 	FogStart    float32
+	FogColor    color.NRGBA
 }
 
 // ToCltOverrideDayNightRatio overrides the client's day-night ratio
@@ -787,6 +782,12 @@ type ToCltStarParams struct {
 	DayOpacity float32
 }
 
+// ToCltMovePlayerRel tells the client that the player has been moved
+// server-side by a relative offset.
+type ToCltMovePlayerRel struct {
+	Pos
+}
+
 type ToCltSRPBytesSaltB struct {
 	Salt, B []byte
 }
@@ -841,6 +842,7 @@ type ToCltLighting struct {
 	SpeedDarkBright    float32
 	SpeedBrightDark    float32
 	CenterWeightPower  float32
+	VolumetricStrength float32
 }
 
 type ToCltDisco struct{}

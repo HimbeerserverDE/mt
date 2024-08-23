@@ -114,3 +114,25 @@ PointedThing	{
 			chk(fmt.Errorf("%d bytes of trailing data", r.N))
 		}
 	}
+
+map[string]PointabilityType	{ // For Pointabilities.
+		n := read32(r)
+		*p = make(map[string]PointabilityType, n)
+		for ; n > 0; n-- {
+			var name string
+			chk(deserialize(r, &name))
+			typ := PointabilityType(read8(r))
+			(*p)[name] = typ
+		}
+	}
+
+map[float32]image/color.NRGBA	{ // For WearBarParams.ColorStops.
+		n := read16(r)
+		*p = make(map[float32]color.NRGBA, n)
+		for ; n > 0; n-- {
+			wear := float32(read32(r))
+			var colorStop color.NRGBA
+			chk(deserialize(r, &colorStop))
+			(*p)[wear] = colorStop
+		}
+	}

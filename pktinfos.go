@@ -58,6 +58,7 @@ func (*ToCltNodeMetasChanged) DefaultPktInfo() rudp.PktInfo      { return rudp.P
 func (*ToCltSunParams) DefaultPktInfo() rudp.PktInfo             { return rudp.PktInfo{0, false} }
 func (*ToCltMoonParams) DefaultPktInfo() rudp.PktInfo            { return rudp.PktInfo{0, false} }
 func (*ToCltStarParams) DefaultPktInfo() rudp.PktInfo            { return rudp.PktInfo{0, false} }
+func (*ToCltMovePlayerRel) DefaultPktInfo() rudp.PktInfo         { return rudp.PktInfo{0, false} }
 func (*ToCltSRPBytesSaltB) DefaultPktInfo() rudp.PktInfo         { return rudp.PktInfo{0, false} }
 func (*ToCltFormspecPrepend) DefaultPktInfo() rudp.PktInfo       { return rudp.PktInfo{0, false} }
 func (*ToCltMinimapModes) DefaultPktInfo() rudp.PktInfo          { return rudp.PktInfo{0, false} }

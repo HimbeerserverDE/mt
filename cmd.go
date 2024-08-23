@@ -56,6 +56,7 @@ func (*ToCltNodeMetasChanged) cmd()      {}
 func (*ToCltSunParams) cmd()             {}
 func (*ToCltMoonParams) cmd()            {}
 func (*ToCltStarParams) cmd()            {}
+func (*ToCltMovePlayerRel) cmd()         {}
 func (*ToCltSRPBytesSaltB) cmd()         {}
 func (*ToCltFormspecPrepend) cmd()       {}
 func (*ToCltMinimapModes) cmd()          {}

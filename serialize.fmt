@@ -155,3 +155,28 @@ PointedThing	chk(writePointedThing(w, x))
 		_, err := b.WriteTo(w)
 		chk(err)
 	}
+
+map[string]PointabilityType	{ // For Pointabilities.
+		if len(x) > math.MaxUint32 {
+			chk(ErrTooLong)
+		}
+		write32(w, uint32(len(x)))
+		for name, typ := range x {
+			if len(name) > math.MaxUint16 {
+				chk(ErrTooLong)
+			}
+			chk(serialize(w, name))
+			write8(w, uint8(typ))
+		}
+	}
+
+map[float32]image/color.NRGBA	{ // For WearBarParams.ColorStops.
+		if len(x) > math.MaxUint16 {
+			chk(ErrTooLong)
+		}
+		write16(w, uint16(len(x)))
+		for wear, colorStop := range x {
+			write32(w, uint32(wear))
+			chk(serialize(w, colorStop))
+		}
+	}

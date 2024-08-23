@@ -52,9 +52,6 @@ type ItemDef struct {
 
 	ShortDesc string
 
-	// Use PlaceParam2 instead, this is just for serialization.
-	PlaceParam2Legacy uint8
-
 	SoundUse    SoundDef
 	SoundUseAir SoundDef
 
@@ -64,5 +61,45 @@ type ItemDef struct {
 	PlaceParam2 uint8
 	//mt:end
 
+	WallmountedRotateVertical bool
+	TouchInteraction          TouchInteraction
+
+	Pointabilities string
+
+	HasWearBarParams bool
+
+	//mt:if %s.HasWearBarParams
+	WearBarParams WearBarParams
 	//mt:end
+
+	//mt:end
+}
+
+type TouchInteractionMode uint8
+
+const (
+	UserDefined TouchInteractionMode = iota
+)
+
+// A TouchInteraction defines how touchscreen taps should be handled
+// depending on what the player is pointing at.
+type TouchInteraction struct {
+	Nothing, Node, Object TouchInteractionMode
+}
+
+type BlendMode uint8
+
+const (
+	Constant BlendMode = iota
+	Linear
+)
+
+// A WearBarParams specifies the wear bar colors for certain wear levels.
+type WearBarParams struct {
+	// Version.
+	//mt:const uint8(1)
+
+	Blend BlendMode
+
+	ColorStops map[float32]color.NRGBA
 }
