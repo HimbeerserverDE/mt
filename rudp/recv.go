@@ -150,6 +150,11 @@ func (c *Conn) processRawPkt(data []byte, pi PktInfo) (err error) {
 			return TrailingDataError(data[off:])
 		}
 	case rawOrig:
+		// Don't forward initial empty packet to caller.
+		if len(data[off:]) == 0 {
+			break
+		}
+
 		c.gotPkt(Pkt{
 			Reader:  bytes.NewReader(data[off:]),
 			PktInfo: pi,
