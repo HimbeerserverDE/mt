@@ -175,8 +175,11 @@ map[float32]image/color.NRGBA	{ // For WearBarParams.ColorStops.
 			chk(ErrTooLong)
 		}
 		write16(w, uint16(len(x)))
-		for wear, colorStop := range x {
+		for wear, c := range x {
 			write32(w, uint32(wear))
-			chk(serialize(w, colorStop))
+			// Same as image/color.NRGBA, but it doesn't implement
+			// serializer.
+			_, err := w.Write([]byte{c.A, c.R, c.G, c.B})
+			chk(err)
 		}
 	}

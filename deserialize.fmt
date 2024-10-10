@@ -131,8 +131,13 @@ map[float32]image/color.NRGBA	{ // For WearBarParams.ColorStops.
 		*p = make(map[float32]color.NRGBA, n)
 		for ; n > 0; n-- {
 			wear := float32(read32(r))
-			var colorStop color.NRGBA
-			chk(deserialize(r, &colorStop))
-			(*p)[wear] = colorStop
+			// Same as image/color.NRGBA, but it doesn't implement
+			// deserializer.
+			(*p)[wear] = color.NRGBA{
+				A: read8(r),
+				R: read8(r),
+				G: read8(r),
+				B: read8(r),
+			}
 		}
 	}

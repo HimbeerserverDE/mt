@@ -43278,9 +43278,12 @@ func (obj *WearBarParams) serialize(w io.Writer) {
 				chk(ErrTooLong)
 			}
 			write16(w, uint16(len(x)))
-			for wear, colorStop := range x {
+			for wear, c := range x {
 				write32(w, uint32(wear))
-				chk(serialize(w, colorStop))
+				// Same as image/color.NRGBA, but it doesn't implement
+				// serializer.
+				_, err := w.Write([]byte{c.A, c.R, c.G, c.B})
+				chk(err)
 			}
 		}
 	}
@@ -43321,9 +43324,14 @@ func (obj *WearBarParams) deserialize(r io.Reader) {
 			*p = make(map[float32]color.NRGBA, n)
 			for ; n > 0; n-- {
 				wear := float32(read32(r))
-				var colorStop color.NRGBA
-				chk(deserialize(r, &colorStop))
-				(*p)[wear] = colorStop
+				// Same as image/color.NRGBA, but it doesn't implement
+				// deserializer.
+				(*p)[wear] = color.NRGBA{
+					A: read8(r),
+					R: read8(r),
+					G: read8(r),
+					B: read8(r),
+				}
 			}
 		}
 	}
