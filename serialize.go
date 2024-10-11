@@ -18162,7 +18162,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -18245,7 +18245,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -18315,7 +18315,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -18385,7 +18385,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -18454,7 +18454,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -18524,7 +18524,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -18593,7 +18593,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -18661,7 +18661,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 					GndContent   bool
 					Collides     bool
-					Pointable    bool
+					PointType    PointabilityType
 					Diggable     bool
 					Climbable    bool
 					Replaceable  bool
@@ -18736,7 +18736,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -18810,7 +18810,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -18884,7 +18884,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -18957,7 +18957,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -19027,7 +19027,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -19097,7 +19097,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -19167,7 +19167,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -19243,7 +19243,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -19311,7 +19311,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 					GndContent   bool
 					Collides     bool
-					Pointable    bool
+					PointType    PointabilityType
 					Diggable     bool
 					Climbable    bool
 					Replaceable  bool
@@ -19385,7 +19385,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -19453,7 +19453,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 					GndContent   bool
 					Collides     bool
-					Pointable    bool
+					PointType    PointabilityType
 					Diggable     bool
 					Climbable    bool
 					Replaceable  bool
@@ -19534,7 +19534,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -19602,7 +19602,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 					GndContent   bool
 					Collides     bool
-					Pointable    bool
+					PointType    PointabilityType
 					Diggable     bool
 					Climbable    bool
 					Replaceable  bool
@@ -19677,7 +19677,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -19747,7 +19747,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -19821,7 +19821,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -19895,7 +19895,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -19964,7 +19964,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -20034,7 +20034,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -20103,7 +20103,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -20171,7 +20171,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 					GndContent   bool
 					Collides     bool
-					Pointable    bool
+					PointType    PointabilityType
 					Diggable     bool
 					Climbable    bool
 					Replaceable  bool
@@ -20246,7 +20246,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -20316,7 +20316,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -20386,7 +20386,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -20460,7 +20460,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -20534,7 +20534,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -20604,7 +20604,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -20678,7 +20678,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -20718,8 +20718,8 @@ func (obj *NodeDef) serialize(w io.Writer) {
 				write8(w, 0)
 			}
 		}
-		{
-			x := (*(*(struct {
+		if err := pcall(func() {
+			((*(*(struct {
 				Param0 Content
 
 				Name   string
@@ -20752,7 +20752,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -20785,12 +20785,12 @@ func (obj *NodeDef) serialize(w io.Writer) {
 				MoveResistance    uint8
 				LiquidMovePhysics bool
 				InsideTintShaded  bool
-			}))(obj)).Pointable
-			if x {
-				write8(w, 1)
-			} else {
-				write8(w, 0)
+			}))(obj)).PointType).serialize(w)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
 			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PointabilityType", err))
 		}
 		{
 			x := (*(*(struct {
@@ -20826,7 +20826,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -20900,7 +20900,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -20974,7 +20974,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21048,7 +21048,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21122,7 +21122,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21192,7 +21192,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21265,7 +21265,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -21335,7 +21335,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21405,7 +21405,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21474,7 +21474,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -21544,7 +21544,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21614,7 +21614,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21684,7 +21684,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21754,7 +21754,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21828,7 +21828,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21898,7 +21898,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -21968,7 +21968,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22042,7 +22042,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22116,7 +22116,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22190,7 +22190,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22264,7 +22264,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22338,7 +22338,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22412,7 +22412,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22486,7 +22486,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22560,7 +22560,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22633,7 +22633,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -22703,7 +22703,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22773,7 +22773,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22843,7 +22843,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22913,7 +22913,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -22987,7 +22987,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -23057,7 +23057,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -23131,7 +23131,7 @@ func (obj *NodeDef) serialize(w io.Writer) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -23224,7 +23224,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -23326,7 +23326,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -23398,7 +23398,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -23465,7 +23465,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -23533,7 +23533,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 					GndContent   bool
 					Collides     bool
-					Pointable    bool
+					PointType    PointabilityType
 					Diggable     bool
 					Climbable    bool
 					Replaceable  bool
@@ -23608,7 +23608,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -23682,7 +23682,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -23756,7 +23756,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -23840,7 +23840,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -23908,7 +23908,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -23988,7 +23988,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -24056,7 +24056,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 					GndContent   bool
 					Collides     bool
-					Pointable    bool
+					PointType    PointabilityType
 					Diggable     bool
 					Climbable    bool
 					Replaceable  bool
@@ -24130,7 +24130,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -24198,7 +24198,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 					GndContent   bool
 					Collides     bool
-					Pointable    bool
+					PointType    PointabilityType
 					Diggable     bool
 					Climbable    bool
 					Replaceable  bool
@@ -24283,7 +24283,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -24351,7 +24351,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 					GndContent   bool
 					Collides     bool
-					Pointable    bool
+					PointType    PointabilityType
 					Diggable     bool
 					Climbable    bool
 					Replaceable  bool
@@ -24426,7 +24426,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -24496,7 +24496,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -24570,7 +24570,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -24644,7 +24644,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -24718,7 +24718,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -24785,7 +24785,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -24853,7 +24853,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 					GndContent   bool
 					Collides     bool
-					Pointable    bool
+					PointType    PointabilityType
 					Diggable     bool
 					Climbable    bool
 					Replaceable  bool
@@ -24928,7 +24928,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -24998,7 +24998,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25068,7 +25068,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25145,7 +25145,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25222,7 +25222,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25292,7 +25292,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25369,7 +25369,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25412,8 +25412,8 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 				chk(fmt.Errorf("invalid bool: %d", n))
 			}
 		}
-		{
-			p := &(*(*(struct {
+		if err := pcall(func() {
+			((*(*(struct {
 				Param0 Content
 
 				Name   string
@@ -25446,7 +25446,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25479,15 +25479,12 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 				MoveResistance    uint8
 				LiquidMovePhysics bool
 				InsideTintShaded  bool
-			}))(obj)).Pointable
-			switch n := read8(r); n {
-			case 0:
-				*p = false
-			case 1:
-				*p = true
-			default:
-				chk(fmt.Errorf("invalid bool: %d", n))
+			}))(obj)).PointType).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
 			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PointabilityType", err))
 		}
 		{
 			p := &(*(*(struct {
@@ -25523,7 +25520,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25600,7 +25597,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25677,7 +25674,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25754,7 +25751,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25831,7 +25828,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25901,7 +25898,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -25985,7 +25982,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -26063,7 +26060,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -26131,7 +26128,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -26201,7 +26198,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -26278,7 +26275,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -26348,7 +26345,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -26418,7 +26415,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -26495,7 +26492,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -26569,7 +26566,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -26643,7 +26640,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -26717,7 +26714,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -26791,7 +26788,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -26865,7 +26862,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -26939,7 +26936,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -27016,7 +27013,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -27103,7 +27100,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 			GndContent   bool
 			Collides     bool
-			Pointable    bool
+			PointType    PointabilityType
 			Diggable     bool
 			Climbable    bool
 			Replaceable  bool
@@ -27171,7 +27168,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -27241,7 +27238,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -27315,7 +27312,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -27385,7 +27382,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -27462,7 +27459,7 @@ func (obj *NodeDef) deserialize(r io.Reader) {
 
 				GndContent   bool
 				Collides     bool
-				Pointable    bool
+				PointType    PointabilityType
 				Diggable     bool
 				Climbable    bool
 				Replaceable  bool
@@ -41247,6 +41244,20 @@ func (obj *WaveType) deserialize(r io.Reader) {
 	}
 }
 
+func (obj *PointabilityType) serialize(w io.Writer) {
+	{
+		x := *(*(uint8))(obj)
+		write8(w, uint8(x))
+	}
+}
+
+func (obj *PointabilityType) deserialize(r io.Reader) {
+	{
+		p := &*(*(uint8))(obj)
+		*p = read8(r)
+	}
+}
+
 func (obj *LiquidType) serialize(w io.Writer) {
 	{
 		x := *(*(uint8))(obj)
@@ -43652,20 +43663,6 @@ func (obj *Box) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Vec", err))
 		}
-	}
-}
-
-func (obj *PointabilityType) serialize(w io.Writer) {
-	{
-		x := *(*(uint8))(obj)
-		write8(w, uint8(x))
-	}
-}
-
-func (obj *PointabilityType) deserialize(r io.Reader) {
-	{
-		p := &*(*(uint8))(obj)
-		*p = read8(r)
 	}
 }
 

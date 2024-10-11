@@ -127,7 +127,7 @@ type NodeDef struct {
 
 	GndContent   bool
 	Collides     bool
-	Pointable    bool
+	PointType    PointabilityType
 	Diggable     bool
 	Climbable    bool
 	Replaceable  bool
