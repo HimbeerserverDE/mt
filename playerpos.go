@@ -28,6 +28,8 @@ type PlayerPos struct {
 	FOV80            uint8
 	WantedRange      uint8 // in MapBlks.
 	Flags            PlayerPosFlags
+	Speed            float32
+	Dir              float32
 }
 
 func (p PlayerPos) Pos() (pos Pos) {

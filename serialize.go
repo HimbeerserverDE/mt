@@ -16112,6 +16112,7 @@ func (obj *ToCltCloudParams) serialize(w io.Writer) {
 			Density      float32
 			DiffuseColor color.NRGBA
 			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
 			Height       float32
 			Thickness    float32
 			Speed        [2]float32
@@ -16123,6 +16124,7 @@ func (obj *ToCltCloudParams) serialize(w io.Writer) {
 			Density      float32
 			DiffuseColor color.NRGBA
 			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
 			Height       float32
 			Thickness    float32
 			Speed        [2]float32
@@ -16134,6 +16136,7 @@ func (obj *ToCltCloudParams) serialize(w io.Writer) {
 			Density      float32
 			DiffuseColor color.NRGBA
 			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
 			Height       float32
 			Thickness    float32
 			Speed        [2]float32
@@ -16145,6 +16148,19 @@ func (obj *ToCltCloudParams) serialize(w io.Writer) {
 			Density      float32
 			DiffuseColor color.NRGBA
 			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
+			Height       float32
+			Thickness    float32
+			Speed        [2]float32
+		}))(obj)).ShadowColor
+		w.Write([]byte{x.A, x.R, x.G, x.B})
+	}
+	{
+		x := (*(*(struct {
+			Density      float32
+			DiffuseColor color.NRGBA
+			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
 			Height       float32
 			Thickness    float32
 			Speed        [2]float32
@@ -16156,6 +16172,7 @@ func (obj *ToCltCloudParams) serialize(w io.Writer) {
 			Density      float32
 			DiffuseColor color.NRGBA
 			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
 			Height       float32
 			Thickness    float32
 			Speed        [2]float32
@@ -16166,6 +16183,7 @@ func (obj *ToCltCloudParams) serialize(w io.Writer) {
 		Density      float32
 		DiffuseColor color.NRGBA
 		AmbientColor color.NRGBA
+		ShadowColor  color.NRGBA
 		Height       float32
 		Thickness    float32
 		Speed        [2]float32
@@ -16175,6 +16193,7 @@ func (obj *ToCltCloudParams) serialize(w io.Writer) {
 				Density      float32
 				DiffuseColor color.NRGBA
 				AmbientColor color.NRGBA
+				ShadowColor  color.NRGBA
 				Height       float32
 				Thickness    float32
 				Speed        [2]float32
@@ -16190,6 +16209,7 @@ func (obj *ToCltCloudParams) deserialize(r io.Reader) {
 			Density      float32
 			DiffuseColor color.NRGBA
 			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
 			Height       float32
 			Thickness    float32
 			Speed        [2]float32
@@ -16201,6 +16221,7 @@ func (obj *ToCltCloudParams) deserialize(r io.Reader) {
 			Density      float32
 			DiffuseColor color.NRGBA
 			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
 			Height       float32
 			Thickness    float32
 			Speed        [2]float32
@@ -16212,6 +16233,7 @@ func (obj *ToCltCloudParams) deserialize(r io.Reader) {
 			Density      float32
 			DiffuseColor color.NRGBA
 			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
 			Height       float32
 			Thickness    float32
 			Speed        [2]float32
@@ -16223,6 +16245,19 @@ func (obj *ToCltCloudParams) deserialize(r io.Reader) {
 			Density      float32
 			DiffuseColor color.NRGBA
 			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
+			Height       float32
+			Thickness    float32
+			Speed        [2]float32
+		}))(obj)).ShadowColor
+		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
+	}
+	{
+		p := &(*(*(struct {
+			Density      float32
+			DiffuseColor color.NRGBA
+			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
 			Height       float32
 			Thickness    float32
 			Speed        [2]float32
@@ -16234,6 +16269,7 @@ func (obj *ToCltCloudParams) deserialize(r io.Reader) {
 			Density      float32
 			DiffuseColor color.NRGBA
 			AmbientColor color.NRGBA
+			ShadowColor  color.NRGBA
 			Height       float32
 			Thickness    float32
 			Speed        [2]float32
@@ -16244,6 +16280,7 @@ func (obj *ToCltCloudParams) deserialize(r io.Reader) {
 		Density      float32
 		DiffuseColor color.NRGBA
 		AmbientColor color.NRGBA
+		ShadowColor  color.NRGBA
 		Height       float32
 		Thickness    float32
 		Speed        [2]float32
@@ -16253,6 +16290,7 @@ func (obj *ToCltCloudParams) deserialize(r io.Reader) {
 				Density      float32
 				DiffuseColor color.NRGBA
 				AmbientColor color.NRGBA
+				ShadowColor  color.NRGBA
 				Height       float32
 				Thickness    float32
 				Speed        [2]float32
@@ -17260,6 +17298,10 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).ShadowIntensity
 		write32(w, math.Float32bits(x))
 	}
@@ -17274,6 +17316,10 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).Saturation
 		write32(w, math.Float32bits(x))
 	}
@@ -17288,6 +17334,10 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).LuminanceMin
 		write32(w, math.Float32bits(x))
 	}
@@ -17302,6 +17352,10 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).LuminanceMax
 		write32(w, math.Float32bits(x))
 	}
@@ -17316,6 +17370,10 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).ExposureCorrection
 		write32(w, math.Float32bits(x))
 	}
@@ -17330,6 +17388,10 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).SpeedDarkBright
 		write32(w, math.Float32bits(x))
 	}
@@ -17344,6 +17406,10 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).SpeedBrightDark
 		write32(w, math.Float32bits(x))
 	}
@@ -17358,6 +17424,10 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).CenterWeightPower
 		write32(w, math.Float32bits(x))
 	}
@@ -17372,7 +17442,83 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).VolumetricStrength
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+		}))(obj)).ShadowTint
+		w.Write([]byte{x.A, x.R, x.G, x.B})
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+		}))(obj)).BloomIntensity
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+		}))(obj)).BloomStrength
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+		}))(obj)).BloomRadius
 		write32(w, math.Float32bits(x))
 	}
 }
@@ -17389,6 +17535,10 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).ShadowIntensity
 		*p = math.Float32frombits(read32(r))
 	}
@@ -17403,6 +17553,10 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).Saturation
 		*p = math.Float32frombits(read32(r))
 	}
@@ -17417,6 +17571,10 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).LuminanceMin
 		*p = math.Float32frombits(read32(r))
 	}
@@ -17431,6 +17589,10 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).LuminanceMax
 		*p = math.Float32frombits(read32(r))
 	}
@@ -17445,6 +17607,10 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).ExposureCorrection
 		*p = math.Float32frombits(read32(r))
 	}
@@ -17459,6 +17625,10 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).SpeedDarkBright
 		*p = math.Float32frombits(read32(r))
 	}
@@ -17473,6 +17643,10 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).SpeedBrightDark
 		*p = math.Float32frombits(read32(r))
 	}
@@ -17487,6 +17661,10 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).CenterWeightPower
 		*p = math.Float32frombits(read32(r))
 	}
@@ -17501,7 +17679,83 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			SpeedBrightDark    float32
 			CenterWeightPower  float32
 			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
 		}))(obj)).VolumetricStrength
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+		}))(obj)).ShadowTint
+		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+		}))(obj)).BloomIntensity
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+		}))(obj)).BloomStrength
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+		}))(obj)).BloomRadius
 		*p = math.Float32frombits(read32(r))
 	}
 }
@@ -27602,6 +27856,8 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 		FOV80            uint8
 		WantedRange      uint8 // in MapBlks.
 		Flags            PlayerPosFlags
+		Speed            float32
+		Dir              float32
 	}))(obj)).Pos100 {
 		{
 			x := ((*(*(struct {
@@ -27611,6 +27867,8 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
 				Flags            PlayerPosFlags
+				Speed            float32
+				Dir              float32
 			}))(obj)).Pos100)[local270]
 			write32(w, uint32(x))
 		}
@@ -27622,6 +27880,8 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 		FOV80            uint8
 		WantedRange      uint8 // in MapBlks.
 		Flags            PlayerPosFlags
+		Speed            float32
+		Dir              float32
 	}))(obj)).Vel100 {
 		{
 			x := ((*(*(struct {
@@ -27631,6 +27891,8 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
 				Flags            PlayerPosFlags
+				Speed            float32
+				Dir              float32
 			}))(obj)).Vel100)[local271]
 			write32(w, uint32(x))
 		}
@@ -27643,6 +27905,8 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).Pitch100
 		write32(w, uint32(x))
 	}
@@ -27654,6 +27918,8 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).Yaw100
 		write32(w, uint32(x))
 	}
@@ -27665,6 +27931,8 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).Keys).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -27680,6 +27948,8 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).FOV80
 		write8(w, uint8(x))
 	}
@@ -27691,6 +27961,8 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).WantedRange
 		write8(w, uint8(x))
 	}
@@ -27702,12 +27974,40 @@ func (obj *PlayerPos) serialize(w io.Writer) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).Flags).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPosFlags", err))
+	}
+	{
+		x := (*(*(struct {
+			Pos100, Vel100   [3]int32
+			Pitch100, Yaw100 int32
+			Keys             Keys
+			FOV80            uint8
+			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
+		}))(obj)).Speed
+		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Pos100, Vel100   [3]int32
+			Pitch100, Yaw100 int32
+			Keys             Keys
+			FOV80            uint8
+			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
+		}))(obj)).Dir
+		write32(w, math.Float32bits(x))
 	}
 }
 
@@ -27719,6 +28019,8 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 		FOV80            uint8
 		WantedRange      uint8 // in MapBlks.
 		Flags            PlayerPosFlags
+		Speed            float32
+		Dir              float32
 	}))(obj)).Pos100 {
 		{
 			p := &((*(*(struct {
@@ -27728,6 +28030,8 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
 				Flags            PlayerPosFlags
+				Speed            float32
+				Dir              float32
 			}))(obj)).Pos100)[local272]
 			*p = int32(read32(r))
 		}
@@ -27739,6 +28043,8 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 		FOV80            uint8
 		WantedRange      uint8 // in MapBlks.
 		Flags            PlayerPosFlags
+		Speed            float32
+		Dir              float32
 	}))(obj)).Vel100 {
 		{
 			p := &((*(*(struct {
@@ -27748,6 +28054,8 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 				FOV80            uint8
 				WantedRange      uint8 // in MapBlks.
 				Flags            PlayerPosFlags
+				Speed            float32
+				Dir              float32
 			}))(obj)).Vel100)[local273]
 			*p = int32(read32(r))
 		}
@@ -27760,6 +28068,8 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).Pitch100
 		*p = int32(read32(r))
 	}
@@ -27771,6 +28081,8 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).Yaw100
 		*p = int32(read32(r))
 	}
@@ -27782,6 +28094,8 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).Keys).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -27797,6 +28111,8 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).FOV80
 		*p = read8(r)
 	}
@@ -27808,6 +28124,8 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).WantedRange
 		*p = read8(r)
 	}
@@ -27819,12 +28137,40 @@ func (obj *PlayerPos) deserialize(r io.Reader) {
 			FOV80            uint8
 			WantedRange      uint8 // in MapBlks.
 			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
 		}))(obj)).Flags).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.PlayerPosFlags", err))
+	}
+	{
+		p := &(*(*(struct {
+			Pos100, Vel100   [3]int32
+			Pitch100, Yaw100 int32
+			Keys             Keys
+			FOV80            uint8
+			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
+		}))(obj)).Speed
+		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Pos100, Vel100   [3]int32
+			Pitch100, Yaw100 int32
+			Keys             Keys
+			FOV80            uint8
+			WantedRange      uint8 // in MapBlks.
+			Flags            PlayerPosFlags
+			Speed            float32
+			Dir              float32
+		}))(obj)).Dir
+		*p = math.Float32frombits(read32(r))
 	}
 }
 

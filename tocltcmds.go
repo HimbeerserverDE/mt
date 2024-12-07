@@ -694,6 +694,7 @@ type ToCltCloudParams struct {
 	Density      float32
 	DiffuseColor color.NRGBA
 	AmbientColor color.NRGBA
+	ShadowColor  color.NRGBA
 	Height       float32
 	Thickness    float32
 	Speed        [2]float32
@@ -843,6 +844,10 @@ type ToCltLighting struct {
 	SpeedBrightDark    float32
 	CenterWeightPower  float32
 	VolumetricStrength float32
+	ShadowTint         color.NRGBA
+	BloomIntensity     float32
+	BloomStrength      float32
+	BloomRadius        float32
 }
 
 type ToCltDisco struct{}
