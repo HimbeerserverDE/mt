@@ -729,7 +729,7 @@ type ToCltModChanMsg struct {
 	Msg     string
 }
 
-// ToCltModChanMsg tells the client it has received a signal on a mod channel.
+// ToCltModChanSig tells the client it has received a signal on a mod channel.
 type ToCltModChanSig struct {
 	Signal  ModChanSig
 	Channel string
@@ -748,7 +748,7 @@ const (
 
 //go:generate stringer -type ModChanSig
 
-// ToCltModChanMsg is sent when node metadata near the client changes.
+// ToCltNodeMetasChanged is sent when node metadata near the client changes.
 type ToCltNodeMetasChanged struct {
 	//mt:lenhdr 32
 	Changed map[[3]int16]*NodeMeta
