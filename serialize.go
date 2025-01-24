@@ -2617,8 +2617,8 @@ func (obj *ToCltMediaPush) serialize(w io.Writer) {
 			//mt:const uint16(sha1.Size)
 			SHA1          [sha1.Size]byte
 			Filename      string
+			Ephemeral     bool
 			CallbackToken uint32
-			ShouldCache   bool
 		}))(obj)).SHA1)[:])
 		chk(err)
 	}
@@ -2626,8 +2626,8 @@ func (obj *ToCltMediaPush) serialize(w io.Writer) {
 		//mt:const uint16(sha1.Size)
 		SHA1          [sha1.Size]byte
 		Filename      string
+		Ephemeral     bool
 		CallbackToken uint32
-		ShouldCache   bool
 	}))(obj)).Filename))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -2636,8 +2636,8 @@ func (obj *ToCltMediaPush) serialize(w io.Writer) {
 			//mt:const uint16(sha1.Size)
 			SHA1          [sha1.Size]byte
 			Filename      string
+			Ephemeral     bool
 			CallbackToken uint32
-			ShouldCache   bool
 		}))(obj)).Filename))))
 		write16(w, uint16(x))
 	}
@@ -2646,8 +2646,8 @@ func (obj *ToCltMediaPush) serialize(w io.Writer) {
 			//mt:const uint16(sha1.Size)
 			SHA1          [sha1.Size]byte
 			Filename      string
+			Ephemeral     bool
 			CallbackToken uint32
-			ShouldCache   bool
 		}))(obj)).Filename))[:])
 		chk(err)
 	}
@@ -2656,24 +2656,24 @@ func (obj *ToCltMediaPush) serialize(w io.Writer) {
 			//mt:const uint16(sha1.Size)
 			SHA1          [sha1.Size]byte
 			Filename      string
+			Ephemeral     bool
 			CallbackToken uint32
-			ShouldCache   bool
-		}))(obj)).CallbackToken
-		write32(w, uint32(x))
+		}))(obj)).Ephemeral
+		if x {
+			write8(w, 1)
+		} else {
+			write8(w, 0)
+		}
 	}
 	{
 		x := (*(*(struct {
 			//mt:const uint16(sha1.Size)
 			SHA1          [sha1.Size]byte
 			Filename      string
+			Ephemeral     bool
 			CallbackToken uint32
-			ShouldCache   bool
-		}))(obj)).ShouldCache
-		if x {
-			write8(w, 1)
-		} else {
-			write8(w, 0)
-		}
+		}))(obj)).CallbackToken
+		write32(w, uint32(x))
 	}
 }
 
@@ -2694,8 +2694,8 @@ func (obj *ToCltMediaPush) deserialize(r io.Reader) {
 			//mt:const uint16(sha1.Size)
 			SHA1          [sha1.Size]byte
 			Filename      string
+			Ephemeral     bool
 			CallbackToken uint32
-			ShouldCache   bool
 		}))(obj)).SHA1)[:])
 		chk(err)
 	}
@@ -2714,27 +2714,17 @@ func (obj *ToCltMediaPush) deserialize(r io.Reader) {
 		//mt:const uint16(sha1.Size)
 		SHA1          [sha1.Size]byte
 		Filename      string
+		Ephemeral     bool
 		CallbackToken uint32
-		ShouldCache   bool
 	}))(obj)).Filename) = string(local79)
 	{
 		p := &(*(*(struct {
 			//mt:const uint16(sha1.Size)
 			SHA1          [sha1.Size]byte
 			Filename      string
+			Ephemeral     bool
 			CallbackToken uint32
-			ShouldCache   bool
-		}))(obj)).CallbackToken
-		*p = read32(r)
-	}
-	{
-		p := &(*(*(struct {
-			//mt:const uint16(sha1.Size)
-			SHA1          [sha1.Size]byte
-			Filename      string
-			CallbackToken uint32
-			ShouldCache   bool
-		}))(obj)).ShouldCache
+		}))(obj)).Ephemeral
 		switch n := read8(r); n {
 		case 0:
 			*p = false
@@ -2743,6 +2733,16 @@ func (obj *ToCltMediaPush) deserialize(r io.Reader) {
 		default:
 			chk(fmt.Errorf("invalid bool: %d", n))
 		}
+	}
+	{
+		p := &(*(*(struct {
+			//mt:const uint16(sha1.Size)
+			SHA1          [sha1.Size]byte
+			Filename      string
+			Ephemeral     bool
+			CallbackToken uint32
+		}))(obj)).CallbackToken
+		*p = read32(r)
 	}
 }
 

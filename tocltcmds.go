@@ -183,8 +183,8 @@ type ToCltMediaPush struct {
 	//mt:const uint16(sha1.Size)
 	SHA1          [sha1.Size]byte
 	Filename      string
+	Ephemeral     bool
 	CallbackToken uint32
-	ShouldCache   bool
 }
 
 // ToCltChatMsg tells the client that is has received a chat message.
