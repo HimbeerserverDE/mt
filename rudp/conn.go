@@ -149,7 +149,6 @@ func newConn(uc udpConn, id, remoteID PeerID) *Conn {
 
 	c.newAckBuf()
 
-	go c.sendPings(c.ping.C)
 	go c.recvUDPPkts()
 
 	return c

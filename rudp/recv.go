@@ -136,6 +136,8 @@ func (c *Conn) processRawPkt(data []byte, pi PktInfo) (err error) {
 			c.mu.Unlock()
 
 			c.newAckBuf()
+
+			go c.sendPings(c.ping.C)
 		case ctlPing:
 			defer errWrap("ping")
 		case ctlDisco:
