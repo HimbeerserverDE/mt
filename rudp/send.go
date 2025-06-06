@@ -120,7 +120,10 @@ func (c *Conn) Send(pkt Pkt) (ack <-chan struct{}, err error) {
 		if !pkt.Unrel {
 			wg.Add(1)
 			go func() {
-				<-ack
+				select {
+				case <-ack:
+				case <-c.Closed():
+				}
 				wg.Done()
 			}()
 		}
