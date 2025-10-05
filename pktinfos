@@ -12,6 +12,7 @@ ToCltCSMRestrictionFlags	0	rel
 ToCltAddPlayerVel	0	rel
 ToCltMediaPush	0	rel
 ToCltChatMsg	0	rel
+ToCltCam	0	rel
 ToCltAORmAdd	0	rel
 ToCltAOMsgs	0	rel
 ToCltHP	0	rel

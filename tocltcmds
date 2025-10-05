@@ -12,6 +12,7 @@
 43	AddPlayerVel
 44	MediaPush
 47	ChatMsg
+48	Cam
 49	AORmAdd
 50	AOMsgs
 51	HP

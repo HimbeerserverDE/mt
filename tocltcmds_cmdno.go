@@ -16,6 +16,7 @@ func (*ToCltCSMRestrictionFlags) toCltCmdNo() uint16   { return 42 }
 func (*ToCltAddPlayerVel) toCltCmdNo() uint16          { return 43 }
 func (*ToCltMediaPush) toCltCmdNo() uint16             { return 44 }
 func (*ToCltChatMsg) toCltCmdNo() uint16               { return 47 }
+func (*ToCltCam) toCltCmdNo() uint16                   { return 48 }
 func (*ToCltAORmAdd) toCltCmdNo() uint16               { return 49 }
 func (*ToCltAOMsgs) toCltCmdNo() uint16                { return 50 }
 func (*ToCltHP) toCltCmdNo() uint16                    { return 51 }
@@ -77,6 +78,7 @@ var newToCltCmd = map[uint16]func() Cmd{
 	43: func() Cmd { return new(ToCltAddPlayerVel) },
 	44: func() Cmd { return new(ToCltMediaPush) },
 	47: func() Cmd { return new(ToCltChatMsg) },
+	48: func() Cmd { return new(ToCltCam) },
 	49: func() Cmd { return new(ToCltAORmAdd) },
 	50: func() Cmd { return new(ToCltAOMsgs) },
 	51: func() Cmd { return new(ToCltHP) },

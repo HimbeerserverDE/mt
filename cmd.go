@@ -16,6 +16,7 @@ func (*ToCltCSMRestrictionFlags) cmd()   {}
 func (*ToCltAddPlayerVel) cmd()          {}
 func (*ToCltMediaPush) cmd()             {}
 func (*ToCltChatMsg) cmd()               {}
+func (*ToCltCam) cmd()                   {}
 func (*ToCltAORmAdd) cmd()               {}
 func (*ToCltAOMsgs) cmd()                {}
 func (*ToCltHP) cmd()                    {}

@@ -211,6 +211,22 @@ const (
 
 //go:generate stringer -linecomment -type ChatMsgType
 
+// ToCltCam tells the client which camera mode is allowed.
+type ToCltCam struct {
+	Mode CamMode
+}
+
+type CamMode uint8
+
+const (
+	AnyCam CamMode = iota
+	FirstPerson
+	ThirdPersonBack
+	ThirdPersonFront
+)
+
+//go:generate stringer -linecomment -type CamMode
+
 // ToCltAORmAdd tells the client that AOs have been removed from and/or added to
 // the AOs that it can see.
 type ToCltAORmAdd struct {
@@ -272,15 +288,20 @@ type ToCltMedia struct {
 	Files []struct {
 		Name string
 
-		//mt:len32
+		//mt:lenhdr 32
+		//mt:zstd
+		//mt:raw
 		Data []byte
+
+		//mt:end
+		//mt:end
 	}
 }
 
 // ToCltNodeDefs tells the client the definitions of nodes.
 type ToCltNodeDefs struct {
 	//mt:lenhdr 32
-	//mt:zlib
+	//mt:zstd
 
 	// Version.
 	//mt:const uint8(1)
@@ -295,17 +316,28 @@ type ToCltNodeDefs struct {
 // ToCltAnnounceMedia tells the client what media is available on request.
 // See ToSrvReqMedia.
 type ToCltAnnounceMedia struct {
-	Files []struct {
-		Name       string
-		Base64SHA1 string
-	}
+	//mt:lenhdr 32
+	//mt:zstd
+	N uint32
+	//mt:manlen %s.N
+	NameLens []uint16
+
+	//mt:raw
+	NameData []byte
+
+	//mt:end
+	//mt:end
+
+	//mt:manlen %s.N
+	Digests [][sha1.Size]byte
+
 	URL string
 }
 
 // ToCltItemDefs tells the client the definitions of items.
 type ToCltItemDefs struct {
 	//mt:lenhdr 32
-	//mt:zlib
+	//mt:zstd
 
 	//mt:const uint8(0)
 

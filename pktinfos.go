@@ -18,6 +18,7 @@ func (*ToCltCSMRestrictionFlags) DefaultPktInfo() rudp.PktInfo   { return rudp.P
 func (*ToCltAddPlayerVel) DefaultPktInfo() rudp.PktInfo          { return rudp.PktInfo{0, false} }
 func (*ToCltMediaPush) DefaultPktInfo() rudp.PktInfo             { return rudp.PktInfo{0, false} }
 func (*ToCltChatMsg) DefaultPktInfo() rudp.PktInfo               { return rudp.PktInfo{0, false} }
+func (*ToCltCam) DefaultPktInfo() rudp.PktInfo                   { return rudp.PktInfo{0, false} }
 func (*ToCltAORmAdd) DefaultPktInfo() rudp.PktInfo               { return rudp.PktInfo{0, false} }
 func (*ToCltAOMsgs) DefaultPktInfo() rudp.PktInfo                { return rudp.PktInfo{0, false} }
 func (*ToCltHP) DefaultPktInfo() rudp.PktInfo                    { return rudp.PktInfo{0, false} }
