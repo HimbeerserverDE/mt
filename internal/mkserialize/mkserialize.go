@@ -10,6 +10,7 @@ import (
 	"go/types"
 	"io"
 	"log"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -151,12 +152,18 @@ func structPragma(c *ast.Comment, sp *[]func(), expr string, de bool) {
 
 func genSerialize(t types.Type, expr string, pos token.Pos, doc *ast.CommentGroup, de bool) {
 	var lenhdr types.Type = types.Typ[types.Uint16]
+	var manlen string
 
 	useMethod := true
 	if doc != nil {
 		for _, c := range doc.List {
 			pragma := true
-			switch c.Text {
+			fields := strings.SplitN(c.Text, " ", 2)
+			var arg string
+			if len(fields) > 1 {
+				arg = fields[1]
+			}
+			switch fields[0] {
 			case "//mt:32to16":
 				t = types.Typ[types.Int16]
 				if de {
@@ -198,6 +205,13 @@ func genSerialize(t types.Type, expr string, pos token.Pos, doc *ast.CommentGrou
 				lenhdr = types.Typ[types.Uint8]
 			case "//mt:len32":
 				lenhdr = types.Typ[types.Uint32]
+			case "//mt:manlen":
+				segs := strings.Split(expr, ".")
+				n := int(math.Max(float64(len(segs)-1), 1.0))
+				parent := strings.Join(segs[:n], ".")
+
+				lenhdr = nil
+				manlen = fmt.Sprintf(arg, parent)
 			case "//mt:opt":
 				fmt.Println("if err := pcall(func() {")
 				defer fmt.Println("}); err != nil && err != io.EOF",
@@ -334,6 +348,10 @@ func genSerialize(t types.Type, expr string, pos token.Pos, doc *ast.CommentGrou
 				genSerialize(lenhdr, v, pos, nil, de)
 				fmt.Printf("%s = make(%v, %s)\n",
 					expr, typeStr(t), v)
+				genSerialize(types.NewArray(t.Elem(), 0), expr, pos, nil, de)
+			} else if manlen != "" {
+				fmt.Printf("%s = make(%v, %s)\n",
+					expr, typeStr(t), manlen)
 				genSerialize(types.NewArray(t.Elem(), 0), expr, pos, nil, de)
 			} else {
 				if b, ok := t.Elem().(*types.Basic); ok && b.Kind() == types.Byte {
