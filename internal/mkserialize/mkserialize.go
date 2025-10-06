@@ -565,6 +565,7 @@ var typeNames = []string{
 	"ToCltMovement",
 	"ToCltSpawnParticle",
 	"ToCltAddParticleSpawner",
+	"ToCltCam",
 	"ToCltAddHUD",
 	"ToCltRmHUD",
 	"ToCltChangeHUD",

@@ -10509,6 +10509,32 @@ func (obj *ToCltAddParticleSpawner) deserialize(r io.Reader) {
 	}
 }
 
+func (obj *ToCltCam) serialize(w io.Writer) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Mode CamMode
+		}))(obj)).Mode).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CamMode", err))
+	}
+}
+
+func (obj *ToCltCam) deserialize(r io.Reader) {
+	if err := pcall(func() {
+		((*(*(struct {
+			Mode CamMode
+		}))(obj)).Mode).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.CamMode", err))
+	}
+}
+
 func (obj *ToCltAddHUD) serialize(w io.Writer) {
 	if err := pcall(func() {
 		((*(*(struct {
@@ -34581,6 +34607,20 @@ func (obj *ParticleSpawnerFlags) serialize(w io.Writer) {
 }
 
 func (obj *ParticleSpawnerFlags) deserialize(r io.Reader) {
+	{
+		p := &*(*(uint8))(obj)
+		*p = read8(r)
+	}
+}
+
+func (obj *CamMode) serialize(w io.Writer) {
+	{
+		x := *(*(uint8))(obj)
+		write8(w, uint8(x))
+	}
+}
+
+func (obj *CamMode) deserialize(r io.Reader) {
 	{
 		p := &*(*(uint8))(obj)
 		*p = read8(r)
