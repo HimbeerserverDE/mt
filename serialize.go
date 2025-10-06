@@ -2103,10 +2103,7 @@ func (obj *ToCltKick) serialize(w io.Writer) {
 		((*(*(struct {
 			Reason KickReason
 
-			//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-			Custom string
-
-			//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
+			Custom    string
 			Reconnect bool
 		}))(obj)).Reason).serialize(w)
 	}); err != nil {
@@ -2118,83 +2115,48 @@ func (obj *ToCltKick) serialize(w io.Writer) {
 	if !((*(*(struct {
 		Reason KickReason
 
-		//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-		Custom string
-
-		//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
+		Custom    string
 		Reconnect bool
 	}))(obj)).Reason < maxKickReason) {
 		chk(errors.New("assertion failed: %s.Reason < maxKickReason"))
 	}
-	if dr := (*(*(struct {
+	if len(([]byte((*(*(struct {
 		Reason KickReason
 
-		//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-		Custom string
-
-		//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
+		Custom    string
 		Reconnect bool
-	}))(obj)).Reason; dr == Custom || dr == Shutdown || dr == Crash {
-		if len(([]byte((*(*(struct {
+	}))(obj)).Custom))) > math.MaxUint16 {
+		chk(ErrTooLong)
+	}
+	{
+		x := uint16(len(([]byte((*(*(struct {
 			Reason KickReason
 
-			//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-			Custom string
-
-			//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
+			Custom    string
 			Reconnect bool
-		}))(obj)).Custom))) > math.MaxUint16 {
-			chk(ErrTooLong)
-		}
-		{
-			x := uint16(len(([]byte((*(*(struct {
-				Reason KickReason
-
-				//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-				Custom string
-
-				//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
-				Reconnect bool
-			}))(obj)).Custom))))
-			write16(w, uint16(x))
-		}
-		{
-			_, err := w.Write(([]byte((*(*(struct {
-				Reason KickReason
-
-				//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-				Custom string
-
-				//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
-				Reconnect bool
-			}))(obj)).Custom))[:])
-			chk(err)
-		}
+		}))(obj)).Custom))))
+		write16(w, uint16(x))
 	}
-	if dr := (*(*(struct {
-		Reason KickReason
+	{
+		_, err := w.Write(([]byte((*(*(struct {
+			Reason KickReason
 
-		//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-		Custom string
+			Custom    string
+			Reconnect bool
+		}))(obj)).Custom))[:])
+		chk(err)
+	}
+	{
+		x := (*(*(struct {
+			Reason KickReason
 
-		//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
-		Reconnect bool
-	}))(obj)).Reason; dr == Shutdown || dr == Crash {
-		{
-			x := (*(*(struct {
-				Reason KickReason
-
-				//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-				Custom string
-
-				//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
-				Reconnect bool
-			}))(obj)).Reconnect
-			if x {
-				write8(w, 1)
-			} else {
-				write8(w, 0)
-			}
+			Custom    string
+			Reconnect bool
+		}))(obj)).Reconnect
+		if x {
+			write8(w, 1)
+		} else {
+			write8(w, 0)
 		}
 	}
 }
@@ -2204,10 +2166,7 @@ func (obj *ToCltKick) deserialize(r io.Reader) {
 		((*(*(struct {
 			Reason KickReason
 
-			//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-			Custom string
-
-			//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
+			Custom    string
 			Reconnect bool
 		}))(obj)).Reason).deserialize(r)
 	}); err != nil {
@@ -2219,71 +2178,42 @@ func (obj *ToCltKick) deserialize(r io.Reader) {
 	if !((*(*(struct {
 		Reason KickReason
 
-		//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-		Custom string
-
-		//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
+		Custom    string
 		Reconnect bool
 	}))(obj)).Reason < maxKickReason) {
 		chk(errors.New("assertion failed: %s.Reason < maxKickReason"))
 	}
-	if dr := (*(*(struct {
+	var local67 []uint8
+	var local68 uint16
+	{
+		p := &local68
+		*p = read16(r)
+	}
+	(local67) = make([]uint8, local68)
+	{
+		_, err := io.ReadFull(r, (local67)[:])
+		chk(err)
+	}
+	((*(*(struct {
 		Reason KickReason
 
-		//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-		Custom string
-
-		//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
+		Custom    string
 		Reconnect bool
-	}))(obj)).Reason; dr == Custom || dr == Shutdown || dr == Crash {
-		var local67 []uint8
-		var local68 uint16
-		{
-			p := &local68
-			*p = read16(r)
-		}
-		(local67) = make([]uint8, local68)
-		{
-			_, err := io.ReadFull(r, (local67)[:])
-			chk(err)
-		}
-		((*(*(struct {
+	}))(obj)).Custom) = string(local67)
+	{
+		p := &(*(*(struct {
 			Reason KickReason
 
-			//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-			Custom string
-
-			//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
+			Custom    string
 			Reconnect bool
-		}))(obj)).Custom) = string(local67)
-	}
-	if dr := (*(*(struct {
-		Reason KickReason
-
-		//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-		Custom string
-
-		//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
-		Reconnect bool
-	}))(obj)).Reason; dr == Shutdown || dr == Crash {
-		{
-			p := &(*(*(struct {
-				Reason KickReason
-
-				//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-				Custom string
-
-				//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
-				Reconnect bool
-			}))(obj)).Reconnect
-			switch n := read8(r); n {
-			case 0:
-				*p = false
-			case 1:
-				*p = true
-			default:
-				chk(fmt.Errorf("invalid bool: %d", n))
-			}
+		}))(obj)).Reconnect
+		switch n := read8(r); n {
+		case 0:
+			*p = false
+		case 1:
+			*p = true
+		default:
+			chk(fmt.Errorf("invalid bool: %d", n))
 		}
 	}
 }

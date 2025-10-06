@@ -52,13 +52,8 @@ type ToCltKick struct {
 	Reason KickReason
 	//mt:assert %s.Reason < maxKickReason
 
-	//mt:if dr := %s.Reason; dr == Custom || dr == Shutdown || dr == Crash
-	Custom string
-	//mt:end
-
-	//mt:if dr := %s.Reason; dr == Shutdown || dr == Crash
+	Custom    string
 	Reconnect bool
-	//mt:end
 }
 
 // A KickReason is the reason a ToCltKick has been sent.
