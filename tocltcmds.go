@@ -206,22 +206,6 @@ const (
 
 //go:generate stringer -linecomment -type ChatMsgType
 
-// ToCltCam tells the client which camera mode is allowed.
-type ToCltCam struct {
-	Mode CamMode
-}
-
-type CamMode uint8
-
-const (
-	AnyCam CamMode = iota
-	FirstPerson
-	ThirdPersonBack
-	ThirdPersonFront
-)
-
-//go:generate stringer -linecomment -type CamMode
-
 // ToCltAORmAdd tells the client that AOs have been removed from and/or added to
 // the AOs that it can see.
 type ToCltAORmAdd struct {
@@ -475,6 +459,22 @@ type ToCltAddParticleSpawner struct {
 	//mt:len16
 	Textures []ParticleTexture
 }
+
+// ToCltCam tells the client which camera mode is allowed.
+type ToCltCam struct {
+	Mode CamMode
+}
+
+type CamMode uint8
+
+const (
+	AnyCam CamMode = iota
+	FirstPerson
+	ThirdPersonBack
+	ThirdPersonFront
+)
+
+//go:generate stringer -linecomment -type CamMode
 
 type HUD struct {
 	Type HUDType

@@ -12,7 +12,6 @@
 43	AddPlayerVel
 44	MediaPush
 47	ChatMsg
-48	Cam
 49	AORmAdd
 50	AOMsgs
 51	HP
@@ -33,6 +32,7 @@
 69	Movement
 70	SpawnParticle
 71	AddParticleSpawner
+72	Cam
 73	AddHUD
 74	RmHUD
 75	ChangeHUD

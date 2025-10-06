@@ -16,7 +16,6 @@ func (*ToCltCSMRestrictionFlags) cmd()   {}
 func (*ToCltAddPlayerVel) cmd()          {}
 func (*ToCltMediaPush) cmd()             {}
 func (*ToCltChatMsg) cmd()               {}
-func (*ToCltCam) cmd()                   {}
 func (*ToCltAORmAdd) cmd()               {}
 func (*ToCltAOMsgs) cmd()                {}
 func (*ToCltHP) cmd()                    {}
@@ -37,6 +36,7 @@ func (*ToCltShowFormspec) cmd()          {}
 func (*ToCltMovement) cmd()              {}
 func (*ToCltSpawnParticle) cmd()         {}
 func (*ToCltAddParticleSpawner) cmd()    {}
+func (*ToCltCam) cmd()                   {}
 func (*ToCltAddHUD) cmd()                {}
 func (*ToCltRmHUD) cmd()                 {}
 func (*ToCltChangeHUD) cmd()             {}
