@@ -590,6 +590,7 @@ var typeNames = []string{
 	"ToCltSRPBytesSaltB",
 	"ToCltFormspecPrepend",
 	"ToCltLighting",
+	"ToCltSpawnParticleBatch",
 
 	"AOCmdProps",
 	"AOCmdPos",

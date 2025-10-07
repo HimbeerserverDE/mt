@@ -36,3 +36,26 @@ type ParticleTexture struct {
 	Animation TileAnim
 	//mt:end
 }
+
+type ParticleParams struct {
+	Pos, Vel, Acc  [3]float32
+	ExpirationTime float32 // in seconds.
+	Size           float32
+	Collide        bool
+
+	//mt:len32
+	TextureName Texture
+
+	Vertical    bool
+	CollisionRm bool
+	AnimParams  TileAnim
+	Glow        uint8
+	AOCollision bool
+	NodeParam0  Content
+	NodeParam2  uint8
+	NodeTile    uint8
+	Drag        [3]float32
+	Jitter      RangeV3F32
+	Bounce      RangeF32
+	Texture     ParticleTexture
+}

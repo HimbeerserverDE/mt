@@ -64,6 +64,7 @@ func (*ToCltSRPBytesSaltB) DefaultPktInfo() rudp.PktInfo         { return rudp.P
 func (*ToCltFormspecPrepend) DefaultPktInfo() rudp.PktInfo       { return rudp.PktInfo{0, false} }
 func (*ToCltMinimapModes) DefaultPktInfo() rudp.PktInfo          { return rudp.PktInfo{0, false} }
 func (*ToCltLighting) DefaultPktInfo() rudp.PktInfo              { return rudp.PktInfo{0, false} }
+func (*ToCltSpawnParticleBatch) DefaultPktInfo() rudp.PktInfo    { return rudp.PktInfo{0, false} }
 func (*ToSrvNil) DefaultPktInfo() rudp.PktInfo                   { return rudp.PktInfo{0, false} }
 func (*ToSrvInit) DefaultPktInfo() rudp.PktInfo                  { return rudp.PktInfo{1, true} }
 func (*ToSrvInit2) DefaultPktInfo() rudp.PktInfo                 { return rudp.PktInfo{1, false} }

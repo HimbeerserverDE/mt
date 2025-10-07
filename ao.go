@@ -81,6 +81,8 @@ type AOProps struct {
 	NodeParam0       Content
 	NodeParam1       uint8
 	NodeParam2       uint8
+	NametagFontSize  uint32 // 0xffffffff means nil.
+	NametagScaleZ    uint8
 }
 
 type AOPos struct {

@@ -386,26 +386,7 @@ type ToCltMovement struct {
 
 // ToCltSpawnParticle tells the client to spawn a particle.
 type ToCltSpawnParticle struct {
-	Pos, Vel, Acc  [3]float32
-	ExpirationTime float32 // in seconds.
-	Size           float32
-	Collide        bool
-
-	//mt:len32
-	TextureName Texture
-
-	Vertical    bool
-	CollisionRm bool
-	AnimParams  TileAnim
-	Glow        uint8
-	AOCollision bool
-	NodeParam0  Content
-	NodeParam2  uint8
-	NodeTile    uint8
-	Drag        [3]float32
-	Jitter      RangeV3F32
-	Bounce      RangeF32
-	Texture     ParticleTexture
+	ParticleParams
 }
 
 type ParticleSpawnerID uint32
@@ -875,6 +856,22 @@ type ToCltLighting struct {
 	BloomIntensity     float32
 	BloomStrength      float32
 	BloomRadius        float32
+}
+
+// ToCltSpawnParticleBatch tells the client to spawn multiple particles.
+type ToCltSpawnParticleBatch struct {
+	//mt:lenhdr 32
+	//mt:zstd
+
+	//mt:raw
+	Particles []struct {
+		//mt:lenhdr 32
+		ParticleParams
+		//mt:end
+	}
+
+	//mt:end
+	//mt:end
 }
 
 type ToCltDisco struct{}
