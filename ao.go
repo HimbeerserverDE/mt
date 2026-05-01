@@ -20,6 +20,14 @@ const (
 	ScaleAbs
 )
 
+type StepUpMode uint8
+
+const (
+	LegacyStepUp StepUpMode = iota
+	FloatyStepUp
+	RigidStepUp
+)
+
 type AOInitData struct {
 	// Version.
 	//mt:const uint8(1)
@@ -83,6 +91,7 @@ type AOProps struct {
 	NodeParam2       uint8
 	NametagFontSize  uint32 // 0xffffffff means nil.
 	NametagScaleZ    uint8
+	StepUp           StepUpMode
 }
 
 type AOPos struct {

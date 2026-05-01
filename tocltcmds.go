@@ -141,8 +141,10 @@ type ToCltRemoveNode struct {
 
 // ToCltInv updates the client's inventory.
 type ToCltInv struct {
-	//mt:raw
+	//mt:len32
 	Inv string
+
+	SkipWieldAnim bool
 }
 
 // ToCltTimeOfDay updates the client's in-game time of day.
@@ -473,7 +475,7 @@ type HUD struct {
 	Align    [2]float32
 	Offset   [2]float32
 	WorldPos Pos
-	Size     [2]int32
+	Size     [2]float32
 	ZIndex   int16
 	Text2    string
 	Style    HUDStyleFlags
@@ -675,6 +677,7 @@ type ToCltSkyParams struct {
 	FogDistance int16
 	FogStart    float32
 	FogColor    color.NRGBA
+	AutoDim     bool
 }
 
 // ToCltOverrideDayNightRatio overrides the client's day-night ratio
@@ -860,6 +863,7 @@ type ToCltLighting struct {
 	BloomIntensity     float32
 	BloomStrength      float32
 	BloomRadius        float32
+	ShadowDir          [3]float32
 }
 
 // ToCltSpawnParticleBatch tells the client to spawn multiple particles.
