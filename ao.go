@@ -28,6 +28,14 @@ const (
 	RigidStepUp
 )
 
+type TrackID struct {
+	ID uint16
+
+	//mt:if %s.ID == 0
+	Name string
+	//mt:end
+}
+
 type AOInitData struct {
 	// Version.
 	//mt:const uint8(1)
@@ -112,10 +120,13 @@ type AOSprite struct {
 }
 
 type AOAnim struct {
-	Frames [2]int32
-	Speed  float32
-	Blend  float32
-	NoLoop bool
+	Frames   [2]int32
+	Speed    float32
+	Blend    float32
+	NoLoop   bool
+	Track    TrackID
+	Priority int32
+	Frame    float32
 }
 
 type AOBoneOverride struct {
@@ -197,6 +208,11 @@ type AOCmdSpawnInfant struct {
 
 type AOCmdAnimSpeed struct {
 	Speed float32
+	Track TrackID
+}
+
+type AOCmdStopAnim struct {
+	Track TrackID
 }
 
 type AOMsg interface {

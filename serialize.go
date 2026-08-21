@@ -17527,8 +17527,20 @@ func (obj *AOCmdAnimSpeed) serialize(w io.Writer) {
 	{
 		x := (*(*(struct {
 			Speed float32
+			Track TrackID
 		}))(obj)).Speed
 		write32(w, math.Float32bits(x))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Speed float32
+			Track TrackID
+		}))(obj)).Track).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TrackID", err))
 	}
 }
 
@@ -17536,8 +17548,20 @@ func (obj *AOCmdAnimSpeed) deserialize(r io.Reader) {
 	{
 		p := &(*(*(struct {
 			Speed float32
+			Track TrackID
 		}))(obj)).Speed
 		*p = math.Float32frombits(read32(r))
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Speed float32
+			Track TrackID
+		}))(obj)).Track).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TrackID", err))
 	}
 }
 
@@ -35045,6 +35069,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Type).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -35069,6 +35094,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Pos {
 		{
 			x := ((*(*(struct {
@@ -35088,6 +35114,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
+				Hideable bool
 			}))(obj)).Pos)[local316]
 			write32(w, math.Float32bits(x))
 		}
@@ -35109,6 +35136,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Name))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -35130,6 +35158,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Name))))
 		write16(w, uint16(x))
 	}
@@ -35151,6 +35180,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Name))[:])
 		chk(err)
 	}
@@ -35171,6 +35201,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Scale {
 		{
 			x := ((*(*(struct {
@@ -35190,6 +35221,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
+				Hideable bool
 			}))(obj)).Scale)[local317]
 			write32(w, math.Float32bits(x))
 		}
@@ -35211,6 +35243,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Text))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -35232,6 +35265,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Text))))
 		write16(w, uint16(x))
 	}
@@ -35253,6 +35287,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Text))[:])
 		chk(err)
 	}
@@ -35274,6 +35309,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Number
 		write32(w, uint32(x))
 	}
@@ -35295,6 +35331,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Item
 		write32(w, uint32(x))
 	}
@@ -35316,6 +35353,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Dir
 		write32(w, uint32(x))
 	}
@@ -35336,6 +35374,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Align {
 		{
 			x := ((*(*(struct {
@@ -35355,6 +35394,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
+				Hideable bool
 			}))(obj)).Align)[local318]
 			write32(w, math.Float32bits(x))
 		}
@@ -35376,6 +35416,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Offset {
 		{
 			x := ((*(*(struct {
@@ -35395,6 +35436,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
+				Hideable bool
 			}))(obj)).Offset)[local319]
 			write32(w, math.Float32bits(x))
 		}
@@ -35417,6 +35459,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).WorldPos).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -35441,6 +35484,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Size {
 		{
 			x := ((*(*(struct {
@@ -35460,6 +35504,7 @@ func (obj *HUD) serialize(w io.Writer) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
+				Hideable bool
 			}))(obj)).Size)[local320]
 			write32(w, math.Float32bits(x))
 		}
@@ -35482,6 +35527,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).ZIndex
 		write16(w, uint16(x))
 	}
@@ -35502,6 +35548,7 @@ func (obj *HUD) serialize(w io.Writer) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Text2))) > math.MaxUint16 {
 		chk(ErrTooLong)
 	}
@@ -35523,6 +35570,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Text2))))
 		write16(w, uint16(x))
 	}
@@ -35544,6 +35592,7 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Text2))[:])
 		chk(err)
 	}
@@ -35565,12 +35614,39 @@ func (obj *HUD) serialize(w io.Writer) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Style).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDStyleFlags", err))
+	}
+	{
+		x := (*(*(struct {
+			Type HUDType
+
+			Pos      [2]float32
+			Name     string
+			Scale    [2]float32
+			Text     string
+			Number   uint32
+			Item     uint32
+			Dir      uint32
+			Align    [2]float32
+			Offset   [2]float32
+			WorldPos Pos
+			Size     [2]float32
+			ZIndex   int16
+			Text2    string
+			Style    HUDStyleFlags
+			Hideable bool
+		}))(obj)).Hideable
+		if x {
+			write8(w, 1)
+		} else {
+			write8(w, 0)
+		}
 	}
 }
 
@@ -35593,6 +35669,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Type).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -35617,6 +35694,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Pos {
 		{
 			p := &((*(*(struct {
@@ -35636,6 +35714,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
+				Hideable bool
 			}))(obj)).Pos)[local321]
 			*p = math.Float32frombits(read32(r))
 		}
@@ -35668,6 +35747,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Name) = string(local322)
 	for local324 := range (*(*(struct {
 		Type HUDType
@@ -35686,6 +35766,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Scale {
 		{
 			p := &((*(*(struct {
@@ -35705,6 +35786,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
+				Hideable bool
 			}))(obj)).Scale)[local324]
 			*p = math.Float32frombits(read32(r))
 		}
@@ -35737,6 +35819,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Text) = string(local325)
 	{
 		p := &(*(*(struct {
@@ -35756,6 +35839,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Number
 		*p = read32(r)
 	}
@@ -35777,6 +35861,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Item
 		*p = read32(r)
 	}
@@ -35798,6 +35883,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Dir
 		*p = read32(r)
 	}
@@ -35818,6 +35904,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Align {
 		{
 			p := &((*(*(struct {
@@ -35837,6 +35924,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
+				Hideable bool
 			}))(obj)).Align)[local327]
 			*p = math.Float32frombits(read32(r))
 		}
@@ -35858,6 +35946,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Offset {
 		{
 			p := &((*(*(struct {
@@ -35877,6 +35966,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
+				Hideable bool
 			}))(obj)).Offset)[local328]
 			*p = math.Float32frombits(read32(r))
 		}
@@ -35899,6 +35989,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).WorldPos).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -35923,6 +36014,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Size {
 		{
 			p := &((*(*(struct {
@@ -35942,6 +36034,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 				ZIndex   int16
 				Text2    string
 				Style    HUDStyleFlags
+				Hideable bool
 			}))(obj)).Size)[local329]
 			*p = math.Float32frombits(read32(r))
 		}
@@ -35964,6 +36057,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).ZIndex
 		*p = int16(read16(r))
 	}
@@ -35995,6 +36089,7 @@ func (obj *HUD) deserialize(r io.Reader) {
 		ZIndex   int16
 		Text2    string
 		Style    HUDStyleFlags
+		Hideable bool
 	}))(obj)).Text2) = string(local330)
 	if err := pcall(func() {
 		((*(*(struct {
@@ -36014,12 +36109,42 @@ func (obj *HUD) deserialize(r io.Reader) {
 			ZIndex   int16
 			Text2    string
 			Style    HUDStyleFlags
+			Hideable bool
 		}))(obj)).Style).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
 			chk(io.EOF)
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.HUDStyleFlags", err))
+	}
+	{
+		p := &(*(*(struct {
+			Type HUDType
+
+			Pos      [2]float32
+			Name     string
+			Scale    [2]float32
+			Text     string
+			Number   uint32
+			Item     uint32
+			Dir      uint32
+			Align    [2]float32
+			Offset   [2]float32
+			WorldPos Pos
+			Size     [2]float32
+			ZIndex   int16
+			Text2    string
+			Style    HUDStyleFlags
+			Hideable bool
+		}))(obj)).Hideable
+		switch n := read8(r); n {
+		case 0:
+			*p = false
+		case 1:
+			*p = true
+		default:
+			chk(fmt.Errorf("invalid bool: %d", n))
+		}
 	}
 }
 
@@ -41803,45 +41928,60 @@ func (obj *Group) deserialize(r io.Reader) {
 
 func (obj *AOAnim) serialize(w io.Writer) {
 	for local365 := range (*(*(struct {
-		Frames [2]int32
-		Speed  float32
-		Blend  float32
-		NoLoop bool
+		Frames   [2]int32
+		Speed    float32
+		Blend    float32
+		NoLoop   bool
+		Track    TrackID
+		Priority int32
+		Frame    float32
 	}))(obj)).Frames {
 		{
 			x := ((*(*(struct {
-				Frames [2]int32
-				Speed  float32
-				Blend  float32
-				NoLoop bool
+				Frames   [2]int32
+				Speed    float32
+				Blend    float32
+				NoLoop   bool
+				Track    TrackID
+				Priority int32
+				Frame    float32
 			}))(obj)).Frames)[local365]
 			write32(w, uint32(x))
 		}
 	}
 	{
 		x := (*(*(struct {
-			Frames [2]int32
-			Speed  float32
-			Blend  float32
-			NoLoop bool
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
 		}))(obj)).Speed
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			Frames [2]int32
-			Speed  float32
-			Blend  float32
-			NoLoop bool
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
 		}))(obj)).Blend
 		write32(w, math.Float32bits(x))
 	}
 	{
 		x := (*(*(struct {
-			Frames [2]int32
-			Speed  float32
-			Blend  float32
-			NoLoop bool
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
 		}))(obj)).NoLoop
 		if x {
 			write8(w, 1)
@@ -41849,49 +41989,104 @@ func (obj *AOAnim) serialize(w io.Writer) {
 			write8(w, 0)
 		}
 	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
+		}))(obj)).Track).serialize(w)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TrackID", err))
+	}
+	{
+		x := (*(*(struct {
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
+		}))(obj)).Priority
+		write32(w, uint32(x))
+	}
+	{
+		x := (*(*(struct {
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
+		}))(obj)).Frame
+		write32(w, math.Float32bits(x))
+	}
 }
 
 func (obj *AOAnim) deserialize(r io.Reader) {
 	for local366 := range (*(*(struct {
-		Frames [2]int32
-		Speed  float32
-		Blend  float32
-		NoLoop bool
+		Frames   [2]int32
+		Speed    float32
+		Blend    float32
+		NoLoop   bool
+		Track    TrackID
+		Priority int32
+		Frame    float32
 	}))(obj)).Frames {
 		{
 			p := &((*(*(struct {
-				Frames [2]int32
-				Speed  float32
-				Blend  float32
-				NoLoop bool
+				Frames   [2]int32
+				Speed    float32
+				Blend    float32
+				NoLoop   bool
+				Track    TrackID
+				Priority int32
+				Frame    float32
 			}))(obj)).Frames)[local366]
 			*p = int32(read32(r))
 		}
 	}
 	{
 		p := &(*(*(struct {
-			Frames [2]int32
-			Speed  float32
-			Blend  float32
-			NoLoop bool
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
 		}))(obj)).Speed
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			Frames [2]int32
-			Speed  float32
-			Blend  float32
-			NoLoop bool
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
 		}))(obj)).Blend
 		*p = math.Float32frombits(read32(r))
 	}
 	{
 		p := &(*(*(struct {
-			Frames [2]int32
-			Speed  float32
-			Blend  float32
-			NoLoop bool
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
 		}))(obj)).NoLoop
 		switch n := read8(r); n {
 		case 0:
@@ -41901,6 +42096,46 @@ func (obj *AOAnim) deserialize(r io.Reader) {
 		default:
 			chk(fmt.Errorf("invalid bool: %d", n))
 		}
+	}
+	if err := pcall(func() {
+		((*(*(struct {
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
+		}))(obj)).Track).deserialize(r)
+	}); err != nil {
+		if err == io.EOF {
+			chk(io.EOF)
+		}
+		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.TrackID", err))
+	}
+	{
+		p := &(*(*(struct {
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
+		}))(obj)).Priority
+		*p = int32(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Frames   [2]int32
+			Speed    float32
+			Blend    float32
+			NoLoop   bool
+			Track    TrackID
+			Priority int32
+			Frame    float32
+		}))(obj)).Frame
+		*p = math.Float32frombits(read32(r))
 	}
 }
 
@@ -42779,6 +43014,87 @@ func (obj *aoType) deserialize(r io.Reader) {
 	}
 }
 
+func (obj *TrackID) serialize(w io.Writer) {
+	{
+		x := (*(*(struct {
+			ID uint16
+
+			//mt:if %s.ID == 0
+			Name string
+		}))(obj)).ID
+		write16(w, uint16(x))
+	}
+	if (*(*(struct {
+		ID uint16
+
+		//mt:if %s.ID == 0
+		Name string
+	}))(obj)).ID == 0 {
+		if len(([]byte((*(*(struct {
+			ID uint16
+
+			//mt:if %s.ID == 0
+			Name string
+		}))(obj)).Name))) > math.MaxUint16 {
+			chk(ErrTooLong)
+		}
+		{
+			x := uint16(len(([]byte((*(*(struct {
+				ID uint16
+
+				//mt:if %s.ID == 0
+				Name string
+			}))(obj)).Name))))
+			write16(w, uint16(x))
+		}
+		{
+			_, err := w.Write(([]byte((*(*(struct {
+				ID uint16
+
+				//mt:if %s.ID == 0
+				Name string
+			}))(obj)).Name))[:])
+			chk(err)
+		}
+	}
+}
+
+func (obj *TrackID) deserialize(r io.Reader) {
+	{
+		p := &(*(*(struct {
+			ID uint16
+
+			//mt:if %s.ID == 0
+			Name string
+		}))(obj)).ID
+		*p = read16(r)
+	}
+	if (*(*(struct {
+		ID uint16
+
+		//mt:if %s.ID == 0
+		Name string
+	}))(obj)).ID == 0 {
+		var local375 []uint8
+		var local376 uint16
+		{
+			p := &local376
+			*p = read16(r)
+		}
+		(local375) = make([]uint8, local376)
+		{
+			_, err := io.ReadFull(r, (local375)[:])
+			chk(err)
+		}
+		((*(*(struct {
+			ID uint16
+
+			//mt:if %s.ID == 0
+			Name string
+		}))(obj)).Name) = string(local375)
+	}
+}
+
 func (obj *NodeMetaField) serialize(w io.Writer) {
 	if err := pcall(func() {
 		((*(*(struct {
@@ -42890,9 +43206,9 @@ func (obj *DrawType) deserialize(r io.Reader) {
 
 func (obj *TileDef) serialize(w io.Writer) {
 	{
-		local375 := uint8(6)
+		local377 := uint8(6)
 		{
-			x := local375
+			x := local377
 			write8(w, uint8(x))
 		}
 	}
@@ -43097,14 +43413,14 @@ func (obj *TileDef) serialize(w io.Writer) {
 
 func (obj *TileDef) deserialize(r io.Reader) {
 	{
-		var local376 uint8
-		local377 := uint8(6)
+		var local378 uint8
+		local379 := uint8(6)
 		{
-			p := &local376
+			p := &local378
 			*p = read8(r)
 		}
-		if local376 != local377 {
-			chk(fmt.Errorf("const %v: %v", "uint8(6)", local376))
+		if local378 != local379 {
+			chk(fmt.Errorf("const %v: %v", "uint8(6)", local378))
 		}
 	}
 	if err := pcall(func() {
@@ -43350,9 +43666,9 @@ func (obj *LiquidType) deserialize(r io.Reader) {
 
 func (obj *NodeBox) serialize(w io.Writer) {
 	{
-		local378 := uint8(6)
+		local380 := uint8(6)
 		{
-			x := local378
+			x := local380
 			write8(w, uint8(x))
 		}
 	}
@@ -43509,7 +43825,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			}))(obj)).Fixed)))
 			write16(w, uint16(x))
 		}
-		for local379 := range (*(*(struct {
+		for local381 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -43535,7 +43851,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).Fixed)[local379]).serialize(w)
+				}))(obj)).Fixed)[local381]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -43628,7 +43944,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			}))(obj)).DiscoAll)))
 			write16(w, uint16(x))
 		}
-		for local380 := range (*(*(struct {
+		for local382 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -43654,7 +43970,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoAll)[local380]).serialize(w)
+				}))(obj)).DiscoAll)[local382]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -43693,7 +44009,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 			}))(obj)).DiscoSides)))
 			write16(w, uint16(x))
 		}
-		for local381 := range (*(*(struct {
+		for local383 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -43719,7 +44035,7 @@ func (obj *NodeBox) serialize(w io.Writer) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoSides)[local381]).serialize(w)
+				}))(obj)).DiscoSides)[local383]).serialize(w)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -43732,14 +44048,14 @@ func (obj *NodeBox) serialize(w io.Writer) {
 
 func (obj *NodeBox) deserialize(r io.Reader) {
 	{
-		var local382 uint8
-		local383 := uint8(6)
+		var local384 uint8
+		local385 := uint8(6)
 		{
-			p := &local382
+			p := &local384
 			*p = read8(r)
 		}
-		if local382 != local383 {
-			chk(fmt.Errorf("const %v: %v", "uint8(6)", local382))
+		if local384 != local385 {
+			chk(fmt.Errorf("const %v: %v", "uint8(6)", local384))
 		}
 	}
 	if err := pcall(func() {
@@ -43864,9 +44180,9 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 		ConnDirs, DiscoDirs  DirBoxes
 		DiscoAll, DiscoSides []Box
 	}))(obj)).Type; t == FixedBox || t == LeveledBox || t == ConnectedBox {
-		var local384 uint16
+		var local386 uint16
 		{
-			p := &local384
+			p := &local386
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -43881,8 +44197,8 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			//mt:if %s.Type == ConnectedBox
 			ConnDirs, DiscoDirs  DirBoxes
 			DiscoAll, DiscoSides []Box
-		}))(obj)).Fixed) = make([]Box, local384)
-		for local385 := range (*(*(struct {
+		}))(obj)).Fixed) = make([]Box, local386)
+		for local387 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -43908,7 +44224,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).Fixed)[local385]).deserialize(r)
+				}))(obj)).Fixed)[local387]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -43970,9 +44286,9 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			}
 			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.DirBoxes", err))
 		}
-		var local386 uint16
+		var local388 uint16
 		{
-			p := &local386
+			p := &local388
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -43987,8 +44303,8 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			//mt:if %s.Type == ConnectedBox
 			ConnDirs, DiscoDirs  DirBoxes
 			DiscoAll, DiscoSides []Box
-		}))(obj)).DiscoAll) = make([]Box, local386)
-		for local387 := range (*(*(struct {
+		}))(obj)).DiscoAll) = make([]Box, local388)
+		for local389 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -44014,7 +44330,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoAll)[local387]).deserialize(r)
+				}))(obj)).DiscoAll)[local389]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -44022,9 +44338,9 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 				chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
 			}
 		}
-		var local388 uint16
+		var local390 uint16
 		{
-			p := &local388
+			p := &local390
 			*p = read16(r)
 		}
 		((*(*(struct {
@@ -44039,8 +44355,8 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 			//mt:if %s.Type == ConnectedBox
 			ConnDirs, DiscoDirs  DirBoxes
 			DiscoAll, DiscoSides []Box
-		}))(obj)).DiscoSides) = make([]Box, local388)
-		for local389 := range (*(*(struct {
+		}))(obj)).DiscoSides) = make([]Box, local390)
+		for local391 := range (*(*(struct {
 			Type NodeBoxType
 
 			//mt:if %s.Type == MountedBox
@@ -44066,7 +44382,7 @@ func (obj *NodeBox) deserialize(r io.Reader) {
 					//mt:if %s.Type == ConnectedBox
 					ConnDirs, DiscoDirs  DirBoxes
 					DiscoAll, DiscoSides []Box
-				}))(obj)).DiscoSides)[local389]).deserialize(r)
+				}))(obj)).DiscoSides)[local391]).deserialize(r)
 			}); err != nil {
 				if err == io.EOF {
 					chk(io.EOF)
@@ -44122,21 +44438,21 @@ func (obj *SoundDef) serialize(w io.Writer) {
 }
 
 func (obj *SoundDef) deserialize(r io.Reader) {
-	var local390 []uint8
-	var local391 uint16
+	var local392 []uint8
+	var local393 uint16
 	{
-		p := &local391
+		p := &local393
 		*p = read16(r)
 	}
-	(local390) = make([]uint8, local391)
+	(local392) = make([]uint8, local393)
 	{
-		_, err := io.ReadFull(r, (local390)[:])
+		_, err := io.ReadFull(r, (local392)[:])
 		chk(err)
 	}
 	((*(*(struct {
 		Name              string
 		Gain, Pitch, Fade float32
-	}))(obj)).Name) = string(local390)
+	}))(obj)).Name) = string(local392)
 	{
 		p := &(*(*(struct {
 			Name              string
@@ -44232,9 +44548,9 @@ func (obj *LitFromBlks) deserialize(r io.Reader) {
 
 func (obj *AOInitData) serialize(w io.Writer) {
 	{
-		local392 := uint8(1)
+		local394 := uint8(1)
 		{
-			x := local392
+			x := local394
 			write8(w, uint8(x))
 		}
 	}
@@ -44363,7 +44679,7 @@ func (obj *AOInitData) serialize(w io.Writer) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
-	for local393 := range (*(*(struct {
+	for local395 := range (*(*(struct {
 
 		// For players.
 		Name     string
@@ -44395,7 +44711,7 @@ func (obj *AOInitData) serialize(w io.Writer) {
 
 				// See (de)serialize.fmt.
 				Msgs []AOMsg
-			}))(obj)).Rot)[local393]
+			}))(obj)).Rot)[local395]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -44456,25 +44772,25 @@ func (obj *AOInitData) serialize(w io.Writer) {
 
 func (obj *AOInitData) deserialize(r io.Reader) {
 	{
-		var local394 uint8
-		local395 := uint8(1)
+		var local396 uint8
+		local397 := uint8(1)
 		{
-			p := &local394
+			p := &local396
 			*p = read8(r)
 		}
-		if local394 != local395 {
-			chk(fmt.Errorf("const %v: %v", "uint8(1)", local394))
+		if local396 != local397 {
+			chk(fmt.Errorf("const %v: %v", "uint8(1)", local396))
 		}
 	}
-	var local396 []uint8
-	var local397 uint16
+	var local398 []uint8
+	var local399 uint16
 	{
-		p := &local397
+		p := &local399
 		*p = read16(r)
 	}
-	(local396) = make([]uint8, local397)
+	(local398) = make([]uint8, local399)
 	{
-		_, err := io.ReadFull(r, (local396)[:])
+		_, err := io.ReadFull(r, (local398)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -44492,7 +44808,7 @@ func (obj *AOInitData) deserialize(r io.Reader) {
 
 		// See (de)serialize.fmt.
 		Msgs []AOMsg
-	}))(obj)).Name) = string(local396)
+	}))(obj)).Name) = string(local398)
 	{
 		p := &(*(*(struct {
 
@@ -44565,7 +44881,7 @@ func (obj *AOInitData) deserialize(r io.Reader) {
 		}
 		chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Pos", err))
 	}
-	for local398 := range (*(*(struct {
+	for local400 := range (*(*(struct {
 
 		// For players.
 		Name     string
@@ -44597,7 +44913,7 @@ func (obj *AOInitData) deserialize(r io.Reader) {
 
 				// See (de)serialize.fmt.
 				Msgs []AOMsg
-			}))(obj)).Rot)[local398]
+			}))(obj)).Rot)[local400]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -44795,9 +45111,9 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 				PunchUses int32
 			}))(obj)).NonNil {
 				{
-					local399 := uint8(5)
+					local401 := uint8(5)
 					{
-						x := local399
+						x := local401
 						write8(w, uint8(x))
 					}
 				}
@@ -44876,7 +45192,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 					}))(obj)).GroupCaps)))
 					write32(w, uint32(x))
 				}
-				for local400 := range (*(*(struct {
+				for local402 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -44908,7 +45224,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).GroupCaps)[local400]).serialize(w)
+						}))(obj)).GroupCaps)[local402]).serialize(w)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -44953,7 +45269,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 					}))(obj)).DmgGroups)))
 					write32(w, uint32(x))
 				}
-				for local401 := range (*(*(struct {
+				for local403 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -44985,7 +45301,7 @@ func (obj *ToolCaps) serialize(w io.Writer) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).DmgGroups)[local401]).serialize(w)
+						}))(obj)).DmgGroups)[local403]).serialize(w)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -45119,14 +45435,14 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 				PunchUses int32
 			}))(obj)).NonNil {
 				{
-					var local402 uint8
-					local403 := uint8(5)
+					var local404 uint8
+					local405 := uint8(5)
 					{
-						p := &local402
+						p := &local404
 						*p = read8(r)
 					}
-					if local402 != local403 {
-						chk(fmt.Errorf("const %v: %v", "uint8(5)", local402))
+					if local404 != local405 {
+						chk(fmt.Errorf("const %v: %v", "uint8(5)", local404))
 					}
 				}
 				{
@@ -45167,9 +45483,9 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 					}))(obj)).MaxDropLvl
 					*p = int16(read16(r))
 				}
-				var local404 uint32
+				var local406 uint32
 				{
-					p := &local404
+					p := &local406
 					*p = read32(r)
 				}
 				((*(*(struct {
@@ -45187,8 +45503,8 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 					//mt:32tou16
 					PunchUses int32
-				}))(obj)).GroupCaps) = make([]ToolGroupCap, local404)
-				for local405 := range (*(*(struct {
+				}))(obj)).GroupCaps) = make([]ToolGroupCap, local406)
+				for local407 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -45220,7 +45536,7 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).GroupCaps)[local405]).deserialize(r)
+						}))(obj)).GroupCaps)[local407]).deserialize(r)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -45228,9 +45544,9 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.ToolGroupCap", err))
 					}
 				}
-				var local406 uint32
+				var local408 uint32
 				{
-					p := &local406
+					p := &local408
 					*p = read32(r)
 				}
 				((*(*(struct {
@@ -45248,8 +45564,8 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 					//mt:32tou16
 					PunchUses int32
-				}))(obj)).DmgGroups) = make([]Group, local406)
-				for local407 := range (*(*(struct {
+				}))(obj)).DmgGroups) = make([]Group, local408)
+				for local409 := range (*(*(struct {
 					//mt:if _ = %s; false
 					NonNil bool
 
@@ -45281,7 +45597,7 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 							//mt:32tou16
 							PunchUses int32
-						}))(obj)).DmgGroups)[local407]).deserialize(r)
+						}))(obj)).DmgGroups)[local409]).deserialize(r)
 					}); err != nil {
 						if err == io.EOF {
 							chk(io.EOF)
@@ -45289,9 +45605,9 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 						chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Group", err))
 					}
 				}
-				var local408 uint16
+				var local410 uint16
 				{
-					p := &local408
+					p := &local410
 					*p = read16(r)
 				}
 				(*(*(struct {
@@ -45309,7 +45625,7 @@ func (obj *ToolCaps) deserialize(r io.Reader) {
 
 					//mt:32tou16
 					PunchUses int32
-				}))(obj)).PunchUses = int32(local408)
+				}))(obj)).PunchUses = int32(local410)
 			}
 		}
 		if r.N > 0 {
@@ -45386,9 +45702,9 @@ func (obj *TouchInteraction) deserialize(r io.Reader) {
 
 func (obj *WearBarParams) serialize(w io.Writer) {
 	{
-		local409 := uint8(1)
+		local411 := uint8(1)
 		{
-			x := local409
+			x := local411
 			write8(w, uint8(x))
 		}
 	}
@@ -45428,14 +45744,14 @@ func (obj *WearBarParams) serialize(w io.Writer) {
 
 func (obj *WearBarParams) deserialize(r io.Reader) {
 	{
-		var local410 uint8
-		local411 := uint8(1)
+		var local412 uint8
+		local413 := uint8(1)
 		{
-			p := &local410
+			p := &local412
 			*p = read8(r)
 		}
-		if local410 != local411 {
-			chk(fmt.Errorf("const %v: %v", "uint8(1)", local410))
+		if local412 != local413 {
+			chk(fmt.Errorf("const %v: %v", "uint8(1)", local412))
 		}
 	}
 	if err := pcall(func() {
@@ -45475,7 +45791,7 @@ func (obj *WearBarParams) deserialize(r io.Reader) {
 }
 
 func (obj *RangeV3F32) serialize(w io.Writer) {
-	for local412 := range (*(*(struct {
+	for local414 := range (*(*(struct {
 		Min, Max [3]float32
 		Bias     float32
 	}))(obj)).Min {
@@ -45483,11 +45799,11 @@ func (obj *RangeV3F32) serialize(w io.Writer) {
 			x := ((*(*(struct {
 				Min, Max [3]float32
 				Bias     float32
-			}))(obj)).Min)[local412]
+			}))(obj)).Min)[local414]
 			write32(w, math.Float32bits(x))
 		}
 	}
-	for local413 := range (*(*(struct {
+	for local415 := range (*(*(struct {
 		Min, Max [3]float32
 		Bias     float32
 	}))(obj)).Max {
@@ -45495,7 +45811,7 @@ func (obj *RangeV3F32) serialize(w io.Writer) {
 			x := ((*(*(struct {
 				Min, Max [3]float32
 				Bias     float32
-			}))(obj)).Max)[local413]
+			}))(obj)).Max)[local415]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -45509,7 +45825,7 @@ func (obj *RangeV3F32) serialize(w io.Writer) {
 }
 
 func (obj *RangeV3F32) deserialize(r io.Reader) {
-	for local414 := range (*(*(struct {
+	for local416 := range (*(*(struct {
 		Min, Max [3]float32
 		Bias     float32
 	}))(obj)).Min {
@@ -45517,11 +45833,11 @@ func (obj *RangeV3F32) deserialize(r io.Reader) {
 			p := &((*(*(struct {
 				Min, Max [3]float32
 				Bias     float32
-			}))(obj)).Min)[local414]
+			}))(obj)).Min)[local416]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	for local415 := range (*(*(struct {
+	for local417 := range (*(*(struct {
 		Min, Max [3]float32
 		Bias     float32
 	}))(obj)).Max {
@@ -45529,7 +45845,7 @@ func (obj *RangeV3F32) deserialize(r io.Reader) {
 			p := &((*(*(struct {
 				Min, Max [3]float32
 				Bias     float32
-			}))(obj)).Max)[local415]
+			}))(obj)).Max)[local417]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -45768,7 +46084,7 @@ func (obj *TweenV2F32) serialize(w io.Writer) {
 		}))(obj)).Beginning
 		write32(w, math.Float32bits(x))
 	}
-	for local416 := range (*(*(struct {
+	for local418 := range (*(*(struct {
 		Style      TweenStyle
 		Reps       uint16
 		Beginning  float32
@@ -45780,11 +46096,11 @@ func (obj *TweenV2F32) serialize(w io.Writer) {
 				Reps       uint16
 				Beginning  float32
 				Start, End [2]float32
-			}))(obj)).Start)[local416]
+			}))(obj)).Start)[local418]
 			write32(w, math.Float32bits(x))
 		}
 	}
-	for local417 := range (*(*(struct {
+	for local419 := range (*(*(struct {
 		Style      TweenStyle
 		Reps       uint16
 		Beginning  float32
@@ -45796,7 +46112,7 @@ func (obj *TweenV2F32) serialize(w io.Writer) {
 				Reps       uint16
 				Beginning  float32
 				Start, End [2]float32
-			}))(obj)).End)[local417]
+			}))(obj)).End)[local419]
 			write32(w, math.Float32bits(x))
 		}
 	}
@@ -45834,7 +46150,7 @@ func (obj *TweenV2F32) deserialize(r io.Reader) {
 		}))(obj)).Beginning
 		*p = math.Float32frombits(read32(r))
 	}
-	for local418 := range (*(*(struct {
+	for local420 := range (*(*(struct {
 		Style      TweenStyle
 		Reps       uint16
 		Beginning  float32
@@ -45846,11 +46162,11 @@ func (obj *TweenV2F32) deserialize(r io.Reader) {
 				Reps       uint16
 				Beginning  float32
 				Start, End [2]float32
-			}))(obj)).Start)[local418]
+			}))(obj)).Start)[local420]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
-	for local419 := range (*(*(struct {
+	for local421 := range (*(*(struct {
 		Style      TweenStyle
 		Reps       uint16
 		Beginning  float32
@@ -45862,7 +46178,7 @@ func (obj *TweenV2F32) deserialize(r io.Reader) {
 				Reps       uint16
 				Beginning  float32
 				Start, End [2]float32
-			}))(obj)).End)[local419]
+			}))(obj)).End)[local421]
 			*p = math.Float32frombits(read32(r))
 		}
 	}
@@ -45883,9 +46199,9 @@ func (obj *HUDType) deserialize(r io.Reader) {
 }
 
 func (obj *Box) serialize(w io.Writer) {
-	for local420 := range *(*([2]Vec))(obj) {
+	for local422 := range *(*([2]Vec))(obj) {
 		if err := pcall(func() {
-			((*(*([2]Vec))(obj))[local420]).serialize(w)
+			((*(*([2]Vec))(obj))[local422]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -45896,9 +46212,9 @@ func (obj *Box) serialize(w io.Writer) {
 }
 
 func (obj *Box) deserialize(r io.Reader) {
-	for local421 := range *(*([2]Vec))(obj) {
+	for local423 := range *(*([2]Vec))(obj) {
 		if err := pcall(func() {
-			((*(*([2]Vec))(obj))[local421]).deserialize(r)
+			((*(*([2]Vec))(obj))[local423]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -45992,7 +46308,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Top)))
 		write16(w, uint16(x))
 	}
-	for local422 := range (*(*(struct {
+	for local424 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Top {
@@ -46000,7 +46316,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Top)[local422]).serialize(w)
+			}))(obj)).Top)[local424]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46021,7 +46337,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Bot)))
 		write16(w, uint16(x))
 	}
-	for local423 := range (*(*(struct {
+	for local425 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Bot {
@@ -46029,7 +46345,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Bot)[local423]).serialize(w)
+			}))(obj)).Bot)[local425]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46050,7 +46366,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Front)))
 		write16(w, uint16(x))
 	}
-	for local424 := range (*(*(struct {
+	for local426 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Front {
@@ -46058,7 +46374,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Front)[local424]).serialize(w)
+			}))(obj)).Front)[local426]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46079,7 +46395,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Left)))
 		write16(w, uint16(x))
 	}
-	for local425 := range (*(*(struct {
+	for local427 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Left {
@@ -46087,7 +46403,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Left)[local425]).serialize(w)
+			}))(obj)).Left)[local427]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46108,7 +46424,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Back)))
 		write16(w, uint16(x))
 	}
-	for local426 := range (*(*(struct {
+	for local428 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Back {
@@ -46116,7 +46432,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Back)[local426]).serialize(w)
+			}))(obj)).Back)[local428]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46137,7 +46453,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 		}))(obj)).Right)))
 		write16(w, uint16(x))
 	}
-	for local427 := range (*(*(struct {
+	for local429 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Right {
@@ -46145,7 +46461,7 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Right)[local427]).serialize(w)
+			}))(obj)).Right)[local429]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46156,31 +46472,6 @@ func (obj *DirBoxes) serialize(w io.Writer) {
 }
 
 func (obj *DirBoxes) deserialize(r io.Reader) {
-	var local428 uint16
-	{
-		p := &local428
-		*p = read16(r)
-	}
-	((*(*(struct {
-		Top, Bot                 []Box
-		Front, Left, Back, Right []Box
-	}))(obj)).Top) = make([]Box, local428)
-	for local429 := range (*(*(struct {
-		Top, Bot                 []Box
-		Front, Left, Back, Right []Box
-	}))(obj)).Top {
-		if err := pcall(func() {
-			(((*(*(struct {
-				Top, Bot                 []Box
-				Front, Left, Back, Right []Box
-			}))(obj)).Top)[local429]).deserialize(r)
-		}); err != nil {
-			if err == io.EOF {
-				chk(io.EOF)
-			}
-			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
-		}
-	}
 	var local430 uint16
 	{
 		p := &local430
@@ -46189,16 +46480,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Bot) = make([]Box, local430)
+	}))(obj)).Top) = make([]Box, local430)
 	for local431 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Bot {
+	}))(obj)).Top {
 		if err := pcall(func() {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Bot)[local431]).deserialize(r)
+			}))(obj)).Top)[local431]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46214,16 +46505,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Front) = make([]Box, local432)
+	}))(obj)).Bot) = make([]Box, local432)
 	for local433 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Front {
+	}))(obj)).Bot {
 		if err := pcall(func() {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Front)[local433]).deserialize(r)
+			}))(obj)).Bot)[local433]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46239,16 +46530,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Left) = make([]Box, local434)
+	}))(obj)).Front) = make([]Box, local434)
 	for local435 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Left {
+	}))(obj)).Front {
 		if err := pcall(func() {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Left)[local435]).deserialize(r)
+			}))(obj)).Front)[local435]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46264,16 +46555,16 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Back) = make([]Box, local436)
+	}))(obj)).Left) = make([]Box, local436)
 	for local437 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Back {
+	}))(obj)).Left {
 		if err := pcall(func() {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Back)[local437]).deserialize(r)
+			}))(obj)).Left)[local437]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46289,8 +46580,33 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 	((*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
-	}))(obj)).Right) = make([]Box, local438)
+	}))(obj)).Back) = make([]Box, local438)
 	for local439 := range (*(*(struct {
+		Top, Bot                 []Box
+		Front, Left, Back, Right []Box
+	}))(obj)).Back {
+		if err := pcall(func() {
+			(((*(*(struct {
+				Top, Bot                 []Box
+				Front, Left, Back, Right []Box
+			}))(obj)).Back)[local439]).deserialize(r)
+		}); err != nil {
+			if err == io.EOF {
+				chk(io.EOF)
+			}
+			chk(fmt.Errorf("%s: %w", "github.com/HimbeerserverDE/mt.Box", err))
+		}
+	}
+	var local440 uint16
+	{
+		p := &local440
+		*p = read16(r)
+	}
+	((*(*(struct {
+		Top, Bot                 []Box
+		Front, Left, Back, Right []Box
+	}))(obj)).Right) = make([]Box, local440)
+	for local441 := range (*(*(struct {
 		Top, Bot                 []Box
 		Front, Left, Back, Right []Box
 	}))(obj)).Right {
@@ -46298,7 +46614,7 @@ func (obj *DirBoxes) deserialize(r io.Reader) {
 			(((*(*(struct {
 				Top, Bot                 []Box
 				Front, Left, Back, Right []Box
-			}))(obj)).Right)[local439]).deserialize(r)
+			}))(obj)).Right)[local441]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46405,7 +46721,7 @@ func (obj *ToolGroupCap) serialize(w io.Writer) {
 		}))(obj)).Times)))
 		write32(w, uint32(x))
 	}
-	for local440 := range (*(*(struct {
+	for local442 := range (*(*(struct {
 		Name string
 
 		//mt:32to16
@@ -46427,7 +46743,7 @@ func (obj *ToolGroupCap) serialize(w io.Writer) {
 
 				//mt:len32
 				Times []DigTime
-			}))(obj)).Times)[local440]).serialize(w)
+			}))(obj)).Times)[local442]).serialize(w)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)
@@ -46438,15 +46754,15 @@ func (obj *ToolGroupCap) serialize(w io.Writer) {
 }
 
 func (obj *ToolGroupCap) deserialize(r io.Reader) {
-	var local441 []uint8
-	var local442 uint16
+	var local443 []uint8
+	var local444 uint16
 	{
-		p := &local442
+		p := &local444
 		*p = read16(r)
 	}
-	(local441) = make([]uint8, local442)
+	(local443) = make([]uint8, local444)
 	{
-		_, err := io.ReadFull(r, (local441)[:])
+		_, err := io.ReadFull(r, (local443)[:])
 		chk(err)
 	}
 	((*(*(struct {
@@ -46459,10 +46775,10 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 		//mt:len32
 		Times []DigTime
-	}))(obj)).Name) = string(local441)
-	var local443 int16
+	}))(obj)).Name) = string(local443)
+	var local445 int16
 	{
-		p := &local443
+		p := &local445
 		*p = int16(read16(r))
 	}
 	(*(*(struct {
@@ -46475,7 +46791,7 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 		//mt:len32
 		Times []DigTime
-	}))(obj)).Uses = int32(local443)
+	}))(obj)).Uses = int32(local445)
 	{
 		p := &(*(*(struct {
 			Name string
@@ -46490,9 +46806,9 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 		}))(obj)).MaxLvl
 		*p = int16(read16(r))
 	}
-	var local444 uint32
+	var local446 uint32
 	{
-		p := &local444
+		p := &local446
 		*p = read32(r)
 	}
 	((*(*(struct {
@@ -46505,8 +46821,8 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 		//mt:len32
 		Times []DigTime
-	}))(obj)).Times) = make([]DigTime, local444)
-	for local445 := range (*(*(struct {
+	}))(obj)).Times) = make([]DigTime, local446)
+	for local447 := range (*(*(struct {
 		Name string
 
 		//mt:32to16
@@ -46528,7 +46844,7 @@ func (obj *ToolGroupCap) deserialize(r io.Reader) {
 
 				//mt:len32
 				Times []DigTime
-			}))(obj)).Times)[local445]).deserialize(r)
+			}))(obj)).Times)[local447]).deserialize(r)
 		}); err != nil {
 			if err == io.EOF {
 				chk(io.EOF)

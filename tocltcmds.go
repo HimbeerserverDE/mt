@@ -479,6 +479,7 @@ type HUD struct {
 	ZIndex   int16
 	Text2    string
 	Style    HUDStyleFlags
+	Hideable bool
 }
 
 type HUDID uint32

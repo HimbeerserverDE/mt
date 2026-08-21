@@ -14,6 +14,7 @@ func (*AOCmdAttach) aoCmdNo() uint8       { return 8 }
 func (*AOCmdPhysOverride) aoCmdNo() uint8 { return 9 }
 func (*AOCmdSpawnInfant) aoCmdNo() uint8  { return 11 }
 func (*AOCmdAnimSpeed) aoCmdNo() uint8    { return 12 }
+func (*AOCmdStopAnim) aoCmdNo() uint8     { return 13 }
 
 var newAOMsg = map[uint8]func() AOMsg{
 	0:  func() AOMsg { return new(AOCmdProps) },
@@ -28,4 +29,5 @@ var newAOMsg = map[uint8]func() AOMsg{
 	9:  func() AOMsg { return new(AOCmdPhysOverride) },
 	11: func() AOMsg { return new(AOCmdSpawnInfant) },
 	12: func() AOMsg { return new(AOCmdAnimSpeed) },
+	13: func() AOMsg { return new(AOCmdStopAnim) },
 }
