@@ -19,8 +19,9 @@ const _MinimapType_name = "nonesurfaceradartexture"
 var _MinimapType_index = [...]uint8{0, 4, 11, 16, 23}
 
 func (i MinimapType) String() string {
-	if i >= MinimapType(len(_MinimapType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_MinimapType_index)-1 {
 		return "MinimapType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _MinimapType_name[_MinimapType_index[i]:_MinimapType_index[i+1]]
+	return _MinimapType_name[_MinimapType_index[idx]:_MinimapType_index[idx+1]]
 }

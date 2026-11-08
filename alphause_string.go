@@ -19,8 +19,9 @@ const _AlphaUse_name = "BlendMaskOpaqueLegacy"
 var _AlphaUse_index = [...]uint8{0, 5, 9, 15, 21}
 
 func (i AlphaUse) String() string {
-	if i >= AlphaUse(len(_AlphaUse_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_AlphaUse_index)-1 {
 		return "AlphaUse(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _AlphaUse_name[_AlphaUse_index[i]:_AlphaUse_index[i+1]]
+	return _AlphaUse_name[_AlphaUse_index[idx]:_AlphaUse_index[idx+1]]
 }

@@ -16,9 +16,9 @@ const _ParticleTextureFlags_name = "Animated"
 var _ParticleTextureFlags_index = [...]uint8{0, 8}
 
 func (i ParticleTextureFlags) String() string {
-	i -= 1
-	if i >= ParticleTextureFlags(len(_ParticleTextureFlags_index)-1) {
-		return "ParticleTextureFlags(" + strconv.FormatInt(int64(i+1), 10) + ")"
+	idx := int(i) - 1
+	if i < 1 || idx >= len(_ParticleTextureFlags_index)-1 {
+		return "ParticleTextureFlags(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _ParticleTextureFlags_name[_ParticleTextureFlags_index[i]:_ParticleTextureFlags_index[i+1]]
+	return _ParticleTextureFlags_name[_ParticleTextureFlags_index[idx]:_ParticleTextureFlags_index[idx+1]]
 }

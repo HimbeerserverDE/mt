@@ -22,8 +22,9 @@ const _Dir_name = "EastAboveNorthSouthBelowWestNoDir"
 var _Dir_index = [...]uint8{0, 4, 9, 14, 19, 24, 28, 33}
 
 func (i Dir) String() string {
-	if i >= Dir(len(_Dir_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_Dir_index)-1 {
 		return "Dir(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _Dir_name[_Dir_index[i]:_Dir_index[i+1]]
+	return _Dir_name[_Dir_index[idx]:_Dir_index[idx+1]]
 }

@@ -21,8 +21,9 @@ const _Interaction_name = "DigStopDiggingDugPlaceUseActivate"
 var _Interaction_index = [...]uint8{0, 3, 14, 17, 22, 25, 33}
 
 func (i Interaction) String() string {
-	if i >= Interaction(len(_Interaction_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_Interaction_index)-1 {
 		return "Interaction(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _Interaction_name[_Interaction_index[i]:_Interaction_index[i+1]]
+	return _Interaction_name[_Interaction_index[idx]:_Interaction_index[idx+1]]
 }

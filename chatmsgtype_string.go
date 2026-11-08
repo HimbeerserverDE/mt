@@ -20,8 +20,9 @@ const _ChatMsgType_name = "rawnormalannouncesysmaxMsg"
 var _ChatMsgType_index = [...]uint8{0, 3, 9, 17, 20, 26}
 
 func (i ChatMsgType) String() string {
-	if i >= ChatMsgType(len(_ChatMsgType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_ChatMsgType_index)-1 {
 		return "ChatMsgType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _ChatMsgType_name[_ChatMsgType_index[i]:_ChatMsgType_index[i+1]]
+	return _ChatMsgType_name[_ChatMsgType_index[idx]:_ChatMsgType_index[idx+1]]
 }

@@ -18,9 +18,9 @@ const _ItemType_name = "NodeItemCraftItemToolItem"
 var _ItemType_index = [...]uint8{0, 8, 17, 25}
 
 func (i ItemType) String() string {
-	i -= 1
-	if i >= ItemType(len(_ItemType_index)-1) {
-		return "ItemType(" + strconv.FormatInt(int64(i+1), 10) + ")"
+	idx := int(i) - 1
+	if i < 1 || idx >= len(_ItemType_index)-1 {
+		return "ItemType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _ItemType_name[_ItemType_index[i]:_ItemType_index[i+1]]
+	return _ItemType_name[_ItemType_index[idx]:_ItemType_index[idx+1]]
 }

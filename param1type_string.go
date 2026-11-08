@@ -17,8 +17,9 @@ const _Param1Type_name = "NothingLight"
 var _Param1Type_index = [...]uint8{0, 7, 12}
 
 func (i Param1Type) String() string {
-	if i >= Param1Type(len(_Param1Type_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_Param1Type_index)-1 {
 		return "Param1Type(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _Param1Type_name[_Param1Type_index[i]:_Param1Type_index[i+1]]
+	return _Param1Type_name[_Param1Type_index[idx]:_Param1Type_index[idx+1]]
 }

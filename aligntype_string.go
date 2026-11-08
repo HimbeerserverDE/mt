@@ -18,8 +18,9 @@ const _AlignType_name = "NoAlignWorldAlignUserAlign"
 var _AlignType_index = [...]uint8{0, 7, 17, 26}
 
 func (i AlignType) String() string {
-	if i >= AlignType(len(_AlignType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_AlignType_index)-1 {
 		return "AlignType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _AlignType_name[_AlignType_index[i]:_AlignType_index[i+1]]
+	return _AlignType_name[_AlignType_index[idx]:_AlignType_index[idx+1]]
 }

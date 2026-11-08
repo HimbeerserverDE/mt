@@ -18,8 +18,9 @@ const _SoundSrcType_name = "nowhereposao"
 var _SoundSrcType_index = [...]uint8{0, 7, 10, 12}
 
 func (i SoundSrcType) String() string {
-	if i >= SoundSrcType(len(_SoundSrcType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_SoundSrcType_index)-1 {
 		return "SoundSrcType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _SoundSrcType_name[_SoundSrcType_index[i]:_SoundSrcType_index[i+1]]
+	return _SoundSrcType_name[_SoundSrcType_index[idx]:_SoundSrcType_index[idx+1]]
 }

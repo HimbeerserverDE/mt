@@ -19,8 +19,9 @@ const _AnimType_name = "nonevertical framesprite sheetmaxAnim"
 var _AnimType_index = [...]uint8{0, 4, 18, 30, 37}
 
 func (i AnimType) String() string {
-	if i >= AnimType(len(_AnimType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_AnimType_index)-1 {
 		return "AnimType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _AnimType_name[_AnimType_index[i]:_AnimType_index[i+1]]
+	return _AnimType_name[_AnimType_index[idx]:_AnimType_index[idx+1]]
 }

@@ -28,8 +28,9 @@ const _Param2Type_name = "NibbleByteFlowingFaceDirMountedLeveledRotationMeshColo
 var _Param2Type_index = [...]uint8{0, 6, 10, 17, 24, 31, 38, 46, 50, 55, 67, 79, 93, 106}
 
 func (i Param2Type) String() string {
-	if i >= Param2Type(len(_Param2Type_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_Param2Type_index)-1 {
 		return "Param2Type(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _Param2Type_name[_Param2Type_index[i]:_Param2Type_index[i+1]]
+	return _Param2Type_name[_Param2Type_index[idx]:_Param2Type_index[idx+1]]
 }

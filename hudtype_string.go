@@ -21,8 +21,9 @@ const _HUDType_name = "ImgHUDTextHUDStatbarHUDInvHUDWaypointHUDImgWaypointHUD"
 var _HUDType_index = [...]uint8{0, 6, 13, 23, 29, 40, 54}
 
 func (i HUDType) String() string {
-	if i >= HUDType(len(_HUDType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_HUDType_index)-1 {
 		return "HUDType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _HUDType_name[_HUDType_index[i]:_HUDType_index[i+1]]
+	return _HUDType_name[_HUDType_index[idx]:_HUDType_index[idx+1]]
 }

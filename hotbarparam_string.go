@@ -18,9 +18,9 @@ const _HotbarParam_name = "SizeImgSelImg"
 var _HotbarParam_index = [...]uint8{0, 4, 7, 13}
 
 func (i HotbarParam) String() string {
-	i -= 1
-	if i >= HotbarParam(len(_HotbarParam_index)-1) {
-		return "HotbarParam(" + strconv.FormatInt(int64(i+1), 10) + ")"
+	idx := int(i) - 1
+	if i < 1 || idx >= len(_HotbarParam_index)-1 {
+		return "HotbarParam(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _HotbarParam_name[_HotbarParam_index[i]:_HotbarParam_index[i+1]]
+	return _HotbarParam_name[_HotbarParam_index[idx]:_HotbarParam_index[idx+1]]
 }

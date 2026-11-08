@@ -17,8 +17,9 @@ const _LightBank_name = "DayNight"
 var _LightBank_index = [...]uint8{0, 3, 8}
 
 func (i LightBank) String() string {
-	if i >= LightBank(len(_LightBank_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_LightBank_index)-1 {
 		return "LightBank(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _LightBank_name[_LightBank_index[i]:_LightBank_index[i+1]]
+	return _LightBank_name[_LightBank_index[idx]:_LightBank_index[idx+1]]
 }

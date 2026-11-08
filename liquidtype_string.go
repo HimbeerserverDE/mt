@@ -18,8 +18,9 @@ const _LiquidType_name = "NotALiquidFlowingLiquidLiquidSrc"
 var _LiquidType_index = [...]uint8{0, 10, 23, 32}
 
 func (i LiquidType) String() string {
-	if i >= LiquidType(len(_LiquidType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_LiquidType_index)-1 {
 		return "LiquidType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _LiquidType_name[_LiquidType_index[i]:_LiquidType_index[i+1]]
+	return _LiquidType_name[_LiquidType_index[idx]:_LiquidType_index[idx+1]]
 }

@@ -16,9 +16,9 @@ const _ParticleSpawnerFlags_name = "Particle dies on contact"
 var _ParticleSpawnerFlags_index = [...]uint8{0, 24}
 
 func (i ParticleSpawnerFlags) String() string {
-	i -= 1
-	if i >= ParticleSpawnerFlags(len(_ParticleSpawnerFlags_index)-1) {
-		return "ParticleSpawnerFlags(" + strconv.FormatInt(int64(i+1), 10) + ")"
+	idx := int(i) - 1
+	if i < 1 || idx >= len(_ParticleSpawnerFlags_index)-1 {
+		return "ParticleSpawnerFlags(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _ParticleSpawnerFlags_name[_ParticleSpawnerFlags_index[i]:_ParticleSpawnerFlags_index[i+1]]
+	return _ParticleSpawnerFlags_name[_ParticleSpawnerFlags_index[idx]:_ParticleSpawnerFlags_index[idx+1]]
 }

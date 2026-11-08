@@ -16468,6 +16468,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).ShadowIntensity
 		write32(w, math.Float32bits(x))
 	}
@@ -16487,6 +16493,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).Saturation
 		write32(w, math.Float32bits(x))
 	}
@@ -16506,6 +16518,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).LuminanceMin
 		write32(w, math.Float32bits(x))
 	}
@@ -16525,6 +16543,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).LuminanceMax
 		write32(w, math.Float32bits(x))
 	}
@@ -16544,6 +16568,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).ExposureCorrection
 		write32(w, math.Float32bits(x))
 	}
@@ -16563,6 +16593,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).SpeedDarkBright
 		write32(w, math.Float32bits(x))
 	}
@@ -16582,6 +16618,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).SpeedBrightDark
 		write32(w, math.Float32bits(x))
 	}
@@ -16601,6 +16643,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).CenterWeightPower
 		write32(w, math.Float32bits(x))
 	}
@@ -16620,6 +16668,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).VolumetricStrength
 		write32(w, math.Float32bits(x))
 	}
@@ -16639,6 +16693,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).ShadowTint
 		w.Write([]byte{x.A, x.R, x.G, x.B})
 	}
@@ -16658,6 +16718,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).BloomIntensity
 		write32(w, math.Float32bits(x))
 	}
@@ -16677,6 +16743,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).BloomStrength
 		write32(w, math.Float32bits(x))
 	}
@@ -16696,6 +16768,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).BloomRadius
 		write32(w, math.Float32bits(x))
 	}
@@ -16714,6 +16792,12 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 		BloomStrength      float32
 		BloomRadius        float32
 		ShadowDir          [3]float32
+		HasLightCurve      bool
+
+		//mt:if %s.HasLightCurve
+		LightCurve [16]uint8
+
+		AmbientOcclusionGamma float32
 	}))(obj)).ShadowDir {
 		{
 			x := ((*(*(struct {
@@ -16731,9 +16815,117 @@ func (obj *ToCltLighting) serialize(w io.Writer) {
 				BloomStrength      float32
 				BloomRadius        float32
 				ShadowDir          [3]float32
+				HasLightCurve      bool
+
+				//mt:if %s.HasLightCurve
+				LightCurve [16]uint8
+
+				AmbientOcclusionGamma float32
 			}))(obj)).ShadowDir)[local209]
 			write32(w, math.Float32bits(x))
 		}
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
+		}))(obj)).HasLightCurve
+		if x {
+			write8(w, 1)
+		} else {
+			write8(w, 0)
+		}
+	}
+	if (*(*(struct {
+		ShadowIntensity    float32
+		Saturation         float32
+		LuminanceMin       float32
+		LuminanceMax       float32
+		ExposureCorrection float32
+		SpeedDarkBright    float32
+		SpeedBrightDark    float32
+		CenterWeightPower  float32
+		VolumetricStrength float32
+		ShadowTint         color.NRGBA
+		BloomIntensity     float32
+		BloomStrength      float32
+		BloomRadius        float32
+		ShadowDir          [3]float32
+		HasLightCurve      bool
+
+		//mt:if %s.HasLightCurve
+		LightCurve [16]uint8
+
+		AmbientOcclusionGamma float32
+	}))(obj)).HasLightCurve {
+		{
+			_, err := w.Write(((*(*(struct {
+				ShadowIntensity    float32
+				Saturation         float32
+				LuminanceMin       float32
+				LuminanceMax       float32
+				ExposureCorrection float32
+				SpeedDarkBright    float32
+				SpeedBrightDark    float32
+				CenterWeightPower  float32
+				VolumetricStrength float32
+				ShadowTint         color.NRGBA
+				BloomIntensity     float32
+				BloomStrength      float32
+				BloomRadius        float32
+				ShadowDir          [3]float32
+				HasLightCurve      bool
+
+				//mt:if %s.HasLightCurve
+				LightCurve [16]uint8
+
+				AmbientOcclusionGamma float32
+			}))(obj)).LightCurve)[:])
+			chk(err)
+		}
+	}
+	{
+		x := (*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
+		}))(obj)).AmbientOcclusionGamma
+		write32(w, math.Float32bits(x))
 	}
 }
 
@@ -16754,6 +16946,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).ShadowIntensity
 		*p = math.Float32frombits(read32(r))
 	}
@@ -16773,6 +16971,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).Saturation
 		*p = math.Float32frombits(read32(r))
 	}
@@ -16792,6 +16996,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).LuminanceMin
 		*p = math.Float32frombits(read32(r))
 	}
@@ -16811,6 +17021,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).LuminanceMax
 		*p = math.Float32frombits(read32(r))
 	}
@@ -16830,6 +17046,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).ExposureCorrection
 		*p = math.Float32frombits(read32(r))
 	}
@@ -16849,6 +17071,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).SpeedDarkBright
 		*p = math.Float32frombits(read32(r))
 	}
@@ -16868,6 +17096,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).SpeedBrightDark
 		*p = math.Float32frombits(read32(r))
 	}
@@ -16887,6 +17121,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).CenterWeightPower
 		*p = math.Float32frombits(read32(r))
 	}
@@ -16906,6 +17146,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).VolumetricStrength
 		*p = math.Float32frombits(read32(r))
 	}
@@ -16925,6 +17171,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).ShadowTint
 		*p = color.NRGBA{A: read8(r), R: read8(r), G: read8(r), B: read8(r)}
 	}
@@ -16944,6 +17196,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).BloomIntensity
 		*p = math.Float32frombits(read32(r))
 	}
@@ -16963,6 +17221,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).BloomStrength
 		*p = math.Float32frombits(read32(r))
 	}
@@ -16982,6 +17246,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 			BloomStrength      float32
 			BloomRadius        float32
 			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
 		}))(obj)).BloomRadius
 		*p = math.Float32frombits(read32(r))
 	}
@@ -17000,6 +17270,12 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 		BloomStrength      float32
 		BloomRadius        float32
 		ShadowDir          [3]float32
+		HasLightCurve      bool
+
+		//mt:if %s.HasLightCurve
+		LightCurve [16]uint8
+
+		AmbientOcclusionGamma float32
 	}))(obj)).ShadowDir {
 		{
 			p := &((*(*(struct {
@@ -17017,9 +17293,120 @@ func (obj *ToCltLighting) deserialize(r io.Reader) {
 				BloomStrength      float32
 				BloomRadius        float32
 				ShadowDir          [3]float32
+				HasLightCurve      bool
+
+				//mt:if %s.HasLightCurve
+				LightCurve [16]uint8
+
+				AmbientOcclusionGamma float32
 			}))(obj)).ShadowDir)[local210]
 			*p = math.Float32frombits(read32(r))
 		}
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
+		}))(obj)).HasLightCurve
+		switch n := read8(r); n {
+		case 0:
+			*p = false
+		case 1:
+			*p = true
+		default:
+			chk(fmt.Errorf("invalid bool: %d", n))
+		}
+	}
+	if (*(*(struct {
+		ShadowIntensity    float32
+		Saturation         float32
+		LuminanceMin       float32
+		LuminanceMax       float32
+		ExposureCorrection float32
+		SpeedDarkBright    float32
+		SpeedBrightDark    float32
+		CenterWeightPower  float32
+		VolumetricStrength float32
+		ShadowTint         color.NRGBA
+		BloomIntensity     float32
+		BloomStrength      float32
+		BloomRadius        float32
+		ShadowDir          [3]float32
+		HasLightCurve      bool
+
+		//mt:if %s.HasLightCurve
+		LightCurve [16]uint8
+
+		AmbientOcclusionGamma float32
+	}))(obj)).HasLightCurve {
+		{
+			_, err := io.ReadFull(r, ((*(*(struct {
+				ShadowIntensity    float32
+				Saturation         float32
+				LuminanceMin       float32
+				LuminanceMax       float32
+				ExposureCorrection float32
+				SpeedDarkBright    float32
+				SpeedBrightDark    float32
+				CenterWeightPower  float32
+				VolumetricStrength float32
+				ShadowTint         color.NRGBA
+				BloomIntensity     float32
+				BloomStrength      float32
+				BloomRadius        float32
+				ShadowDir          [3]float32
+				HasLightCurve      bool
+
+				//mt:if %s.HasLightCurve
+				LightCurve [16]uint8
+
+				AmbientOcclusionGamma float32
+			}))(obj)).LightCurve)[:])
+			chk(err)
+		}
+	}
+	{
+		p := &(*(*(struct {
+			ShadowIntensity    float32
+			Saturation         float32
+			LuminanceMin       float32
+			LuminanceMax       float32
+			ExposureCorrection float32
+			SpeedDarkBright    float32
+			SpeedBrightDark    float32
+			CenterWeightPower  float32
+			VolumetricStrength float32
+			ShadowTint         color.NRGBA
+			BloomIntensity     float32
+			BloomStrength      float32
+			BloomRadius        float32
+			ShadowDir          [3]float32
+			HasLightCurve      bool
+
+			//mt:if %s.HasLightCurve
+			LightCurve [16]uint8
+
+			AmbientOcclusionGamma float32
+		}))(obj)).AmbientOcclusionGamma
+		*p = math.Float32frombits(read32(r))
 	}
 }
 
@@ -41538,6 +41925,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).Pos).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -41554,6 +41942,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).Vel).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -41570,6 +41959,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).Acc).serialize(w)
 	}); err != nil {
 		if err == io.EOF {
@@ -41585,6 +41975,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 		Interpolate    bool
 		End            bool
 		UpdateInterval float32
+		InterpolateRot bool
 	}))(obj)).Rot {
 		{
 			x := ((*(*(struct {
@@ -41595,6 +41986,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 				Interpolate    bool
 				End            bool
 				UpdateInterval float32
+				InterpolateRot bool
 			}))(obj)).Rot)[local359]
 			write32(w, math.Float32bits(x))
 		}
@@ -41608,6 +42000,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).Interpolate
 		if x {
 			write8(w, 1)
@@ -41624,6 +42017,7 @@ func (obj *AOPos) serialize(w io.Writer) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).End
 		if x {
 			write8(w, 1)
@@ -41640,8 +42034,26 @@ func (obj *AOPos) serialize(w io.Writer) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).UpdateInterval
 		write32(w, math.Float32bits(x))
+	}
+	{
+		x := (*(*(struct {
+			Pos
+			Vel, Acc Vec
+			Rot      [3]float32
+
+			Interpolate    bool
+			End            bool
+			UpdateInterval float32
+			InterpolateRot bool
+		}))(obj)).InterpolateRot
+		if x {
+			write8(w, 1)
+		} else {
+			write8(w, 0)
+		}
 	}
 }
 
@@ -41655,6 +42067,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).Pos).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -41671,6 +42084,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).Vel).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -41687,6 +42101,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).Acc).deserialize(r)
 	}); err != nil {
 		if err == io.EOF {
@@ -41702,6 +42117,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 		Interpolate    bool
 		End            bool
 		UpdateInterval float32
+		InterpolateRot bool
 	}))(obj)).Rot {
 		{
 			p := &((*(*(struct {
@@ -41712,6 +42128,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 				Interpolate    bool
 				End            bool
 				UpdateInterval float32
+				InterpolateRot bool
 			}))(obj)).Rot)[local360]
 			*p = math.Float32frombits(read32(r))
 		}
@@ -41725,6 +42142,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).Interpolate
 		switch n := read8(r); n {
 		case 0:
@@ -41744,6 +42162,7 @@ func (obj *AOPos) deserialize(r io.Reader) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).End
 		switch n := read8(r); n {
 		case 0:
@@ -41763,8 +42182,29 @@ func (obj *AOPos) deserialize(r io.Reader) {
 			Interpolate    bool
 			End            bool
 			UpdateInterval float32
+			InterpolateRot bool
 		}))(obj)).UpdateInterval
 		*p = math.Float32frombits(read32(r))
+	}
+	{
+		p := &(*(*(struct {
+			Pos
+			Vel, Acc Vec
+			Rot      [3]float32
+
+			Interpolate    bool
+			End            bool
+			UpdateInterval float32
+			InterpolateRot bool
+		}))(obj)).InterpolateRot
+		switch n := read8(r); n {
+		case 0:
+			*p = false
+		case 1:
+			*p = true
+		default:
+			chk(fmt.Errorf("invalid bool: %d", n))
+		}
 	}
 }
 

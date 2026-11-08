@@ -21,8 +21,9 @@ const _ModChanSig_name = "JoinOKJoinFailLeaveOKLeaveFailNotRegisteredSetState"
 var _ModChanSig_index = [...]uint8{0, 6, 14, 21, 30, 43, 51}
 
 func (i ModChanSig) String() string {
-	if i >= ModChanSig(len(_ModChanSig_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_ModChanSig_index)-1 {
 		return "ModChanSig(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _ModChanSig_name[_ModChanSig_index[i]:_ModChanSig_index[i+1]]
+	return _ModChanSig_name[_ModChanSig_index[idx]:_ModChanSig_index[idx+1]]
 }

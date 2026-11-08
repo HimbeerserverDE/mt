@@ -18,8 +18,9 @@ const _PlayerListUpdateType_name = "initaddremove"
 var _PlayerListUpdateType_index = [...]uint8{0, 4, 7, 13}
 
 func (i PlayerListUpdateType) String() string {
-	if i >= PlayerListUpdateType(len(_PlayerListUpdateType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_PlayerListUpdateType_index)-1 {
 		return "PlayerListUpdateType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _PlayerListUpdateType_name[_PlayerListUpdateType_index[i]:_PlayerListUpdateType_index[i+1]]
+	return _PlayerListUpdateType_name[_PlayerListUpdateType_index[idx]:_PlayerListUpdateType_index[idx+1]]
 }

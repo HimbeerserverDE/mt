@@ -19,8 +19,9 @@ const _WaveType_name = "NotWavingPlantWavingLeafWavingLiquidWaving"
 var _WaveType_index = [...]uint8{0, 9, 20, 30, 42}
 
 func (i WaveType) String() string {
-	if i >= WaveType(len(_WaveType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_WaveType_index)-1 {
 		return "WaveType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _WaveType_name[_WaveType_index[i]:_WaveType_index[i+1]]
+	return _WaveType_name[_WaveType_index[idx]:_WaveType_index[idx+1]]
 }

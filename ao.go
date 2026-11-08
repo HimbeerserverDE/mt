@@ -110,6 +110,7 @@ type AOPos struct {
 	Interpolate    bool
 	End            bool
 	UpdateInterval float32
+	InterpolateRot bool
 }
 
 type AOSprite struct {

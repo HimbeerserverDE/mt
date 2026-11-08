@@ -19,8 +19,9 @@ const _CamMode_name = "AnyCamFirstPersonThirdPersonBackThirdPersonFront"
 var _CamMode_index = [...]uint8{0, 6, 17, 32, 48}
 
 func (i CamMode) String() string {
-	if i >= CamMode(len(_CamMode_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_CamMode_index)-1 {
 		return "CamMode(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _CamMode_name[_CamMode_index[i]:_CamMode_index[i+1]]
+	return _CamMode_name[_CamMode_index[idx]:_CamMode_index[idx+1]]
 }

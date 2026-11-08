@@ -865,6 +865,13 @@ type ToCltLighting struct {
 	BloomStrength      float32
 	BloomRadius        float32
 	ShadowDir          [3]float32
+	HasLightCurve      bool
+
+	//mt:if %s.HasLightCurve
+	LightCurve [16]uint8
+	//mt:end
+
+	AmbientOcclusionGamma float32
 }
 
 // ToCltSpawnParticleBatch tells the client to spawn multiple particles.

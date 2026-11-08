@@ -21,8 +21,9 @@ const _NodeBoxType_name = "CubeFixedMountedLeveledConnectedmaxBox"
 var _NodeBoxType_index = [...]uint8{0, 4, 9, 16, 23, 32, 38}
 
 func (i NodeBoxType) String() string {
-	if i >= NodeBoxType(len(_NodeBoxType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_NodeBoxType_index)-1 {
 		return "NodeBoxType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _NodeBoxType_name[_NodeBoxType_index[i]:_NodeBoxType_index[i+1]]
+	return _NodeBoxType_name[_NodeBoxType_index[idx]:_NodeBoxType_index[idx+1]]
 }

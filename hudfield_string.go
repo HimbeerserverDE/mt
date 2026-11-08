@@ -30,8 +30,9 @@ const _HUDField_name = "PosNameScaleTextNumberItemDirAlignOffsetWorldPosSizeZInd
 var _HUDField_index = [...]uint8{0, 3, 7, 12, 16, 22, 26, 29, 34, 40, 48, 52, 58, 63, 68, 74}
 
 func (i HUDField) String() string {
-	if i >= HUDField(len(_HUDField_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_HUDField_index)-1 {
 		return "HUDField(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _HUDField_name[_HUDField_index[i]:_HUDField_index[i+1]]
+	return _HUDField_name[_HUDField_index[idx]:_HUDField_index[idx+1]]
 }

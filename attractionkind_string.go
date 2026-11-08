@@ -19,8 +19,9 @@ const _AttractionKind_name = "NonePointLinePlane"
 var _AttractionKind_index = [...]uint8{0, 4, 9, 13, 18}
 
 func (i AttractionKind) String() string {
-	if i >= AttractionKind(len(_AttractionKind_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_AttractionKind_index)-1 {
 		return "AttractionKind(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _AttractionKind_name[_AttractionKind_index[i]:_AttractionKind_index[i+1]]
+	return _AttractionKind_name[_AttractionKind_index[idx]:_AttractionKind_index[idx+1]]
 }

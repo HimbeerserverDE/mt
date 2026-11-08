@@ -33,8 +33,9 @@ const _DrawType_name = "CubeNothingLiquidFlowingLikeGlassAllFacesAllFacesOptTorc
 var _DrawType_index = [...]uint8{0, 4, 11, 17, 24, 33, 41, 52, 57, 61, 66, 71, 75, 82, 92, 96, 109, 113, 124}
 
 func (i DrawType) String() string {
-	if i >= DrawType(len(_DrawType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_DrawType_index)-1 {
 		return "DrawType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _DrawType_name[_DrawType_index[i]:_DrawType_index[i+1]]
+	return _DrawType_name[_DrawType_index[idx]:_DrawType_index[idx+1]]
 }
